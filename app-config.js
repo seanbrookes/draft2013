@@ -1,17 +1,17 @@
 /**
  * Created with JetBrains WebStorm.
  * User: sean
- * Date: 14/03/13
+ * Date: 19/03/13
  * Time: 11:14 PM
  * To change this template use File | Settings | File Templates.
  */
 var config = {
     app: {
-        friendlyName: 'Simple Framework One',
-            name:'sf1'
+        friendlyName: 'Draft 2013',
+            name:'draft2013'
     },
     db: {
-        db: 'sf1',
+        db: 'd2013',
         host: 'localhost',
         port: 27017,  // optional, default: 27017
         collection: 'sessions', // optional, default: sessions
@@ -21,8 +21,8 @@ var config = {
             }
         }
     },
-    salt: '076ee61d63aa10a125ea872411e433bc',
-    cookieSecretString: 'a secret string',
+    salt: '076ee61d63aa10a115ea872411e433bc',
+    cookieSecretString: 'a secret string 2013',
     localPort: 3002
 };
 module.exports = config;

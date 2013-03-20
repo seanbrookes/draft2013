@@ -1,5 +1,5 @@
 /**
- * Simple Framework One
+ * Draft 2013
  *
  *
  * Basic bootstrap application based node/mongo/backbone
