@@ -7,11 +7,11 @@
  */
 define(['sf1'],function(sf1){
 
-    function init(){
+    function init(rosterName){
        // alert('TEST');
         sf1.io.ajax({
             type:'get',
-            url:'/pagereader',
+            url:'/pagereader/' + rosterName,
             success:function(response){
                 sf1.log('success: ' + JSON.stringify(response));
                 $('.main-content-wrapper').html(response);
@@ -23,8 +23,8 @@ define(['sf1'],function(sf1){
 
     }
     return {
-        init:function(){
-            return init();
+        init:function(rosterName){
+            return init(rosterName);
         }
     };
 });

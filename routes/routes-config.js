@@ -19,7 +19,7 @@ module.exports = function(app){
     app.get('/roster/:name',roster.getRoster);
     app.get('/logout',user.logout);
     app.get('/isauth',user.isUserAuth);
-    app.get('/pagereader',pagereader.getPage);
+    app.get('/pagereader/:name',pagereader.getPage);
     app.post('/auth',user.postAuthenticate);
     app.post('/user',user.createUser);
     app.get('/pendingaccounts',admin.getPendingAccountList);

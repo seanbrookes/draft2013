@@ -16,7 +16,7 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
             "login":"login",
             "signup":"signup",
             "admin":"admin",
-            "page":"page",
+            "page/:name":"page",
             "roster/:name":"roster"
         },
 
@@ -39,11 +39,11 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
             });
 
         },
-        page:function () {
+        page:function (rosterName) {
             sf1.log('page route');
             sf1.EventBus.trigger('ia.mainNavEvent',{route:'page'});
             require(['../modules/pagereader/pagereader-module'],function(module){
-                module.init();
+                module.init(rosterName);
             });
 
         },

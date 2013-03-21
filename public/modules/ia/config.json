@@ -32,7 +32,7 @@
                     "value":"ia.hooters"
                 }
             ],
-            "href":"#roster/hooters",
+            "href":"#page/hooters",
             "title":"iaI18n.k18Hooters",
             "name":"iaI18nk18.k18Hooters"
         },
@@ -50,7 +50,7 @@
                     "value":"ia.stallions"
                 }
             ],
-            "href":"#roster/stallions",
+            "href":"#page/stallions",
             "title":"iaI18n.k18Stallions",
             "name":"iaI18n.k18Stallions"
         },
@@ -68,7 +68,7 @@
                     "value":"ia.bashers"
                 }
             ],
-            "href":"#roster/bashers",
+            "href":"#page/bashers",
             "title":"iaI18n.k18Bashers",
             "name":"iaI18n.k18Bashers"
         },
@@ -86,7 +86,7 @@
                     "value":"ia.rallycaps"
                 }
             ],
-            "href":"#roster/rallycaps",
+            "href":"#page/rallycaps",
             "title":"iaI18n.k18RallyCaps",
             "name":"iaI18n.k18RallyCaps"
         },
@@ -104,7 +104,7 @@
                     "value":"ia.mashers"
                 }
             ],
-            "href":"#roster/mashers",
+            "href":"#page/mashers",
             "title":"iaI18n.k18Mashers",
             "name":"iaI18n.k18Mashers"
         },

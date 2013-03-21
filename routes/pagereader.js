@@ -23,185 +23,256 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({ filename: 'pagereader.log' })
     ]
 });
+var getTranslatedName = function(slug){
 
+    switch(slug){
+        case 'mashers':
+            return 'Mashers';
+        case 'rallycaps':
+            return 'Rally%20Caps';
+        case 'bashers':
+            return 'Bashers';
+        case 'hooters':
+            return 'Hooters';
+        case 'stallions':
+            return 'Stallions';
+        default:
+            return false;
+    }
+}
+var getRosterTotal = function(slug){
+
+    switch(slug){
+        case 'mashers':
+            return 3644.5;
+        case 'rallycaps':
+            return 4196;
+        case 'bashers':
+            return 4096.5;
+        case 'hooters':
+            return 4322;
+        case 'stallions':
+            return 4792;
+        default:
+            return false;
+    }
+}
+var getRosterEmail = function(slug){
+
+    switch(slug){
+        case 'mashers':
+            return 'jcmaeland@bigpond.com';
+        case 'rallycaps':
+            return 'russellm@clearwaternow.ca';
+        case 'bashers':
+            return 'seanbrookes@shaw.ca';
+        case 'hooters':
+            return 'kevin.pedersen@alumni.uvic.ca';
+        case 'stallions':
+            return 'brentfromvan@hotmail.com';
+        default:
+            return false;
+    }
+}
 exports.getPage = function(req, res){
     var urlObj = {};
-    urlObj.url = 'http://dewman.homeserver.com:8080/baseball/team.php?team=Mashers';
+    if (req.params.name){
+        logger.info('process roster: ' + req.params.name);
+        var slug = req.params.name;
+        var queryName = getTranslatedName(slug);
+        var rosterTotal = getRosterTotal(slug);
+        var rosterEmail = getRosterEmail(slug);
 
-    request({uri: urlObj.url}, function(err, response, body){
-        if(err){
-            logger.error('get page error: ' + err.message);
-            res.send(400,'get page error: ' + err.message);
-        }
-        else{
-            var urlObj2 = urlObj;
-            var self = this;
+        if (queryName){
 
-            //Just a basic error check
-            if(err && response.statusCode !== 200){
-                console.log('Request error.');
-            }
-            //Send the body param as the HTML code we will parse in jsdom
-            //also tell jsdom to attach jQuery in the scripts and loaded from jQuery.com
-            jsdom.env({
-                html: body,
-                scripts: ['http://code.jquery.com/jquery-1.6.min.js']
-            }, function(err, window){
+            urlObj.url = 'http://dewman.homeserver.com:8080/baseball/team.php?team=' + queryName;
 
-                //Use jQuery just as in a regular HTML page
-                var $ = window.jQuery;
-                var title = $('title').text();
-                var bodyScrapedText = $('#pagebody').html();
-                var statsTableArray = $('#pagebody .team_stats');
-                var responseHtml = $(statsTableArray[1]).html();
+            request({uri: urlObj.url}, function(err, response, body){
+                if(err){
+                    logger.error('get page error: ' + err.message);
+                    res.send(400,'get page error: ' + err.message);
+                }
+                else{
+                    var urlObj2 = urlObj;
+                    var self = this;
 
-                var newRoster = new Roster({
-                    name: title,
-                    email: 'jcmaeland@bigpond.com',
-                    total: 3644.5
+                    //Just a basic error check
+                    if(err && response.statusCode !== 200){
+                        console.log('Request error.');
+                    }
+                    //Send the body param as the HTML code we will parse in jsdom
+                    //also tell jsdom to attach jQuery in the scripts and loaded from jQuery.com
+                    jsdom.env({
+                        html: body,
+                        scripts: ['http://code.jquery.com/jquery-1.6.min.js']
+                    }, function(err, window){
 
-                });
-                var pos;
-                var name;
-                var team;
-                var runs;
-                var hits;
-                var hr;
-                var rbi;
-                var sb;
-                var wins;
-                var losses;
-                var k;
-                var ip;
-                var saves;
-                var total;
+                        //Use jQuery just as in a regular HTML page
+                        var $ = window.jQuery;
+                        var title = $('title').text();
+                        var bodyScrapedText = $('#pagebody').html();
+                        var statsTableArray = $('#pagebody .team_stats');
+                        var responseHtml = $(statsTableArray[1]).html();
 
-                var tableArray = $(statsTableArray);
-                for (var i = 0;i < tableArray.length;i++){
-                    var currTable = tableArray[i];
-                    $(currTable).find('tr').map(function() {
+                        var newRoster = new Roster({
+                            name: title,
+                            slug: slug,
+                            email: rosterEmail,
+                            total: rosterTotal
 
-                        // $(this) is used more than once; cache it for performance.
-                        var $row = $(this);
+                        });
+                        var pos;
+                        var name;
+                        var team;
+                        var runs;
+                        var hits;
+                        var hr;
+                        var rbi;
+                        var sb;
+                        var wins;
+                        var losses;
+                        var k;
+                        var ip;
+                        var saves;
+                        var total;
 
-                        // For each row that's "mapped", return an object that
-                        //  describes the first and second <td> in the row.
+                        var tableArray = $(statsTableArray);
+                        for (var i = 0;i < tableArray.length;i++){
+                            var currTable = tableArray[i];
+                            $(currTable).find('tr').map(function() {
 
-                        //logger.info('RECORD TYPE: ' + $row.attr('class'));
-                        var recordType = $row.attr('class');
+                                // $(this) is used more than once; cache it for performance.
+                                var $row = $(this);
 
-                        if (recordType){
-                            // batters
-                            if (i === 0){
+                                // For each row that's "mapped", return an object that
+                                //  describes the first and second <td> in the row.
+
+                                //logger.info('RECORD TYPE: ' + $row.attr('class'));
+                                var recordType = $row.attr('class');
+
+                                if (recordType){
+                                    // batters
+                                    if (i === 0){
 
 
-                                pos = $row.find(':nth-child(1)').text();
-                                name = $row.find(':nth-child(2)').text();
-                                team = $row.find(':nth-child(3)').text();
-                                runs = $row.find(':nth-child(4)').text();
-                                hits = $row.find(':nth-child(5)').text();
-                                hr = $row.find(':nth-child(6)').text();
-                                rbi = $row.find(':nth-child(7)').text();
-                                sb = $row.find(':nth-child(8)').text();
-                                total = $row.find(':nth-child(9)').text();
-                                var batterObj = {
-                                    pos:pos,
-                                    team:team,
-                                    name:name,
-                                    runs:runs,
-                                    hits:hits,
-                                    hr:hr,
-                                    rbi:rbi,
-                                    sb:sb,
-                                    total:total,
-                                    posType:'batter',
-                                    playerStatus:recordType,
-                                    draftStatus:'protected'
-                                };
-                                var newBatter = new Player(batterObj);
-                                newRoster.players.push(newBatter);
-                                logger.info('BATTER: ' + recordType + ':' + pos + ':' + name + ':' + team + ':' + runs + ':' + hits + ':' + hr + ':' + rbi + ':' + sb + ':' + total);
-                            }
-                            // starters
-                            if (i === 1){
-                                pos = $row.find(':nth-child(1)').text();
-                                name = $row.find(':nth-child(2)').text();
-                                team = $row.find(':nth-child(3)').text();
-                                wins = $row.find(':nth-child(5)').text();
-                                losses = $row.find(':nth-child(6)').text();
-                                k = $row.find(':nth-child(7)').text();
-                                total = $row.find(':nth-child(9)').text();
-                                var starterObj = {
-                                    pos:pos,
-                                    team:team,
-                                    name:name,
-                                    wins:wins,
-                                    losses:losses,
-                                    k:k,
-                                    total:total,
-                                    posType:'starter',
-                                    playerStatus:recordType,
-                                    draftStatus:'protected'
-                                };
-                                var newStarter = new Player(starterObj);
-                                newRoster.players.push(newStarter);
-                                logger.info('STARTER: ' + recordType + ':' + pos + ':' + name + ':' + team + ':' + wins + ':' + losses + ':' + k + ':' +total);
-                            }
-                            // closers
-                            if (i === 2){
-                                pos = $row.find(':nth-child(1)').text();
-                                name = $row.find(':nth-child(2)').text();
-                                team = $row.find(':nth-child(3)').text();
-                                wins = $row.find(':nth-child(4)').text();
-                                losses = $row.find(':nth-child(5)').text();
-                                saves = $row.find(':nth-child(6)').text();
-                                ip = $row.find(':nth-child(7)').text();
-                                k = $row.find(':nth-child(8)').text();
-                                total = $row.find(':nth-child(9)').text();
-                                var closerObj = {
-                                    pos:pos,
-                                    team:team,
-                                    name:name,
-                                    wins:wins,
-                                    losses:losses,
-                                    saves:saves,
-                                    ip:ip,
-                                    k:k,
-                                    total:total,
-                                    posType:'closer',
-                                    playerStatus:recordType,
-                                    draftStatus:'protected'
-                                };
-                                var newCloser = new Player(closerObj);
-                                newRoster.players.push(newCloser);
-                                logger.info('CLOSER: ' + recordType + ':' + pos + ':' + name + ':' + team + ':' + wins + ':' + losses + ':' + saves + ':' + ip + ':' + k + ':' +total);
+                                        pos = $row.find(':nth-child(1)').text();
+                                        name = $row.find(':nth-child(2)').text();
+                                        team = $row.find(':nth-child(3)').text();
+                                        runs = $row.find(':nth-child(4)').text();
+                                        hits = $row.find(':nth-child(5)').text();
+                                        hr = $row.find(':nth-child(6)').text();
+                                        rbi = $row.find(':nth-child(7)').text();
+                                        sb = $row.find(':nth-child(8)').text();
+                                        total = $row.find(':nth-child(9)').text();
+                                        var batterObj = {
+                                            pos:pos,
+                                            team:team,
+                                            name:name,
+                                            runs:runs,
+                                            hits:hits,
+                                            hr:hr,
+                                            rbi:rbi,
+                                            sb:sb,
+                                            total:total,
+                                            posType:'batter',
+                                            playerStatus:recordType,
+                                            draftStatus:'protected'
+                                        };
+                                        var newBatter = new Player(batterObj);
+                                        newRoster.players.push(newBatter);
+                                        logger.info('BATTER: ' + recordType + ':' + pos + ':' + name + ':' + team + ':' + runs + ':' + hits + ':' + hr + ':' + rbi + ':' + sb + ':' + total);
+                                    }
+                                    // starters
+                                    if (i === 1){
+                                        pos = $row.find(':nth-child(1)').text();
+                                        name = $row.find(':nth-child(2)').text();
+                                        team = $row.find(':nth-child(3)').text();
+                                        wins = $row.find(':nth-child(5)').text();
+                                        losses = $row.find(':nth-child(6)').text();
+                                        k = $row.find(':nth-child(7)').text();
+                                        total = $row.find(':nth-child(9)').text();
+                                        var starterObj = {
+                                            pos:pos,
+                                            team:team,
+                                            name:name,
+                                            wins:wins,
+                                            losses:losses,
+                                            k:k,
+                                            total:total,
+                                            posType:'starter',
+                                            playerStatus:recordType,
+                                            draftStatus:'protected'
+                                        };
+                                        var newStarter = new Player(starterObj);
+                                        newRoster.players.push(newStarter);
+                                        logger.info('STARTER: ' + recordType + ':' + pos + ':' + name + ':' + team + ':' + wins + ':' + losses + ':' + k + ':' +total);
+                                    }
+                                    // closers
+                                    if (i === 2){
+                                        pos = $row.find(':nth-child(1)').text();
+                                        name = $row.find(':nth-child(2)').text();
+                                        team = $row.find(':nth-child(3)').text();
+                                        wins = $row.find(':nth-child(4)').text();
+                                        losses = $row.find(':nth-child(5)').text();
+                                        saves = $row.find(':nth-child(6)').text();
+                                        ip = $row.find(':nth-child(7)').text();
+                                        k = $row.find(':nth-child(8)').text();
+                                        total = $row.find(':nth-child(9)').text();
+                                        var closerObj = {
+                                            pos:pos,
+                                            team:team,
+                                            name:name,
+                                            wins:wins,
+                                            losses:losses,
+                                            saves:saves,
+                                            ip:ip,
+                                            k:k,
+                                            total:total,
+                                            posType:'closer',
+                                            playerStatus:recordType,
+                                            draftStatus:'protected'
+                                        };
+                                        var newCloser = new Player(closerObj);
+                                        newRoster.players.push(newCloser);
+                                        logger.info('CLOSER: ' + recordType + ':' + pos + ':' + name + ':' + team + ':' + wins + ':' + losses + ':' + saves + ':' + ip + ':' + k + ':' +total);
 
-                            }
+                                    }
+                                }
+
+
+                            }).get();
+
+                            //	var urlQueryObj = {      url: reqURL             };
                         }
 
 
-                    }).get();
 
-                    //	var urlQueryObj = {      url: reqURL             };
+                        newRoster.save(function(err){
+
+                            if (err){
+                                logger.error('save new roster error: ' + JSON.stringify(err));
+                                return res.send(400,'save new roster error: ' + JSON.stringify(err));
+                            }
+                            res.send('SUCCESS!!!');
+                        });
+                        //res.send('SUCCESS!!!');
+
+
+                    });
                 }
-
-
-
-//                newRoster.save(function(err){
-//
-//                    if (err){
-//                        logger.error('save new roster error: ' + JSON.stringify(err));
-//                        return res.send(400,'save new roster error: ' + JSON.stringify(err));
-//                    }
-//                    res.send('SUCCESS!!!');
-//                });
-
-
 
             });
         }
+        else{
+            logger.warn('invalid roster slug');
+            return res.send(400);
+        }
+    }
+    else{
+        logger.warn('no roster name supplied');
+        return res.send(400);
+    }
 
-    });
 };
 //exports.processURLs = function(req, res){
 //
