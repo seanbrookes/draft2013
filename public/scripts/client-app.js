@@ -15,7 +15,9 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
             "home":"index",
             "login":"login",
             "signup":"signup",
-            "admin":"admin"
+            "admin":"admin",
+            "page":"page",
+            "roster/:name":"roster"
         },
 
         index:function () {
@@ -37,7 +39,22 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
             });
 
         },
+        page:function () {
+            sf1.log('page route');
+            sf1.EventBus.trigger('ia.mainNavEvent',{route:'page'});
+            require(['../modules/pagereader/pagereader-module'],function(module){
+                module.init();
+            });
 
+        },
+        roster:function (rosterId) {
+            sf1.log('roster route');
+            sf1.EventBus.trigger('ia.mainNavEvent',{route:'roster'});
+            require(['../modules/roster/roster-module'],function(module){
+                module.init(rosterId);
+            });
+
+        },
         login:function () {
             sf1.log('login route');
             sf1.EventBus.trigger('ia.mainNavEvent',{route:'login'});

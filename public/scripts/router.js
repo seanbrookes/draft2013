@@ -7,6 +7,7 @@
  *
  */
 // Router
+// CURRENTLY USING CLIENT-APP FOR ROUTER CONFIG
 var AppRouter = Backbone.Router.extend({
 
 	routes:{
@@ -14,7 +15,8 @@ var AppRouter = Backbone.Router.extend({
 		"home":"index",
 		"login":"login",
 		"signup":"signup",
-		"admin":"admin"
+		"admin":"admin",
+        "page":"page"
 	},
 
 	index:function () {
@@ -27,12 +29,22 @@ var AppRouter = Backbone.Router.extend({
 	},
 
 
-	signup:function () {
-		sf1.log('signup route');
-		sf1.EventBus.trigger('ia.mainNavEvent',{route:'signup'});
-		securityModule.initSignup();
+    signup:function () {
+        sf1.log('signup route');
+        sf1.EventBus.trigger('ia.mainNavEvent',{route:'signup'});
+        securityModule.initSignup();
 
-	},
+    },
+    page:function () {
+        sf1.log('page route');
+        sf1.EventBus.trigger('ia.mainNavEvent',{route:'page'});
+        require(['../modules/pagereader/pagereader-module'],function(module){
+
+            // turning this off for now as it was only really needed to import the rosters from Kevin's site
+            //module.init();
+        });
+
+    },
 
 	login:function () {
 		sf1.log('login route');

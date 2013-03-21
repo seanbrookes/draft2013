@@ -153,3 +153,9 @@
 {"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"hawkeye4\"}","timestamp":"2013-03-17T16:07:27.479Z"}
 {"level":"info","message":"login attempt","timestamp":"2013-03-17T16:15:20.300Z"}
 {"level":"info","message":"{\"email\":\"seanbrookes@beachair.ca\",\"password\":\"hawkeye4\"}","timestamp":"2013-03-17T16:15:20.302Z"}
+{"level":"info","message":"GET ROSTER: mashers","timestamp":"2013-03-21T06:07:12.381Z"}
+{"level":"info","message":"GET ROSTER: mashers","timestamp":"2013-03-21T06:13:24.827Z"}
+{"level":"info","message":"GET ROSTER: mashers","timestamp":"2013-03-21T06:14:26.923Z"}
+{"level":"info","message":"GET ROSTER: mashers","timestamp":"2013-03-21T06:21:53.039Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-21T06:36:21.743Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-21T06:37:36.357Z"}

@@ -3,6 +3,11 @@
         "home": "Home",
         "admin": "Admin",
         "signup": "Sign Up",
+        "hooters": "Hooters",
+        "bashers": "Bashers",
+        "rallycaps": "Rally Caps",
+        "stallions": "Stallions",
+        "mashers": "Mashers",
         "login": "Login"
     }
 }
