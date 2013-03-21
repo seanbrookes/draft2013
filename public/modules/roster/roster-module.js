@@ -73,8 +73,10 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                 url:'/roster/' + rosterName,
                 success:function(response){
                     sf1.log('get roster success: ' + JSON.stringify(response));
-                    var playerCollection =  new PlayerCollection(response.players);
-                    renderRoster(response[0].players);
+                    //var playerCollection =  new PlayerCollection(response.players);
+                    if (response[0]){
+                        renderRoster(response[0].players);
+                    }
                 },
                 error:function(response){
                     sf1.log('error getting roster: ' + JSON.stringify(response));
