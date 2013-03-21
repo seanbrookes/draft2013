@@ -10,7 +10,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var PlayerSchema = new Schema({
-    name : {type: String, required: true, unique: true },
+    name : {type: String, required: true },
     pos : {type: String, required: true },
     team: {type: String, required: true },
     posType: {type: String, required: true}, // batter, starter, closer
