@@ -32,7 +32,7 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
 
         signup:function () {
             sf1.log('signup route');
-            sf1.EventBus.trigger('ia.mainNavEvent',{route:'signup'});
+            sf1.EventBus.trigger('ia.mainNavEvent',[{route:'signup'}]);
 
             require(['security'],function(module){
                 module.initSignup();
@@ -41,7 +41,7 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
         },
         page:function (rosterName) {
             sf1.log('page route');
-            sf1.EventBus.trigger('ia.mainNavEvent',{route:'page'});
+            sf1.EventBus.trigger('ia.mainNavEvent',[{route:'page'}]);
             require(['../modules/pagereader/pagereader-module'],function(module){
                 //module.init(rosterName);
             });
@@ -57,7 +57,7 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
         },
         login:function () {
             sf1.log('login route');
-            sf1.EventBus.trigger('ia.mainNavEvent',{route:'login'});
+            sf1.EventBus.trigger('ia.mainNavEvent',[{route:'login'}]);
 
             require(['security'],function(module){
                 module.initLogin();
