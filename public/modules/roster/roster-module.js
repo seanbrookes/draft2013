@@ -75,7 +75,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                     sf1.log('get roster success: ' + JSON.stringify(response));
                     //var playerCollection =  new PlayerCollection(response.players);
                     if (response[0]){
-                        renderRoster(response[0].players);
+                        renderRoster(response[0].name,response[0].players);
                     }
                 },
                 error:function(response){
@@ -92,8 +92,8 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
 
     }
-    var renderRoster = function(roster){
-        if (roster){
+    var renderRoster = function(name, roster){
+        if (roster && name){
             var rosterShell = $('#RosterTemplate').html();
             $('.main-content-wrapper').html(rosterShell);
 
@@ -103,6 +103,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
             });
             var output = rosterView.render().$el;
             $('.roster-container .navbar-inner').html(output);
+            $('.roster-title').text(name);
 
             //$('.nav-main-list').i18n();
 
