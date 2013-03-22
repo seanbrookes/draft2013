@@ -107,38 +107,40 @@
             "href":"#roster/mashers",
             "title":"iaI18n.k18Mashers",
             "name":"iaI18n.k18Mashers"
-        }//,
-//		{
-//			"permissions":[
-//				"AdminView"
-//			],
-//			"renderRules":[
-//				{
-//					"isAuth":true
-//				}
-//			],
-//			"href":"#admin",
-//			"cssClasses":[
-//				"global-nav-item"
-//			],
-//			"dataAttribs":[
-//				{
-//					"name":"route",
-//					"value":"admin"
-//				},
-//				{
-//					"name":"i18n",
-//					"value":"ia.admin"
-//				}
-//			],
-//			"title":"iaI18n.k18Admin",
-//			"name":"iaI18n.k18Admin"
-//		}
+        },
+		{
+			"permissions":[
+				"AdminView"
+			],
+			"renderRules":[
+				{
+					"isAuth":true
+				}
+			],
+			"href":"#admin",
+			"cssClasses":[
+				"main-nav-item",
+                "admin-nav-item"
+			],
+			"dataAttribs":[
+				{
+					"name":"route",
+					"value":"admin"
+				},
+				{
+					"name":"i18n",
+					"value":"ia.admin"
+				}
+			],
+			"title":"iaI18n.k18Admin",
+			"name":"iaI18n.k18Admin"
+		}
 	],
 	"globalNav":[
 		{
 			"cssClasses":[
 				"global-nav-item",
+                "login-nav-item",
 				"cmd-auth"
 			],
 			"dataAttribs":[
@@ -163,7 +165,8 @@
 			],
 			"href":"#signup",
 			"cssClasses":[
-				"global-nav-item"
+				"global-nav-item",
+                "signup-nav-item"
 			],
 			"dataAttribs":[
 				{

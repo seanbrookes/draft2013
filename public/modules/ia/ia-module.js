@@ -151,6 +151,9 @@ define(
             });
 
 		}
+        var setActiveNavItem = function(){
+
+        };
         return {
           init:function(){
               return init();

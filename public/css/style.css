@@ -44,9 +44,14 @@ h3 {
 }
 .nav-global-list{
     list-style: none;
-
+    visibility: hidden;
 }
 .nav-global-list li{
     display:inline;
 }
-
+#MainNavigation .admin-nav-item{
+    display:none;
+}
+#TestButton{
+    display:none;
+}
