@@ -250,14 +250,14 @@ exports.getPage = function(req, res){
                         logger.info('|  to insert: ' + JSON.stringify(newRoster));
                         logger.info('|');
 
-                        newRoster.save(function(err){
-
-                            if (err){
-                                logger.error('save new roster error: ' + JSON.stringify(err));
-                                return res.send(400,'save new roster error: ' + JSON.stringify(err));
-                            }
-                            res.send('SUCCESS!!!');
-                        });
+//                        newRoster.save(function(err){
+//
+//                            if (err){
+//                                logger.error('save new roster error: ' + JSON.stringify(err));
+//                                return res.send(400,'save new roster error: ' + JSON.stringify(err));
+//                            }
+//                            res.send('SUCCESS!!!');
+//                        });
                         //res.send('SUCCESS!!!');
 
 

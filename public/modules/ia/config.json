@@ -32,7 +32,7 @@
                     "value":"ia.hooters"
                 }
             ],
-            "href":"#page/hooters",
+            "href":"#roster/hooters",
             "title":"iaI18n.k18Hooters",
             "name":"iaI18nk18.k18Hooters"
         },
@@ -50,7 +50,7 @@
                     "value":"ia.stallions"
                 }
             ],
-            "href":"#page/stallions",
+            "href":"#roster/stallions",
             "title":"iaI18n.k18Stallions",
             "name":"iaI18n.k18Stallions"
         },
@@ -68,7 +68,7 @@
                     "value":"ia.bashers"
                 }
             ],
-            "href":"#page/bashers",
+            "href":"#roster/bashers",
             "title":"iaI18n.k18Bashers",
             "name":"iaI18n.k18Bashers"
         },
@@ -86,7 +86,7 @@
                     "value":"ia.rallycaps"
                 }
             ],
-            "href":"#page/rallycaps",
+            "href":"#roster/rallycaps",
             "title":"iaI18n.k18RallyCaps",
             "name":"iaI18n.k18RallyCaps"
         },
@@ -104,36 +104,36 @@
                     "value":"ia.mashers"
                 }
             ],
-            "href":"#page/mashers",
+            "href":"#roster/mashers",
             "title":"iaI18n.k18Mashers",
             "name":"iaI18n.k18Mashers"
-        },
-		{
-			"permissions":[
-				"AdminView"
-			],
-			"renderRules":[
-				{
-					"isAuth":true
-				}
-			],
-			"href":"#admin",
-			"cssClasses":[
-				"global-nav-item"
-			],
-			"dataAttribs":[
-				{
-					"name":"route",
-					"value":"admin"
-				},
-				{
-					"name":"i18n",
-					"value":"ia.admin"
-				}
-			],
-			"title":"iaI18n.k18Admin",
-			"name":"iaI18n.k18Admin"
-		}
+        }//,
+//		{
+//			"permissions":[
+//				"AdminView"
+//			],
+//			"renderRules":[
+//				{
+//					"isAuth":true
+//				}
+//			],
+//			"href":"#admin",
+//			"cssClasses":[
+//				"global-nav-item"
+//			],
+//			"dataAttribs":[
+//				{
+//					"name":"route",
+//					"value":"admin"
+//				},
+//				{
+//					"name":"i18n",
+//					"value":"ia.admin"
+//				}
+//			],
+//			"title":"iaI18n.k18Admin",
+//			"name":"iaI18n.k18Admin"
+//		}
 	],
 	"globalNav":[
 		{
