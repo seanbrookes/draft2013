@@ -7,7 +7,33 @@
  *
  */
 // Router
-// CURRENTLY USING CLIENT-APP FOR ROUTER CONFIG
+    /*
+    *
+    *
+    *
+    *
+    *
+    * // CURRENTLY USING CLIENT-APP FOR ROUTER CONFIG
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    * */
 var AppRouter = Backbone.Router.extend({
 
 	routes:{

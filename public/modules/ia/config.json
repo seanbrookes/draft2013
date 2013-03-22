@@ -7,7 +7,7 @@
             "dataAttribs":[
                 {
                     "name":"route",
-                    "value":"index"
+                    "value":"home"
                 },
                 {
                     "name":"i18n",
@@ -25,7 +25,7 @@
             "dataAttribs":[
                 {
                     "name":"route",
-                    "value":"roster"
+                    "value":"hooters"
                 },
                 {
                     "name":"i18n",
@@ -43,7 +43,7 @@
             "dataAttribs":[
                 {
                     "name":"route",
-                    "value":"roster"
+                    "value":"stallions"
                 },
                 {
                     "name":"i18n",
@@ -61,7 +61,7 @@
             "dataAttribs":[
                 {
                     "name":"route",
-                    "value":"roster"
+                    "value":"bashers"
                 },
                 {
                     "name":"i18n",
@@ -79,7 +79,7 @@
             "dataAttribs":[
                 {
                     "name":"route",
-                    "value":"roster"
+                    "value":"rallycaps"
                 },
                 {
                     "name":"i18n",
@@ -97,7 +97,7 @@
             "dataAttribs":[
                 {
                     "name":"route",
-                    "value":"roster"
+                    "value":"mashers"
                 },
                 {
                     "name":"i18n",

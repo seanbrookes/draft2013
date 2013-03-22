@@ -22,7 +22,7 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
 
         index:function () {
             sf1.log('index');
-            sf1.EventBus.trigger('ia.mainNavEvent',{route:'index'});
+            sf1.EventBus.trigger('ia.mainNavEvent',[{route:'index'}]);
             require(['index'],function(module){
                 module.init();
             });
@@ -43,13 +43,13 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
             sf1.log('page route');
             sf1.EventBus.trigger('ia.mainNavEvent',{route:'page'});
             require(['../modules/pagereader/pagereader-module'],function(module){
-                module.init(rosterName);
+                //module.init(rosterName);
             });
 
         },
         roster:function (rosterId) {
             sf1.log('roster route');
-            sf1.EventBus.trigger('ia.mainNavEvent',{route:'roster'});
+            sf1.EventBus.trigger('ia.mainNavEvent',[{route:rosterId}]);
             require(['../modules/roster/roster-module'],function(module){
                 module.init(rosterId);
             });

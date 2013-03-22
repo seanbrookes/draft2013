@@ -149,10 +149,18 @@ define(
 
                 sf1.EventBus.trigger('checkauth-event');
             });
+            sf1.EventBus.bind('ia.mainNavEvent',function(event,param){
+                if (param){
+                    setActiveNavItem(param.route);
+                }
+
+            });
 
 		}
-        var setActiveNavItem = function(){
-
+        var setActiveNavItem = function(route){
+            $('.nav-main-list a').removeClass('is-selected');
+            var itemSelector = '[data-route=' + route + ']';
+            $(itemSelector).addClass('is-selected');
         };
         return {
           init:function(){

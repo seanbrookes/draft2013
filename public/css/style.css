@@ -55,3 +55,7 @@ h3 {
 #TestButton{
     display:none;
 }
+#MainNavigation .nav-main-list .is-selected{
+    color:#005580;
+    font-weight: bold;
+}
