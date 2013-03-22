@@ -31,7 +31,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
      * */
     var PlayerView = Backbone.Marionette.ItemView.extend({
         template: '#PlayerTemplate',
-        tagName: 'li'
+        tagName: 'tr'
     });
 
     /*
@@ -39,7 +39,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
      *
      * */
     var RosterView = Backbone.Marionette.CollectionView.extend({
-        tagName: 'ul',
+        tagName: 'table',
         className: 'player-list'
 
     });
