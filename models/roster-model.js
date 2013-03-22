@@ -12,7 +12,6 @@ var Player = require('./player-model');
 
 var PlayerSchema = new Schema({
     name : {type: String, required: true },
-    slug : {type: String, unique: true },
     pos : {type: String, required: true },
     team: {type: String, required: true },
     posType: {type: String, required: true}, // batter, starter, closer
@@ -36,6 +35,7 @@ var PlayerSchema = new Schema({
 
 var RosterSchema = new Schema({
     name : {type: String, required: true },
+    slug : {type: String, required: true },
     email : {type: String},
     total : {type: Number},
     players : [PlayerSchema]

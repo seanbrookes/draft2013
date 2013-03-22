@@ -247,7 +247,7 @@ exports.getPage = function(req, res){
 
 
                         logger.info('|');
-                        logger.info('|  to insert: ' + newRoster.name);
+                        logger.info('|  to insert: ' + JSON.stringify(newRoster));
                         logger.info('|');
 
                         newRoster.save(function(err){
