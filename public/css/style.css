@@ -63,3 +63,58 @@ h3 {
     font-size:1.5em;
     font-family:Consolas;
 }
+.ui-instrument-list{
+    list-style:none;
+    margin-top:.7em;
+}
+.ui-instrument-list .ui-gauge-item{
+    display:inline-block;
+    border:1px solid #444;
+    position:relative;
+    border-radius:4px;
+    background-color:#444;
+    min-width:60px;
+}
+.ui-gauge-item .gauge-title{
+    position:absolute;
+    float:left;
+}
+.gauge-title{
+    font-size:.7em;
+    color:#fef4f1;
+}
+.gauge-value{
+    padding:12px;
+    font-size:1.5em;
+    color:#ccc;
+    margin-top:.3em;
+}
+.roster-container{
+    background-color:#eee;
+}
+.player-list td{
+    border:1px solid #eee;
+    padding:.2em;
+}
+table.player-list select{
+    width:10em;
+}
+.ui-gauge-item .instrument-over-threshold{
+    color:#ff4242;
+}
+.ui-gauge-item .instrument-within-threshold{
+    color:#28ff28;
+}
+.roster-container{
+    max-width:600px;
+    border:1px solid #444;
+    border-radius:6px;
+}
+.roster-title{
+    float:left;
+    margin-right:2em;
+    margin-left:1em;
+}
+.roster-status-instrument-container{
+
+}

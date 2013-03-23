@@ -11,6 +11,12 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
     var anchorSelector = '#TemplateContainer';
     var baseMarkup;
     var rosterSlug;
+    var rosterName;
+    var protectedCount;
+    var bubbleCount;
+    var droppedCount;
+    var prospectCount;
+    var playersModel;
 
     // namespace for var reference in template
     _.templateSettings.variable = 'S';
@@ -68,21 +74,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
 
         if (rosterName){
-
-            sf1.io.ajax({
-                type:'GET',
-                url:'/roster/' + rosterName,
-                success:function(response){
-                    sf1.log('get roster success: ' + JSON.stringify(response));
-                    //var playerCollection =  new PlayerCollection(response.players);
-                    if (response[0]){
-                        renderRoster(response[0].name,response[0].players);
-                    }
-                },
-                error:function(response){
-                    sf1.log('error getting roster: ' + JSON.stringify(response));
-                }
-            });
+            synchPlayerModel();
            // new PlayerCollection(response.players)
 
 
@@ -93,6 +85,38 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
 
     }
+    sf1.EventBus.bind('roster.playerModelUpdateRequest',function(){
+        // update
+        synchPlayerModel();
+    });
+    sf1.EventBus.bind('roster.playerModelUpdate',function(){
+        // update
+        renderRoster();
+        updateRosterDraftStatusModel();
+    });
+    var synchPlayerModel = function(callback){
+        sf1.io.ajax({
+            type:'GET',
+            url:'/roster/' + rosterSlug,
+            success:function(response){
+                sf1.log('get roster success: ' + JSON.stringify(response));
+                //var playerCollection =  new PlayerCollection(response.players);
+                if (response[0]){
+
+                    playersModel = response[0].players;
+                    //rosterSlug = rosterName;
+                    rosterName = response[0].name;
+
+                    sf1.EventBus.trigger('roster.playerModelUpdate');
+
+
+                }
+            },
+            error:function(response){
+                sf1.log('error getting roster: ' + JSON.stringify(response));
+            }
+        });
+    };
     var toggleEditOn = function(id,val){
         var selectElement = $('#StatusSelectTemplate').html();
 
@@ -158,6 +182,65 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
 
     };
+    var updateRosterDraftStatusModel = function(){
+        protectedCount = 0;
+        bubbleCount = 0;
+        droppedCount = 0;
+        prospectCount = 0;
+        // get model (roster object)
+        // iterate and count up the totals
+        //var playersCollectionModel = playersModel;
+        for (var i = 0;i < playersModel.length;i++){
+            var player = playersModel[i];
+            if (player.draftStatus === 'protected'){
+                protectedCount++;
+            }
+            if (player.draftStatus === 'bubble'){
+                bubbleCount++;
+            }
+            if (player.draftStatus === 'dropped'){
+                droppedCount++;
+            }
+            if (player.draftStatus === 'prospect'){
+                prospectCount++;
+            }
+            var xyz = 'abc';
+            sf1.log('end of calculation');
+        }
+        // update dashboard
+
+        var protectedGaugeDOMEl = $('.protected-item-display-guage-container .gauge-value');
+        protectedGaugeDOMEl.text(protectedCount);
+
+        if (protectedCount > 14){
+            protectedGaugeDOMEl.addClass('instrument-over-threshold');
+            protectedGaugeDOMEl.removeClass('instrument-within-threshold');
+
+        }
+        else{
+            protectedGaugeDOMEl.removeClass('instrument-over-threshold');
+            protectedGaugeDOMEl.addClass('instrument-within-threshold');
+
+        }
+        $('.bubble-item-display-guage-container .gauge-value').text(bubbleCount);
+        $('.dropped-item-display-guage-container .gauge-value').text(droppedCount);
+
+        // Protected gauge render
+        var prospectGaugeDOMEl = $('.prospect-item-display-guage-container .gauge-value');
+        prospectGaugeDOMEl.text(prospectCount);
+        if (prospectCount > 1){
+            prospectGaugeDOMEl.addClass('instrument-over-threshold');
+            prospectGaugeDOMEl.removeClass('instrument-within-threshold');
+
+        }
+        else{
+            prospectGaugeDOMEl.removeClass('instrument-over-threshold');
+            prospectGaugeDOMEl.addClass('instrument-within-threshold');
+
+        }
+
+    };
+
     var toggleEditOff = function(playerId,draftStatus){
 
        // sf1.log(JSON.stringify(response));
@@ -174,6 +257,16 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         $('td[data-id="' + playerId + '"]').html(linkString).click(function(event){
             toggleEditOn(playerId,draftStatus);
         });
+
+        sf1.EventBus.trigger('roster.draftStateUpdateComplete');
+        sf1.EventBus.trigger('roster.playerModelUpdateRequest');
+        //updateRosterDraftStatusModel();
+        // recalculate the totals
+
+
+
+
+
 //        $(linkString).on('click',function(event){
 //
 //        }).show();
@@ -233,18 +326,21 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 //            });
 //        });
     };
-    var renderRoster = function(name, roster){
-        if (roster && name){
+    var renderRoster = function(){
+//        var roster = rosterslug;
+//        var name;
+        if (rosterSlug){
             var rosterShell = $('#RosterTemplate').html();
             $('.main-content-wrapper').html(rosterShell);
-
+            // convert raw model to BB collection
+            var playersCollection = new PlayerCollection(playersModel);
             var rosterView = new RosterView({
                 itemView: PlayerView,
-                collection: new PlayerCollection(roster)
+                collection: playersCollection
             });
             var output = rosterView.render().$el;
             $('.roster-container .navbar-inner').html(output);
-            $('.roster-title').text(name);
+            $('.roster-title').text(rosterName);
             $('.draft-status-cmd').click(function(event){
                 event.preventDefault();
                // get
@@ -254,6 +350,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
             });
 
+            sf1.EventBus.trigger('roster.renderRosterComplete');
             //$('.nav-main-list').i18n();
 
             //sf1.EventBus.trigger('ia.mainNavRenderComplete');
