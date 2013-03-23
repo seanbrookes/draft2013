@@ -22,9 +22,18 @@
             </div>
         </div>
     </script>
+    <!-- status selector -->
+    <script type="text/template" id="StatusSelectTemplate" class="ui-template">
+        <select class="status-select">
+            <option value="protected">protected</option>
+            <option value="bubble">bubble</option>
+            <option value="dropped">dropped</option>
+            <option value="prospect">prospect</option>
+        </select>
+    </script>
 
     <!-- Player Template -->
     <script id="PlayerTemplate" class="player-template" type="text/template">
-        <td><%= S.pos %></td><td><span><%= S.name %></span></td><td><%= S.team %></td><td><%= S.runs %></td><td><%= S.hits %></td><td><%= S.hr %></td><td><%= S.rbe %></td><td><%= S.sb %></td><td><%= S.total %></td><td><span><%= S.draftStatus %></span></td>
+        <td><%= S.pos %></td><td><span><%= S.name %></span></td><td><%= S.team %></td><td><%= S.runs %></td><td><%= S.hits %></td><td><%= S.hr %></td><td><%= S.rbe %></td><td><%= S.sb %></td><td><%= S.total %></td><td data-id="<%= S._id%>"><a class="draft-status-cmd" href="#" data-id="<%= S._id%>"><%= S.draftStatus %></a></td>
     </script>
 </div>

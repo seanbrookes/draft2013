@@ -14,6 +14,31 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({ filename: 'user.log' })
     ]
 });
+exports.updateDraftStatus = function(req,res){
+  var playerId = req.param('playerId',null);
+    logger.info('playerId: ' + playerId);
+    var draftStatus = req.param('draftStatus',null);
+    logger.info('draftStatus: ' + draftStatus);
+    var rosterSlug = req.param('rosterSlug',null);
+    logger.info('rosterSlug: ' + rosterSlug);
+
+    Roster.update({slug:rosterSlug, 'players._id': playerId},{$set:{ 'players.$.draftStatus' : draftStatus }},function(err){
+        if(err){
+            logger.error('error update player status: ' + err.message);
+            return res.send(400,err.message);
+        }
+        retObj = {};
+        retObj.playerId = playerId;
+        retObj.draftStatus = draftStatus;
+
+        return res.send(200,retObj);
+    });
+
+    //db.students.update( { _id: 1, grades: 80 }, { $set: { "grades.$" : 82 } } )
+
+  //logger.info('REQ PARAMS: ' + JSON.stringify(req.params));
+  //res.send(400);
+};
 exports.getRoster = function(req,res){
     var rosterSlug = req.params.name;
     if (rosterSlug){

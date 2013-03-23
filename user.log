@@ -170,3 +170,21 @@
 {"level":"info","message":"GET ROSTER: stallions","timestamp":"2013-03-22T04:58:01.400Z"}
 {"level":"info","message":"GET ROSTER: bashers","timestamp":"2013-03-22T05:32:46.397Z"}
 {"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-22T05:57:55.596Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-22T06:06:50.674Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-22T06:44:48.553Z"}
+{"level":"info","message":"playerId: undefined","timestamp":"2013-03-22T06:47:36.857Z"}
+{"level":"info","message":"draftStatus: undefined","timestamp":"2013-03-22T06:47:36.858Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-22T06:56:52.240Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-22T07:05:38.319Z"}
+{"level":"info","message":"GET ROSTER: rallycaps","timestamp":"2013-03-22T07:27:36.886Z"}
+{"level":"info","message":"playerId: 514bc83262faf2c00d000088","timestamp":"2013-03-22T07:28:41.699Z"}
+{"level":"info","message":"draftStatus: bubble","timestamp":"2013-03-22T07:28:41.699Z"}
+{"level":"info","message":"rosterSlug: rallycaps","timestamp":"2013-03-22T07:28:41.699Z"}
+{"level":"info","message":"GET ROSTER: rallycaps","timestamp":"2013-03-22T07:30:29.542Z"}
+{"level":"info","message":"GET ROSTER: rallycaps","timestamp":"2013-03-23T02:33:03.161Z"}
+{"level":"info","message":"GET ROSTER: rallycaps","timestamp":"2013-03-23T04:07:12.451Z"}
+{"level":"info","message":"GET ROSTER: rallycaps","timestamp":"2013-03-23T04:10:28.453Z"}
+{"level":"info","message":"GET ROSTER: rallycaps","timestamp":"2013-03-23T04:12:11.112Z"}
+{"level":"info","message":"GET ROSTER: rallycaps","timestamp":"2013-03-23T04:29:54.271Z"}
+{"level":"info","message":"GET ROSTER: rallycaps","timestamp":"2013-03-23T04:35:33.466Z"}
+{"level":"info","message":"GET ROSTER: rallycaps","timestamp":"2013-03-23T04:54:13.245Z"}

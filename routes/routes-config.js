@@ -23,4 +23,5 @@ module.exports = function(app){
     app.post('/auth',user.postAuthenticate);
     app.post('/user',user.createUser);
     app.get('/pendingaccounts',admin.getPendingAccountList);
+    app.put('/statusupdate', roster.updateDraftStatus);
 }
