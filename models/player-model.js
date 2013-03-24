@@ -26,7 +26,8 @@ var PlayerSchema = new Schema({
     k: {type: Number},
     ip: {type: Number},
     saves: {type: Number},
-    total: {type: Number}
+    total: {type: Number},
+    draftYear: {type: Number}
 
 
 

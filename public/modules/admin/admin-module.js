@@ -53,6 +53,41 @@ define(
 					}
 				});
 			});
+
+            $('#CreateDraft').click(function(event){
+                event.preventDefault();
+                sf1.io.ajax({
+                    type:'POST',
+                    url:'/createdraft',
+                    data: {},
+                    success:function(response){
+                        sf1.log('success: ' + JSON.stringify(response));
+                    },
+                    error:function(response){
+                        sf1.log('error: ' + JSON.stringify(response));
+                    }
+
+
+
+                });
+            });
+            $('#CreateDraftList').click(function(event){
+                event.preventDefault();
+                sf1.io.ajax({
+                    type:'POST',
+                    url:'/createdraftlist',
+                    data: {},
+                    success:function(response){
+                        sf1.log('success: ' + JSON.stringify(response));
+                    },
+                    error:function(response){
+                        sf1.log('error: ' + JSON.stringify(response));
+                    }
+
+
+
+                });
+            });
 		}
 		return {
 			init:init

@@ -65,4 +65,4 @@ exports.getRoster = function(req,res){
         logger.warn('no roster name supplied');
         res.send(400,'no roster name supplied');
     }
-}
+};

@@ -27,7 +27,8 @@ var PlayerSchema = new Schema({
     k: {type: Number},
     ip: {type: Number},
     saves: {type: Number},
-    total: {type: Number}
+    total: {type: Number},
+    draftYear: {type: Number}
 
 
 
@@ -36,8 +37,10 @@ var PlayerSchema = new Schema({
 var RosterSchema = new Schema({
     name : {type: String, required: true },
     slug : {type: String, required: true },
+    owner: {type: String },
     email : {type: String},
     total : {type: Number},
+    year : {type: Number},
     players : [PlayerSchema]
 
 });
