@@ -20,13 +20,13 @@ exports.createDraft = function(req,res){
         year:2013
     });
 
-    draft.save(function(err) {
-        if (err){
-            logger.error('error creating draft: ' + err.message);
-            return res.send(400,err.message);
-        }
-        return res.send(200);
-    });
+//    draft.save(function(err) {
+//        if (err){
+//            logger.error('error creating draft: ' + err.message);
+//            return res.send(400,err.message);
+//        }
+//        return res.send(200);
+//    });
 };
 exports.createDraftList = function(req,res){
 
@@ -86,14 +86,14 @@ exports.createDraftList = function(req,res){
             }
         }
 
-        doc.save(function(err){
-
-            if (err){
-                logger.error('save draft with picks error: ' + JSON.stringify(err));
-                return res.send(400,'save draft with picks error: ' + JSON.stringify(err));
-            }
-            res.send(200,'SUCCESS!!!');
-        });
+//        doc.save(function(err){
+//
+//            if (err){
+//                logger.error('save draft with picks error: ' + JSON.stringify(err));
+//                return res.send(400,'save draft with picks error: ' + JSON.stringify(err));
+//            }
+//            res.send(200,'SUCCESS!!!');
+//        });
     });
 
 
