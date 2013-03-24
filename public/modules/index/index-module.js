@@ -51,6 +51,46 @@ define(
 				});
 			});
 
+            var markupOutput = '<tr><th>round</th><th>pick</th><th>roster</th><th>player</th><th>pos</th><th>team</th></tr>';
+            sf1.io.ajax({
+                type:'GET',
+                url:'/draft',
+                success:function(response){
+
+
+                    var resObj = response;
+                    var draftList = resObj[0].picks;
+                    sf1.log('success: ' + JSON.stringify(response));
+                    var nameVal = '', posVal = '', teamVal = '';
+                    for (var i = 0;i < draftList.length;i++){
+                        var x = draftList[i];
+                        if (x.name){
+                            nameVal = x.name;
+                        }
+                        if (x.team){
+                            teamVal = x.team;
+                        }
+                        if (x.pos){
+                            posVal = x.pos;
+                        }
+                        markupOutput += '<tr>';
+                        markupOutput += '<td>' + x.round + '</td>';
+                        markupOutput += '<td>' + x.pickNumber + '</td>';
+                        markupOutput += '<td>' + x.roster + '</td>';
+                        markupOutput += '<td>' + nameVal + '</td>';
+                        markupOutput += '<td>' + posVal + '</td>';
+                        markupOutput += '<td>' + teamVal + '</td>';
+                        markupOutput += '</tr>';
+                    }
+                    $('#DraftList').html(markupOutput);
+                },
+                error:function(response){
+                    sf1.log('error: ' + JSON.stringify(response));
+                }
+
+
+
+            });
 
 
 //			var editor = ace.edit("editor");

@@ -121,6 +121,10 @@ table.player-list select{
 .roster-status-instrument-container{
 
 }
+#DraftList td{
+    border:1px solid #fff;
+    padding:.3em;
+}
 /*
 
     small screen
