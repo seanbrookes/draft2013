@@ -19,6 +19,11 @@ define(
 
         var mainNavCollection = {};
         var globalNavCollection = {};
+
+        // attach the module template markup to the DOM
+        baseMarkup = $(template);
+        $(anchorSelector).append(baseMarkup);
+
         // IA base model
         var navConfigObj = {};
 
@@ -62,8 +67,12 @@ define(
 
         });
 
-
-
+        /*
+         * initialize data store mdel
+         *
+         * */
+        navConfigObj = JSON.parse(config);
+        bindEventListeners();
 
 
 
@@ -71,20 +80,15 @@ define(
 
 			sf1.log('IA module init ');
 
-			// attach the module template markup to the DOM
-			baseMarkup = $(template);
-			$(anchorSelector).html(baseMarkup);
-            /*
-            * initialize data store mdel
-            *
-            * */
-            navConfigObj = JSON.parse(config);
 
-			bindEventListeners();
+
+
+
 
 			sf1.EventBus.trigger('ia.initComplete');
 
 		}
+
 
         /*
         *
@@ -100,7 +104,7 @@ define(
 			sf1.EventBus.bind('ia.initComplete',function(event){
 
                 sf1.EventBus.trigger('ia.renderMainNavRequest');
-                sf1.EventBus.trigger('ia.renderGlobalNavRequest');
+                //sf1.EventBus.trigger('ia.renderGlobalNavRequest');
 
 			});
 
@@ -110,7 +114,7 @@ define(
              *
              * */
             sf1.EventBus.bind('ia.renderMainNavRequest',function(event){
-
+                _.templateSettings.variable = 'P';
                 // set the initial main nav markup
                 var mainNavShell = $('#MainNavTemplate').html();
                 $('.page-header').after(mainNavShell);
@@ -132,7 +136,7 @@ define(
              *
              * */
             sf1.EventBus.bind('ia.renderGlobalNavRequest',function(event){
-
+                _.templateSettings.variable = 'P';
                 // set the initial main nav markup
                 var globalNavShell = $('#GlobalNavTemplate').html();
                 $('.page-header').append(globalNavShell);
@@ -163,9 +167,15 @@ define(
             $(itemSelector).addClass('is-selected');
         };
         return {
-          init:function(){
+            init:function(){
               return init();
-          }
+            },
+            initGlobalNav:function(){
+                sf1.EventBus.trigger('ia.renderGlobalNavRequest');
+            },
+            initMainNav:function(){
+                sf1.EventBus.trigger('ia.renderMainNavRequest');
+            }
         };
 
 

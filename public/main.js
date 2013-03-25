@@ -28,9 +28,13 @@ require.config({
         'bootstrap'     : 'bootstrap/js/bootstrap',
         'client'        : 'scripts/client-app',
         'sf1'           : 'scripts/sf1.0.1',
+        'draft'         : 'modules/draft/draft-module',
         'security'      : 'modules/security/security-module',
         'admin'         : 'modules/admin/admin-module',
         'index'         : 'modules/index/index-module',
+        'countdown'     : 'scripts/lib/plugins/kkcountdown',
+        'pageheader'    : 'modules/pageheader/pageheader-module',
+        'maincontent'    : 'modules/maincontent/maincontent-module',
         'io'            : 'modules/io/io-module',
         'ui'            : 'modules/ui/ui-module',
         'ia'            : 'modules/ia/ia-module'
@@ -63,42 +67,52 @@ require.config({
         prettydate: {
             deps: ['jquery']
         },
+        countdown: {
+            deps: ['jquery']
+        },
+//        ia: {
+//            deps: ['pageheader']
+//        },
         cookie: {
             deps: ['jquery']
         }
     }
 });
 define(
-    ['jquery','i18n', 'client', 'security', 'ia'],
-    function($, i18n, App, Security, IA) {
+    ['jquery','i18n', 'client', 'security', 'ia', 'pageheader', 'maincontent'],
+    function($, i18n, App, Security, IA, PageHeader, MainContent) {
 
         App.sf1.log('typeof $: ' + typeof $);
         App.sf1.log('typeof _: ' + typeof _);
         App.sf1.log('typeof backbone: ' + typeof Backbone);
 
+        $(document).ready(function(){
+            i18n.init({
+                lng: 'en'
+            }, function(t) {
+                var router = new App.AppRouter(t);
+                Backbone.history.start();
 
-        i18n.init({
-            lng: 'en'
-        }, function(t) {
-            var router = new App.AppRouter(t);
-            Backbone.history.start();
+
+                SF1 = new Backbone.Marionette.Application();
+                SF1.addRegions({
+                    mainContentRegion: '.main-content-wrapper',
+                    pageHeaderRegion:'.page-header',
+                    pageFooterRegion:'.page-footer',
+                    mainNavRegion:'#MainNavigation',
+                    globalNavRegion:'#GlbalNavigation'
+
+                });
+                PageHeader.init();
+                MainContent.init();
+                //IA.init();
 
 
-            SF1 = new Backbone.Marionette.Application();
-            SF1.addRegions({
-                mainContentRegion: '.main-content-wrapper',
-                pageHeaderRegion:'.page-header',
-                pageFooterRegion:'.page-footer',
-                mainNavRegion:'#MainNavigation',
-                globalNavRegion:'#GlbalNavigation'
+
 
             });
-            IA.init();
-
-
-
-
         });
+
 
     }
 );

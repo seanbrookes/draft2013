@@ -6,6 +6,9 @@
  * Time: 10:46 PM
  *
  *
+ * hooters:514bd73c9388c80200000002
+ * 
+ *
  */
 define(
 	['client', 'modules/admin/admin-i18n','text!/modules/admin/admin-template.html'],

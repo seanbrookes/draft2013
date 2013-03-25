@@ -23,7 +23,7 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
         index:function () {
             sf1.log('index');
             sf1.EventBus.trigger('ia.mainNavEvent',[{route:'index'}]);
-            require(['index'],function(module){
+            require(['draft'],function(module){
                 module.init();
             });
             //indexModule.init();
