@@ -47,6 +47,15 @@ define(
         };
         // declare a name-spaced event bus
         sf1.EventBus = $(Object.create({}));
+        sf1.hasStorage = (function() {
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                return true;
+            } catch(e) {
+                return false;
+            }
+        }());
         sf1.translate = function(obj){
             sf1.log('translate this string key: ' + JSON.stringify(obj) + '  with this locale value: ' + sf1.getUserLocale());
             return obj.key;

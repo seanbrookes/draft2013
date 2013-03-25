@@ -33,8 +33,9 @@ require.config({
         'admin'         : 'modules/admin/admin-module',
         'index'         : 'modules/index/index-module',
         'countdown'     : 'scripts/lib/plugins/kkcountdown',
+        'chat'          : 'modules/chat/chat-module',
         'pageheader'    : 'modules/pageheader/pageheader-module',
-        'maincontent'    : 'modules/maincontent/maincontent-module',
+        'maincontent'   : 'modules/maincontent/maincontent-module',
         'io'            : 'modules/io/io-module',
         'ui'            : 'modules/ui/ui-module',
         'ia'            : 'modules/ia/ia-module'

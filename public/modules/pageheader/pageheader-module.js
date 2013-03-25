@@ -11,6 +11,7 @@ define(
     function($, App, IA, countdown, markup) {
         var sf1 = App.sf1;
         sf1.log('PageHeader module loaded ');
+        var currentAuthRoster;
 
         var anchorSelector = '#TemplateContainer';
         var baseMarkup = $(markup);
@@ -33,6 +34,13 @@ define(
                 oneDayClass : 'one-day'
             });
             IA.initGlobalNav();
+
+            if (sf1.hasStorage){
+                if (localStorage.getItem('currentAuthRoster')){
+                    currentAuthRoster = JSON.parse(localStorage.getItem('currentAuthRoster'));
+                    $('.page-header-greeting').text('Hi ' + currentAuthRoster.owner)
+                }
+            }
 
             sf1.EventBus.trigger('pageheader.initComplete');
         };

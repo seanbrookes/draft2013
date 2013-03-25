@@ -10,6 +10,59 @@ define(
     ['client','text!/modules/draft/draft-template.html'],
     function(App, markup) {
 
+        var currentAuthRoster;
+
+        var userDictionary = [
+            {
+                roster:'stallions',
+                uuid:'514bd7469388c80200000023',
+                owner:'Brent',
+                email:'brentfromvan@hotmail.com'
+            },
+            {
+                roster:'mashers',
+                uuid:'514bd75b9388c80200000084',
+                owner:'Chris',
+                email:'jcmaeland@bigpond.com'
+            },
+            {
+                roster:'hooters',
+                uuid:'514bd73c9388c80200000002',
+                owner:'Kevin',
+                email:'kevin.pedersen@alumni.uvic.ca'
+            },
+            {
+                roster:'rallycaps',
+                uuid:'514bd7579388c80200000063',
+                owner:'Russ',
+                email:'russellm@clearwaternow.ca'
+            },
+            {
+                roster:'bashers',
+                uuid:'514bd7499388c80200000042',
+                owner:'Sean',
+                email:'seanbrookes@shaw.ca'
+            }
+        ];
+        var getUser = function(uuid){
+            var retVal;
+            for (var i = 0;i < userDictionary.length;i++){
+                if (userDictionary[i].uuid === uuid){
+                    retVal = userDictionary[i];
+                    return retVal;
+                }
+            }
+            return retVal;
+        };
+        var getCurrentAuthRoster = function(){
+            if (sf1.hasStorage){
+                return localStorage.getItem('currentAuthRoster');
+            }
+            else{
+                return null;
+            }
+        };
+
         var sf1 = App.sf1;
         sf1.log('Draft module loaded ');
 
@@ -17,7 +70,28 @@ define(
         // namespace for var reference in template
         _.templateSettings.variable = 'S';
 
-        function init(){
+        function init(uuid){
+            if (uuid){
+                sf1.log('checking user id: '  + uuid);
+                // look up uuid in dictionary
+                var currentUser = getUser(uuid);
+                if (currentUser){
+                    if (sf1.hasStorage){
+                        sf1.log('has local storage support - setting values: ' + JSON.stringify(currentUser));
+                        // set storage variables
+                        localStorage.setItem('currentAuthRoster', JSON.stringify(currentUser));
+//                        localStorage.setItem('uuid', currentUser.uuid);
+//                        localStorage.setItem('rosterEmail', currentUser.email);
+//                        localStorage.setItem('rosterOwner', currentUser.owner);
+                    }
+                    else{
+                        sf1.log('no localstorage support - send email to admin');
+                        // send email indicating there is a problem with localstorage
+                    }
+                }
+                // check if localstorage available
+                // set the local storage value
+            }
             sf1.log('Draft module init');
             var baseMarkup = $(markup);
             $(anchorSelector).html(baseMarkup);
@@ -31,25 +105,11 @@ define(
             $('.main-content-wrapper').html(templateMarkup);
 
 
-            /*
-             *
-             * test code to demonstrate io.ajax namespace
-             *
-             * */
-            $('#TestButton').click(function(event){
-                $.ajax({
-                    type:'get',
-                    url:'/isauth',
-                    success:function(response){
-                        sf1.log('hell ya!');
-                        sf1.log(response);
-                    },
-                    error:function(response){
-                        sf1.log('hell no');
-                        sf1.log(response);
-                    }
-                });
-            });
+            if (sf1.hasStorage){
+                currentAuthRoster = getCurrentAuthRoster();
+                sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
+            }
+
 
             var markupOutput = '<tr><th>round</th><th>pick</th><th>roster</th><th>player</th><th>pos</th><th>team</th></tr>';
             sf1.io.ajax({
@@ -98,7 +158,9 @@ define(
 //			editor.getSession().setMode("ace/mode/javascript");
         }
         return {
-            init:init
+            init:function(uuid){
+                return init(uuid);
+            }
         };
     }
 );

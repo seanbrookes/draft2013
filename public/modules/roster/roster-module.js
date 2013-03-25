@@ -17,10 +17,18 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
     var droppedCount;
     var prospectCount;
     var playersModel;
+    var currentAuthRoster;
 
     // namespace for var reference in template
     _.templateSettings.variable = 'S';
-
+    var getCurrentAuthRoster = function(){
+        if (sf1.hasStorage){
+            return localStorage.getItem('currentAuthRoster');
+        }
+        else{
+            return null;
+        }
+    };
 
 
     /*
@@ -60,6 +68,17 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
 
     function init(rosterName){
+
+        if (sf1.hasStorage){
+            var testUserObj = getCurrentAuthRoster();
+            if (testUserObj){
+                currentAuthRoster = testUserObj;
+                sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
+            }
+            else{
+                sf1.log('No auth ROSTER ');
+            }
+        }
 
         rosterSlug = rosterName;
         sf1.log('Roster module init ');
@@ -205,7 +224,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                 prospectCount++;
             }
             var xyz = 'abc';
-            sf1.log('end of calculation');
+            //sf1.log('end of calculation');
         }
         // update dashboard
 
