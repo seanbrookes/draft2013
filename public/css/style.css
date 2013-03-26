@@ -36,8 +36,28 @@ h3 {
     font-size: 1.44em;
     margin-bottom: 10px;
 }
+.btn-cmd-link{
+    border:0;
+    padding:.2em;
+    background:transparent;
+}
+.btn-cmd-link:hover{
+    background-color:#fff;
+}
+.btn-cmd-link:active{
+    background-color:#ddd;
+    border-top:1px solid #fff;
+    border-left:1px solid #fff;
+    border-right:1px solid #bbb;
+    border-bottom:1px solid #bbb;
+}
 
-
+.viewport{
+    max-width:1000px;
+}
+.ui-nav-list{
+    list-style:none;
+}
 .global-nav-container{
     float:right;
 }
@@ -118,6 +138,15 @@ table.player-list select{
 .roster-status-instrument-container{
 
 }
+.draft-module-container{
+    max-width:450px;
+    min-width:445px;
+    float:left;
+}
+#DraftList{
+    width:100%;
+}
+
 #DraftList td{
     border:1px solid #fff;
     padding:.3em;
@@ -127,7 +156,16 @@ table.player-list select{
     margin: 6px 0 6px;
     border-bottom: 1px solid #eee;
 }
-
+.chat-container-1{
+    float:left;
+}
+.chat-widget-container{
+    margin-left:500px;
+}
+.chat-module-container{
+    margin-left:453px;
+    max-width:450px;
+}
 /*
 
     small screen

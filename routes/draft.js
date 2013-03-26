@@ -49,7 +49,7 @@ exports.createDraftList = function(req,res){
             logger.error('error getting draft: ' + err.message);
             return res.send(400);
         }
-        logger.info('we have a draft: ' + JSON.stringify(doc));
+        //logger.info('we have a draft: ' + JSON.stringify(doc));
 
 
         var draftList = [];
@@ -162,7 +162,7 @@ exports.updateDraftPick = function(req,res){
 
 };
 exports.getDraftModel = function(req,res){
-    logger.info('GET Draft Model ');
+  //  logger.info('GET Draft Model ');
 
     // check if roster exists
     Draft.find({year:2013},function(err,doc){
@@ -175,7 +175,7 @@ exports.getDraftModel = function(req,res){
             return res.send(200,'expecting draft doc but none returned ');
 
         }
-        logger.info('draft doc: ' + JSON.stringify(doc));
+       // logger.info('draft doc: ' + JSON.stringify(doc));
         return res.send(doc);
     });
 

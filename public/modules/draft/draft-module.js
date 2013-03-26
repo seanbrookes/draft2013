@@ -102,7 +102,7 @@ define(
             var templateData = {};
 
             var templateMarkup = template( templateData );
-            $('.main-content-wrapper').html(templateMarkup);
+            $('.main-content-wrapper').append(templateMarkup);
 
 
             if (sf1.hasStorage){

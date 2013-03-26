@@ -33,7 +33,9 @@ require.config({
         'admin'         : 'modules/admin/admin-module',
         'index'         : 'modules/index/index-module',
         'countdown'     : 'scripts/lib/plugins/kkcountdown',
+        'socket.io'     : '/socket.io/socket.io',
         'chat'          : 'modules/chat/chat-module',
+        'chatlib'       : 'scripts/lib/plugins/chat.io',
         'pageheader'    : 'modules/pageheader/pageheader-module',
         'maincontent'   : 'modules/maincontent/maincontent-module',
         'io'            : 'modules/io/io-module',
@@ -80,7 +82,7 @@ require.config({
     }
 });
 define(
-    ['jquery','i18n', 'client', 'security', 'ia', 'pageheader', 'maincontent'],
+    ['jquery', 'i18n', 'client', 'security', 'ia', 'pageheader', 'maincontent', 'socket.io'],
     function($, i18n, App, Security, IA, PageHeader, MainContent) {
 
         App.sf1.log('typeof $: ' + typeof $);

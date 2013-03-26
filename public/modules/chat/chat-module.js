@@ -7,8 +7,8 @@
  *
  */
 define(
-    ['client','text!/modules/chat/chat-template.html'],
-    function(App, markup) {
+    ['client','chatlib','text!/modules/chat/chat-template.html'],
+    function(App, ChatLib, markup) {
 
         var sf1 = App.sf1;
         var currentAuthRoster;
@@ -43,15 +43,18 @@ define(
             var templateData = {};
 
             var templateMarkup = template( templateData );
-            $('.main-content-wrapper').html(templateMarkup);
+            $('.main-content-wrapper').append(templateMarkup);
 
 
             if (sf1.hasStorage){
                 currentAuthRoster = getCurrentAuthRoster();
-                sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
+               // sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
             }
 
+            ChatLib.init();
+
         }
+
         return {
             init:function(){
                 return init();

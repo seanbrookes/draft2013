@@ -26,8 +26,11 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
         index:function () {
             sf1.log('index');
             sf1.EventBus.trigger('ia.mainNavEvent',[{route:'index'}]);
-            require(['draft'],function(module){
-                module.init();
+            require(['draft','chat'],function(draftMod,chatMod){
+                $('.main-content-wrapper').empty();
+                draftMod.init();
+                chatMod.init();
+
             });
             //indexModule.init();
         },

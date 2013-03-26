@@ -108,6 +108,11 @@ define(
                 });
             });
 
+            $('.btn-cmd-link').click(function(event){
+                var id = $(event.target).data('id');
+                sf1.log('command button clicked: ' + id);
+                document.location.href = '#draft/' + id;
+            });
 
 		}
 		return {

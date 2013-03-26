@@ -16,11 +16,11 @@ var logger = new (winston.Logger)({
 });
 exports.updateDraftStatus = function(req,res){
   var playerId = req.param('playerId',null);
-    logger.info('playerId: ' + playerId);
+    //logger.info('playerId: ' + playerId);
     var draftStatus = req.param('draftStatus',null);
-    logger.info('draftStatus: ' + draftStatus);
+   // logger.info('draftStatus: ' + draftStatus);
     var rosterSlug = req.param('rosterSlug',null);
-    logger.info('rosterSlug: ' + rosterSlug);
+   // logger.info('rosterSlug: ' + rosterSlug);
 
     Roster.update({slug:rosterSlug, 'players._id': playerId},{$set:{ 'players.$.draftStatus' : draftStatus }},function(err){
         if(err){
@@ -55,7 +55,7 @@ exports.getRoster = function(req,res){
                 return res.send(200,'expecting roster doc but none returned ');
 
             }
-            logger.info('roster doc: ' + JSON.stringify(doc));
+            //logger.info('roster doc: ' + JSON.stringify(doc));
             return res.send(doc);
         });
 

@@ -1,14 +1,40 @@
 <div id="ChatModuleTemplateContainer">
 
     <script type="text/template" id="ChatModuleDefaultTemplate">
-        <div class="chat-container">
-            <p><textarea class="input-xlarge span8 chat-widget" id="textarea"
-                         rows="20"></textarea></p>
-            <p><input type="text" class="input-xlarge span8 chat-widget"
-                      id="input01" placeholder="Enter your message"></p>
-            <p><button type="submit" class="btn btn-primary chat-widget"
-                       id="send-chat">Send</button></p>
 
+
+        <div class="chat-module-container">
+            <div class="cf pr chat animate">
+                <div class="pa chat-shadow">
+                    <div class="content animate bounceInDown">Click <div class="big-button-green start">Start</div> to begin...</div>
+                </div>
+                <div class="cf chat-top">
+                    <div class="fl chat-left">
+                        <div class="chat-messages">
+                            <ul></ul>
+                        </div>
+                    </div>
+                    <div class="fl chat-right">
+                        <div class="chat-clients">
+                            <div class="cf title">
+                                <div class="fl">Users</div>
+                            </div>
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <textarea class="chat-widget-textarea" id="textarea" rows="8"></textarea>
+            </div>
+            <div>
+                <input type="text" class="chat-widget-input" id="ChatInput" placeholder="Enter your message">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary btn-chat-widget-post" id="send-chat">Send</button>
+            </div>
         </div>
+
     </script>
 </div>
