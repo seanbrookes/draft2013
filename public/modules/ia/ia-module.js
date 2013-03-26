@@ -7,8 +7,8 @@
  *
  */
 define(
-	['marionette', 'i18n', 'client', 'text!/modules/ia/ia-template.html', 'text!/modules/ia/config.json'],
-	function(Marionette, i18n, App, template, config) {
+	['marionette', 'i18n', 'sf1', 'client', 'text!/modules/ia/ia-template.html', 'text!/modules/ia/config.json'],
+	function(Marionette, i18n, sf1, App, template, config) {
 
 		_.templateSettings.variable = 'P';
 

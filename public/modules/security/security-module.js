@@ -7,8 +7,8 @@
  *
  */
 define(
-    ['jquery','client'],
-    function($,App){
+    ['jquery','underscore','client'],
+    function($, _, App){
         var sf1 = App.sf1;
         var anchorSelector = '.main-content-wrapper';
         var isTemplateMarkupLoaded = false;
