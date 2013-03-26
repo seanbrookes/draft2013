@@ -73,8 +73,11 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
         draft:function (userId) {
             sf1.log('draft route');
             sf1.EventBus.trigger('ia.mainNavEvent',[{route:'draft'}]);
-            require(['draft'],function(module){
-                module.init(userId);
+            require(['draft','chat'],function(draftMod,chatMod){
+                $('.main-content-wrapper').empty();
+                draftMod.init();
+                chatMod.init();
+
             });
         },
         login:function () {
