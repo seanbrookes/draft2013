@@ -116,7 +116,6 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 		console.log('|==========================================');
 		console.log('|==========================================');
 		console.log('|');
-		console.log('|');
 
 	});
 });
@@ -144,7 +143,18 @@ io.set('log level', 2);
 // revert to 'xhr-polling' (like Comet/Long polling).
 // for more configurations got to:
 // https://github.com/LearnBoost/Socket.IO/wiki/Configuring-Socket.IO
-io.set('transports', [ 'websocket', 'xhr-polling' ]);
+app.configure('development', function(){
+    io.set('transports', [ 'websocket', 'xhr-polling' ]);
+});
+
+app.configure('produtction', function(){
+    io.set("transports", ["xhr-polling"]);
+    io.set("polling duration", 10);
+});
+//
+//io.configure(function () {
+//
+//});
 
 // socket.io events, each connection goes through here
 // and each event is emited in the client.

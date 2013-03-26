@@ -82,7 +82,7 @@ require.config({
     }
 });
 define(
-    ['jquery', 'i18n', 'client', 'security', 'ia', 'pageheader', 'maincontent', 'socket.io'],
+    ['jquery', 'i18n', 'client', 'security', 'ia', 'pageheader', 'maincontent'],
     function($, i18n, App, Security, IA, PageHeader, MainContent) {
 
         App.sf1.log('typeof $: ' + typeof $);

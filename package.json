@@ -15,7 +15,7 @@
 		"bcrypt":"0.7.x",
 		"validator":"0.4.x",
 		"winston":"0.6.x",
-        "socket.io": "0.9.10",
+        "socket.io": "0.9.x",
         "jsdom" : "0.3.x"
 	},
 	"devDependencies": {
