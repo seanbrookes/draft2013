@@ -64,7 +64,7 @@ define(
         };
 
         var sf1 = App.sf1;
-        sf1.log('Draft module loaded ');
+        //sf1.log('Draft module loaded ');
 
         var anchorSelector = '#TemplateContainer';
         // namespace for var reference in template
@@ -72,14 +72,15 @@ define(
 
         function init(uuid){
             if (uuid){
-                sf1.log('checking user id: '  + uuid);
+                //sf1.log('checking user id: '  + uuid);
                 // look up uuid in dictionary
                 var currentUser = getUser(uuid);
                 if (currentUser){
                     if (sf1.hasStorage){
-                        sf1.log('has local storage support - setting values: ' + JSON.stringify(currentUser));
+                        //sf1.log('has local storage support - setting values: ' + JSON.stringify(currentUser));
                         // set storage variables
                         localStorage.setItem('currentAuthRoster', JSON.stringify(currentUser));
+                        sf1.EventBus.trigger('user.setNewAuthUser');
 //                        localStorage.setItem('uuid', currentUser.uuid);
 //                        localStorage.setItem('rosterEmail', currentUser.email);
 //                        localStorage.setItem('rosterOwner', currentUser.owner);
@@ -92,7 +93,7 @@ define(
                 // check if localstorage available
                 // set the local storage value
             }
-            sf1.log('Draft module init');
+           // sf1.log('Draft module init');
             var baseMarkup = $(markup);
             $(anchorSelector).html(baseMarkup);
             var draftModuleContainer = $('script#DraftModuleContainer').html();
@@ -107,7 +108,7 @@ define(
 
             if (sf1.hasStorage){
                 currentAuthRoster = getCurrentAuthRoster();
-                sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
+               // sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
             }
 
 

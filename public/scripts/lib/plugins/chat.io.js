@@ -13,7 +13,8 @@ define(['jquery','sf1'], // Require jquery
             currentRoom = null,
 
             // server information
-            serverAddress = 'http://draft2013.herokuapp.com',
+
+            serverAddress = null,
             serverDisplayName = 'Server',
             serverDisplayColor = '#1c5380',
 
@@ -38,6 +39,14 @@ define(['jquery','sf1'], // Require jquery
                     '</li>'
                 ].join("")
          };
+
+        var currentUrl = document.location.href;
+        if (currentUrl.indexOf('localhost') > -1){
+            serverAddress = 'localhost';
+        }
+        else{
+            serverAddress = 'http://draft2013.herokuapp.com';
+        }
 
         sf1.EventBus.bind('chat.bindDOMEventsRequest',function(event){
             connect();

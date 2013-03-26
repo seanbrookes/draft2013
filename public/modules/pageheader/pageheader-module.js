@@ -10,7 +10,7 @@ define(
     ['jquery', 'client','ia', 'countdown', 'text!/modules/pageheader/pageheader-template.html'],
     function($, App, IA, countdown, markup) {
         var sf1 = App.sf1;
-        sf1.log('PageHeader module loaded ');
+        //sf1.log('PageHeader module loaded ');
         var currentAuthRoster;
 
         var anchorSelector = '#TemplateContainer';
@@ -35,15 +35,23 @@ define(
             });
             IA.initGlobalNav();
 
+            setGreeting();
+
+
+            sf1.EventBus.trigger('pageheader.initComplete');
+        };
+        var setGreeting = function(){
             if (sf1.hasStorage){
                 if (localStorage.getItem('currentAuthRoster')){
                     currentAuthRoster = JSON.parse(localStorage.getItem('currentAuthRoster'));
                     $('.page-header-greeting').text('Hi ' + currentAuthRoster.owner)
                 }
             }
-
-            sf1.EventBus.trigger('pageheader.initComplete');
         };
+        sf1.EventBus.bind('user.setNewAuthUser',function(event){
+            setGreeting();
+        });
+
         return{
             init:function(){
                 return init();
