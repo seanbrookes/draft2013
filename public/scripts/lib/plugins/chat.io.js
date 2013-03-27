@@ -53,6 +53,35 @@ define(['jquery','sf1'], // Require jquery
             bindDOMEvents();
 
         });
+        sf1.EventBus.bind('chat.transcriptRefreshed',function(event,arg){
+            var messages = arg;
+            var outputHtml = '';
+            for (var i = 0;i < messages.length;i++){
+                var messageItem = messages[i];
+                outputHtml += '<li>' + messageItem.nickname + ': ' + messageItem.message + ': ' + messageItem.messageTimeStamp +'</li>';
+            }
+            $('.chat-messages ul').append(outputHtml);
+
+        });
+        sf1.EventBus.bind('chat.initTranscript',function(event){
+           // load the model from the db
+            sf1.io.ajax({
+                type:'GET',
+                url:'/drafttranscript',
+                success:function(response){
+                    sf1.log('GOT the Transcript');
+                    var xzy = response;
+                    sf1.EventBus.trigger('chat.transcriptRefreshed',[response]);
+                    sf1.EventBus.trigger('chat.bindDOMEventsRequest');
+                },
+                error:function(response){
+                    sf1.log('failed to get the transcript');
+                }
+            });
+            // bind it to the DOM
+            // trigger bind DOM events
+
+        });
 
         // bind DOM elements like button clicks and keydown
         var bindDOMEvents = function(){
@@ -467,7 +496,8 @@ define(['jquery','sf1'], // Require jquery
         //});
         return{
             init:function(){
-                sf1.EventBus.trigger('chat.bindDOMEventsRequest');
+                sf1.EventBus.trigger('chat.initTranscript');
+
 
             }
         }

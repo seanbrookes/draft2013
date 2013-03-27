@@ -146,19 +146,29 @@ table.player-list select{
     min-width:445px;
     float:left;
 }
+.draft-board-header{
+    font-family: Consolas;
+    font-size:160%;
+    color:#1B1B96;
+    letter-spacing: .2em;
+}
 .draft-table{
     width:100%;
 }
 
 .draft-table td{
-    border:1px solid #fff;
     padding:.3em;
+    border:1px solid;
+    border-top-color:#000;
+    border-left-color:#000;
+    border-bottom-color:#fefefe;
+    border-right-color:#fefefe;
 }
 .draft-table tr{
-    background-color:#e6f6fa;
+    background-color:#E6ECFA;
 }
 .draft-table tr.even-round{
-    background-color:#d0dbf6;
+    background-color:#BBBBF0;
 }
 .round-col{
     text-align:center;
@@ -175,6 +185,15 @@ table.player-list select{
     vertical-align:middle;
     width:.7em;
     font-size:70%
+}
+.pos-col, .team-col{
+    text-align:center;
+    vertical-align:middle;
+    width:2em;
+}
+
+.picktime-col{
+    width:3em;
 }
 .viewport .page-header{
     padding-bottom: 2px;
@@ -195,6 +214,16 @@ table.player-list select{
     background-color:#fff;
     border:1px solid #000080;
     border-radius:4px;
+    margin-right:3.5em;
+    max-height:12em;
+    overflow:scroll;
+}
+.chat-module-container .chat-widget-input{
+    width:20em;
+    height:4em;
+}
+.chat-clients{
+    float:right;
 }
 .player-protected{
     background-color:#439C2A;

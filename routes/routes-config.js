@@ -23,6 +23,7 @@ module.exports = function(app){
     app.get('/isauth',user.isUserAuth);
     app.get('/pagereader/:name',pagereader.getPage);
     app.get('/draft', draft.getDraftModel);
+    app.get('/drafttranscript', draft.getDraftTranscript);
     app.post('/createdraft', draft.createDraft);
     app.post('/createdraftlist', draft.createDraftList);
     app.put('/draftpick', draft.updateDraftPick);
