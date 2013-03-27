@@ -143,11 +143,11 @@ table.player-list select{
     min-width:445px;
     float:left;
 }
-#DraftList{
+.draft-table{
     width:100%;
 }
 
-#DraftList td{
+.draft-table td{
     border:1px solid #fff;
     padding:.3em;
 }

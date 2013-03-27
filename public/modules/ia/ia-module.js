@@ -20,6 +20,8 @@ define(
         var mainNavCollection = {};
         var globalNavCollection = {};
 
+
+        var baseMarkup;
         // attach the module template markup to the DOM
         baseMarkup = $(template);
         $(anchorSelector).append(baseMarkup);
@@ -27,7 +29,6 @@ define(
         // IA base model
         var navConfigObj = {};
 
-        var baseMarkup;
 
 		/*
 		 * Nav Item Model / Collection

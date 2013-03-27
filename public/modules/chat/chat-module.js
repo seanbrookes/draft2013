@@ -11,8 +11,13 @@ define(
     function(App, ChatLib, markup) {
 
         var sf1 = App.sf1;
-        var currentAuthRoster;
+        var anchorSelector = '#TemplateContainer';
+        // namespace for var reference in template
+        _.templateSettings.variable = 'S';
 
+        var currentAuthRoster;
+        var baseMarkup = $(markup);
+        $(anchorSelector).append(baseMarkup);
 
 
         var getCurrentAuthRoster = function(){
@@ -26,15 +31,12 @@ define(
 
         sf1.log('Chat module loaded ');
 
-        var anchorSelector = '#TemplateContainer';
-        // namespace for var reference in template
-        _.templateSettings.variable = 'S';
+
 
         function init(){
 
             sf1.log('Chat module init');
-            var baseMarkup = $(markup);
-            $(anchorSelector).html(baseMarkup);
+
 
             var chatModuleContainer = $('script#ChatModuleDefaultTemplate').html();
 

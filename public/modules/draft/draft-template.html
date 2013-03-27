@@ -1,13 +1,36 @@
-<div class="draft-module">
+<div id="DraftModuleTemplateContainer" class="draft-module">
 
     <!-- Templates -->
     <script type="text/template" id="DraftModuleContainer" class="ui-template">
         <div class="draft-module-container ui-container">
-            <table id="DraftList">
-
-            </table>
+            <h1 class="module-header">Draft Board</h1>
 
         </div>
+
     </script>
+
+
+    <!-- DraftPick Item Template -->
+    <script type="text/template" id="DraftPickTemplate" class="draft-pick-template">
+        <td>
+            <%= S.round %>
+        </td>
+        <td>
+            <%= S.pickNumber %>
+        </td>
+        <td data-id="<%= S._id %>" data-roster="<%= S.roster %>" >
+            <button class="btn-cmd-link">
+                <%= S.roster %>
+            </button>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+    </script>
+
+
 
 </div>
