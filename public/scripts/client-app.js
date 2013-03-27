@@ -75,7 +75,7 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
             sf1.EventBus.trigger('ia.mainNavEvent',[{route:'draft'}]);
             require(['draft','chat'],function(draftMod,chatMod){
                 $('.main-content-wrapper').empty();
-                draftMod.init();
+                draftMod.init(userId);
                 chatMod.init();
 
             });

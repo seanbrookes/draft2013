@@ -81,6 +81,7 @@ define(
                         // set storage variables
                         localStorage.setItem('currentAuthRoster', JSON.stringify(currentUser));
                         sf1.EventBus.trigger('user.setNewAuthUser');
+                        document.location.href = '/';
 //                        localStorage.setItem('uuid', currentUser.uuid);
 //                        localStorage.setItem('rosterEmail', currentUser.email);
 //                        localStorage.setItem('rosterOwner', currentUser.owner);
