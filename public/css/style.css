@@ -6,7 +6,7 @@ body {
     font-size: 95.5%;
     font-family: "Trebuchet MS", Arial, Tahoma, sans-serif;
     color: #333;
-    background: #eee;
+    background: #fff;
     padding-top: 10px;
 }
 
@@ -35,6 +35,9 @@ h3 {
     font-weight: bold;
     font-size: 1.44em;
     margin-bottom: 10px;
+}
+ul{
+    list-style: none;
 }
 .btn-cmd-link{
     border:0;
@@ -151,6 +154,28 @@ table.player-list select{
     border:1px solid #fff;
     padding:.3em;
 }
+.draft-table tr{
+    background-color:#e6f6fa;
+}
+.draft-table tr.even-round{
+    background-color:#d0dbf6;
+}
+.round-col{
+    text-align:center;
+    vertical-align:middle;
+    width:.7em;
+    font-size:70%;
+}
+.roster-col{
+    text-align:left;
+    width:4em;
+}
+.pick-col{
+    text-align:center;
+    vertical-align:middle;
+    width:.7em;
+    font-size:70%
+}
 .viewport .page-header{
     padding-bottom: 2px;
     margin: 6px 0 6px;
@@ -165,6 +190,29 @@ table.player-list select{
 .chat-module-container{
     margin-left:453px;
     max-width:450px;
+}
+.chat-messages{
+    background-color:#fff;
+    border:1px solid #000080;
+    border-radius:4px;
+}
+.player-protected{
+    background-color:#439C2A;
+    color:#fff;
+}
+.player-protected a.draft-status-cmd, .player-prospect a.draft-status-cmd{
+    color:#fff;
+}
+.player-dropped{
+    background-color:#ddd;
+
+}
+.player-prospect{
+    background-color:#316921;
+    color:#fff;
+}
+.player-bubble{
+    background-color:#E3E159;
 }
 /*
 

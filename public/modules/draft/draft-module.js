@@ -107,6 +107,7 @@ define(
         var DraftPickView = Backbone.Marionette.ItemView.extend({
             template: '#DraftPickTemplate',
             tagName: 'tr'
+
         });
 
         /*
@@ -186,7 +187,7 @@ define(
 
             // initial draft board header row
 
-            var markupOutput = '<tr><th>round</th><th>pick</th><th>roster</th><th>player</th><th>pos</th><th>team</th></tr>';
+           // var markupOutput = '<tr><th>round</th><th>pick</th><th>roster</th><th>player</th><th>pos</th><th>team</th></tr>';
 
 
             var testTemplate = $('#DraftPickTemplate').html();
@@ -207,12 +208,19 @@ define(
                     sf1.log('success: ' + JSON.stringify(response));
 
                     var draftTableView = new DraftTableView({
-                        collection: new DraftPickCollection(draftList)
+                        collection: new DraftPickCollection(draftList),
+                        onItemAdded: function(itemView){
+                            sf1.log('ITEM ADDED');
+                        }
                     });
                     //draftTableView.render();
                     $('.draft-module-container').append(draftTableView.render().$el);
 
-
+                    $(".draft-table tr:nth-child(10n)").addClass("even-round")
+                        .prev().addClass("even-round")
+                        .prev().addClass("even-round")
+                        .prev().addClass("even-round")
+                        .prev().addClass("even-round");
 
 
 

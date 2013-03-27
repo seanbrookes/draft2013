@@ -12,22 +12,36 @@
 
     <!-- DraftPick Item Template -->
     <script type="text/template" id="DraftPickTemplate" class="draft-pick-template">
-        <td>
+        <td class="round-col">
             <%= S.round %>
         </td>
-        <td>
+        <td class="pick-col">
             <%= S.pickNumber %>
         </td>
-        <td data-id="<%= S._id %>" data-roster="<%= S.roster %>" >
+        <td data-id="<%= S._id %>" data-roster="<%= S.roster %>" class="roster-col">
             <button class="btn-cmd-link">
                 <%= S.roster %>
             </button>
         </td>
-        <td>
+        <td class="name-col">
+            <button class="btn-cmd-link">
+                <%= S.name %>
+            </button>
         </td>
-        <td>
+        <td class="pos-col">
+            <button class="btn-cmd-link">
+                <%= S.pos %>
+            </button>
         </td>
-        <td>
+        <td class="team-col">
+            <button class="btn-cmd-link">
+                <%= S.team %>
+            </button>
+        </td>
+        <td class="picktime-col">
+            <button class="btn-cmd-link">
+                <%= S.pickTime %>
+            </button>
         </td>
     </script>
 

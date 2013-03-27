@@ -46,7 +46,8 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
      * */
     var PlayerView = Backbone.Marionette.ItemView.extend({
         template: '#PlayerTemplate',
-        tagName: 'tr'
+        tagName: 'tr',
+
     });
 
     /*
@@ -55,8 +56,12 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
      * */
     var RosterView = Backbone.Marionette.CollectionView.extend({
         tagName: 'table',
-        className: 'player-list'
-
+        className: 'player-list',
+        onAfterItemAdded: function(item){
+            // add class
+            var dStatus = item.model.attributes.draftStatus;
+            $(item.el).addClass('player-' + dStatus);
+        }
     });
 
 
@@ -276,74 +281,11 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         $('td[data-id="' + playerId + '"]').html(linkString).click(function(event){
             toggleEditOn(playerId,draftStatus);
         });
+        $('td[data-id="' + playerId + '"]').parent().addClass(draftStatus);
 
         sf1.EventBus.trigger('roster.draftStateUpdateComplete');
         sf1.EventBus.trigger('roster.playerModelUpdateRequest');
-        //updateRosterDraftStatusModel();
-        // recalculate the totals
 
-
-
-
-
-//        $(linkString).on('click',function(event){
-//
-//        }).show();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        var selectElement = $('#StatusSelectTemplate').html();
-//
-//        $('a[data-id="' + playerId + '"]').hide();
-//        //$(selectElement).data('id',id);
-//        $('td[data-id="' + playerId + '"]').html(selectElement);
-//        $('td[data-id="' + playerId + '"]').find('.status-select').attr('data-id',playerId);
-//
-//        $('td[data-id="' + playerId + '"]').find('.status-select').on('change',function(event){
-//            sf1.log('CHECKED!!!: ' + draftStatus);
-//            var statusValue = draftStatus;
-//            // save value to the db
-//
-//            var postObj = {};
-//            postObj.playerId = playerId;
-//            postObj.draftStatus = statusValue;
-//            postObj.rosterSlug = rosterSlug;
-//
-//            sf1.io.ajax({
-//                type:'PUT',
-//                url:'/statusupdate',
-//                contentType: "application/json",
-//                data:JSON.stringify(postObj),
-//                success:function(response){
-//                    sf1.log(JSON.stringify(response));
-//
-//                    // get value
-//                    var draftStatus = response.draftStatus;
-//                    var playerId = response.playerId;
-//                    // get id
-//                    // turn off the select
-//                    selectElement = $('#StatusSelectTemplate').html();
-//                    // turn on the link
-//                    var linkString = '<a data-id="' + playerId + '">' + draftStatus + '</a>';
-//                    $('td[data-id="' + playerId + '"]').html(linkString);
-//                    $(linkString).on('click',toggleEditOn);
-//                },
-//                error:function(response){
-//                    sf1.log(JSON.stringify(response));
-//                }
-//            });
-//        });
     };
     var renderRoster = function(){
 //        var roster = rosterslug;
@@ -358,6 +300,8 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                 collection: playersCollection
             });
             var output = rosterView.render().$el;
+
+
             $('.roster-container .navbar-inner').html(output);
             $('.roster-title').text(rosterName);
             $('.draft-status-cmd').click(function(event){
@@ -368,7 +312,6 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                 toggleEditOn(id,val);
 
             });
-
             sf1.EventBus.trigger('roster.renderRosterComplete');
             //$('.nav-main-list').i18n();
 
