@@ -39,6 +39,9 @@ h3 {
 ul{
     list-style: none;
 }
+.pool-site-link{
+    float:right;
+}
 .btn-cmd-link{
     border:0;
     padding:.2em;
