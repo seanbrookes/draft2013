@@ -220,6 +220,11 @@ table.player-list select{
     margin-right:3.5em;
     max-height:12em;
     overflow:scroll;
+    postion:relative;
+}
+.transcript-list{
+    postion:absolute;
+    bottom:0;
 }
 .chat-module-container .chat-widget-input{
     width:20em;
@@ -227,6 +232,30 @@ table.player-list select{
 }
 .chat-clients{
     float:right;
+}
+.chat-message-item{
+    border-top:1px dotted #aaa;
+    margin-top:.2em;
+    padding-top:.2em;
+    position:relative;
+}
+.message-sender{
+    display:block;
+    font-size:80%;
+    font-style: italic;
+    font-weight: bold;
+}
+.message-body{
+    display:block;
+    margin-left:1em;
+    padding-bottom:1.2em;
+    color:#37541A;
+    font-family: Consolas;
+}
+.message-timestamp{
+    position:absolute;
+    right:1px;
+    bottom:1px;
 }
 .player-protected{
     background-color:#439C2A;

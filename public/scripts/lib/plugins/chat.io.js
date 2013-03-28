@@ -1,4 +1,4 @@
-define(['jquery','sf1'], // Require jquery
+define(['jquery','sf1','prettydate'], // Require jquery
     function($, sf1){
 
         // create global app parameters...
@@ -58,10 +58,12 @@ define(['jquery','sf1'], // Require jquery
             var outputHtml = '';
             for (var i = 0;i < messages.length;i++){
                 var messageItem = messages[i];
-                outputHtml += '<li>' + messageItem.nickname + ': ' + messageItem.message + ': ' + messageItem.messageTimeStamp +'</li>';
+                outputHtml += '<li class="chat-message-item"><span class="message-sender">' + messageItem.nickname + ':</span><span class="message-body">' + messageItem.message + '</span><span class="message-timestamp" title="' + messageItem.messageTimeStamp + '">' + messageItem.messageTimeStamp +'</span></li>';
+
             }
             $('.chat-messages ul').append(outputHtml);
-
+            $('.message-timestamp').prettyDate();
+            $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
         });
         sf1.EventBus.bind('chat.initTranscript',function(event){
            // load the model from the db
@@ -69,7 +71,7 @@ define(['jquery','sf1'], // Require jquery
                 type:'GET',
                 url:'/drafttranscript',
                 success:function(response){
-                    sf1.log('GOT the Transcript');
+                    //sf1.log('GOT the Transcript');
                     var xzy = response;
                     sf1.EventBus.trigger('chat.transcriptRefreshed',[response]);
                     sf1.EventBus.trigger('chat.bindDOMEventsRequest');
@@ -133,7 +135,7 @@ define(['jquery','sf1'], // Require jquery
                 $('.chat-rooms ul li.selected').css('top', $(this).scrollTop());
             });
 
-            $('.chat-messages').on('scroll', function(){
+            $('.transcript-list').on('scroll', function(){
                 var self = this;
                 window.setTimeout(function(){
                     if($(self).scrollTop() + $(self).height() < $(self).find('ul').height()){
@@ -214,7 +216,7 @@ define(['jquery','sf1'], // Require jquery
                 setCurrentRoom(data.room);
 
                 // announce a welcome message
-                insertMessage(serverDisplayName, 'welcome to the draft chat ', true, false, true);
+                //insertMessage(serverDisplayName, 'welcome to the draft chat ', true, false, true);
                 $('.chat-clients ul').empty();
                 nickname = getCurrentChatNickName();
                 // add the clients to the clients list
@@ -276,7 +278,7 @@ define(['jquery','sf1'], // Require jquery
             $('.chat-rooms ul li[data-roomId="' + name + '"]').remove();
             // if announce is true, show a message about this room
             if(announce){
-                insertMessage(serverDisplayName, 'The room `' + name + '` destroyed...', true, false, true);
+                //insertMessage(serverDisplayName, 'The room `' + name + '` destroyed...', true, false, true);
             }
         }
 
@@ -293,7 +295,7 @@ define(['jquery','sf1'], // Require jquery
 
             // if announce is true, show a message about this client
             if(announce){
-                insertMessage(serverDisplayName, client.nickname + ' has joined the room...', true, false, true);
+               // insertMessage(serverDisplayName, client.nickname + ' has joined the room...', true, false, true);
             }
             $('.chat-clients ul').append(html);
         }
@@ -304,7 +306,7 @@ define(['jquery','sf1'], // Require jquery
 
             // if announce is true, show a message about this room
             if(announce){
-                insertMessage(serverDisplayName, client.nickname + ' has left the room...', true, false, true);
+                //insertMessage(serverDisplayName, client.nickname + ' has left the room...', true, false, true);
             }
         }
 
@@ -432,7 +434,9 @@ define(['jquery','sf1'], // Require jquery
         function insertMessage(sender, message, showTime, isMe, isServer){
             var senderArg = sender;
             var msg = message;
-            var html = '<li>' + sender + ':   ' + message + '</li>';
+            //var html = '<li class="chat-message-item"><span class="message-sender">' + sender + ':</span><span class="message-body">' + message + '</span></li>';
+            var html = '<li class="chat-message-item"><span class="message-sender">' + sender + ':</span><span class="message-body">' + message + '</span><span class="message-timestamp" title="' + new Date().toISOString() + '">' + Date.now() +'</span></li>';
+
 //            var $html = $.tmpl(tmplt.message, {
 //                sender: sender,
 //                text: message,
@@ -452,6 +456,7 @@ define(['jquery','sf1'], // Require jquery
             }
            // $html.appendTo('.chat-messages ul');
             $('.chat-messages ul').append(html);
+            $('.message-timestamp').prettyDate();
             $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
         }
 

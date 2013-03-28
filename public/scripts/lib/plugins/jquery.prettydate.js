@@ -11,8 +11,9 @@ function prettyDate(time){
 		diff = (((new Date()).getTime() - date.getTime()) / 1000),
 		day_diff = Math.floor(diff / 86400);
 
-	if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
+	if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 ){
 		return;
+    }
 
 	return day_diff == 0 && (
 		diff < 60 && "just now" ||
@@ -26,11 +27,13 @@ function prettyDate(time){
 }
 
 // If jQuery is included in the page, adds a jQuery plugin to handle it as well
-if ( typeof jQuery != "undefined" )
-	jQuery.fn.prettyDate = function(){
+if ( typeof $ !== "undefined" ){
+	$.fn.prettyDate = function(){
 		return this.each(function(){
 			var date = prettyDate(this.title);
-			if ( date )
-				jQuery(this).text( date );
+			if ( date ){
+				$(this).text( date );
+            }
 		});
 	};
+}

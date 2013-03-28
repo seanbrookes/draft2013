@@ -18,7 +18,7 @@ require.config({
     paths: {
         'jquery'        : 'scripts/lib/jquery-1.8.2.min',
         'cookie'        : 'scripts/lib/plugins/jquery.cookie',
-        'prettydate'    : 'scripts/lib/plugins/jquery.prettydate.js',
+        'prettydate'    : 'scripts/lib/plugins/jquery.prettydate',
         'underscore'    : 'scripts/lib/underscore',
         //'text'          : 'scripts/lib/text',
         'json2'         : 'scripts/lib/json2',
@@ -68,7 +68,8 @@ require.config({
             exports: 'sf1'
         },
         prettydate: {
-            deps: ['jquery']
+            deps: ['jquery'],
+            exports: 'jQuery.fn.prettyDate'
         },
         countdown: {
             deps: ['jquery']
