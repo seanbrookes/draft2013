@@ -46,7 +46,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
      * */
     var PlayerView = Backbone.Marionette.ItemView.extend({
         template: '#PlayerTemplate',
-        tagName: 'tr',
+        tagName: 'tr'
 
     });
 
@@ -90,7 +90,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
         // attach the module template markup to the DOM
         baseMarkup = $(template);
-        $(anchorSelector).html(baseMarkup);
+        $(anchorSelector).append(baseMarkup);
 
         sf1.log('roster module init - rosterId: ' + rosterName);
 
