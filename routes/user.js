@@ -39,9 +39,9 @@ var logger = new (winston.Logger)({
  */
 exports.createUser = function(req, res){
 // create a user a new user
-	console.log('createUser');
-	logger.log('info', 'createUser request');
-	console.log('req body: ' + req.body);
+	//console.log('createUser');
+	//logger.log('info', 'createUser request');
+	//console.log('req body: ' + req.body);
 	var userName = req.param('email', null);
 	var password = req.param('password', null);
 
@@ -52,7 +52,7 @@ exports.createUser = function(req, res){
 	}
 
 	if (req.body){
-		console.log('1: userName:' + userName);
+		//console.log('1: userName:' + userName);
 		var reqUserModel = req.body;
 		var user = {
 			userName: userName,
@@ -73,7 +73,7 @@ exports.createUser = function(req, res){
 		* */
 		User.findOne({email: req.body.email}, function (err, existingUser) {
 			if(err){
-				logger.error('exception testing for existing user: ' + err.message);
+				//logger.error('exception testing for existing user: ' + err.message);
 				return res.send(500, 'exception testing for existing user: ' + err.message);
 			}
 
@@ -105,7 +105,7 @@ exports.createUser = function(req, res){
 						we have created and saved user [pending activation]
 
 						  */
-						logger.info('new user successfully created [pending activation]: ' + newUser.userName);
+						//logger.info('new user successfully created [pending activation]: ' + newUser.userName);
 
 						return res.send(user);
 
@@ -161,7 +161,7 @@ var getToken = function(){
  *
  */
 exports.postAuthenticate = function(req, res){
-	logger.info('login attempt');
+	//logger.info('login attempt');
 	if (req.body){
         logger.info(JSON.stringify(req.body));
 		if(req.body.email && req.body.password){
@@ -192,12 +192,12 @@ exports.postAuthenticate = function(req, res){
 						}
 						// no user but no error
 						else{
-							console.log('exports.postAuthenticate - no user returned on auth - reason: ' + User.printReason(reason));
+							logger.warn('exports.postAuthenticate - no user returned on auth - reason: ' + User.printReason(reason));
 						}
 					}
 					// auth attempt threw an error
 					else{
-						console.log('exports.postAuthenticate - error during auth attempt: ' + err.message);
+						logger.warn('exports.postAuthenticate - error during auth attempt: ' + err.message);
 					}
 
 
@@ -207,14 +207,14 @@ exports.postAuthenticate = function(req, res){
 				});
 			}
 			catch(e){
-				console.log('error login: ' + e.message);
+				//logger.error('error login: ' + e.message);
 				logger.error('exports.postAuthentcate uncaught exception during auth attempt: ' + e.message);
 				// TODO - message structure and content
 				res.send('error login: ' + e.message);
 			}
 		}
 		else{
-			console.log('no req.userName or req.password');
+			//console.log('no req.userName or req.password');
 			logger.warn('login attempt missing username or password');
 			// TODO - message structure and content
 			res.send('no req.userName or req.password');
@@ -223,8 +223,8 @@ exports.postAuthenticate = function(req, res){
 	}
 	else{
 		// TODO - message content and structure
-		console.log('no Req. body');
-		logger.info('exports.postAuthenticate - request made with no req.body');
+		//console.log('no Req. body');
+		logger.warn('exports.postAuthenticate - request made with no req.body');
 		res.send('no req.body');
 	}
 
