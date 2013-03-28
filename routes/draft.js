@@ -119,7 +119,114 @@ exports.createDraftList = function(req,res){
 //        return res.send(200);
 //    });
 };
+exports.updateDraftPickRoster = function(req, res){
+    var draftPickId = req.param('draftPickId',null);
+    //logger.info('draftPickId: ' + draftPickId);
+    var draftPickRoster = req.param('propertyVal',null);
+    //logger.info('draftPickRoster: ' + draftPickRoster);
+    if (draftPickRoster && draftPickId){
 
+       // var queryObj = {'draftpicks._id': draftPickId};
+      //  logger.info('query: ' + JSON.stringify(queryObj));
+
+        Draft.update({'year':2013,'picks._id': draftPickId},{$set:{ 'picks.$.roster' : draftPickRoster }},function(err){
+            if(err){
+                logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
+                return res.send(400,err.message);
+            }
+            var retObj = {};
+            retObj.draftPickId = draftPickId;
+            retObj.draftPickRoster = draftPickRoster;
+
+            return res.send(200,retObj);
+        });
+    }
+    else{
+        logger.error('updateDraftPickRoster no roster supplied!!');
+        return res.send(400,'updateDraftPickRoster no roster supplied!!')
+    }
+};
+exports.updateDraftPickName = function(req, res){
+    var draftPickId = req.param('draftPickId',null);
+    logger.info('draftPickId: ' + draftPickId);
+
+    var draftPickPlayerName = req.param('propertyVal',null);
+    logger.info('draftPickPlayerName: ' + draftPickPlayerName);
+    if (draftPickPlayerName && draftPickId){
+        Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'draftpicks.$.name' : draftPickPlayerName }},function(err){
+            if(err){
+                logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
+                return res.send(400,err.message);
+            }
+            var retObj = {};
+            retObj.draftPickId = draftPickId;
+            retObj.draftPickPlayerName = draftPickPlayerName;
+
+
+            return res.send(200,retObj);
+        });
+    }
+    else{
+        logger.error('updateDraftPickName no name supplied!!');
+        return res.send(400,'updateDraftPickName no name supplied!!')
+    }
+
+};
+exports.updateDraftPickPos = function(req, res){
+    var draftPickId = req.param('draftPickId',null);
+    logger.info('draftPickId: ' + draftPickId);
+
+    var draftPickPos = req.param('propertyVal',null);
+    logger.info('draftPickPos: ' + draftPickPos);
+    if (draftPickPos && draftPickId){
+        Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'draftpicks.$.pos' : draftPickPos }},function(err){
+            if(err){
+                logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
+                return res.send(400,err.message);
+            }
+            var retObj = {};
+            retObj.draftPickId = draftPickId;
+            retObj.draftPickPos = draftPickPos;
+
+
+            return res.send(200,retObj);
+        });
+    }
+    else{
+        logger.error('updateDraftPickPos no pos supplied!!');
+        return res.send(400,'updateDraftPickPos no pos supplied!!')
+
+    }
+
+};
+exports.updateDraftPickTeam = function(req, res){
+    var draftPickId = req.param('draftPickId',null);
+    logger.info('draftPickId: ' + draftPickId);
+
+    var draftPickTeam = req.param('propertyVal',null);
+    logger.info('draftPickTeam: ' + draftPickTeam);
+    if (draftPickTeam && draftPickId){
+        Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'draftpicks.$.team' : draftPickTeam }},function(err){
+            if(err){
+                logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
+                return res.send(400,err.message);
+            }
+            var retObj = {};
+            retObj.draftPickId = draftPickId;
+            retObj.draftPickTeam = draftPickTeam;
+
+
+            return res.send(200,retObj);
+        });
+    }
+    else{
+        logger.error('updateDraftPickTeam no team supplied!!');
+        return res.send(400,'updateDraftPickTeam no team supplied!!')
+
+    }
+
+
+};
 exports.updateDraftPick = function(req,res){
     var draftPickId = req.param('draftPickId',null);
     logger.info('draftPickId: ' + draftPickId);
@@ -149,7 +256,7 @@ exports.updateDraftPick = function(req,res){
         pickTimeStamp: Date.now()
     });
 
-    Draft.update({'draftpick._id': draftPickId},{$set:{ 'players.$' : updateDraftPickModel }},function(err){
+    Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'draftpicks.$' : updateDraftPickModel }},function(err){
         if(err){
             logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
             return res.send(400,err.message);

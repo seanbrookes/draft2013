@@ -26,7 +26,10 @@ module.exports = function(app){
     app.get('/drafttranscript', draft.getDraftTranscript);
     app.post('/createdraft', draft.createDraft);
     app.post('/createdraftlist', draft.createDraftList);
-    app.put('/draftpick', draft.updateDraftPick);
+    app.put('/pickroster', draft.updateDraftPickRoster);
+    app.put('/pickname', draft.updateDraftPickName);
+    app.put('/pickpos', draft.updateDraftPickPos);
+    app.put('/pickteam', draft.updateDraftPickTeam);
     app.post('/auth',user.postAuthenticate);
     app.post('/user',user.createUser);
     app.get('/pendingaccounts',admin.getPendingAccountList);
