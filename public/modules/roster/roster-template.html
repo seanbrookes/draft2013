@@ -37,7 +37,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="navbar-inner">
+            <div class="roster-inner">
 
             </div>
         </div>
@@ -51,9 +51,18 @@
             <option value="prospect">prospect</option>
         </select>
     </script>
+    <script type="text/template" id="RosterSelectTemplate" class="ui-template">
+        <select class="roster-select">
+            <option value="bashers">bashers</option>
+            <option value="hooters">hooters</option>
+            <option value="mashers">mashers</option>
+            <option value="rallycaps">rallycaps</option>
+            <option value="stallions">stallions</option>
+        </select>
+    </script>
 
     <!-- Player Template -->
     <script id="PlayerTemplate" class="player-template" type="text/template">
-        <td><%= S.pos %></td><td><span><%= S.name %></span></td><td><%= S.team %></td><td><%= S.runs %></td><td><%= S.hits %></td><td><%= S.hr %></td><td><%= S.rbe %></td><td><%= S.sb %></td><td><%= S.total %></td><td data-id="<%= S._id%>"><a class="draft-status-cmd" href="#" data-id="<%= S._id%>"><%= S.draftStatus %></a></td>
+        <td><%= S.pos %></td><td><a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><span><%= S.name %></span></a></td><td><%= S.team %></td><td><%= S.runs %></td><td><%= S.hits %></td><td><%= S.hr %></td><td><%= S.rbe %></td><td><%= S.sb %></td><td><%= S.total %></td><td data-id="<%= S._id%>"><a class="draft-status-cmd" href="#" data-id="<%= S._id%>"><%= S.draftStatus %></a></td>
     </script>
 </div>

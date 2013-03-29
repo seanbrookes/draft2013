@@ -7,84 +7,101 @@
  *
  */
 // Client App
-define(['sf1', 'backbone'],function(sf1, Backbone){
-    var AppRouter = Backbone.Router.extend({
+define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
+    var AppRouter;
+    AppRouter = Backbone.Router.extend({
 
-        routes:{
-            "":"index",
-            "home":"index",
-            "draft":"draft",
-            "draft/:userid":"draft",
-            "login":"login",
-            "signup":"signup",
-            "chat":"chat",
-            "admin":"admin",
-            "page/:name":"page",
-            "roster/:name":"roster"
+        routes: {
+            "": "index",
+            "home": "index",
+            "draft": "draft",
+            "draft/:userid": "draft",
+            "login": "login",
+            "signup": "signup",
+            "chat": "chat",
+            "admin": "admin",
+            "page/:name": "page",
+            "roster/:name": "roster"
         },
 
-        index:function () {
+        index: function () {
             sf1.log('index');
-            sf1.EventBus.trigger('ia.mainNavEvent',[{route:'index'}]);
-            require(['draft','chat'],function(draftMod,chatMod){
+            sf1.EventBus.trigger('ia.mainNavEvent', [
+                {route: 'index'}
+            ]);
+            require(['draft', 'chat'], function (draftMod, chatMod) {
                 $('.main-content-wrapper').empty();
-                draftMod.init();
                 chatMod.init();
+                draftMod.init();
 
             });
             //indexModule.init();
         },
 
 
-        signup:function () {
+        signup: function () {
             sf1.log('signup route');
-            sf1.EventBus.trigger('ia.mainNavEvent',[{route:'signup'}]);
+            sf1.EventBus.trigger('ia.mainNavEvent', [
+                {route: 'signup'}
+            ]);
 
-            require(['security'],function(module){
+            require(['security'], function (module) {
                 module.initSignup();
             });
 
         },
 
-        page:function (rosterName) {
+        page: function (rosterName) {
             sf1.log('page route');
-            sf1.EventBus.trigger('ia.mainNavEvent',[{route:'page'}]);
-            require(['../modules/pagereader/pagereader-module'],function(module){
+            sf1.EventBus.trigger('ia.mainNavEvent', [
+                {route: 'page'}
+            ]);
+            require(['../modules/pagereader/pagereader-module'], function (module) {
                 //module.init(rosterName);
             });
 
         },
-        chat:function (rosterName) {
+        chat: function (rosterName) {
             sf1.log('chat route');
-            sf1.EventBus.trigger('ia.mainNavEvent',[{route:'chat'}]);
-            require(['chat'],function(module){
+            sf1.EventBus.trigger('ia.mainNavEvent', [
+                {route: 'chat'}
+            ]);
+            require(['chat'], function (module) {
                 module.init();
             });
 
         },
-        roster:function (rosterId) {
+        roster: function (rosterId) {
             sf1.log('roster route');
-            sf1.EventBus.trigger('ia.mainNavEvent',[{route:rosterId}]);
-            require(['../modules/roster/roster-module'],function(module){
+            sf1.EventBus.trigger('ia.mainNavEvent', [
+                {route: rosterId}
+            ]);
+            $('.main-content-wrapper').empty();
+            require(['../modules/roster/roster-module', 'chat'], function (module, chatMod) {
                 module.init(rosterId);
+                chatMod.init();
             });
 
         },
-        draft:function (userId) {
+        draft: function (userId) {
             sf1.log('draft route');
-            sf1.EventBus.trigger('ia.mainNavEvent',[{route:'draft'}]);
-            require(['draft','chat'],function(draftMod,chatMod){
+            sf1.EventBus.trigger('ia.mainNavEvent', [
+                {route: 'draft'}
+            ]);
+            require(['draft', 'chat'], function (draftMod, chatMod) {
                 $('.main-content-wrapper').empty();
                 draftMod.init(userId);
                 chatMod.init();
 
             });
         },
-        login:function () {
+        login: function () {
             sf1.log('login route');
-            sf1.EventBus.trigger('ia.mainNavEvent',[{route:'login'}]);
+            sf1.EventBus.trigger('ia.mainNavEvent', [
+                {route: 'login'}
+            ]);
 
-            require(['security'],function(module){
+            require(['security'], function (module) {
                 module.initLogin();
             });
 //
@@ -92,7 +109,7 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
 
         },
 
-        admin:function () {
+        admin: function () {
             sf1.log('admin route');
 
             /*
@@ -110,8 +127,8 @@ define(['sf1', 'backbone'],function(sf1, Backbone){
              * also maps to IA and other areas of the application.
              *
              * */
-            sf1.EventBus.trigger('ia.mainNavEvent',{route:'admin'});
-            require(['../modules/admin/admin-module'],function(module){
+            sf1.EventBus.trigger('ia.mainNavEvent', {route: 'admin'});
+            require(['../modules/admin/admin-module'], function (module) {
                 module.init();
             });
         }

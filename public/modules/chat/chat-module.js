@@ -135,7 +135,7 @@ define(
 
 
             //ChatLib.init();
-            sf1.EventBus.trigger('chat.initTranscript');
+          //  sf1.EventBus.trigger('chat.initTranscript');
 
         }
 

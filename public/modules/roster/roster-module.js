@@ -292,7 +292,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 //        var name;
         if (rosterSlug){
             var rosterShell = $('#RosterTemplate').html();
-            $('.main-content-wrapper').html(rosterShell);
+            $('.main-content-wrapper').append(rosterShell);
             // convert raw model to BB collection
             var playersCollection = new PlayerCollection(playersModel);
             var rosterView = new RosterView({
@@ -302,7 +302,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
             var output = rosterView.render().$el;
 
 
-            $('.roster-container .navbar-inner').html(output);
+            $('.roster-container .roster-inner').html(output);
             $('.roster-title').text(rosterName);
             $('.draft-status-cmd').click(function(event){
                 event.preventDefault();
