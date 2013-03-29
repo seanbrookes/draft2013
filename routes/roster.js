@@ -6,6 +6,7 @@
  * Time: 10:57 PM
  *
  */
+var Player = require('../models/player-model');
 var Roster = require('../models/roster-model');
 var winston = require('winston');
 var logger = new (winston.Logger)({
@@ -39,13 +40,85 @@ exports.updateDraftStatus = function(req,res){
   //logger.info('REQ PARAMS: ' + JSON.stringify(req.params));
   //res.send(400);
 };
-exports.updateDraftStatus = function(req,res){
+exports.updatePlayerRoster = function(req,res){
     var playerId = req.param('playerId',null);
     //logger.info('playerId: ' + playerId);
     var newRoster = req.param('newRoster',null);
     // logger.info('draftStatus: ' + draftStatus);
     var rosterSlug = req.param('rosterSlug',null);
     // logger.info('rosterSlug: ' + rosterSlug);
+
+logger.info('playerid: ' + playerId + '   oldRoster: ' + rosterSlug + '  newRoster: ' + newRoster);
+
+    Roster.find({'slug':rosterSlug},function(err,doc){
+        if(err){
+            return res.send(500);
+        }
+        if(!doc){
+            return res.send(400,'no doc');
+        }
+       // logger.info('roster: ' + doc);
+
+        //var pDoc = JSON.parse(doc);
+        var filteredPlayer;
+
+        //logger.info('players: ' + doc[0].players);
+        var x = doc[0].players;
+
+       // doc = JSON.parse(doc);
+        //var tRoster = JSON.parse(doc);
+        //logger.info('players: ' + doc);
+
+        for (var i = 0;i < x.length;i++){
+
+
+            if (x[i]._id == playerId) {
+
+                filteredPlayer = x[i];
+                break;
+            }
+
+        }
+        if (filteredPlayer){
+
+         //   Roster.
+
+            Roster.update({slug:rosterSlug},{$pull : {'players' : {'_id': filteredPlayer._id }}},function(err){
+                if(err){
+                    return res.send(500);
+                }
+                logger.info('yes or no?W?W?W');
+            });
+
+            logger.info('found the player: ' + filteredPlayer);
+            // add this player to the target roster
+            var targetRoster = Roster.find({slug:newRoster},function(err,doc){
+                if(err){
+                    return res.send(500);
+                }
+                // add filterplayer to doc[0].players
+                logger.info('in SAVE FLOW TARGET player');
+                doc[0].players.push(new Player(filteredPlayer));
+                doc[0].save(function(err){
+                    if (err){
+                        return res.send(500);
+                    }
+                    logger.info('updated player!!!!!!!!!!!!!!1');
+                    return res.send(200);
+                });
+            })
+            // remove player from this roster
+
+            return res.send(filteredPlayer);
+        }
+        else{
+            return res.send(400);
+
+        }
+
+    });
+
+
 
 
     // add player to new roster

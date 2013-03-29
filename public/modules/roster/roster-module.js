@@ -206,6 +206,91 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
 
     };
+
+        var toggleRosterEditOn = function(id,val){
+            var selectElement = $('#RosterSelectTemplate').html();
+
+            $('a[data-id="' + id + '"]').hide();
+            //$(selectElement).data('id',id);
+            $('td[data-id="' + id + '"][data-type="playername"]').html(selectElement);
+
+            var selectInstance = $('td[data-id="' + id + '"]').find('.roster-select');
+            selectInstance.attr('data-id',id);
+            selectInstance.focus();
+            selectInstance.val(val);
+
+            $('td[data-id="' + id + '"]').find('.roster-select').on('change',function(event){
+                val = event.target.value;
+                // sf1.log('CHECKED!!!: ' + val);
+                var rosterValue = val;
+                // save value to the db
+
+                var postObj = {};
+                postObj.playerId = id;
+                postObj.newRoster = rosterValue;
+                postObj.rosterSlug = rosterSlug;
+
+                sf1.io.ajax({
+                    type:'PUT',
+                    url:'/playerrosterupdate',
+                    contentType: "application/json",
+                    data:JSON.stringify(postObj),
+                    success:function(response){
+                        sf1.log('Roster update ok, reload page');
+                        //toggleEditOff(response.playerId,response.draftStatus);
+                    },
+                    error:function(response){
+                        sf1.log(JSON.stringify(response));
+                    }
+                });
+            });
+
+            $('td[data-id="' + id + '"]').find('.status-select').on('blur',function(event){
+                val = event.target.value;
+                // sf1.log('CHECKED!!!: ' + val);
+                var rosterValue = val;
+                // save value to the db
+
+                var postObj = {};
+                postObj.playerId = id;
+                postObj.newRoster = rosterValue;
+                postObj.rosterSlug = rosterSlug;
+
+                sf1.io.ajax({
+                    type:'PUT',
+                    url:'/playerrosterupdate',
+                    contentType: "application/json",
+                    data:JSON.stringify(postObj),
+                    success:function(response){
+                        sf1.log('Roster update ok, reload page');
+                        //toggleEditOff(response.playerId,response.draftStatus);
+                    },
+                    error:function(response){
+                        sf1.log(JSON.stringify(response));
+                    }
+                });
+            });
+
+
+
+        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     var updateRosterDraftStatusModel = function(){
         protectedCount = 0;
         bubbleCount = 0;
@@ -310,6 +395,15 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                 var id = $(event.target).data('id');
                 var val = event.target.value;
                 toggleEditOn(id,val);
+
+            });
+            $('.draft-roster-cmd-xxx').click(function(event){
+                event.preventDefault();
+                // get
+                var id = $(event.target).data('id');
+              //  var val = $(event.target).text();
+                var val = 'rosterSlug';
+                toggleRosterEditOn(id,val);
 
             });
             sf1.EventBus.trigger('roster.renderRosterComplete');

@@ -216,6 +216,7 @@ table.player-list select{
 .chat-module-container{
     /*margin-left:453px;*/
     float:right;
+    max-width:600px;
 }
 .chat-messages{
     background-color:#fff;
