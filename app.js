@@ -175,7 +175,9 @@ io.sockets.on('connection', function(socket){
     socket.on('chatmessage', function(data){
         var chatMessage = new ChatMessage(data);
         chatMessage.save(function(err){
-            logger.info('socket message: ' + JSON.stringify(data));
+            logger.info('| ');
+            logger.info('| NEW MESSAGE socket message: ' + JSON.stringify(data));
+            logger.info('| ');
             chatmessage(socket, data);
         });
 

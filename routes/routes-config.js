@@ -10,6 +10,7 @@ var pagereader = require('./pagereader');
 var admin = require('./admin');
 var roster = require('./roster');
 var draft = require('./draft');
+var chat = require('./chat');
 
 module.exports = function(app){
 
@@ -23,7 +24,7 @@ module.exports = function(app){
     app.get('/isauth',user.isUserAuth);
     app.get('/pagereader/:name',pagereader.getPage);
     app.get('/draft', draft.getDraftModel);
-    app.get('/drafttranscript', draft.getDraftTranscript);
+    app.get('/drafttranscript', chat.getDraftTranscript);
     app.post('/createdraft', draft.createDraft);
     app.post('/createdraftlist', draft.createDraftList);
     app.put('/pickroster', draft.updateDraftPickRoster);

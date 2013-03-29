@@ -10,8 +10,12 @@ define(
     ['client','jquery','text!/modules/chat/chat-template.html','prettydate'],
     function(App, $, markup) {
 
+        var that = this;
+
+
         var sf1 = App.sf1;
         var anchorSelector = '#TemplateContainer';
+        var chatDirection = 'newest-at-bottom';
         // namespace for var reference in template
         _.templateSettings.variable = 'S';
 
@@ -116,9 +120,17 @@ define(
          * */
         sf1.EventBus.bind('chat.initTranscript',function(event){
             // load the model from the db
+
+//            if (chatDirection === 'newest-at-top'){
+//
+//            }
+//            else{
+//
+//            }
+
             sf1.io.ajax({
                 type:'GET',
-                url:'/drafttranscript',
+                url:'/drafttranscript?chatDirection=' + chatDirection,
                 success:function(response){
                     //sf1.log('GOT the Transcript');
                     var xzy = response;
@@ -129,10 +141,17 @@ define(
                     });
                     $('.chat-messages').html(chatListView.render().$el);
 
-                    $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
+                    if (chatDirection === 'newest-at-bottom'){
+                        $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
+                    }
+                    else{
+                        $('.chat-messages').animate({ scrollTop: 0 }, 0);
 
+                    }
 
-
+                    //bindDOMEvents();
+                    $('.chat-widget-input').val('');
+                    $('.chat-widget-input').focus();
 
 
                     sf1.EventBus.trigger('chat.bindDOMEventsRequest');
@@ -151,6 +170,12 @@ define(
 
 
 
+        //var userPreference = {};
+        // use dashes in value for preference to allow for simple display by replacing dash
+        // to server double duty as value and label
+        //userPreference.chatTranscriptAddDirection = 'newest-at-top';
+
+//                    if (userPreference.chatTranscriptAddDirection && (userPreference.chatTranscriptAddDirection === 'newest-at-top')){
 
 
 
@@ -171,7 +196,25 @@ define(
 
 
 
+        sf1.EventBus.bind('chat.changeChatPreference',function(){
+           sf1.log('FIRE CHANGE CHAT PREFERENCES ');
+           var inputContainer;
+           if (chatDirection === 'newest-at-top'){
+               inputContainer = $('#BottomChatContainer').html();
+               $('#TopChatContainer').empty();
+               $('#BottomChatContainer').empty();
+               $('#TopChatContainer').html(inputContainer);
 
+           }
+           else{
+               inputContainer = $('#TopChatContainer').html();
+               $('#BottomChatContainer').empty();
+               $('#TopChatContainer').empty();
+               $('#BottomChatContainer').html(inputContainer);
+           }
+           sf1.EventBus.trigger('chat.initTranscript');
+
+        });
 
 
 
@@ -204,17 +247,29 @@ define(
 //            $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
         });
         sf1.EventBus.bind('chat.addNewChatMessage',function(event,data){
+
+            //var userPreference = {};
+            // use dashes in value for preference to allow for simple display by replacing dash
+            // to server double duty as value and label
+           // userPreference.chatTranscriptAddDirection = 'newest-at-top';
             // sf1.log('EVENT ADD CHAT MESSAGE: ' + data.nickname);
 
-            var html = '<li class="chat-message-item"><span class="message-sender">' + data.nickname + ':</span><span class="message-body">' + data.message + '</span><span class="message-timestamp" title="' + data.messageTimeStamp + '">' + Date.now() +'</span></li>';
+            var messageItemMarkup = '<li class="chat-message-item"><span class="message-sender">' + data.nickname + ':</span><span class="message-body">' + data.message + '</span><span class="message-timestamp" title="' + data.messageTimeStamp + '">' + Date.now() +'</span></li>';
 
 
             var chatMessageList = $('.chat-messages ul');
-            chatMessageList.append(html);
+            if (chatDirection === 'newest-at-bottom'){
+                chatMessageList.append(messageItemMarkup);
+                $('.chat-messages').animate({ scrollTop: chatMessageList.height() }, 100);
+            }
+            else{
+                chatMessageList.prepend(messageItemMarkup);
+            }
+
+
             $('.message-timestamp').prettyDate();
-            $('.chat-messages').animate({ scrollTop: chatMessageList.height() }, 100);
 
-
+            sf1.EventBus.trigger('chat.initTranscript');
         });
 //        /*
 //         *
@@ -291,7 +346,7 @@ define(
                 // hiding the 'connecting...' message
                 $('.chat-shadow').animate({ 'opacity': 0 }, 200, function(){
                     $(this).hide();
-                    $('.chat input').focus();
+                    $('.chat-widget-input').focus();
                 });
 
                 // saving the clientId localy
@@ -347,7 +402,7 @@ define(
                 // hide connecting to room message message
                 $('.chat-shadow').animate({ 'opacity': 0 }, 200, function(){
                     $(this).hide();
-                    $('.chat input').focus();
+                    $('.chat-widget-input').focus();
                 });
             });
 
@@ -429,9 +484,11 @@ define(
                     // send the message to the server with the room name
                     socket.emit('chatmessage', {nickname: nickname, message: message, room: currentRoom });
 
+                    sf1.EventBus.trigger('chat.initTranscript');
                     // display the message in the chat window
-                    insertMessage(nickname, message, true, true);
-                    $('.chat-widget-input').val('');
+//                    insertMessage(nickname, message, true, true);
+//                    $('.chat-widget-input').val('');
+//                    $('.chat-widget-input').focus();
                 }
                 else{
                     sf1.log('posting requires a nickname - none was supplied: ' + message);
@@ -554,7 +611,19 @@ define(
                 currentAuthRoster = getCurrentAuthRoster();
                // sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
             }
+            $('#InputChatTranscriptNewestFirst').on('change',function(event){
+                if($(event.target).attr('checked')){
+                    sf1.log('user preference change  newest at top ');
+                    chatDirection = 'newest-at-top';
 
+                }
+                else{
+                    sf1.log('user preference change  newest at bottom ');
+                    chatDirection = 'newest-at-bottom';
+
+                }
+                sf1.EventBus.trigger('chat.changeChatPreference');
+            });
 
 
             //ChatLib.init();

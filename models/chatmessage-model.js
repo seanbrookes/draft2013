@@ -12,7 +12,7 @@ var Schema = mongoose.Schema;
 var ChatMessageSchema = new Schema({
     nickname: {type: String, required: true},
     message: {type: String},
-    messageTimeStamp: {type: Date, default: Date.now()}
+    messageTimeStamp: {type: Date, default: Date.now}
 
 });
 

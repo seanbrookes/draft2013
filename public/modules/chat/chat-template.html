@@ -4,7 +4,14 @@
 
 
         <div class="chat-module-container">
+            <div id="TopChatContainer">
+
+
+
+            </div>
+
             <div class="chat">
+
                 <div class="chat-clients">
                     <div class="cf title">
                         <div class="fl">Users</div>
@@ -16,12 +23,21 @@
                 </div>
 
             </div>
+            <div id="BottomChatContainer">
 
-            <div>
-                <input type="text" class="chat-widget-input" id="ChatInput" placeholder="Enter your message">
+                <div>
+                    <input type="text" class="chat-widget-input" id="ChatInput" placeholder="Enter your message">
+                    <button type="submit" class="btn btn-primary btn-chat-widget-post" id="send-chat">Send</button>
+                </div>
 
-                <button type="submit" class="btn btn-primary btn-chat-widget-post" id="send-chat">Send</button>
             </div>
+            <div class="chat-pref-container">
+
+                <label for="InputChatTranscriptNewestAtTop">newest at top</label>
+                <input type="checkbox" id="InputChatTranscriptNewestFirst" value="newest-at-top" >
+
+            </div>
+
         </div>
 
     </script>

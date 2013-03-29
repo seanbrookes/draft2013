@@ -10,6 +10,7 @@ var Draft = require('../models/draft-model');
 var DraftPick = require('../models/draftpick-model');
 var ChatMessage = require('../models/chatmessage-model');
 var winston = require('winston');
+var url = require('url');
 var logger = new (winston.Logger)({
     transports: [
         new (winston.transports.Console)(),
@@ -288,12 +289,3 @@ exports.getDraftModel = function(req,res){
     });
 
 };
-exports.getDraftTranscript = function(req,res){
-    ChatMessage.find(function(err,dox){
-       if (err){
-           logger.error('exception getting chat trascript: ' + err.message);
-           return res.send(500,'exception getting chat trascript: ' + err.message);
-       }
-       res.send(dox);
-    });
-}
