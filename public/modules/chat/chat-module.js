@@ -19,7 +19,9 @@ define(
         // namespace for var reference in template
         _.templateSettings.variable = 'S';
 
+        // make sure template is loaded in the DOM
         var currentAuthRoster;
+        var currentChatTranscriptModel;
         var baseMarkup = $(markup);
         $(anchorSelector).append(baseMarkup);
 
@@ -38,30 +40,9 @@ define(
 
             serverAddress = null,
             serverDisplayName = 'Server',
-            serverDisplayColor = '#1c5380',
+            serverDisplayColor = '#1c5380';
 
-        // some templates we going to use in the chat,
-        // like message row, client and room, this
-        // templates will be rendered with jQuery.tmpl
-            tmplt = {
-                room: [
-                    '<li data-roomId="${room}">',
-                    '<span class="icon"></span> ${room}',
-                    '</li>'
-                ].join(""),
-                client: [
-                    '<li data-clientId="${clientId}" class="cf">',
-                    '<div class="fl clientName"><span class="icon"></span> ${nickname}</div>',
-                    '<div class="fr composing"></div>',
-                    '</li>'
-                ].join(""),
-                message: [
-                    '<li class="cf">',
-                    '<div class="fl sender">${sender}: </div><div class="fl text">${text}</div><div class="fr time">${time}</div>',
-                    '</li>'
-                ].join("")
-            };
-
+        // determine where to post messages to
         var currentUrl = document.location.href;
         if (currentUrl.indexOf('localhost') > -1){
             serverAddress = 'localhost';
@@ -112,6 +93,296 @@ define(
 
         sf1.log('Chat module loaded ');
 
+
+
+        function init(){
+
+            sf1.log('Chat module init');
+
+
+            // check and set sort direction
+            try{
+                if (localStorage.getItem('chatTranscriptDirection')){
+                    chatDirection = localStorage.getItem('chatTranscriptDirection');
+                }
+                else{
+                    localStorage.setItem('chatTranscriptDirection',chatDirection);
+
+                }
+            }
+            catch(e){
+                sf1.log('problem setting localstorage transcript direction');
+            }
+
+            // load markup in view
+            var chatModuleContainer = $('script#ChatModuleDefaultTemplate').html();
+
+            $('.main-content-wrapper').append(chatModuleContainer);
+
+
+            if (sf1.hasStorage){
+                currentAuthRoster = getCurrentAuthRoster();
+                // sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
+            }
+            // fire markup ready
+            sf1.EventBus.trigger('chat.markupReady');
+
+            // init dom elements
+            // init socket events
+            // wait
+
+
+
+
+            //ChatLib.init();
+            sf1.EventBus.trigger('chat.initTranscript');
+
+        }
+
+
+
+
+        /*
+        *
+        *
+        *   INIT EVENT LISTENERS
+        *
+        *
+        *
+        *
+        * */
+        sf1.EventBus.bind('chat.markupReady',function(){
+            // load transcript
+            connect();
+
+           sf1.EventBus.trigger('chat.refreshTranscriptData');
+
+        });
+        sf1.EventBus.bind('chat.refreshTranscriptData',function(){
+            // make ajax call
+            // trigger transcriptLoadSuccess
+
+
+
+            sf1.io.ajax({
+                type:'GET',
+                url:'/drafttranscript?chatDirection=' + chatDirection,
+                success:function(response){
+                    //sf1.log('GOT the Transcript');
+                    var xzy = response;
+                    //sf1.EventBus.trigger('chat.transcriptRefreshed',[response]);
+
+                    currentChatTranscriptModel = new ChatItemCollection(response);
+
+
+
+                    sf1.EventBus.trigger('chat.transcriptLoadSuccess');
+                },
+                error:function(response){
+                    sf1.log('failed to get the transcript');
+                }
+            });
+
+
+
+
+
+
+
+
+
+        });
+        sf1.EventBus.bind('chat.transcriptLoadSuccess',function(){
+            // render chat message view
+            sf1.EventBus.trigger('chat.renderChatTranscriptRequest');
+            // init DOM events
+
+        });
+        sf1.EventBus.bind('chat.renderChatTranscriptRequest',function(){
+
+            var chatListView = new ChatListView({
+                itemView: ChatItemView,
+                collection: currentChatTranscriptModel
+            });
+            $('.chat-messages').html(chatListView.render().$el);
+
+
+            var inputContainer;
+            if (chatDirection === 'newest-at-top'){
+                inputContainer = $('#BottomChatContainer').html();
+                if (inputContainer.toString().indexOf('button') > 0){
+                    $('#TopChatContainer').empty();
+                    $('#BottomChatContainer').empty();
+                    $('#TopChatContainer').html(inputContainer);
+                }
+
+            }
+            else{
+                inputContainer = $('#TopChatContainer').html();
+                // test in case things are in the correct state
+                if (inputContainer.toString().indexOf('button') > 0){
+                    $('#BottomChatContainer').empty();
+                    $('#TopChatContainer').empty();
+                    $('#BottomChatContainer').html(inputContainer);
+                }
+            }
+
+
+
+
+            if (chatDirection === 'newest-at-bottom'){
+                $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
+            }
+            else{
+                $('.chat-messages').animate({ scrollTop: 0 }, 0);
+
+            }
+
+            //bindDOMEvents();
+
+
+
+           // init dom events
+            sf1.EventBus.trigger('chat.renderChatTranscriptSuccess');
+        });
+        sf1.EventBus.bind('chat.renderChatTranscriptSuccess',function(){
+            // init DOM events
+            bindDOMEvents();
+            $('.chat-widget-input').val('');
+            $('.chat-widget-input').focus();
+            $('.message-timestamp ').prettyDate();
+
+
+
+
+
+        });
+        sf1.EventBus.bind('chat.domEventsInitialized',function(){
+            // initialize socket events
+        });
+
+
+        sf1.EventBus.bind('chat.postNewMessageRequest',function(message){
+
+            currentRoom = 'lobbby';
+            message = $('.chat-widget-input').val().trim();
+            if(message){
+
+                nickname = getCurrentChatNickName();
+                if (nickname){
+
+                    socket.emit('chatmessage', {nickname: nickname, message: message, room: currentRoom });
+
+                    sf1.EventBus.trigger('chat.postNewMessageSuccess');
+                }
+                else{
+                    sf1.log('cant send message - no nickname');
+                }
+            }
+            else{
+                sf1.log('cant send message - no message');
+            }
+            //
+        });
+        sf1.EventBus.bind('chat.postNewMessageSuccess',function(){
+            sf1.EventBus.trigger('chat.refreshTranscriptData');
+
+        });
+        sf1.EventBus.bind('chat.changeChatTranscriptDirectionSuccess',function(){
+
+            sf1.EventBus.trigger('chat.refreshTranscriptData');
+        });
+
+
+        // from socket io
+        sf1.EventBus.bind('chat.newChatMessageReceived',function(){
+
+            sf1.EventBus.trigger('chat.refreshTranscriptData');
+        });
+        // bind DOM elements like button clicks and keydown
+        var bindDOMEvents = function(){
+
+            $('.chat-widget-input').unbind().on('keydown', function(e){
+                var key = e.which || e.keyCode;
+                if(key === 13) {
+                   // handleMessage();
+                    sf1.EventBus.trigger('chat.postNewMessageRequest');
+                }
+            });
+
+            $('.btn-chat-widget-post').unbind().click('click', function(){
+                sf1.EventBus.trigger('chat.postNewMessageRequest');
+            });
+
+            try{
+                if ((localStorage.getItem('chatTranscriptDirection') === 'newest-at-top')){
+                    $('#InputChatTranscriptNewestFirst').attr('checked','checked');
+                }
+            }
+            catch(e){
+
+            }
+
+            // init the chat toggle checkbox - should be part of DOM
+            $('#InputChatTranscriptNewestFirst').on('change',function(event){
+                if($(event.target).attr('checked')){
+                    sf1.log('user preference change  newest at top ');
+                    chatDirection = 'newest-at-top';
+
+                }
+                else{
+                    sf1.log('user preference change  newest at bottom ');
+                    chatDirection = 'newest-at-bottom';
+
+                }
+                try{
+                    localStorage.setItem('chatTranscriptDirection',chatDirection);
+
+                }
+                catch(e){
+                    sf1.log('problem setting localstorage transcript direction');
+                }
+                sf1.EventBus.trigger('chat.changeChatTranscriptDirectionSuccess');
+            });
+
+//            $('.chat-rooms ul').on('scroll', function(){
+//                $('.chat-rooms ul li.selected').css('top', $(this).scrollTop());
+//            });
+//
+//            $('.transcript-list').on('scroll', function(){
+//                var self = this;
+//                window.setTimeout(function(){
+//                    if($(self).scrollTop() + $(self).height() < $(self).find('ul').height()){
+//                        $(self).addClass('scroll');
+//                    } else {
+//                        $(self).removeClass('scroll');
+//                    }
+//                }, 50);
+//            });
+
+        };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /*
          *
          *
@@ -128,38 +399,38 @@ define(
 //
 //            }
 
-            sf1.io.ajax({
-                type:'GET',
-                url:'/drafttranscript?chatDirection=' + chatDirection,
-                success:function(response){
-                    //sf1.log('GOT the Transcript');
-                    var xzy = response;
-                    //sf1.EventBus.trigger('chat.transcriptRefreshed',[response]);
-                    var chatListView = new ChatListView({
-                        itemView: ChatItemView,
-                        collection: new ChatItemCollection(response)
-                    });
-                    $('.chat-messages').html(chatListView.render().$el);
-
-                    if (chatDirection === 'newest-at-bottom'){
-                        $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
-                    }
-                    else{
-                        $('.chat-messages').animate({ scrollTop: 0 }, 0);
-
-                    }
-
-                    //bindDOMEvents();
-                    $('.chat-widget-input').val('');
-                    $('.chat-widget-input').focus();
-
-
-                    sf1.EventBus.trigger('chat.bindDOMEventsRequest');
-                },
-                error:function(response){
-                    sf1.log('failed to get the transcript');
-                }
-            });
+//            sf1.io.ajax({
+//                type:'GET',
+//                url:'/drafttranscript?chatDirection=' + chatDirection,
+//                success:function(response){
+//                    //sf1.log('GOT the Transcript');
+//                    var xzy = response;
+//                    //sf1.EventBus.trigger('chat.transcriptRefreshed',[response]);
+//                    var chatListView = new ChatListView({
+//                        itemView: ChatItemView,
+//                        collection: new ChatItemCollection(response)
+//                    });
+//                    $('.chat-messages').html(chatListView.render().$el);
+//
+//                    if (chatDirection === 'newest-at-bottom'){
+//                        $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
+//                    }
+//                    else{
+//                        $('.chat-messages').animate({ scrollTop: 0 }, 0);
+//
+//                    }
+//
+//                    //bindDOMEvents();
+//                    $('.chat-widget-input').val('');
+//                    $('.chat-widget-input').focus();
+//
+//
+//                    sf1.EventBus.trigger('chat.bindDOMEventsRequest');
+//                },
+//                error:function(response){
+//                    sf1.log('failed to get the transcript');
+//                }
+//            });
             // bind it to the DOM
             // trigger bind DOM events
 
@@ -193,37 +464,23 @@ define(
 
 
 
-
-
-
-        sf1.EventBus.bind('chat.changeChatPreference',function(){
-           sf1.log('FIRE CHANGE CHAT PREFERENCES ');
-           var inputContainer;
-           if (chatDirection === 'newest-at-top'){
-               inputContainer = $('#BottomChatContainer').html();
-               $('#TopChatContainer').empty();
-               $('#BottomChatContainer').empty();
-               $('#TopChatContainer').html(inputContainer);
-
-           }
-           else{
-               inputContainer = $('#TopChatContainer').html();
-               $('#BottomChatContainer').empty();
-               $('#TopChatContainer').empty();
-               $('#BottomChatContainer').html(inputContainer);
-           }
-           sf1.EventBus.trigger('chat.initTranscript');
-
-        });
-
-
-
-
-        sf1.EventBus.bind('chat.bindDOMEventsRequest',function(event){
-            connect();
-            bindDOMEvents();
-
-        });
+//
+//
+//
+//        sf1.EventBus.bind('chat.changeChatPreference',function(){
+//           sf1.log('FIRE CHANGE CHAT PREFERENCES ');
+//
+//
+//        });
+//
+//
+//
+//
+//        sf1.EventBus.bind('chat.bindDOMEventsRequest',function(event){
+////            connect();
+////            bindDOMEvents();
+//
+//        });
 
 
         /*
@@ -234,43 +491,43 @@ define(
          * TRASCRIPT REFRESHED
          *
          * */
-        sf1.EventBus.bind('chat.transcriptRefreshed',function(event,arg){
-            var messages = arg;
-            var outputHtml = '';
-            for (var i = 0;i < messages.length;i++){
-                var messageItem = messages[i];
-                // outputHtml += '<li class="chat-message-item"><span class="message-sender">' + messageItem.nickname + ':</span><span class="message-body">' + messageItem.message + '</span><span class="message-timestamp" title="' + messageItem.messageTimeStamp + '">' + messageItem.messageTimeStamp +'</span></li>';
-                sf1.EventBus.trigger('chat.addNewChatMessage',[messageItem,event]);
-            }
-//            $('.chat-messages ul').append(outputHtml);
+//        sf1.EventBus.bind('chat.transcriptRefreshed',function(event,arg){
+//            var messages = arg;
+//            var outputHtml = '';
+//            for (var i = 0;i < messages.length;i++){
+//                var messageItem = messages[i];
+//                // outputHtml += '<li class="chat-message-item"><span class="message-sender">' + messageItem.nickname + ':</span><span class="message-body">' + messageItem.message + '</span><span class="message-timestamp" title="' + messageItem.messageTimeStamp + '">' + messageItem.messageTimeStamp +'</span></li>';
+//                sf1.EventBus.trigger('chat.addNewChatMessage',[messageItem,event]);
+//            }
+////            $('.chat-messages ul').append(outputHtml);
+////            $('.message-timestamp').prettyDate();
+////            $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
+//        });
+//        sf1.EventBus.bind('chat.addNewChatMessage',function(event,data){
+//
+//            //var userPreference = {};
+//            // use dashes in value for preference to allow for simple display by replacing dash
+//            // to server double duty as value and label
+//           // userPreference.chatTranscriptAddDirection = 'newest-at-top';
+//            // sf1.log('EVENT ADD CHAT MESSAGE: ' + data.nickname);
+//
+//            var messageItemMarkup = '<li class="chat-message-item"><span class="message-sender">' + data.nickname + ':</span><span class="message-body">' + data.message + '</span><span class="message-timestamp" title="' + data.messageTimeStamp + '">' + Date.now() +'</span></li>';
+//
+//
+//            var chatMessageList = $('.chat-messages ul');
+//            if (chatDirection === 'newest-at-bottom'){
+//                chatMessageList.append(messageItemMarkup);
+//                $('.chat-messages').animate({ scrollTop: chatMessageList.height() }, 100);
+//            }
+//            else{
+//                chatMessageList.prepend(messageItemMarkup);
+//            }
+//
+//
 //            $('.message-timestamp').prettyDate();
-//            $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
-        });
-        sf1.EventBus.bind('chat.addNewChatMessage',function(event,data){
-
-            //var userPreference = {};
-            // use dashes in value for preference to allow for simple display by replacing dash
-            // to server double duty as value and label
-           // userPreference.chatTranscriptAddDirection = 'newest-at-top';
-            // sf1.log('EVENT ADD CHAT MESSAGE: ' + data.nickname);
-
-            var messageItemMarkup = '<li class="chat-message-item"><span class="message-sender">' + data.nickname + ':</span><span class="message-body">' + data.message + '</span><span class="message-timestamp" title="' + data.messageTimeStamp + '">' + Date.now() +'</span></li>';
-
-
-            var chatMessageList = $('.chat-messages ul');
-            if (chatDirection === 'newest-at-bottom'){
-                chatMessageList.append(messageItemMarkup);
-                $('.chat-messages').animate({ scrollTop: chatMessageList.height() }, 100);
-            }
-            else{
-                chatMessageList.prepend(messageItemMarkup);
-            }
-
-
-            $('.message-timestamp').prettyDate();
-
-            sf1.EventBus.trigger('chat.initTranscript');
-        });
+//
+//            sf1.EventBus.trigger('chat.initTranscript');
+//        });
 //        /*
 //         *
 //         *
@@ -297,35 +554,7 @@ define(
 //
 //        });
 
-        // bind DOM elements like button clicks and keydown
-        var bindDOMEvents = function(){
 
-            $('.chat-widget-input').on('keydown', function(e){
-                var key = e.which || e.keyCode;
-                if(key === 13) { handleMessage(); }
-            });
-
-            $('.btn-chat-widget-post').on('click', function(){
-                handleMessage();
-            });
-
-
-            $('.chat-rooms ul').on('scroll', function(){
-                $('.chat-rooms ul li.selected').css('top', $(this).scrollTop());
-            });
-
-            $('.transcript-list').on('scroll', function(){
-                var self = this;
-                window.setTimeout(function(){
-                    if($(self).scrollTop() + $(self).height() < $(self).find('ul').height()){
-                        $(self).addClass('scroll');
-                    } else {
-                        $(self).removeClass('scroll');
-                    }
-                }, 50);
-            });
-            $('.message-timestamp').prettyDate();
-        };
 
         // bind socket.io event handlers
         // this events fired in the server
@@ -343,11 +572,7 @@ define(
             // after the server created a client for us, the ready event
             // is fired in the server with our clientId, now we can start
             socket.on('ready', function(data){
-                // hiding the 'connecting...' message
-                $('.chat-shadow').animate({ 'opacity': 0 }, 200, function(){
-                    $(this).hide();
-                    $('.chat-widget-input').focus();
-                });
+                $('.chat-widget-input').focus();
 
                 // saving the clientId localy
                 clientId = data.clientId;
@@ -356,25 +581,26 @@ define(
             // after the initialize, the server sends a list of
             // all the active rooms
             socket.on('roomslist', function(data){
-                for(var i = 0, len = data.rooms.length; i < len; i++){
-                    // in socket.io, their is always one default room
-                    // without a name (empty string), every socket is automaticaly
-                    // joined to this room, however, we don't want this room to be
-                    // displayed in the rooms list
-                    if(data.rooms[i] != ''){
-                        //addRoom(data.rooms[i], false);
-                    }
-                }
+//                for(var i = 0, len = data.rooms.length; i < len; i++){
+//                    // in socket.io, their is always one default room
+//                    // without a name (empty string), every socket is automaticaly
+//                    // joined to this room, however, we don't want this room to be
+//                    // displayed in the rooms list
+//                    if(data.rooms[i] != ''){
+//                        //addRoom(data.rooms[i], false);
+//                    }
+//                }
             });
 
             // when someone sends a message, the sever push it to
             // our client through this event with a relevant data
             socket.on('chatmessage', function(data){
-                var nickname = data.client.nickname;
-                var message = data.message;
-
-                //display the message in the chat window
-                insertMessage(nickname, message, true, false, false);
+//                var nickname = data.client.nickname;
+//                var message = data.message;
+//
+//                //display the message in the chat window
+//                insertMessage(nickname, message, true, false, false);
+                sf1.EventBus.trigger('chat.newChatMessageReceived');
             });
 
             // when we subscribes to a room, the server sends a list
@@ -385,7 +611,7 @@ define(
                 //addRoom(data.room, false);
 
                 // set the current room
-                setCurrentRoom(data.room);
+                //setCurrentRoom(data.room);
 
                 // announce a welcome message
                 //insertMessage(serverDisplayName, 'welcome to the draft chat ', true, false, true);
@@ -398,12 +624,12 @@ define(
                         addClient(data.clients[i], false);
                     }
                 }
-
-                // hide connecting to room message message
-                $('.chat-shadow').animate({ 'opacity': 0 }, 200, function(){
-                    $(this).hide();
-                    $('.chat-widget-input').focus();
-                });
+//
+//                // hide connecting to room message message
+//                $('.chat-shadow').animate({ 'opacity': 0 }, 200, function(){
+//                    $(this).hide();
+//                    $('.chat-widget-input').focus();
+//                });
             });
 
 
@@ -453,8 +679,8 @@ define(
         // makes a subscription
         function setCurrentRoom(room){
             currentRoom = room;
-            $('.chat-rooms ul li.selected').removeClass('selected');
-            $('.chat-rooms ul li[data-roomId="' + room + '"]').addClass('selected');
+//            $('.chat-rooms ul li.selected').removeClass('selected');
+//            $('.chat-rooms ul li[data-roomId="' + room + '"]').addClass('selected');
         }
 
 
@@ -474,30 +700,30 @@ define(
          *
          *
          */
-        function handleMessage(){
-            var message = $('.chat-widget-input').val().trim();
-            if(message){
-
-                nickname = getCurrentChatNickName();
-
-                if (nickname){
-                    // send the message to the server with the room name
-                    socket.emit('chatmessage', {nickname: nickname, message: message, room: currentRoom });
-
-                    sf1.EventBus.trigger('chat.initTranscript');
-                    // display the message in the chat window
-//                    insertMessage(nickname, message, true, true);
-//                    $('.chat-widget-input').val('');
-//                    $('.chat-widget-input').focus();
-                }
-                else{
-                    sf1.log('posting requires a nickname - none was supplied: ' + message);
-                }
-
-            } else {
-                shake('.chat', '.chat-widget-input', 'wobble', 'yellow');
-            }
-        }
+//        function handleMessage(){
+//            var message = $('.chat-widget-input').val().trim();
+//            if(message){
+//
+//                nickname = getCurrentChatNickName();
+//
+//                if (nickname){
+//                    // send the message to the server with the room name
+//                    socket.emit('chatmessage', {nickname: nickname, message: message, room: currentRoom });
+//
+//                    sf1.EventBus.trigger('chat.initTranscript');
+//                    // display the message in the chat window
+////                    insertMessage(nickname, message, true, true);
+////                    $('.chat-widget-input').val('');
+////                    $('.chat-widget-input').focus();
+//                }
+//                else{
+//                    sf1.log('posting requires a nickname - none was supplied: ' + message);
+//                }
+//
+//            } else {
+//                shake('.chat', '.chat-widget-input', 'wobble', 'yellow');
+//            }
+//        }
 
         var getCurrentChatNickName = function(){
             var currentOwner;
@@ -535,15 +761,15 @@ define(
          *
          *
          * */
-        function insertMessage(sender, message, showTime, isMe, isServer){
-            var chatMessageModel = {};
-            chatMessageModel.nickname = sender;
-            chatMessageModel.message = message;
-            chatMessageModel.messageTimeStamp = new Date();
-
-            sf1.EventBus.trigger('chat.addNewChatMessage',[chatMessageModel,event]);
-
-        }
+//        function insertMessage(sender, message, showTime, isMe, isServer){
+//            var chatMessageModel = {};
+//            chatMessageModel.nickname = sender;
+//            chatMessageModel.message = message;
+//            chatMessageModel.messageTimeStamp = new Date();
+//
+//            sf1.EventBus.trigger('chat.addNewChatMessage',[chatMessageModel,event]);
+//
+//        }
 
         // return a short time format for the messages
         function getTime(){
@@ -592,44 +818,6 @@ define(
 
 
 
-        function init(){
-
-            sf1.log('Chat module init');
-
-
-            var chatModuleContainer = $('script#ChatModuleDefaultTemplate').html();
-
-            var template = _.template(chatModuleContainer);
-
-            var templateData = {};
-
-            var templateMarkup = template( templateData );
-            $('.main-content-wrapper').append(templateMarkup);
-
-
-            if (sf1.hasStorage){
-                currentAuthRoster = getCurrentAuthRoster();
-               // sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
-            }
-            $('#InputChatTranscriptNewestFirst').on('change',function(event){
-                if($(event.target).attr('checked')){
-                    sf1.log('user preference change  newest at top ');
-                    chatDirection = 'newest-at-top';
-
-                }
-                else{
-                    sf1.log('user preference change  newest at bottom ');
-                    chatDirection = 'newest-at-bottom';
-
-                }
-                sf1.EventBus.trigger('chat.changeChatPreference');
-            });
-
-
-            //ChatLib.init();
-            sf1.EventBus.trigger('chat.initTranscript');
-
-        }
 
         return {
             init:function(){
