@@ -211,14 +211,13 @@ table.player-list select{
 }
 .chat-module-container{
     margin-left:453px;
-    max-width:450px;
 }
 .chat-messages{
     background-color:#fff;
     border:1px solid #000080;
     border-radius:4px;
     margin-right:3.5em;
-    max-height:12em;
+    max-height:30em;
     overflow:scroll;
     postion:relative;
 }
@@ -227,7 +226,7 @@ table.player-list select{
     bottom:0;
 }
 .chat-module-container .chat-widget-input{
-    width:20em;
+    width:32em;
     height:4em;
 }
 .chat-clients{

@@ -53,6 +53,15 @@ define(['jquery','sf1','prettydate'], // Require jquery
             bindDOMEvents();
 
         });
+
+        /*
+        *
+        *   EVENT BINDINGS
+        *
+        *
+        * TRASCRIPT REFRESHED
+        *
+        * */
         sf1.EventBus.bind('chat.transcriptRefreshed',function(event,arg){
             var messages = arg;
             var outputHtml = '';
@@ -65,6 +74,25 @@ define(['jquery','sf1','prettydate'], // Require jquery
             $('.message-timestamp').prettyDate();
             $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
         });
+        sf1.EventBus.bind('chat.addNewChatMessage',function(event,data){
+            sf1.log('EVENT ADD CHAT MESSAGE: ' + data.nickname);
+
+            var html = '<li class="chat-message-item"><span class="message-sender">' + data.nickname + ':</span><span class="message-body">' + data.message + '</span><span class="message-timestamp" title="' + data.messageTimeStamp + '">' + Date.now() +'</span></li>';
+
+
+            var chatMessageList = $('.chat-messages ul');
+            chatMessageList.append(html);
+            $('.message-timestamp').prettyDate();
+            $('.chat-messages').animate({ scrollTop: chatMessageList.height() }, 100);
+
+
+        });
+        /*
+         *
+         *
+         * INIT TRASCRIPT
+         *
+         * */
         sf1.EventBus.bind('chat.initTranscript',function(event){
            // load the model from the db
             sf1.io.ajax({
@@ -97,39 +125,6 @@ define(['jquery','sf1','prettydate'], // Require jquery
                 handleMessage();
             });
 
-            $('#nickname-popup .input input').on('keydown', function(e){
-                var key = e.which || e.keyCode;
-                if(key === 13) { handleNickname(); }
-            });
-
-            $('#nickname-popup .begin').on('click', function(){
-                handleNickname();
-            });
-
-            $('#addroom-popup .input input').on('keydown', function(e){
-                var key = e.which || e.keyCode;
-                if(key === 13) { createRoom(); }
-            });
-
-            $('#addroom-popup .create').on('click', function(){
-                createRoom();
-            });
-
-            $('.big-button-green.start').on('click', function(){
-                $('#nickname-popup .input input').val('');
-                Avgrund.show('#nickname-popup');
-                window.setTimeout(function(){
-                    $('#nickname-popup .input input').focus();
-                },100);
-            });
-
-            $('.chat-rooms .title-button').on('click', function(){
-                $('#addroom-popup .input input').val('');
-                Avgrund.show('#addroom-popup');
-                window.setTimeout(function(){
-                    $('#addroom-popup .input input').focus();
-                },100);
-            });
 
             $('.chat-rooms ul').on('scroll', function(){
                 $('.chat-rooms ul li.selected').css('top', $(this).scrollTop());
@@ -146,13 +141,6 @@ define(['jquery','sf1','prettydate'], // Require jquery
                 }, 50);
             });
 
-            $('.chat-rooms ul li').live('click', function(){
-                var room = $(this).attr('data-roomId');
-                if(room !== currentRoom){
-                    socket.emit('unsubscribe', { room: currentRoom });
-                    socket.emit('subscribe', { room: room });
-                }
-            });
         };
 
         // bind socket.io event handlers
@@ -190,7 +178,7 @@ define(['jquery','sf1','prettydate'], // Require jquery
                     // joined to this room, however, we don't want this room to be
                     // displayed in the rooms list
                     if(data.rooms[i] != ''){
-                        addRoom(data.rooms[i], false);
+                        //addRoom(data.rooms[i], false);
                     }
                 }
             });
@@ -210,7 +198,7 @@ define(['jquery','sf1','prettydate'], // Require jquery
             socket.on('roomclients', function(data){
 
                 // add the room name to the rooms list
-                addRoom(data.room, false);
+                //addRoom(data.room, false);
 
                 // set the current room
                 setCurrentRoom(data.room);
@@ -234,17 +222,6 @@ define(['jquery','sf1','prettydate'], // Require jquery
                 });
             });
 
-            // if someone creates a room the server updates us
-            // about it
-            socket.on('addroom', function(data){
-                addRoom(data.room, true);
-            });
-
-            // if one of the room is empty from clients, the server,
-            // destroys it and updates us
-            socket.on('removeroom', function(data){
-                removeRoom(data.room, true);
-            });
 
             // with this event the server tells us when a client
             // is connected or disconnected to the current room
@@ -257,30 +234,6 @@ define(['jquery','sf1','prettydate'], // Require jquery
             });
         }
 
-        // add a room to the rooms list, socket.io may add
-        // a trailing '/' to the name so we are clearing it
-        function addRoom(name, announce){
-            // clear the trailing '/'
-            name = name.replace('/','');
-
-            // check if the room is not already in the list
-//            if($('.chat-rooms ul li[data-roomId="' + name + '"]').length == 0){
-//                $.tmpl(tmplt.room, { room: name }).appendTo('.chat-rooms ul');
-//                // if announce is true, show a message about this room
-//                if(announce){
-//                    insertMessage(serverDisplayName, 'The room `' + name + '` created...', true, false, true);
-//                }
-//            }
-        }
-
-        // remove a room from the rooms list
-        function removeRoom(name, announce){
-            $('.chat-rooms ul li[data-roomId="' + name + '"]').remove();
-            // if announce is true, show a message about this room
-            if(announce){
-                //insertMessage(serverDisplayName, 'The room `' + name + '` destroyed...', true, false, true);
-            }
-        }
 
         // add a client to the clients list
         function addClient(client, announce, isMe){
@@ -310,30 +263,7 @@ define(['jquery','sf1','prettydate'], // Require jquery
             }
         }
 
-        // every client can create a new room, when creating one, the client
-        // is unsubscribed from the current room and then subscribed to the
-        // room he just created, if he trying to create a room with the same
-        // name like another room, then the server will subscribe the user
-        // to the existing room
-        function createRoom(){
-            var room = $('#addroom-popup .input input').val().trim();
-            if(room && room.length <= ROOM_MAX_LENGTH && room != currentRoom){
 
-                // show room creating message
-                $('.chat-shadow').show().find('.content').html('Creating room: ' + room + '...');
-                $('.chat-shadow').animate({ 'opacity': 1 }, 200);
-
-                // unsubscribe from the current room
-                socket.emit('unsubscribe', { room: currentRoom });
-
-                // create and subscribe to the new room
-                socket.emit('subscribe', { room: room });
-                Avgrund.hide();
-            } else {
-                shake('#addroom-popup', '#addroom-popup .input input', 'tada', 'yellow');
-                $('#addroom-popup .input input').val('');
-            }
-        }
 
         // sets the current room when the client
         // makes a subscription
@@ -343,19 +273,7 @@ define(['jquery','sf1','prettydate'], // Require jquery
             $('.chat-rooms ul li[data-roomId="' + room + '"]').addClass('selected');
         }
 
-        // save the client nickname and start the chat by
-        // calling the 'connect()' function
-        function handleNickname(){
-            var nick = nickname = getCurrentChatNickName();
-            if(nick && nick.length <= NICK_MAX_LENGTH){
-                nickname = nick;
-                Avgrund.hide();
-                connect();
-            } else {
-                shake('#nickname-popup', '#nickname-popup .input input', 'tada', 'yellow');
-                $('#nickname-popup .input input').val('');
-            }
-        }
+
 
         // handle the client messages
         /*
@@ -432,32 +350,13 @@ define(['jquery','sf1','prettydate'], // Require jquery
         *
         * */
         function insertMessage(sender, message, showTime, isMe, isServer){
-            var senderArg = sender;
-            var msg = message;
-            //var html = '<li class="chat-message-item"><span class="message-sender">' + sender + ':</span><span class="message-body">' + message + '</span></li>';
-            var html = '<li class="chat-message-item"><span class="message-sender">' + sender + ':</span><span class="message-body">' + message + '</span><span class="message-timestamp" title="' + new Date().toISOString() + '">' + Date.now() +'</span></li>';
+            var chatMessageModel = {};
+            chatMessageModel.nickname = sender;
+            chatMessageModel.message = message;
+            chatMessageModel.messageTimeStamp = new Date();
 
-//            var $html = $.tmpl(tmplt.message, {
-//                sender: sender,
-//                text: message,
-//                time: showTime ? getTime() : ''
-//            });
+            sf1.EventBus.trigger('chat.addNewChatMessage',[chatMessageModel,event]);
 
-            // if isMe is true, mark this message so we can
-            // know that this is our message in the chat window
-//            if(isMe){
-//                $html.addClass('marker');
-//            }
-
-            // if isServer is true, mark this message as a server
-            // message
-            if(isServer){
-                //$html.find('.sender').css('color', serverDisplayColor);
-            }
-           // $html.appendTo('.chat-messages ul');
-            $('.chat-messages ul').append(html);
-            $('.message-timestamp').prettyDate();
-            $('.chat-messages').animate({ scrollTop: $('.chat-messages ul').height() }, 100);
         }
 
         // return a short time format for the messages
@@ -486,7 +385,7 @@ define(['jquery','sf1','prettydate'], // Require jquery
         // in order to init the connection with the server
         function connect(){
             // show connecting message
-            $('.chat-shadow .content').html('Connecting...');
+           // $('.chat-shadow .content').html('Connecting...');
 
             // creating the connection and saving the socket
             socket = io.connect(serverAddress);

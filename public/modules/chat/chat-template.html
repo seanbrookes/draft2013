@@ -25,4 +25,10 @@
         </div>
 
     </script>
+
+    <script type="text/template" id="ChatItemTemplate">
+        <li class="chat-message-item">
+            <span class="message-sender"><%= S.nickname %>:</span><span class="message-body"><%= S.message %></span><span class="message-timestamp" title="<%= S.messageTimeStamp %>"><%= S.messageTimeStamp %></span>
+        </li>
+    </script>
 </div>

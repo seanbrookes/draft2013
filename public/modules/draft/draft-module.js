@@ -244,6 +244,7 @@ define(
                     var editModel = {};
                     editModel.id = pickId;
                     editModel.val = currentVal;
+                    var editControl;
                     var editTempalte = null;
                     // render the edit control for the property
                     switch(type){
@@ -251,7 +252,7 @@ define(
                             // render roster edit control
                             editTemplate = $('#DraftPickEditRosterControlTemplate').html();
                             parentEl.html(_.template(editTemplate,editModel));
-                            var editControl = $("select[data-id='" + pickId + "']");
+                            editControl = $("select[data-id='" + pickId + "']");
                             editControl.val(currentVal).focus();
                             editControl.on('blur',function(event){
                               // if (currentVal !== $(event.target).val()){
@@ -278,7 +279,7 @@ define(
 
                             editTemplate = $('#DraftPickEditTeamControlTemplate').html();
                             parentEl.html(_.template(editTemplate,editModel));
-                            var editControl = $("select[data-id='" + pickId + "']");
+                            editControl = $("select[data-id='" + pickId + "']");
                             editControl.val(currentVal).focus();
                             editControl.on('blur',function(event){
                                 // if (currentVal !== $(event.target).val()){
@@ -290,6 +291,7 @@ define(
                                 sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type]);
                                 //  }
                             });
+                            break;
                         default:
                     }
                     // set the current value of the control
@@ -373,7 +375,7 @@ define(
                 sf1.log('edit pos: ' + $(event.target).data('id'));
             });
             $('.btn-cmd-editteam').click(function(event){
-               // sf1.EventBus.trigger('roster.editPlayerPropertyRequest',[event,'team']);
+                sf1.EventBus.trigger('roster.editPlayerPropertyRequest',[event,{type:'team'}]);
                 sf1.log('edit team: ' + $(event.target).data('id'));
             });
         });
