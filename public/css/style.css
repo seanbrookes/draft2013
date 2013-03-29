@@ -274,6 +274,12 @@ table.player-list select{
 .player-bubble{
     background-color:#E3E159;
 }
+#InputChatTranscriptNewestFirst{
+    float:left;
+}
+.chat-direction-toggle-label{
+    margin-left:2em;
+}
 /*
 
     small screen
