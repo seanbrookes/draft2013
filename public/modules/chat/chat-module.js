@@ -251,6 +251,9 @@ define(
             $('.chat-widget-input').val('');
             $('.chat-widget-input').focus();
             $('.message-timestamp ').prettyDate();
+            $('.refresh-chat-cmd').unbind().click(function(event){
+               sf1.EventBus.trigger('chat.refreshTranscriptData');
+            });
 
 
 
