@@ -121,6 +121,9 @@ define(
 
         });
 
+        function initRefreshTimer(){
+            setInterval(init,120000);
+        }
 
 
         function init(uuid){
@@ -162,7 +165,7 @@ define(
                // sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
             }
 
-
+            initRefreshTimer();
             /*
             *
             * DRAFT BOARD
@@ -205,6 +208,25 @@ define(
                 var parentEl = $(event.target).parent();
                 parentEl.html(_.template(editTemplate,editModel));
                 sf1.EventBus.trigger('roster.initEditToggleListeners');
+
+            });
+
+            sf1.EventBus.bind('roster.postPickToRosterRequest',function(data,event){
+                var targetRoster = $(event.target).data('roster');
+                var pickId = $(event.target).data('id');
+                sf1.log('post pick to player: ' + targetRoster + " : " + pickId);
+                sf1.io.ajax({
+                    type:'POST',
+                    url:'/postpicktoroster',
+                    data:{draftPickId:pickId,rosterSlug:targetRoster},
+                    success:function(response){
+                        sf1.log('pretty close to done!!');
+                    },
+                    error:function(response){
+                        sf1.log('still some work to do');
+                    }
+
+                })
 
             });
 
@@ -410,6 +432,36 @@ define(
                 sf1.EventBus.trigger('roster.editPlayerPropertyRequest',event);
                 sf1.log('edit team: ' + $(event.target).data('id'));
             });
+            $('.cmd-post-to-roster').click(function(event){
+                var answer = confirm('Post this player to a roster?');
+                if (answer){
+                    sf1.EventBus.trigger('roster.postPickToRosterRequest',event);
+                    sf1.log('post pick/player: ' + $(event.target).data('id'));
+                }
+            });
+
+            $('.btn-cmd-editname').each(function(item){
+                if (!$.trim($(this).text())){
+                    $(this).text('--------');
+                }
+            });
+
+            $('.btn-cmd-editpos').each(function(item){
+                if (!$.trim($(this).text())){
+                    $(this).text('pos');
+                }
+            });
+
+            $('.btn-cmd-editteam').each(function(item){
+                if (!$.trim($(this).text())){
+                    $(this).text('tm');
+                }
+            });
+
+            $('#ReloadDrafBoard').unbind().click(function(event){
+               init();
+            });
+
         });
         return {
             init:function(uuid){

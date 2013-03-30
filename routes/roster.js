@@ -40,6 +40,39 @@ exports.updateDraftStatus = function(req,res){
   //logger.info('REQ PARAMS: ' + JSON.stringify(req.params));
   //res.send(400);
 };
+exports.addRosterPlayer = function(req,res){
+    // roster
+    var roster = req.param('roster',null);
+    // player name
+    var name = req.param('name',null);
+    // player team
+    var team = req.param('team',null);
+    // player pos
+    var pos = req.param('pos',null);
+
+    var newPlayerObj = {};
+    newPlayerObj.name = name;
+    newPlayerObj.team = team;
+    newPlayerObj.pos = pos;
+
+    var newPlayer = new Player(newPlayerObj);
+
+    Roster.find({'slug':roster},function(err,doc){
+        if (err){
+            logger.error(err);
+            return res.send(500,err);
+        }
+        doc[0].players.push(newPlayer);
+        doc[0].save(function(err){
+            if (err){
+                logger.error(500,err);
+                return res.send(500,err);
+            }
+            return res.send(200,newPlayer);
+        });
+    });
+
+};
 exports.deletePlayer = function(req,res){
     var playerId = req.param('playerId',null);
     var roster = req.param('slug',null);

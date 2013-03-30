@@ -20,7 +20,7 @@ var iaI18n = (function(){
 
 
 	return {
-		k18Home:'home',
+		k18Home:'draft',
 		k18Admin:'admin',
 		k18Login:'login',
 		k18SignUp:'sign up'

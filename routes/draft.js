@@ -9,6 +9,9 @@
 var Draft = require('../models/draft-model');
 var DraftPick = require('../models/draftpick-model');
 var ChatMessage = require('../models/chatmessage-model');
+var Roster = require('../models/roster-model');
+var Player = require('../models/player-model');
+
 var winston = require('winston');
 var url = require('url');
 var logger = new (winston.Logger)({
@@ -29,6 +32,73 @@ exports.createDraft = function(req,res){
 //        }
 //        return res.send(200);
 //    });
+};
+exports.postPickToRoster = function(req,res){
+    var draftPickId = req.param('draftPickId',null);
+    //logger.info('draftPickId: ' + draftPickId);
+    var draftPickRoster = req.param('rosterSlug',null);
+    logger.info('postPickToRoster: ' + draftPickId + ':' + draftPickRoster);
+
+
+
+
+    // find the pick in the draft list
+    Draft.findOne({'year':2013},function(err,doc){
+        if (err){
+           logger.error(err);
+           return res.send(500,err);
+        }
+        logger.info('| found target draft picks :' + doc.picks);
+        var draftPicks = doc.picks;
+        var targetPick;
+        for (var i = 0;i < draftPicks.length;i++){
+            var pick = draftPicks[i];
+            logger.info('|  looping through draft picks ');
+            if (pick._id == draftPickId){
+                logger.info('|  identified draft pick');
+                targetPick = pick;
+                break;
+            }
+        }
+        if (targetPick){
+            var targetRosterPlayerObj = {};
+            targetRosterPlayerObj.name = targetPick.name;
+            targetRosterPlayerObj.pos = targetPick.pos;
+            targetRosterPlayerObj.team = targetPick.team;
+            targetRosterPlayerObj.draftStatus = 'protected';
+            targetRosterPlayerObj.playerStatus = 'regular';
+            targetRosterPlayerObj.posType = 'A';
+
+            Roster.findOne({'slug':draftPickRoster},function(err,doc){
+                if(err){
+                   logger.error(err);
+                   return res.send(500);
+                }
+                logger.info('|  found target roster');
+                var playersArray = doc.players;
+                var newPlayer = new Player(targetRosterPlayerObj);
+                playersArray.push(newPlayer);
+                doc.save(function(err){
+                    logger.info('|  Save target roster');
+                    if(err){
+                        logger.error(err);
+                        return res.send(500,err);
+                    }
+
+                    res.send(200,doc);
+                });
+
+            });
+
+        }
+    });
+    // get the relvant properties
+    // create new player model
+    // get roster
+    // add new player
+    // save roster
+
+
 };
 exports.createDraftList = function(req,res){
 
