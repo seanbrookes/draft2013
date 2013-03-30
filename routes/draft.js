@@ -149,10 +149,10 @@ exports.updateDraftPickRoster = function(req, res){
 };
 exports.updateDraftPickName = function(req, res){
     var draftPickId = req.param('draftPickId',null);
-    logger.info('draftPickId: ' + draftPickId);
+   // logger.info('draftPickId: ' + draftPickId);
 
     var draftPickPlayerName = req.param('propertyVal',null);
-    logger.info('draftPickPlayerName: ' + draftPickPlayerName);
+  //  logger.info('draftPickPlayerName: ' + draftPickPlayerName);
     if (draftPickPlayerName && draftPickId){
         Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'draftpicks.$.name' : draftPickPlayerName }},function(err){
             if(err){
@@ -175,10 +175,10 @@ exports.updateDraftPickName = function(req, res){
 };
 exports.updateDraftPickPos = function(req, res){
     var draftPickId = req.param('draftPickId',null);
-    logger.info('draftPickId: ' + draftPickId);
+ //   logger.info('draftPickId: ' + draftPickId);
 
     var draftPickPos = req.param('propertyVal',null);
-    logger.info('draftPickPos: ' + draftPickPos);
+  //  logger.info('draftPickPos: ' + draftPickPos);
     if (draftPickPos && draftPickId){
         Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'draftpicks.$.pos' : draftPickPos }},function(err){
             if(err){
@@ -202,7 +202,7 @@ exports.updateDraftPickPos = function(req, res){
 };
 exports.updateDraftPickTeam = function(req, res){
     var draftPickId = req.param('draftPickId',null);
-    logger.info('draftPickId: ' + draftPickId);
+ //   logger.info('draftPickId: ' + draftPickId);
 
     var draftPickTeam = req.param('propertyVal',null);
     logger.info('draftPickTeam: ' + draftPickTeam);
@@ -230,21 +230,21 @@ exports.updateDraftPickTeam = function(req, res){
 };
 exports.updateDraftPick = function(req,res){
     var draftPickId = req.param('draftPickId',null);
-    logger.info('draftPickId: ' + draftPickId);
+  //  logger.info('draftPickId: ' + draftPickId);
     var draftPickNumber = req.param('draftPickNumber',null);
-    logger.info('draftPickNumber: ' + draftPickNumber);
+  //  logger.info('draftPickNumber: ' + draftPickNumber);
     var draftPickRound = req.param('draftPickRound',null);
-    logger.info('draftPickRound: ' + draftPickRound);
+//    logger.info('draftPickRound: ' + draftPickRound);
     var draftPickRoster = req.param('draftPickRoster',null);
-    logger.info('draftPickRoster: ' + draftPickRoster);
+ //   logger.info('draftPickRoster: ' + draftPickRoster);
     var draftPickPlayerName = req.param('draftPickPlayerName',null);
-    logger.info('draftPickPlayerName: ' + draftPickPlayerName);
+//    logger.info('draftPickPlayerName: ' + draftPickPlayerName);
     var draftPickPos = req.param('draftPickPos',null);
-    logger.info('draftPickPos: ' + draftPickPos);
+//    logger.info('draftPickPos: ' + draftPickPos);
     var draftPickTeam = req.param('draftPickTeam',null);
-    logger.info('draftPickTeam: ' + draftPickTeam);
+//    logger.info('draftPickTeam: ' + draftPickTeam);
     var draftPickTime = req.param('draftPickTime',null);
-    logger.info('draftPickTime: ' + draftPickTime);
+   // logger.info('draftPickTime: ' + draftPickTime);
 
     var updateDraftPickModel = new DraftPick({
         pickNumber: draftPickNumber,

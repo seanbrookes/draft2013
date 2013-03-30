@@ -163,7 +163,7 @@ var getToken = function(){
 exports.postAuthenticate = function(req, res){
 	//logger.info('login attempt');
 	if (req.body){
-        logger.info(JSON.stringify(req.body));
+     //   logger.info(JSON.stringify(req.body));
 		if(req.body.email && req.body.password){
 			try{
 				/**
@@ -185,8 +185,8 @@ exports.postAuthenticate = function(req, res){
 							res.cookie('userId',user._id);
 							req.session.userName = user.userName;
 							req.session.userId = user._id;
-							console.log('Session User Name: ' + req.session.userName);
-							console.log('Session object: ' + JSON.stringify(req.session));
+						//	console.log('Session User Name: ' + req.session.userName);
+						//	console.log('Session object: ' + JSON.stringify(req.session));
 							//res.send('LOGGED IN');
 							exports.isUserAuth(req, res);
 						}

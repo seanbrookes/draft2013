@@ -127,7 +127,15 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                 //var playerCollection =  new PlayerCollection(response.players);
                 if (response[0]){
 
-                    playersModel = response[0].players;
+                    var processedModel = [];
+                    for (var i = 0;i < response[0].players.length;i++){
+                        var tItemModel = response[0].players[i];
+                        if (!tItemModel.draftStatus){
+                            tItemModel.draftStatus = 'bubble';
+                        }
+                        processedModel.push(tItemModel);
+                    }
+                    playersModel = processedModel;
                     //rosterSlug = rosterName;
                     rosterName = response[0].name;
 
@@ -144,9 +152,9 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
     var toggleEditOn = function(id,val){
         var selectElement = $('#StatusSelectTemplate').html();
 
-        $('a[data-id="' + id + '"]').hide();
+        $('a[data-id="' + id + '"][data-type="draftstatus"]').hide();
         //$(selectElement).data('id',id);
-        $('td[data-id="' + id + '"]').html(selectElement);
+        $('td[data-id="' + id + '"][data-type="draftstatus"]').html(selectElement);
 
         var selectInstance = $('td[data-id="' + id + '"]').find('.status-select');
         selectInstance.attr('data-id',id);
@@ -209,8 +217,9 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
         var toggleRosterEditOn = function(id,val){
             var selectElement = $('#RosterSelectTemplate').html();
+           // var originalRoster = val;
 
-            $('a[data-id="' + id + '"]').hide();
+            $('a[data-id="' + id + '"][data-type="playername"]').hide();
             //$(selectElement).data('id',id);
             $('td[data-id="' + id + '"][data-type="playername"]').html(selectElement);
 
@@ -237,6 +246,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                     data:JSON.stringify(postObj),
                     success:function(response){
                         sf1.log('Roster update ok, reload page');
+                        init(rosterSlug);
                         //toggleEditOff(response.playerId,response.draftStatus);
                     },
                     error:function(response){
@@ -245,7 +255,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                 });
             });
 
-            $('td[data-id="' + id + '"]').find('.status-select').on('blur',function(event){
+            $('td[data-id="' + id + '"]').find('.roster-select').on('blur',function(event){
                 val = event.target.value;
                 // sf1.log('CHECKED!!!: ' + val);
                 var rosterValue = val;
@@ -263,6 +273,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                     data:JSON.stringify(postObj),
                     success:function(response){
                         sf1.log('Roster update ok, reload page');
+                        init(rosterSlug);
                         //toggleEditOff(response.playerId,response.draftStatus);
                     },
                     error:function(response){
@@ -393,16 +404,16 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                 event.preventDefault();
                // get
                 var id = $(event.target).data('id');
-                var val = event.target.value;
+                var val = $(event.target).text();
                 toggleEditOn(id,val);
 
             });
-            $('.draft-roster-cmd-xxx').click(function(event){
+            $('.draft-roster-cmd').click(function(event){
                 event.preventDefault();
                 // get
                 var id = $(event.target).data('id');
               //  var val = $(event.target).text();
-                var val = 'rosterSlug';
+                var val = rosterSlug;
                 toggleRosterEditOn(id,val);
 
             });

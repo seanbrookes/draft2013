@@ -19,14 +19,14 @@ var logger = new (winston.Logger)({
 });
 exports.getDraftTranscript = function(req,res){
     var queryData = url.parse(req.url, true).query;
-    logger.info('|');
-    logger.info('| chat transcript');
-    logger.info('|');
+   // logger.info('|');
+   // logger.info('| chat transcript');
+  //  logger.info('|');
     if ((queryData.chatDirection) && (queryData.chatDirection === 'newest-at-top')){
         var sortDirection = queryData.chatDirection;
-        logger.info('|');
-        logger.info('| NEWEST AT TOP');
-        logger.info('|');
+    //    logger.info('|');
+    //    logger.info('| NEWEST AT TOP');
+    //    logger.info('|');
 
         //logger.info('chat transcript sortDirection: ' + sortDirection);
         // sort direction
@@ -43,9 +43,9 @@ exports.getDraftTranscript = function(req,res){
 
     }
     else{
-        logger.info('|');
-        logger.info('| NEWEST AT BOTTOM');
-        logger.info('|');
+     //   logger.info('|');
+    //    logger.info('| NEWEST AT BOTTOM');
+    //    logger.info('|');
 
         ChatMessage.find(function(err,dox){
             if (err){

@@ -266,7 +266,7 @@ table.player-list select{
     background-color:#439C2A;
     color:#fff;
 }
-.player-protected a.draft-status-cmd, .player-prospect a.draft-status-cmd{
+.player-protected a.draft-status-cmd, .player-prospect a.draft-status-cmd,.player-protected a.draft-roster-cmd, .player-prospect a.draft-roster-cmd{
     color:#fff;
 }
 .player-dropped{

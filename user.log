@@ -242,3 +242,18 @@
 {"level":"info","message":"GET ROSTER: bashers","timestamp":"2013-03-29T23:27:06.647Z"}
 {"level":"info","message":"GET ROSTER: bashers","timestamp":"2013-03-29T23:34:41.979Z"}
 {"level":"info","message":"playerid: 514bc2b3801efd1f0d000062   oldRoster: stallions  newRoster: rallycaps","timestamp":"2013-03-29T23:36:03.711Z"}
+{"level":"info","message":"GET ROSTER: bashers","timestamp":"2013-03-30T02:30:28.595Z"}
+{"level":"info","message":"GET ROSTER: bashers","timestamp":"2013-03-30T02:33:01.915Z"}
+{"level":"info","message":"GET ROSTER: bashers","timestamp":"2013-03-30T02:34:24.221Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-30T02:42:26.446Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-30T02:45:12.116Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-30T04:28:05.442Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-30T04:43:58.138Z"}
+{"level":"info","message":"playerid: 514bc7e862faf2c00d000007   oldRoster: hooters  newRoster: rallycaps","timestamp":"2013-03-30T05:01:40.647Z"}
+{"level":"info","message":"GET ROSTER: mashers","timestamp":"2013-03-30T05:04:36.877Z"}
+{"level":"info","message":"GET ROSTER: rallycaps","timestamp":"2013-03-30T05:05:54.926Z"}
+{"level":"info","message":"playerid: 514bc83062faf2c00d000064   oldRoster: mashers  newRoster: rallycaps","timestamp":"2013-03-30T05:07:55.361Z"}
+{"level":"info","message":"playerid: 514bc83062faf2c00d000066   oldRoster: hooters  newRoster: rallycaps","timestamp":"2013-03-30T05:09:11.451Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-30T05:09:34.522Z"}
+{"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-30T05:12:17.308Z"}
+{"level":"info","message":"playerid: 514bc83362faf2c00d000096   oldRoster: rallycaps  newRoster: bashers","timestamp":"2013-03-30T05:33:27.896Z"}
