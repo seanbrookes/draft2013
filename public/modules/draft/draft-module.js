@@ -122,10 +122,11 @@ define(
         });
 
         function initRefreshTimer(){
-            setInterval(init,120000);
+           // setInterval(init,5000);
         }
 
 
+        //initRefreshTimer();
         function init(uuid){
             if (uuid){
                 //sf1.log('checking user id: '  + uuid);
@@ -165,7 +166,6 @@ define(
                // sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
             }
 
-            initRefreshTimer();
             /*
             *
             * DRAFT BOARD
@@ -176,10 +176,9 @@ define(
 
 
 
-
-
-
-
+            setInterval(function() {
+                sf1.EventBus.trigger('roster.refreshDraftBoard');
+            }, 180000);
 
 
 
@@ -196,191 +195,30 @@ define(
             var testTemplate = $('#DraftPickTemplate').html();
             var xyz = testTemplate;
 
-            sf1.EventBus.bind('roster.editPropertyComplete', function(data,event){
-                var type = $(event.target).data('type');
-                var tEvent = event;
-                var editModel = {};
-                editModel.id = $(event.target).data('id');
-                editModel.val = $(event.target).val();
-                editModel.type = type;
-                // revert back to link
-                editTemplate = $('#DraftPickEditTriggerControlTemplate').html();
-                var parentEl = $(event.target).parent();
-                parentEl.html(_.template(editTemplate,editModel));
-                sf1.EventBus.trigger('roster.initEditToggleListeners');
 
-            });
-
-            sf1.EventBus.bind('roster.postPickToRosterRequest',function(data,event){
-                var targetRoster = $(event.target).data('roster');
-                var pickId = $(event.target).data('id');
-                sf1.log('post pick to player: ' + targetRoster + " : " + pickId);
-                sf1.io.ajax({
-                    type:'POST',
-                    url:'/postpicktoroster',
-                    data:{draftPickId:pickId,rosterSlug:targetRoster},
-                    success:function(response){
-                        sf1.log('pretty close to done!!');
-                    },
-                    error:function(response){
-                        sf1.log('still some work to do');
-                    }
-
-                })
-
-            });
-
-            sf1.EventBus.bind('roster.updatePlayerProperty',function(data,event){
-                var route = '/pick' + $(event.target).data('type');
-                var pickId = $(event.target).data('id');
-                var propertyVal = $(event.target).val();
-                var updateObj = {};
-                updateObj.draftPickId = pickId;
-                updateObj.propertyVal = propertyVal;
-                sf1.io.ajax({
-                    type:'PUT',
-                    url:route,
-                    data:updateObj,
-                    success:function(response){
-                        sf1.log('updated the property: ' + response);
-                        sf1.EventBus.trigger('roster.editPropertyComplete',[event,updateObj]);
-                    },
-                    error:function(response){
-                        sf1.log('ERRER: updating the property: ' + response);
-                    }
-                });
-            });
+            sf1.EventBus.trigger('roster.refreshDraftBoard');
 
 
-            sf1.EventBus.bind('roster.editPlayerPropertyRequest',function(data,event){
-                if ($(event.target).data('id')){
-                    _.templateSettings.variable = 'S';
-                    var abc = data;
-                    var type = $(event.target).data('type');
-
-                    //sf1.log('request to render an edit control');
-                    // set the current value
-                    var currentVal = $(event.target).data('val');
-                    var pickId = $(event.target).data('id');
-                    var parentEl = $(event.target).parent();
-                    var editModel = {};
-                    editModel.id = pickId;
-                    editModel.val = currentVal;
-                    var editControl;
-                    var editTempalte = null;
-                    // render the edit control for the property
-                    switch(type){
-                        case 'roster':
-                            // render roster edit control
-                            editTemplate = $('#DraftPickEditRosterControlTemplate').html();
-                            parentEl.html(_.template(editTemplate,editModel));
-                            editControl = $("select[data-id='" + pickId + "']");
-                            editControl.val(currentVal).focus();
-                            editControl.on('blur',function(event){
-                              // if (currentVal !== $(event.target).val()){
-                                   sf1.EventBus.trigger('roster.updatePlayerProperty',[event,'roster' ]);
-                              // }
-                            });
-                            editControl.on('change',function(event){
-                              //  if (currentVal !== $(event.target).val()){
-                                   sf1.EventBus.trigger('roster.updatePlayerProperty',[event,'roster']);
-                             //  }
-                            });
-
-                            break;
-                        case 'name':
-                            // render name edit control
-
-                            editTemplate = $('#DraftPickEditPlayerNameControlTemplate').html();
-                            parentEl.html(_.template(editTemplate,editModel));
-                            editControl = $("input[data-id='" + pickId + "']");
-                            editControl.val(currentVal).focus();
-                            editControl.on('blur',function(event){
-                                // if (currentVal !== $(event.target).val()){
-                                sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type ]);
-                                // }
-                            });
-                            editControl.on('change',function(event){
-                                //  if (currentVal !== $(event.target).val()){
-                                //sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type]);
-                                //  }
-                            });
-
-
-
-                            break;
-                        case 'pos':
-                            // render pos control
-                            editTemplate = $('#DraftPickEditPosControlTemplate').html();
-                            parentEl.html(_.template(editTemplate,editModel));
-                            editControl = $("select[data-id='" + pickId + "']");
-                            editControl.val(currentVal).focus();
-                            editControl.on('blur',function(event){
-                                // if (currentVal !== $(event.target).val()){
-                                sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type ]);
-                                // }
-                            });
-                            editControl.on('change',function(event){
-                                //  if (currentVal !== $(event.target).val()){
-                                sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type]);
-                                //  }
-                            });
-                            break;
-                        case 'team':
-                            // render team control
-
-
-
-                            editTemplate = $('#DraftPickEditTeamControlTemplate').html();
-                            parentEl.html(_.template(editTemplate,editModel));
-                            editControl = $("select[data-id='" + pickId + "']");
-                            editControl.val(currentVal).focus();
-                            editControl.on('blur',function(event){
-                                // if (currentVal !== $(event.target).val()){
-                                sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type ]);
-                                // }
-                            });
-                            editControl.on('change',function(event){
-                                //  if (currentVal !== $(event.target).val()){
-                                sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type]);
-                                //  }
-                            });
-                            break;
-                        default:
-                    }
-                    // set the current value of the control
-                    // set the event listener
-                    // trigger update event when ready
-
-
-                }
-                else{
-                    sf1.log('request to edit player property with no reference id');
-                }
-
-                // get record id
-                // hide button
-                // show edit control
-                // set value to current value
-                // ensure the id is set
-                // call update on the server - AJAX
-                // - url to call
-                // handle response
-                // - error - reset back to value with log entry
-                // - success - reset ui back to button with updated model/value
-            });
             // get the draft model
+
+
+
+//			var editor = ace.edit("editor");
+//			editor.setTheme("ace/theme/monokai");
+//			editor.getSession().setMode("ace/mode/javascript");
+        }
+        sf1.EventBus.bind('roster.refreshDraftBoard',function(){
             sf1.io.ajax({
                 type:'GET',
                 url:'/draft',
                 success:function(response){
 
-                    var abc = testTemplate;
-                    var ttt = abc;
+                    //var abc = testTemplate;
+                   // var ttt = abc;
 
                     var resObj = response;
                     var draftList = resObj[0].picks;
-                   // sf1.log('success: ' + JSON.stringify(response));
+                    // sf1.log('success: ' + JSON.stringify(response));
 
                     var draftTableView = new DraftTableView({
                         collection: new DraftPickCollection(draftList),
@@ -389,7 +227,8 @@ define(
                         }
                     });
                     //draftTableView.render();
-                    $('.draft-module-container').append(draftTableView.render().$el);
+                    $('.draft-board-container').empty();
+                    $('.draft-board-container').html(draftTableView.render().$el);
 
                     $(".draft-table tr:nth-child(10n)").addClass("even-round")
                         .prev().addClass("even-round")
@@ -408,12 +247,192 @@ define(
 
 
             });
+        });
 
 
-//			var editor = ace.edit("editor");
-//			editor.setTheme("ace/theme/monokai");
-//			editor.getSession().setMode("ace/mode/javascript");
-        }
+        sf1.EventBus.bind('roster.editPropertyComplete', function(data,event){
+            var type = $(event.target).data('type');
+            var tEvent = event;
+            var editModel = {};
+            editModel.id = $(event.target).data('id');
+            editModel.val = $(event.target).val();
+            editModel.type = type;
+            // revert back to link
+            editTemplate = $('#DraftPickEditTriggerControlTemplate').html();
+            var parentEl = $(event.target).parent();
+            parentEl.html(_.template(editTemplate,editModel));
+            sf1.EventBus.trigger('roster.initEditToggleListeners');
+
+        });
+
+        sf1.EventBus.bind('roster.postPickToRosterRequest',function(data,event){
+            var targetRoster = $(event.target).data('roster');
+            var pickId = $(event.target).data('id');
+            sf1.log('post pick to player: ' + targetRoster + " : " + pickId);
+            sf1.io.ajax({
+                type:'POST',
+                url:'/postpicktoroster',
+                data:{draftPickId:pickId,rosterSlug:targetRoster},
+                success:function(response){
+                    sf1.log('pretty close to done!!');
+                },
+                error:function(response){
+                    sf1.log('still some work to do');
+                }
+
+            })
+
+        });
+
+        sf1.EventBus.bind('roster.updatePlayerProperty',function(data,event){
+            var route = '/pick' + $(event.target).data('type');
+            var pickId = $(event.target).data('id');
+            var propertyVal = $(event.target).val();
+            var updateObj = {};
+            updateObj.draftPickId = pickId;
+            updateObj.propertyVal = propertyVal;
+            sf1.io.ajax({
+                type:'PUT',
+                url:route,
+                data:updateObj,
+                success:function(response){
+                    sf1.log('updated the property: ' + response);
+                    sf1.EventBus.trigger('roster.editPropertyComplete',[event,updateObj]);
+                },
+                error:function(response){
+                    sf1.log('ERRER: updating the property: ' + response);
+                }
+            });
+        });
+
+
+        sf1.EventBus.bind('roster.editPlayerPropertyRequest',function(data,event){
+            if ($(event.target).data('id')){
+                _.templateSettings.variable = 'S';
+                var abc = data;
+                var type = $(event.target).data('type');
+
+                //sf1.log('request to render an edit control');
+                // set the current value
+                var currentVal = $(event.target).data('val');
+                var pickId = $(event.target).data('id');
+                var parentEl = $(event.target).parent();
+                var editModel = {};
+                editModel.id = pickId;
+                editModel.val = currentVal;
+                var editControl;
+                var editTempalte = null;
+                // render the edit control for the property
+                switch(type){
+                    case 'roster':
+                        // render roster edit control
+                        editTemplate = $('#DraftPickEditRosterControlTemplate').html();
+                        parentEl.html(_.template(editTemplate,editModel));
+                        editControl = $("select[data-id='" + pickId + "']");
+                        editControl.val(currentVal).focus();
+                        editControl.on('blur',function(event){
+                            // if (currentVal !== $(event.target).val()){
+                            sf1.EventBus.trigger('roster.updatePlayerProperty',[event,'roster' ]);
+                            // }
+                        });
+                        editControl.on('change',function(event){
+                            //  if (currentVal !== $(event.target).val()){
+                            sf1.EventBus.trigger('roster.updatePlayerProperty',[event,'roster']);
+                            //  }
+                        });
+
+                        break;
+                    case 'name':
+                        // render name edit control
+
+                        editTemplate = $('#DraftPickEditPlayerNameControlTemplate').html();
+                        parentEl.html(_.template(editTemplate,editModel));
+                        editControl = $("input[data-id='" + pickId + "']");
+                        editControl.val(currentVal).focus();
+                        editControl.on('blur',function(event){
+                            // if (currentVal !== $(event.target).val()){
+                            sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type ]);
+                            // }
+                        });
+                        editControl.on('change',function(event){
+                            //  if (currentVal !== $(event.target).val()){
+                            //sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type]);
+                            //  }
+                        });
+
+
+
+                        break;
+                    case 'pos':
+                        // render pos control
+                        editTemplate = $('#DraftPickEditPosControlTemplate').html();
+                        parentEl.html(_.template(editTemplate,editModel));
+                        editControl = $("select[data-id='" + pickId + "']");
+                        editControl.val(currentVal).focus();
+                        editControl.on('blur',function(event){
+                            // if (currentVal !== $(event.target).val()){
+                            sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type ]);
+                            // }
+                        });
+                        editControl.on('change',function(event){
+                            //  if (currentVal !== $(event.target).val()){
+                            sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type]);
+                            //  }
+                        });
+                        break;
+                    case 'team':
+                        // render team control
+
+
+
+                        editTemplate = $('#DraftPickEditTeamControlTemplate').html();
+                        parentEl.html(_.template(editTemplate,editModel));
+                        editControl = $("select[data-id='" + pickId + "']");
+                        editControl.val(currentVal).focus();
+                        editControl.on('blur',function(event){
+                            // if (currentVal !== $(event.target).val()){
+                            sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type ]);
+                            // }
+                        });
+                        editControl.on('change',function(event){
+                            //  if (currentVal !== $(event.target).val()){
+                            sf1.EventBus.trigger('roster.updatePlayerProperty',[event,type]);
+                            //  }
+                        });
+                        break;
+                    default:
+                }
+                // set the current value of the control
+                // set the event listener
+                // trigger update event when ready
+
+
+            }
+            else{
+                sf1.log('request to edit player property with no reference id');
+            }
+
+            // get record id
+            // hide button
+            // show edit control
+            // set value to current value
+            // ensure the id is set
+            // call update on the server - AJAX
+            // - url to call
+            // handle response
+            // - error - reset back to value with log entry
+            // - success - reset ui back to button with updated model/value
+        });
+
+
+
+
+
+
+
+
+
+
         sf1.EventBus.bind('roster.initEditToggleListeners',function(event){
             $('.btn-cmd-editroster').click(function(event){
                 sf1.EventBus.trigger('roster.editPlayerPropertyRequest',event);
@@ -459,7 +478,7 @@ define(
             });
 
             $('#ReloadDrafBoard').unbind().click(function(event){
-               init();
+                sf1.EventBus.trigger('roster.refreshDraftBoard');
             });
 
         });
