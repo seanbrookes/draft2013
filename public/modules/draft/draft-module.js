@@ -178,7 +178,7 @@ define(
 
             setInterval(function() {
                 sf1.EventBus.trigger('roster.refreshDraftBoard');
-            }, 180000);
+            }, 500000);
 
 
 
