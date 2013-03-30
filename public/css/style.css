@@ -139,7 +139,7 @@ table.player-list select{
     color:#28ff28;
 }
 
-a#ReloadDrafBoard:active, .refresh-chat-cmd:active{
+#ReloadDrafBoard:active, .refresh-chat-cmd:active{
     color:red;
 }
 .roster-title{
