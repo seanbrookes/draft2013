@@ -9,9 +9,26 @@
 
     </script>
 
+    <script type="text/template" id="DraftPickEditPosControlTemplate" class="ui-template">
+
+        <select id="DraftPickPosSelect" class="select-pos pick-property-edit" data-id="<%= S.id %>" data-type="pos">
+            <option value="C">C</option>
+            <option value="1B">1B</option>
+            <option value="2B">2B</option>
+            <option value="3B">3B</option>
+            <option value="SS">SS</option>
+            <option value="LF">LF</option>
+            <option value="CF">CF</option>
+            <option value="RF">RF</option>
+            <option value="DH">DH</option>
+            <option value="SP">SP</option>
+            <option value="RP">RP</option>
+        </select>
+
+    </script>
     <script type="text/template" id="DraftPickEditRosterControlTemplate" class="ui-template">
 
-        <select class="select-roster pick-property-edit" data-id="<%= S.id %>">
+        <select id="DraftPickRosterSelect" class="select-roster pick-property-edit" data-id="<%= S.id %>" data-type="roster">
             <option value="bashers">bashers</option>
             <option value="hooters">hooters</option>
             <option value="mashers">mashers</option>
@@ -20,9 +37,14 @@
         </select>
 
     </script>
+    <script type="text/template" id="DraftPickEditPlayerNameControlTemplate" class="ui-template">
+
+        <input type="text" class="input-pick-name pick-property-edit" data-id="<%= S.id %>" data-type="name">
+
+    </script>
     <script type="text/template" id="DraftPickEditTeamControlTemplate" class="ui-template">
 
-        <select class="select-team pick-property-edit" data-id="<%= S.id %>">
+        <select class="select-team pick-property-edit" id="DraftPickTeamSelect" data-id="<%= S.id %>" data-type="team">
             <option value="BAL">BAL</option>
             <option value="BOS">BOS</option>
             <option value="CHA">CHA</option>
@@ -42,7 +64,7 @@
     </script>
     <script type="text/template" id="DraftPickEditTriggerControlTemplate" class="ui-template">
 
-        <button class="btn-property-edit btn-cmd-link btn-cmd-edit<%= S.type %>" data-id="<%= S.id %>" data-val="<%= S.val%>">
+        <button class="btn-property-edit btn-cmd-link btn-cmd-edit<%= S.type %>" data-type="<%= S.type %>" data-id="<%= S.id %>" data-val="<%= S.val%>">
             <%= S.val %>
         </button>
 
@@ -57,22 +79,22 @@
             <%= S.pickNumber %>
         </td>
         <td data-id="<%= S._id %>" data-roster="<%= S.roster %>" class="roster-col">
-            <button class="btn-cmd-link btn-cmd-editroster" data-id="<%= S._id %>" data-val="<%= S.roster %>">
+            <button class="btn-cmd-link btn-cmd-editroster" data-type="roster" data-id="<%= S._id %>" data-val="<%= S.roster %>">
                 <%= S.roster %>
             </button>
         </td>
         <td class="name-col">
-            <button class="btn-cmd-link btn-cmd-editname" data-id="<%= S._id %>" data-val="<%= S.name %>">
+            <button class="btn-cmd-link btn-cmd-editname" data-type="name" data-id="<%= S._id %>" data-val="<%= S.name %>">
                 <%= S.name %>
             </button>
         </td>
         <td class="pos-col">
-            <button class="btn-cmd-link btn-cmd-editpos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
+            <button class="btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
                 <%= S.pos %>
             </button>
         </td>
         <td class="team-col">
-            <button class="btn-cmd-link btn-cmd-editteam" data-id="<%= S._id %>" data-val="<%= S.team %>">
+            <button class="btn-cmd-link btn-cmd-editteam" data-type="team" data-id="<%= S._id %>" data-val="<%= S.team %>">
                 <%= S.team %>
             </button>
         </td>

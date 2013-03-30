@@ -257,3 +257,8 @@
 {"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-30T05:09:34.522Z"}
 {"level":"info","message":"GET ROSTER: hooters","timestamp":"2013-03-30T05:12:17.308Z"}
 {"level":"info","message":"playerid: 514bc83362faf2c00d000096   oldRoster: rallycaps  newRoster: bashers","timestamp":"2013-03-30T05:33:27.896Z"}
+{"level":"error","message":{},"timestamp":"2013-03-30T08:07:03.050Z"}
+{"level":"error","message":{},"timestamp":"2013-03-30T08:10:27.577Z"}
+{"level":"info","message":"roster:  stallions","timestamp":"2013-03-30T08:39:28.031Z"}
+{"level":"info","message":"roster:  stallions","timestamp":"2013-03-30T08:41:50.877Z"}
+{"level":"info","message":"roster:  stallions","timestamp":"2013-03-30T08:44:42.236Z"}

@@ -36,4 +36,5 @@ module.exports = function(app){
     app.get('/pendingaccounts',admin.getPendingAccountList);
     app.put('/statusupdate', roster.updateDraftStatus);
     app.put('/playerrosterupdate', roster.updatePlayerRoster);
+    app.post('/deleterosterplayer', roster.deletePlayer);
 }

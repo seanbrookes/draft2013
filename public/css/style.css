@@ -177,6 +177,18 @@ table.player-list select{
 .draft-table tr.even-round{
     background-color:#BBBBF0;
 }
+select#DraftPickTeamSelect{
+
+    width:5em;
+}
+select#DraftPickPosSelect{
+
+    width:5em;
+}
+select#DraftPickRosterSelect{
+
+    width:8em;
+}
 .round-col{
     text-align:center;
     vertical-align:middle;

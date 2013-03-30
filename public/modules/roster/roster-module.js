@@ -142,6 +142,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                     sf1.EventBus.trigger('roster.playerModelUpdate');
 
 
+
                 }
             },
             error:function(response){
@@ -415,6 +416,29 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
               //  var val = $(event.target).text();
                 var val = rosterSlug;
                 toggleRosterEditOn(id,val);
+
+            });
+            $('.delete-roster-player').click(function(event){
+                event.preventDefault();
+               // confirm delete
+                var answer = confirm("Confirm Delete?");
+                if (answer){
+                   // ajax
+                    sf1.io.ajax({
+                        type:'POST',
+                        url:'/deleterosterplayer',
+                        data:{slug:rosterSlug,playerId:$(event.target).data('id')},
+                        success:function(response){
+                            sf1.log('player deleted ' + response);
+                            document.location.reload();
+                        },
+                        error:function(response){
+                            sf1.log('error deleting player: ' + response);
+                        }
+
+                    })
+                }
+                // ajax delete pass id
 
             });
             sf1.EventBus.trigger('roster.renderRosterComplete');

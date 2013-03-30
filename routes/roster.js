@@ -40,6 +40,41 @@ exports.updateDraftStatus = function(req,res){
   //logger.info('REQ PARAMS: ' + JSON.stringify(req.params));
   //res.send(400);
 };
+exports.deletePlayer = function(req,res){
+    var playerId = req.param('playerId',null);
+    var roster = req.param('slug',null);
+    logger.info('roster:  ' + roster);
+    if (playerId && roster){
+        Roster.find({'slug':roster},function(err, doc){
+            if(err){
+                logger.error(err);
+                return res.send(500,err);
+            }
+            logger.info('doc: ' + doc[0]);
+            var collection = doc[0].players;
+            logger.info('collection: ' + collection);
+            for (var i = 0;i < collection.length;i++){
+                if (collection[i]._id == playerId){
+                    collection.splice(i, 1);
+                    break;
+                }
+            }
+            doc[0].players = collection;
+            doc[0].save(function(err){
+                if(err){
+                    logger.error(err);
+                    return res.send(500,err);
+                }
+                return res.send(200,'deleted');
+
+            });
+            return res.send(200,'deleted');
+        });
+    }
+    else{
+        return res.send(400,'no player id');
+    }
+};
 exports.updatePlayerRoster = function(req,res){
     var playerId = req.param('playerId',null);
     //logger.info('playerId: ' + playerId);

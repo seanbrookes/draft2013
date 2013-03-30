@@ -154,18 +154,65 @@ exports.updateDraftPickName = function(req, res){
     var draftPickPlayerName = req.param('propertyVal',null);
   //  logger.info('draftPickPlayerName: ' + draftPickPlayerName);
     if (draftPickPlayerName && draftPickId){
-        Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'draftpicks.$.name' : draftPickPlayerName }},function(err){
+
+
+        Draft.find({'year':2013},function(err,doc){
             if(err){
-                logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
-                return res.send(400,err.message);
+                logger.error(err);
+                return res.send(500,err);
             }
-            var retObj = {};
-            retObj.draftPickId = draftPickId;
-            retObj.draftPickPlayerName = draftPickPlayerName;
+            //var docItem = doc[0];
+            for (var i = 0;i < doc[0].picks.length;i++){
+                var pick = doc[0].picks[i];
+                if (pick._id == draftPickId){
+                    pick.name = draftPickPlayerName;
+                    doc[0].save(function(err){
+                        if(err){
+                            logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
+                            return res.send(400,err.message);
+                        }
+                        var retObj = {};
+                        retObj.draftPickId = draftPickId;
+                        retObj.draftPickName = draftPickPlayerName;
 
 
-            return res.send(200,retObj);
+                        return res.send(200,retObj);
+                    });
+                    break;
+                }
+            }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'picks.$.name' : draftPickPlayerName }},function(err){
+//            if(err){
+//                logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
+//                return res.send(400,err.message);
+//            }
+//            var retObj = {};
+//            retObj.draftPickId = draftPickId;
+//            retObj.draftPickPlayerName = draftPickPlayerName;
+//
+//
+//            return res.send(200,retObj);
+//        });
     }
     else{
         logger.error('updateDraftPickName no name supplied!!');
@@ -178,20 +225,37 @@ exports.updateDraftPickPos = function(req, res){
  //   logger.info('draftPickId: ' + draftPickId);
 
     var draftPickPos = req.param('propertyVal',null);
-  //  logger.info('draftPickPos: ' + draftPickPos);
+    logger.info('draftPickPos: ' + draftPickPos);
     if (draftPickPos && draftPickId){
-        Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'draftpicks.$.pos' : draftPickPos }},function(err){
-            if(err){
-                logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
-                return res.send(400,err.message);
-            }
-            var retObj = {};
-            retObj.draftPickId = draftPickId;
-            retObj.draftPickPos = draftPickPos;
+
+        Draft.find({'year':2013},function(err,doc){
+           if(err){
+               logger.error(err);
+               return res.send(500,err);
+           }
+           //var docItem = doc[0];
+           for (var i = 0;i < doc[0].picks.length;i++){
+               var pick = doc[0].picks[i];
+               if (pick._id == draftPickId){
+                   pick.pos = draftPickPos;
+                   doc[0].save(function(err){
+                       if(err){
+                           logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
+                           return res.send(400,err.message);
+                       }
+                       var retObj = {};
+                       retObj.draftPickId = draftPickId;
+                       retObj.draftPickPos = draftPickPos;
 
 
-            return res.send(200,retObj);
+                       return res.send(200,retObj);
+                   });
+                   break;
+               }
+           }
         });
+
+
     }
     else{
         logger.error('updateDraftPickPos no pos supplied!!');
@@ -207,7 +271,61 @@ exports.updateDraftPickTeam = function(req, res){
     var draftPickTeam = req.param('propertyVal',null);
     logger.info('draftPickTeam: ' + draftPickTeam);
     if (draftPickTeam && draftPickId){
-        Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'draftpicks.$.team' : draftPickTeam }},function(err){
+
+
+        Draft.find({'year':2013},function(err,doc){
+            if(err){
+                logger.error(err);
+                return res.send(500,err);
+            }
+            //var docItem = doc[0];
+            for (var i = 0;i < doc[0].picks.length;i++){
+                var pick = doc[0].picks[i];
+                if (pick._id == draftPickId){
+                    pick.team = draftPickTeam;
+                    doc[0].save(function(err){
+                        if(err){
+                            logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
+                            return res.send(400,err.message);
+                        }
+                        var retObj = {};
+                        retObj.draftPickId = draftPickId;
+                        retObj.draftPickTeam = draftPickTeam;
+
+
+                        return res.send(200,retObj);
+                    });
+                    break;
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Draft.update({'year':2013, 'draftpick._id': draftPickId},{$set:{ 'picks.$.team' : draftPickTeam }},function(err){
             if(err){
                 logger.error('error update draft pick: ' + draftPickId + ' : ' + err.message);
                 return res.send(400,err.message);
