@@ -119,9 +119,12 @@ ul{
 .roster-container{
     background-color:#eee;
     float:left;
-    max-width:500px;
     position: absolute;
+    border:1px solid #444;
+    border-radius:6px;
+    margin-left:2em;
 }
+
 .player-list td{
     border:1px solid #eee;
     padding:.2em;
@@ -135,11 +138,7 @@ table.player-list select{
 .ui-gauge-item .instrument-within-threshold{
     color:#28ff28;
 }
-.roster-container{
-    max-width:500px;
-    border:1px solid #444;
-    border-radius:6px;
-}
+
 .roster-title{
     float:left;
     margin-right:2em;
@@ -149,9 +148,10 @@ table.player-list select{
 
 }
 .draft-module-container{
-    max-width:450px;
-    min-width:445px;
+    max-width:550px;
+    min-width:500px;
     float:left;
+    margin-left:2em;
 }
 .draft-board-header{
     font-family: Consolas;
