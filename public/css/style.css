@@ -124,7 +124,9 @@ ul{
     border-radius:6px;
     margin-left:2em;
 }
-
+table.player-list{
+    min-width:500px;
+}
 .player-list td{
     border:1px solid #eee;
     padding:.2em;
