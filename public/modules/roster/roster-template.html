@@ -42,6 +42,26 @@
             </div>
         </div>
     </script>
+
+    <script type="text/template" id="RosterEditPosControlTemplate" class="ui-template">
+
+        <select id="RosterPickPosSelect" class="select-pos pick-property-edit" data-id="<%= S.id %>" data-type="pos">
+            <option value="C">C</option>
+            <option value="1B">1B</option>
+            <option value="2B">2B</option>
+            <option value="3B">3B</option>
+            <option value="SS">SS</option>
+            <option value="LF">LF</option>
+            <option value="CF">CF</option>
+            <option value="RF">RF</option>
+            <option value="DH">DH</option>
+            <option value="SP">SP</option>
+            <option value="RP">RP</option>
+        </select>
+
+    </script>
+
+
     <!-- status selector -->
     <script type="text/template" id="StatusSelectTemplate" class="ui-template">
         <select class="status-select">
@@ -49,6 +69,7 @@
             <option value="bubble">bubble</option>
             <option value="dropped">dropped</option>
             <option value="prospect">prospect</option>
+            <option value="roster">roster</option>
         </select>
     </script>
     <script type="text/template" id="RosterSelectTemplate" class="ui-template">
@@ -61,8 +82,38 @@
         </select>
     </script>
 
+    <!-- button trigger control -->
+    <script type="text/template" id="RosterPosEditTriggerControlTemplate" class="ui-template">
+
+        <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S.id %>" data-val="<%= S.val %>">
+            <%= S.val %>
+        </button>
+
+    </script>
+
     <!-- Player Template -->
     <script id="PlayerTemplate" class="player-template" type="text/template">
-        <td><%= S.pos %></td><td data-id="<%= S._id %>" data-type="playername"><a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a></td><td><%= S.team %></td><td><%= S.runs %></td><td><%= S.hits %></td><td><%= S.hr %></td><td><%= S.rbe %></td><td><%= S.sb %></td><td><%= S.total %></td><td data-id="<%= S._id%>" data-type="draftstatus"><a class="draft-status-cmd" href="#" data-id="<%= S._id%>" data-type="draftstatus"><%= S.draftStatus %></a></td><td data-id="<%= S._id%>"><a href="#" data-id="<%= S._id %>" class="delete-roster-player">(x)</a></td>
+        <td>
+            <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
+                <%= S.pos %>
+            </button>
+        </td>
+        <td data-id="<%= S._id %>" data-type="playername">
+            <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>
+        </td>
+        <td><%= S.team %></td>
+        <td><%= S.runs %></td>
+        <td><%= S.hits %></td>
+        <td><%= S.hr %></td>
+        <td><%= S.rbe %></td>
+        <td><%= S.sb %></td>
+        <td><%= S.total %></td>
+        <td data-id="<%= S._id%>" data-type="draftstatus">
+            <a class="draft-status-cmd" href="#" data-id="<%= S._id%>" data-type="draftstatus"><%= S.draftStatus %></a>
+        </td>
+        <td data-id="<%= S._id%>">
+            <a href="#" data-id="<%= S._id %>" class="delete-roster-player">(x)</a>
+        </td>
+
     </script>
 </div>

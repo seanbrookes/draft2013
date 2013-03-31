@@ -277,6 +277,9 @@ select#DraftPickRosterSelect{
     right:1px;
     bottom:1px;
 }
+.player-roster{
+    background-color:#ccc;
+}
 .player-protected{
     background-color:#439C2A;
     color:#fff;
@@ -300,6 +303,9 @@ select#DraftPickRosterSelect{
 }
 .chat-direction-toggle-label{
     margin-left:2em;
+}
+.delete-roster-player{
+    display:none;
 }
 /*
 

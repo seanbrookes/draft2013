@@ -25,17 +25,20 @@ module.exports = function(app){
     app.get('/pagereader/:name',pagereader.getPage);
     app.get('/draft', draft.getDraftModel);
     app.get('/drafttranscript', chat.getDraftTranscript);
+    app.get('/pendingaccounts',admin.getPendingAccountList);
+
     app.post('/createdraft', draft.createDraft);
     app.post('/createdraftlist', draft.createDraftList);
-    app.put('/pickroster', draft.updateDraftPickRoster);
-    app.put('/pickname', draft.updateDraftPickName);
-    app.put('/pickpos', draft.updateDraftPickPos);
-    app.put('/pickteam', draft.updateDraftPickTeam);
     app.post('/auth',user.postAuthenticate);
     app.post('/user',user.createUser);
-    app.get('/pendingaccounts',admin.getPendingAccountList);
-    app.put('/statusupdate', roster.updateDraftStatus);
-    app.put('/playerrosterupdate', roster.updatePlayerRoster);
     app.post('/deleterosterplayer', roster.deletePlayer);
     app.post('/postpicktoroster', draft.postPickToRoster);
+
+    app.put('/statusupdate', roster.updateDraftStatus);
+    app.put('/playerrosterupdate', roster.updatePlayerRoster);
+    app.put('/pickroster', draft.updateDraftPickRoster);
+    app.put('/pickname', draft.updateDraftPickName);
+    app.put('/rosterpos', roster.updateRosterPos);
+    app.put('/pickpos', draft.updateDraftPickPos);
+    app.put('/pickteam', draft.updateDraftPickTeam);
 }

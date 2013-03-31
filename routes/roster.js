@@ -15,6 +15,52 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({ filename: 'user.log' })
     ]
 });
+exports.updateRosterPos = function(req, res){
+    var playerId = req.param('playerId',null);
+    var rosterSlug = req.param('rosterSlug',null);
+    //   logger.info('draftPickId: ' + draftPickId);
+
+    var rosterPos = req.param('propertyVal',null);
+    logger.info('rosterPos: ' + rosterPos);
+    if (rosterPos && playerId){
+
+        Roster.find({'slug':rosterSlug},function(err,doc){
+            if(err){
+                logger.error(err);
+                return res.send(500,err);
+            }
+
+            for (var i = 0;i < doc[0].players.length;i++){
+                var player = doc[0].players[i];
+                if (player._id == playerId){
+                    player.pos = rosterPos;
+                    doc[0].save(function(err){
+                        if(err){
+                            logger.error('error update roster item: ' + playerId + ' : ' + err.message);
+                            return res.send(400,err.message);
+                        }
+                        var retObj = {};
+                        retObj.playerId = playerId;
+                        retObj.rosterPos = rosterPos;
+
+
+                        return res.send(200,retObj);
+                    });
+                    break;
+                }
+            }
+        });
+
+
+    }
+    else{
+        logger.error('updateRosterPos no pos supplied!!');
+        return res.send(400,'updateRosterPos no pos supplied!!')
+
+    }
+
+};
+
 exports.updateDraftStatus = function(req,res){
   var playerId = req.param('playerId',null);
     //logger.info('playerId: ' + playerId);

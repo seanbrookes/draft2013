@@ -89,7 +89,13 @@ define(
         *
         *
         * */
-        var baseMarkup = $(markup);
+
+
+
+
+
+
+         var baseMarkup = $(markup);
         $(anchorSelector).append(baseMarkup);
         /*
          * Draft Pick Item Model / Collection
@@ -127,6 +133,19 @@ define(
 
 
         //initRefreshTimer();
+        /*
+        *
+        *
+        *
+        *
+        *       INIT
+        *
+        *
+        *
+        *
+        *
+        *
+        * */
         function init(uuid){
             if (uuid){
                 //sf1.log('checking user id: '  + uuid);
@@ -177,7 +196,7 @@ define(
 
 
             setInterval(function() {
-                sf1.EventBus.trigger('roster.refreshDraftBoard');
+                //sf1.EventBus.trigger('roster.refreshDraftBoard');
             }, 500000);
 
 
@@ -192,20 +211,13 @@ define(
            // var markupOutput = '<tr><th>round</th><th>pick</th><th>roster</th><th>player</th><th>pos</th><th>team</th></tr>';
 
 
-            var testTemplate = $('#DraftPickTemplate').html();
-            var xyz = testTemplate;
+            //var testTemplate = $('#DraftPickTemplate').html();
+
 
 
             sf1.EventBus.trigger('roster.refreshDraftBoard');
 
 
-            // get the draft model
-
-
-
-//			var editor = ace.edit("editor");
-//			editor.setTheme("ace/theme/monokai");
-//			editor.getSession().setMode("ace/mode/javascript");
         }
         sf1.EventBus.bind('roster.refreshDraftBoard',function(){
             sf1.io.ajax({

@@ -109,6 +109,93 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
 
     }
+    sf1.EventBus.bind('roster.updateRosterPlayerPos', function(data, event){
+        var postObj = {};
+        postObj.playerId = $(event.target).data('id');;
+        postObj.propertyVal = $(event.target).val();;
+        postObj.rosterSlug = rosterSlug;
+
+        var endPoint = '/rosterpos';
+
+        sf1.io.ajax({
+            type:'PUT',
+            url:endPoint,
+            contentType: "application/json",
+            data:JSON.stringify(postObj),
+            success:function(response){
+                //toggleEditOff(response.playerId,response.rosterPos);
+
+
+                // get 'read' version  of the template i.e. the button
+                // get the parent element
+                // overwrite the contents of the parent element with read template
+                // init listeners
+                _.templateSettings.variable = 'S';
+                var type = 'pos';
+                // set the current value
+                var currentVal = response.rosterPos;
+                var playerId = response.playerId;
+                var currentEditElement = $('#RosterPickPosSelect');
+                var parentEl = $(currentEditElement).parent();
+                var editModel = {};
+                editModel.id = playerId;
+                editModel.roster = rosterSlug;
+                editModel.val = currentVal;
+
+                //var editControl;
+                var cmdTemplate = $('#RosterPosEditTriggerControlTemplate').html();
+                parentEl.html(_.template(cmdTemplate,editModel));
+
+                var btnControl = $("button[data-id='" + playerId + "'][data-type='pos']");
+                //editControl.val(currentVal).focus();
+                btnControl.click(function(event){
+                    // if (currentVal !== $(event.target).val()){
+                    sf1.EventBus.trigger('roster.editPlayerPosRequest', event);
+                    // }
+                });
+
+
+            },
+            error:function(response){
+                sf1.log(JSON.stringify(response));
+            }
+        });
+    });
+    sf1.EventBus.bind('roster.editPlayerPosRequest',function(data, event){
+
+        // get current value
+        // get markup for edit control
+        // replace existing control
+        // set the value of the control
+        // initialize event listeners
+        _.templateSettings.variable = 'S';
+        var type = $(event.target).data('type');
+        // set the current value
+        var currentVal = $(event.target).data('val');
+        var playerId = $(event.target).data('id');
+        var parentEl = $(event.target).parent();
+        var editModel = {};
+        editModel.id = playerId;
+        editModel.roster = rosterSlug;
+        editModel.val = currentVal;
+        var editControl;
+        editControl = $('#RosterEditPosControlTemplate').html();
+        parentEl.html(_.template(editControl,editModel));
+        editControl = $("select[data-id='" + playerId + "'][data-type='pos']");
+        editControl.val(currentVal).focus();
+        editControl.on('blur',function(event){
+            // if (currentVal !== $(event.target).val()){
+            sf1.EventBus.trigger('roster.updateRosterPlayerPos', event);
+            // }
+        });
+        editControl.on('change',function(event){
+            //  if (currentVal !== $(event.target).val()){
+            sf1.EventBus.trigger('roster.updateRosterPlayerPos', event);
+            //  }
+        });
+
+    });
+
     sf1.EventBus.bind('roster.playerModelUpdateRequest',function(){
         // update
         synchPlayerModel();
@@ -401,6 +488,11 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
             $('.roster-container .roster-inner').html(output);
             $('.roster-title').text(rosterName);
+
+            $('.btn-cmd-editpos').click(function(event){
+               sf1.EventBus.trigger('roster.editPlayerPosRequest',event);
+            });
+
             $('.draft-status-cmd').click(function(event){
                 event.preventDefault();
                // get
