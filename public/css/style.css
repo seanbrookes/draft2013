@@ -291,7 +291,7 @@ select#DraftPickRosterSelect{
     background-color:#ddd;
 
 }
-.player-prospect{
+.player-list .player-prospect{
     background-color:#316921;
     color:#fff;
 }
@@ -306,6 +306,16 @@ select#DraftPickRosterSelect{
 }
 .delete-roster-player{
     display:none;
+}
+
+.pos-1B, .pos-3B, .pos-CF, .pos-LF, .pos-RP, .pos-SS{
+    background-color:#B8D4BD;
+}
+.pos-C, .pos-2B, .pos-C, .pos-DH, .pos-RF, .pos-SP{
+    background-color:#D5E6D8;
+}
+.ui-instrument-list{
+    visibility:hidden;
 }
 /*
 
