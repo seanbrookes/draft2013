@@ -60,7 +60,9 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         onAfterItemAdded: function(item){
             // add class
             var dStatus = item.model.attributes.draftStatus;
+            var dPos = item.model.attributes.pos;
             $(item.el).addClass('player-' + dStatus);
+            $(item.el).addClass('pos-' + dPos);
         }
     });
 
