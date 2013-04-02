@@ -15,6 +15,7 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({ filename: 'user.log' })
     ]
 });
+
 exports.updateRosterPos = function(req, res){
     var playerId = req.param('playerId',null);
     var rosterSlug = req.param('rosterSlug',null);
@@ -95,11 +96,20 @@ exports.addRosterPlayer = function(req,res){
     var team = req.param('team',null);
     // player pos
     var pos = req.param('pos',null);
+    // player pos
+    var draftStatus = req.param('draftStatus',null);
+    // player pos
+    var playerStatus = req.param('playerStatus',null);
+    // player pos
+    var posType = req.param('posType',null);
 
     var newPlayerObj = {};
     newPlayerObj.name = name;
     newPlayerObj.team = team;
     newPlayerObj.pos = pos;
+    newPlayerObj.draftStatus = draftStatus;
+    newPlayerObj.playerStatus = playerStatus;
+    newPlayerObj.posType = posType;
 
     var newPlayer = new Player(newPlayerObj);
 

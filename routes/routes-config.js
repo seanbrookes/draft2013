@@ -33,6 +33,7 @@ module.exports = function(app){
     app.post('/user',user.createUser);
     app.post('/deleterosterplayer', roster.deletePlayer);
     app.post('/postpicktoroster', draft.postPickToRoster);
+    app.post('/rosterplayer', roster.addRosterPlayer);
 
     app.put('/statusupdate', roster.updateDraftStatus);
     app.put('/playerrosterupdate', roster.updatePlayerRoster);
@@ -41,4 +42,5 @@ module.exports = function(app){
     app.put('/rosterpos', roster.updateRosterPos);
     app.put('/pickpos', draft.updateDraftPickPos);
     app.put('/pickteam', draft.updateDraftPickTeam);
-}
+
+};

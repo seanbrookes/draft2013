@@ -32,6 +32,9 @@ define(
 			var templateMarkup = template( templateData );
 			$('.main-content-wrapper').html(templateMarkup);
 
+            var rosterPlayerForm = $('#AdminModuleAddNewRosterPlayerTemplate').html();
+            $('.admin-module-container').append(rosterPlayerForm);
+
 			$('.btn-list-pending').click(function(event){
 				sf1.log('list accounts');
 				$.ajax({
@@ -107,11 +110,48 @@ define(
 
                 });
             });
+// this is too generic - is it necessary?
+//            $('.btn-cmd-link').click(function(event){
+//                var id = $(event.target).data('id');
+//                sf1.log('command button clicked: ' + id);
+//                document.location.href = '#draft/' + id;
+//            });
 
-            $('.btn-cmd-link').click(function(event){
-                var id = $(event.target).data('id');
-                sf1.log('command button clicked: ' + id);
-                document.location.href = '#draft/' + id;
+            $('.btn-submit-rosterplayer').unbind().click(function(event){
+                event.preventDefault();
+                var newPlayerObj = {};
+               // get form elements
+                newPlayerObj.roster = $('#RosterSelect').val();
+                newPlayerObj.name = $('#PlayerNameInput').val();
+                newPlayerObj.pos = $('#PosSelect').val();
+                newPlayerObj.team = $('#TeamSelect').val();
+                newPlayerObj.draftStatus = $('#DraftStatusSelect').val();
+                newPlayerObj.playerStatus = $('#PlayerStatusSelect').val();
+                newPlayerObj.posType = $('#PosTypeSelect').val();
+
+                if (newPlayerObj.roster && newPlayerObj.name && newPlayerObj.pos
+                    && newPlayerObj.team && newPlayerObj.draftStatus && newPlayerObj.playerStatus
+                    && newPlayerObj.posType){
+                    sf1.io.ajax({
+                        type:'POST',
+                        url:'rosterplayer',
+                        data:newPlayerObj,
+                        success:function(response){
+                            // toast successs
+                            sf1.log('successful add new player');
+                            $('#PlayerNameInput').val('');
+                        },
+                        error:function(response){
+                            sf1.log('error creating player');
+                        }
+                    })
+                }
+
+
+                // build post object
+                // execute ajax
+                // handle response
+
             });
 
 		}

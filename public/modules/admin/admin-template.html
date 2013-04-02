@@ -1,9 +1,95 @@
 
 <div class="admin-module">
 
+    <script type="text/template" id="AdminModuleAddNewRosterPlayerTemplate">
+
+        <form id="FormAdminRosterPlayer">
+            <fieldset>
+            <legend>Add Roster Player</legend>
+                <div class="form-field">
+                    <!-- roster -->
+                    <select id="RosterSelect" class="roster-select">
+                        <option value="bashers">bashers</option>
+                        <option value="hooters">hooters</option>
+                        <option value="mashers">mashers</option>
+                        <option value="rallycaps">rallycaps</option>
+                        <option value="stallions">stallions</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <!-- player name -->
+                    <input type="text" id="PlayerNameInput" class="input-player-name" value="">
+                </div>
+                <div class="form-field">
+                    <!-- pos -->
+                    <select id="PosSelect" class="select-pos pick-property-edit" data-id="<%= S.id %>" data-type="pos">
+                        <option value="C">C</option>
+                        <option value="1B">1B</option>
+                        <option value="2B">2B</option>
+                        <option value="3B">3B</option>
+                        <option value="SS">SS</option>
+                        <option value="LF">LF</option>
+                        <option value="CF">CF</option>
+                        <option value="RF">RF</option>
+                        <option value="DH">DH</option>
+                        <option value="SP">SP</option>
+                        <option value="RP">RP</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <!-- team -->
+                    <select class="select-team pick-property-edit" id="TeamSelect" data-id="<%= S.id %>" data-type="team">
+                        <option value="BAL">BAL</option>
+                        <option value="BOS">BOS</option>
+                        <option value="CHA">CHA</option>
+                        <option value="CLE">CLE</option>
+                        <option value="DET">DET</option>
+                        <option value="HOU">HOU</option>
+                        <option value="KC">KC</option>
+                        <option value="LAA">LAA</option>
+                        <option value="MIN">MIN</option>
+                        <option value="NYY">NYY</option>
+                        <option value="OAK">OAK</option>
+                        <option value="SEA">SEA</option>
+                        <option value="TB">TB</option>
+                        <option value="TEX">TEX</option>
+                        <option value="TOR">TOR</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <select id="DraftStatusSelect" class="status-select">
+                        <option value="bubble">bubble</option>
+                        <option value="dropped">dropped</option>
+                        <option value="prospect">prospect</option>
+                        <option value="protected">protected</option>
+                        <option value="roster">roster</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <select id="PlayerStatusSelect" class="status-select">
+                        <option value="dl">dl</option>
+                        <option value="nl">nl</option>
+                        <option value="prospect">prospect</option>
+                        <option value="regular">regular</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <select id="PosTypeSelect" class="status-select">
+                        <option value="hitter">hitter</option>
+                        <option value="pitcher">pitcher</option>
+                    </select>
+                </div>
+            </fieldset>
+            <div class="button-group">
+                <button class="btn-submit btn-submit-rosterplayer">Save</button>
+            </div>
+        </form>
+
+    </script>
+
     <!-- Templates -->
     <script type="text/template" id="AdminModuleContainer" class="ui-template">
-        <div class="module-content-container ui-container">
+        <div class="module-content-container ui-container admin-module-container">
             <h1>Admin View</h1>
             <!--<a href="#" id="CreateDraft">Create Draft</a>-->
             <!--<a href="#" id="CreateDraftList">Create Draft Pick List</a>-->
