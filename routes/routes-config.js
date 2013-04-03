@@ -11,6 +11,7 @@ var admin = require('./admin');
 var roster = require('./roster');
 var draft = require('./draft');
 var chat = require('./chat');
+var stats = require('./stats');
 
 module.exports = function(app){
 
@@ -26,6 +27,8 @@ module.exports = function(app){
     app.get('/draft', draft.getDraftModel);
     app.get('/drafttranscript', chat.getDraftTranscript);
     app.get('/pendingaccounts',admin.getPendingAccountList);
+    app.get('/pullstats',stats.pullStats);
+    app.get('/rosterplayer',roster.getAllPlayers);
 
     app.post('/createdraft', draft.createDraft);
     app.post('/createdraftlist', draft.createDraftList);

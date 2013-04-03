@@ -15,7 +15,16 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({ filename: 'user.log' })
     ]
 });
+exports.getAllPlayers = function(req, res){
 
+    Roster.find(function(err,dox){
+       if(err){
+           logger.error(err);
+           return res.send(500,err);
+       }
+        return res.send(dox);
+    });
+};
 exports.updateRosterPos = function(req, res){
     var playerId = req.param('playerId',null);
     var rosterSlug = req.param('rosterSlug',null);

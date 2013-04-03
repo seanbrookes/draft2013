@@ -319,6 +319,9 @@ select#DraftPickRosterSelect{
 .ui-instrument-list{
     visibility:hidden;
 }
+.display-players-container{
+    float:left;
+}
 /*
 
     small screen

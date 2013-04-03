@@ -116,7 +116,101 @@ define(
 //                sf1.log('command button clicked: ' + id);
 //                document.location.href = '#draft/' + id;
 //            });
+            $('#BtnGetRosterPlayers').click(function(event){
+                sf1.io.ajax({
+                    type:'GET',
+                    url:'/rosterplayer',
+                    success:function(response){
+                        sf1.log('success pull players');
+                      //  var statObj = JSON.parse(response);
+                        var statObj = response;
 
+                        var masterArray = [];
+                        for (var i = 0;i < statObj.length;i++){
+                            masterArray = $.merge(masterArray,statObj[i].players);
+                        }
+
+//                        var totalRecords = statObj.stats_sortable_player.queryResults.totalSize;
+//                        var recordsPerPage = statObj.stats_sortable_player.queryResults.recPP;
+//                        var pageCount = statObj.stats_sortable_player.queryResults.totalP;
+//                        var currentPage = statObj.stats_sortable_player.queryResults.recSP;
+//
+//                        var metaDataMarkup = '<p>Total Records:<span>' + totalRecords + '</span></p>';
+//                        metaDataMarkup += '<p>Records Per Page:<span>' + recordsPerPage + '</span></p>';
+//                        metaDataMarkup += '<p>Page Count:<span>' + pageCount + '</span></p>';
+//                        metaDataMarkup += '<p>Current Page:<span>' + currentPage + '</span></p>';
+
+                        var mainOutput = '<ul>';
+//                        var rows = statObj.stats_sortable_player.queryResults.row;
+                        masterArray.sort(comparePool);
+                        for (var j = 0;j < masterArray.length;j++){
+                            var row = masterArray[j];
+                            mainOutput += '<li>[' + (j + 1) + '][' + row._id + ']Player:  <span>' + row.name + '</span></li>'
+                        }
+                        mainOutput += '</ul>';
+
+                        //$('.display-players-container').html(metaDataMarkup);
+                        $('.display-players-container').append(mainOutput);
+                    },
+                    error:function(response){
+                        sf1.log('error pull stats: ' + response);
+                    }
+                })
+            });
+            function comparePool(a,b) {
+
+                if (a.name < b.name){
+                    return -1;
+                }
+                if (a.name > b.name){
+                    return 1;
+                }
+                return 0;
+            }
+            function compareMLBFirstName(a,b) {
+
+                if (a.name_display_first_last < b.name_display_first_last){
+                    return -1;
+                }
+                if (a.name_display_first_last > b.name_display_first_last){
+                    return 1;
+                }
+                return 0;
+            }
+            $('#BtnManualPullStatus').click(function(event){
+               sf1.io.ajax({
+                   type:'GET',
+                   url:'/pullstats',
+                   success:function(response){
+                       sf1.log('success pull stats');
+                       var statObj = JSON.parse(response);
+                       var totalRecords = statObj.stats_sortable_player.queryResults.totalSize;
+                       var recordsPerPage = statObj.stats_sortable_player.queryResults.recPP;
+                       var pageCount = statObj.stats_sortable_player.queryResults.totalP;
+                       var currentPage = statObj.stats_sortable_player.queryResults.recSP;
+
+                       var metaDataMarkup = '<p>Total Records:<span>' + totalRecords + '</span></p>';
+                       metaDataMarkup += '<p>Records Per Page:<span>' + recordsPerPage + '</span></p>';
+                       metaDataMarkup += '<p>Page Count:<span>' + pageCount + '</span></p>';
+                       metaDataMarkup += '<p>Current Page:<span>' + currentPage + '</span></p>';
+
+                       var mainOutput = '<ul>';
+                       var rows = statObj.stats_sortable_player.queryResults.row;
+                       rows.sort(compareMLBFirstName);
+                       for (var i = 0;i < rows.length;i++){
+                           var row = rows[i];
+                           mainOutput += '<li>[' + (i + 1) + '][' + row.player_id + ']Player Name:  <span>' + row.name_display_first_last + '</span></li>'
+                       }
+                       mainOutput += '</ul>';
+
+                       $('.player-synch-controls').append(metaDataMarkup);
+                       $('.display-stats-container').append(mainOutput);
+                   },
+                   error:function(response){
+                       sf1.log('error pull stats: ' + response);
+                   }
+               })
+            });
             $('.btn-submit-rosterplayer').unbind().click(function(event){
                 event.preventDefault();
                 var newPlayerObj = {};
