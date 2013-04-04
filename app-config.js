@@ -22,6 +22,7 @@ var config = {
         }
     },
     salt: '076ee61d63aa10a115ea872411e433bc',
+    socketio: true,
     cookieSecretString: 'a secret string 2013',
     localPort: 3008
 };

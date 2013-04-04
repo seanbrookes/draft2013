@@ -31,7 +31,7 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             ]);
             require(['draft', 'chat'], function (draftMod, chatMod) {
                 $('.main-content-wrapper').empty();
-                chatMod.init();
+               // chatMod.init();
                 draftMod.init();
 
             });
@@ -79,7 +79,7 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             $('.main-content-wrapper').empty();
             require(['../modules/roster/roster-module', 'chat'], function (module, chatMod) {
                 module.init(rosterId);
-                chatMod.init();
+               // chatMod.init();
             });
 
         },
@@ -91,7 +91,7 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             require(['draft', 'chat'], function (draftMod, chatMod) {
                 $('.main-content-wrapper').empty();
                 draftMod.init(userId);
-                chatMod.init();
+               // chatMod.init();
 
             });
         },

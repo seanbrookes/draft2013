@@ -22,6 +22,12 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({ filename: './logs/stats.log' })
     ]
 });
+/*
+*
+*
+* MLB Server Call
+*
+* */
 exports.pullStats = function(req, res){
 
     // batting stats from mlb

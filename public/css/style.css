@@ -81,8 +81,8 @@ ul{
 #TestButton{
     display:none;
 }
-#MainNavigation .nav-main-list .is-selected{
-    color:#005580;
+#MainNavigation .is-selected{
+    color:#0066aa;
     font-weight: bold;
 }
 .roster-title{
