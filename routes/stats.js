@@ -61,8 +61,8 @@ exports.pullStats = function(req, res){
         self.items = new Array();//I feel like I want to save my results in an array
         //Just a basic error check
         if(err && response.statusCode !== 200){
-            console.log('Request error.');
-            return res.send(500,err);
+            console.log('Request error: ' + JSON.stringify(err));
+            return res.send(500,'there was an error: ' +response.statusCode  + ' : ' + err);
         }
         logger.info(body);
        // logger.info(response);
