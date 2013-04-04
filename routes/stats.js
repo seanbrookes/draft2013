@@ -78,7 +78,7 @@ exports.pullStats = function(req, res){
         //logger.info(payload);
 
        // logger.info(response);
-        return res.send(200);
+        return res.send(payload);
         //Send the body param as the HTML code we will parse in jsdom
         //also tell jsdom to attach jQuery in the scripts and loaded from jQuery.com
 //        jsdom.env({
