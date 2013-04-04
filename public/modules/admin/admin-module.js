@@ -119,6 +119,14 @@ define(
 //                sf1.log('command button clicked: ' + id);
 //                document.location.href = '#draft/' + id;
 //            });
+            $('#BtnSaveRosterLink').click(function(event){
+                sf1.log('|');
+                sf1.log('| mlb: ' + currentMatchMLBId);
+                sf1.log('| roster: ' + currentMatchRoster);
+                sf1.log('| player: ' + currentMatchRosterPlayer);
+                sf1.log('|');
+
+            });
             $('#BtnGetRosterPlayers').click(function(event){
                 sf1.io.ajax({
                     type:'GET',
@@ -162,6 +170,11 @@ define(
 
                         //$('.display-players-container').html(metaDataMarkup);
                         $('.display-players-container').append(mainOutput);
+
+                        $('.roster-check').click(function(event){
+                            currentMatchRosterPlayer = $(event.target).data('id');
+                            currentMatchRoster = $(event.target).data('roster');
+                        });
                     },
                     error:function(response){
                         sf1.log('error pull stats: ' + response);
@@ -210,12 +223,17 @@ define(
                        rows.sort(compareMLBFirstName);
                        for (var i = 0;i < rows.length;i++){
                            var row = rows[i];
-                           mainOutput += '<li><input class="mlb-check" type="checkbox" data-id="' + row.player_id + '">Player Name:  <span>' + row.name_display_first_last + '</span></li>'
+                           mainOutput += '<li><input class="mlb-check" type="checkbox" value="' + row.player_id + '" data-id="' + row.player_id + '">Player Name:  <span>' + row.name_display_first_last + '</span></li>'
                        }
                        mainOutput += '</ul>';
 
                        $('.player-synch-controls').append(metaDataMarkup);
                        $('.display-stats-container').append(mainOutput);
+
+
+                       $('.mlb-check').click(function(event){
+                           currentMatchMLBId = $(event.target).val();
+                       });
                    },
                    error:function(response){
                        sf1.log('error pull stats: ' + response);
