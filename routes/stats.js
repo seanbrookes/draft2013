@@ -66,7 +66,16 @@ exports.pullStats = function(req, res){
         }
 
         var payload = body;
-        logger.info(payload);
+        var statObj = JSON.parse(payload);
+        var totalRecords = statObj.stats_sortable_player.queryResults.totalSize;
+        var recordsPerPage = statObj.stats_sortable_player.queryResults.recPP;
+        var pageCount = statObj.stats_sortable_player.queryResults.totalP;
+        var currentPage = statObj.stats_sortable_player.queryResults.recSP;
+
+
+        logger.info('total: ' + totalRecords);
+
+        //logger.info(payload);
 
        // logger.info(response);
         return res.send(200);
