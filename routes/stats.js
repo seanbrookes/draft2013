@@ -19,7 +19,7 @@ var EventBus = new EE();
 var logger = new (winston.Logger)({
     transports: [
         new (winston.transports.Console)(),
-        new (winston.transports.File)({ filename: './logs/stats.log' })
+       // new (winston.transports.File)({ filename: './logs/stats.log' })
     ]
 });
 /*
