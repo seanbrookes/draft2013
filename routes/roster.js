@@ -25,6 +25,17 @@ exports.getAllPlayers = function(req, res){
         return res.send(dox);
     });
 };
+exports.deleteExtraHooters = function(req, res){
+    Roster.delete({'_id':'514ab683b1b47c0200000002'},function(err){
+
+        if (err){
+            logger.error('error deleting extra hooters: ' + err);
+            return res.send(500,err);
+        }
+        return res.send(200);
+
+    });
+}
 exports.updateRosterPos = function(req, res){
     var playerId = req.param('playerId',null);
     var rosterSlug = req.param('rosterSlug',null);

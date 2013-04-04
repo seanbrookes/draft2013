@@ -125,9 +125,17 @@ define(
                       //  var statObj = JSON.parse(response);
                         var statObj = response;
 
+                        var rosterArray = ['hooters','hooters','stallions','bashers','rallycaps','mashers'];
+
+
                         var masterArray = [];
                         for (var i = 0;i < statObj.length;i++){
-                            masterArray = $.merge(masterArray,statObj[i].players);
+                            var thisArray = statObj[i].players;
+                            for (var j = 0;j < thisArray.length;j++){
+                                var itemPlayer = thisArray[j];
+                                itemPlayer.roster = rosterArray[i];
+                            }
+                            masterArray = $.merge(masterArray,thisArray);
                         }
 
 //                        var totalRecords = statObj.stats_sortable_player.queryResults.totalSize;

@@ -11,6 +11,7 @@ var Schema = mongoose.Schema;
 var Player = require('./player-model');
 
 var PlayerSchema = new Schema({
+    mlbId : {type: String },
     name : {type: String, required: true },
     pos : {type: String, required: true },
     team: {type: String, required: true },

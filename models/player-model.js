@@ -10,6 +10,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var PlayerSchema = new Schema({
+    mlbId : {type: String },
     name : {type: String, required: true },
     pos : {type: String, required: true },
     team: {type: String, required: true },
