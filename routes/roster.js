@@ -26,7 +26,7 @@ exports.getAllPlayers = function(req, res){
     });
 };
 exports.deleteExtraHooters = function(req, res){
-    Roster.delete({'_id':'514ab683b1b47c0200000002'},function(err){
+    Roster.remove({'_id':'514ab683b1b47c0200000002'},function(err){
 
         if (err){
             logger.error('error deleting extra hooters: ' + err);

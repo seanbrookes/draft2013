@@ -219,6 +219,19 @@ define(
                    }
                })
             });
+            $('.btn-delete-hooters').click(function(event){
+                    sf1.io.ajax({
+                        type:'DELETE',
+                        url:'/deletehooters',
+                        success:function(response){
+                            sf1.log(response);
+                        },
+                        error:function(response){
+                            sf1.log(response);
+                        }
+                    })
+                }
+            );
             $('.btn-submit-rosterplayer').unbind().click(function(event){
                 event.preventDefault();
                 var newPlayerObj = {};
