@@ -17,6 +17,9 @@ define(
 		sf1.log('Admin module loaded ');
 
 		var anchorSelector = '#TemplateContainer';
+        var currentMatchRosterPlayer;
+        var currentMatchRoster;
+        var currentMatchMLBId;
 		_.templateSettings.variable = 'P';
 
 		function init(){
@@ -125,7 +128,7 @@ define(
                       //  var statObj = JSON.parse(response);
                         var statObj = response;
 
-                        var rosterArray = ['hooters','hooters','stallions','bashers','rallycaps','mashers'];
+                        var rosterArray = ['hooters','stallions','bashers','rallycaps','mashers'];
 
 
                         var masterArray = [];
@@ -153,7 +156,7 @@ define(
                         masterArray.sort(comparePool);
                         for (var j = 0;j < masterArray.length;j++){
                             var row = masterArray[j];
-                            mainOutput += '<li>[' + (j + 1) + '][' + row._id + ']Player:  <span>' + row.name + '</span></li>'
+                            mainOutput += '<li>[' + (j + 1) + '][' + row._id + ']Player:  <span>' + row.name + '</span><input type="checkbox" class="roster-check" data-id="' + row._id + '" data-roster="' + row.roster + '"></li>'
                         }
                         mainOutput += '</ul>';
 
@@ -207,7 +210,7 @@ define(
                        rows.sort(compareMLBFirstName);
                        for (var i = 0;i < rows.length;i++){
                            var row = rows[i];
-                           mainOutput += '<li>[' + (i + 1) + '][' + row.player_id + ']Player Name:  <span>' + row.name_display_first_last + '</span></li>'
+                           mainOutput += '<li><input class="mlb-check" type="checkbox" data-id="' + row.player_id + '">Player Name:  <span>' + row.name_display_first_last + '</span></li>'
                        }
                        mainOutput += '</ul>';
 
@@ -219,19 +222,7 @@ define(
                    }
                })
             });
-            $('.btn-delete-hooters').click(function(event){
-                    sf1.io.ajax({
-                        type:'DELETE',
-                        url:'/deletehooters',
-                        success:function(response){
-                            sf1.log(response);
-                        },
-                        error:function(response){
-                            sf1.log(response);
-                        }
-                    })
-                }
-            );
+
             $('.btn-submit-rosterplayer').unbind().click(function(event){
                 event.preventDefault();
                 var newPlayerObj = {};
