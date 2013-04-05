@@ -322,6 +322,9 @@ select#DraftPickRosterSelect{
 .display-players-container{
     float:left;
 }
+.associated{
+    background-color:#68B37A;
+}
 /*
 
     small screen

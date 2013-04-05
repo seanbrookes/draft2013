@@ -15,6 +15,50 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({ filename: 'user.log' })
     ]
 });
+exports.associateMLBId = function(req, res){
+  var playerId = req.param('playerId',null);
+  var roster = req.param('roster',null);
+  var mlbid = req.param('mlbid',null);
+    logger.info('update player:' + playerId + '  roseter: '+ roster + '  mlbid: ' + mlbid);
+  if (mlbid && roster && playerId){
+      Roster.find({'slug':roster},function(err,doc){
+          if(err){
+              logger.error(err);
+              return res.send(500,err);
+          }
+        logger.info('found roster');
+          logger.info('start loop: ' + doc[0].players.length);
+          for (var i = 0;i < doc[0].players.length;i++){
+              var player = doc[0].players[i];
+              logger.info('player: ' + player.name + '[' + player._id + '][' + playerId + ']');
+              if (player._id == playerId){
+                  player.mlbid = mlbid;
+                  logger.info('found roster player');
+                  doc[0].save(function(err){
+                      if(err){
+                          logger.error('error update roster mlbid: ' + playerId + ' : ' + err.message);
+                          return res.send(400,err.message);
+                      }
+                      logger.info('saved the doc!!!!!');
+                      var retObj = {};
+                      retObj.playerId = playerId;
+                      retObj.roster = roster;
+                      retObj.mlbid = mlbid;
+
+                      return res.send(200,retObj);
+
+                  });
+                  break;
+              }
+
+          }
+
+      });
+  }
+  else{
+      return res.send(400,'not enough parameters');
+  }
+};
 exports.getAllPlayers = function(req, res){
 
     Roster.find(function(err,dox){

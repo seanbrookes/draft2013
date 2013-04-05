@@ -45,6 +45,7 @@ module.exports = function(app){
     app.put('/rosterpos', roster.updateRosterPos);
     app.put('/pickpos', draft.updateDraftPickPos);
     app.put('/pickteam', draft.updateDraftPickTeam);
+    app.put('/associatemlbid', roster.associateMLBId);
 
 
 };

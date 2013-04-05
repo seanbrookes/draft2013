@@ -120,87 +120,39 @@ define(
 //                document.location.href = '#draft/' + id;
 //            });
             $('#BtnSaveRosterLink').click(function(event){
-                sf1.log('|');
-                sf1.log('| mlb: ' + currentMatchMLBId);
-                sf1.log('| roster: ' + currentMatchRoster);
-                sf1.log('| player: ' + currentMatchRosterPlayer);
-                sf1.log('|');
+                var udpateObj = {};
+
+                var assocRoster = $('#AssociateRosterSelect').val();
+
+                if (assocRoster){
+                    udpateObj.mlbid = currentMatchMLBId;
+                    udpateObj.roster = assocRoster;
+                    udpateObj.playerId = currentMatchRosterPlayer;
+
+                    sf1.io.ajax({
+                       type:'PUT',
+                       url:'/associatemlbid',
+                       data:udpateObj,
+                       success:function(response){
+                           sf1.log(response);
+                           // clear all checkboxes
+
+                           sf1.EventBus.trigger('admin.getRosterPlayersRequest');
+                       },
+                       error:function(response){
+                           sf1.log(response);
+                       }
+                    });
+                }
+                else{
+                    sf1.log('no roster supplied ');
+                }
 
             });
             $('#BtnGetRosterPlayers').click(function(event){
-                sf1.io.ajax({
-                    type:'GET',
-                    url:'/rosterplayer',
-                    success:function(response){
-                        sf1.log('success pull players');
-                      //  var statObj = JSON.parse(response);
-                        var statObj = response;
+                sf1.EventBus.trigger('admin.getRosterPlayersRequest');
 
-                        var rosterArray = ['hooters','stallions','bashers','rallycaps','mashers'];
-
-
-                        var masterArray = [];
-                        for (var i = 0;i < statObj.length;i++){
-                            var thisArray = statObj[i].players;
-                            for (var j = 0;j < thisArray.length;j++){
-                                var itemPlayer = thisArray[j];
-                                itemPlayer.roster = rosterArray[i];
-                            }
-                            masterArray = $.merge(masterArray,thisArray);
-                        }
-
-//                        var totalRecords = statObj.stats_sortable_player.queryResults.totalSize;
-//                        var recordsPerPage = statObj.stats_sortable_player.queryResults.recPP;
-//                        var pageCount = statObj.stats_sortable_player.queryResults.totalP;
-//                        var currentPage = statObj.stats_sortable_player.queryResults.recSP;
-//
-//                        var metaDataMarkup = '<p>Total Records:<span>' + totalRecords + '</span></p>';
-//                        metaDataMarkup += '<p>Records Per Page:<span>' + recordsPerPage + '</span></p>';
-//                        metaDataMarkup += '<p>Page Count:<span>' + pageCount + '</span></p>';
-//                        metaDataMarkup += '<p>Current Page:<span>' + currentPage + '</span></p>';
-
-                        var mainOutput = '<ul>';
-//                        var rows = statObj.stats_sortable_player.queryResults.row;
-                        masterArray.sort(comparePool);
-                        for (var j = 0;j < masterArray.length;j++){
-                            var row = masterArray[j];
-                            mainOutput += '<li>[' + (j + 1) + '][' + row._id + ']Player:  <span>' + row.name + '</span><input type="checkbox" class="roster-check" data-id="' + row._id + '" data-roster="' + row.roster + '"></li>'
-                        }
-                        mainOutput += '</ul>';
-
-                        //$('.display-players-container').html(metaDataMarkup);
-                        $('.display-players-container').append(mainOutput);
-
-                        $('.roster-check').click(function(event){
-                            currentMatchRosterPlayer = $(event.target).data('id');
-                            currentMatchRoster = $(event.target).data('roster');
-                        });
-                    },
-                    error:function(response){
-                        sf1.log('error pull stats: ' + response);
-                    }
-                })
             });
-            function comparePool(a,b) {
-
-                if (a.name < b.name){
-                    return -1;
-                }
-                if (a.name > b.name){
-                    return 1;
-                }
-                return 0;
-            }
-            function compareMLBFirstName(a,b) {
-
-                if (a.name_display_first_last < b.name_display_first_last){
-                    return -1;
-                }
-                if (a.name_display_first_last > b.name_display_first_last){
-                    return 1;
-                }
-                return 0;
-            }
             $('#BtnManualPullStatus').click(function(event){
                sf1.io.ajax({
                    type:'GET',
@@ -227,8 +179,8 @@ define(
                        }
                        mainOutput += '</ul>';
 
-                       $('.player-synch-controls').append(metaDataMarkup);
-                       $('.display-stats-container').append(mainOutput);
+                       //$('.player-synch-controls').append(metaDataMarkup);
+                       $('.display-stats-container').html(mainOutput);
 
 
                        $('.mlb-check').click(function(event){
@@ -279,6 +231,95 @@ define(
             });
 
 		}
+        function comparePool(a,b) {
+
+            if (a.name < b.name){
+                return -1;
+            }
+            if (a.name > b.name){
+                return 1;
+            }
+            return 0;
+        }
+        function compareMLBFirstName(a,b) {
+
+            if (a.name_display_first_last < b.name_display_first_last){
+                return -1;
+            }
+            if (a.name_display_first_last > b.name_display_first_last){
+                return 1;
+            }
+            return 0;
+        }
+
+        sf1.EventBus.bind('admin.renderRosterPlayersComplete',function(event){
+            $(':checkbox:checked').prop('checked', false);
+            // clear the key vars
+            currentMatchRosterPlayer = null;
+            currentMatchRoster = null;
+            currentMatchMLBId = null;
+
+        });
+        sf1.EventBus.bind('admin.getRosterPlayersRequest',function(event){
+            sf1.io.ajax({
+                type:'GET',
+                url:'/rosterplayer',
+                success:function(response){
+                    sf1.log('success pull players');
+                    //  var statObj = JSON.parse(response);
+                    var statObj = response;
+
+                    var rosterArray = ['hooters','stallions','bashers','rallycaps','mashers'];
+
+
+                    var masterArray = [];
+                    for (var i = 0;i < statObj.length;i++){
+                        var thisArray = statObj[i].players;
+//                            for (var j = 0;j < thisArray.length;j++){
+//                                var itemPlayer = thisArray[j];
+//                                itemPlayer.roster = rosterArray[i];
+//                            }
+                        masterArray = $.merge(masterArray,thisArray);
+                    }
+
+//                        var totalRecords = statObj.stats_sortable_player.queryResults.totalSize;
+//                        var recordsPerPage = statObj.stats_sortable_player.queryResults.recPP;
+//                        var pageCount = statObj.stats_sortable_player.queryResults.totalP;
+//                        var currentPage = statObj.stats_sortable_player.queryResults.recSP;
+//
+//                        var metaDataMarkup = '<p>Total Records:<span>' + totalRecords + '</span></p>';
+//                        metaDataMarkup += '<p>Records Per Page:<span>' + recordsPerPage + '</span></p>';
+//                        metaDataMarkup += '<p>Page Count:<span>' + pageCount + '</span></p>';
+//                        metaDataMarkup += '<p>Current Page:<span>' + currentPage + '</span></p>';
+
+                    var mainOutput = '<ul>';
+//                        var rows = statObj.stats_sortable_player.queryResults.row;
+                    masterArray.sort(comparePool);
+                    for (var j = 0;j < masterArray.length;j++){
+                        var row = masterArray[j];
+                        mainOutput += '<li>[' + (j + 1) + '][' + row._id + ']Player:  <span>' + row.name + '</span><input type="checkbox" class="roster-check" data-mlbid="' + row.mlbid + '" data-id="' + row._id + '" data-roster="' + row.roster + '"></li>'
+                    }
+                    mainOutput += '</ul>';
+
+                    //$('.display-players-container').html(metaDataMarkup);
+                    $('.display-players-container').html(mainOutput);
+
+                    $('.roster-check').click(function(event){
+                        currentMatchRosterPlayer = $(event.target).data('id');
+                        currentMatchRoster = $(event.target).data('roster');
+                    });
+                    $('.roster-check').not('[data-mlbid=\'undefined\']').attr('disabled','disabled').parent().addClass('associated');
+
+
+                    sf1.EventBus.trigger('admin.renderRosterPlayersComplete');
+
+
+                },
+                error:function(response){
+                    sf1.log('error pull stats: ' + response);
+                }
+            });
+        });
 		return {
 			init:init
 		};
