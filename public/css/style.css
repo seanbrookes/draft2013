@@ -321,6 +321,13 @@ select#DraftPickRosterSelect{
 }
 .display-players-container{
     float:left;
+    height:400px;
+    overflow:scroll;
+}
+.display-stats-container{
+    height:400px;
+    width:370px;
+    overflow:scroll;
 }
 .associated{
     background-color:#68B37A;
