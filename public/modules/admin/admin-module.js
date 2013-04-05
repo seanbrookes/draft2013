@@ -153,10 +153,49 @@ define(
                 sf1.EventBus.trigger('admin.getRosterPlayersRequest');
 
             });
-            $('#BtnManualPullStatus').click(function(event){
+            $('#BtnPullPitcherStats').click(function(event){
+                sf1.io.ajax({
+                    type:'GET',
+                    url:'/pullstats/pitchers',
+                    success:function(response){
+                        sf1.log('success pull stats');
+                        var statObj = JSON.parse(response);
+                        var totalRecords = statObj.stats_sortable_player.queryResults.totalSize;
+                        var recordsPerPage = statObj.stats_sortable_player.queryResults.recPP;
+                        var pageCount = statObj.stats_sortable_player.queryResults.totalP;
+                        var currentPage = statObj.stats_sortable_player.queryResults.recSP;
+
+                        var metaDataMarkup = '<p>Total Records:<span>' + totalRecords + '</span></p>';
+                        metaDataMarkup += '<p>Records Per Page:<span>' + recordsPerPage + '</span></p>';
+                        metaDataMarkup += '<p>Page Count:<span>' + pageCount + '</span></p>';
+                        metaDataMarkup += '<p>Current Page:<span>' + currentPage + '</span></p>';
+
+                        var mainOutput = '<ul>';
+                        var rows = statObj.stats_sortable_player.queryResults.row;
+                        rows.sort(compareMLBFirstName);
+                        for (var i = 0;i < rows.length;i++){
+                            var row = rows[i];
+                            mainOutput += '<li><input class="mlb-check" type="checkbox" value="' + row.player_id + '" data-id="' + row.player_id + '">Player Name:  <span>' + row.name_display_first_last + '</span></li>'
+                        }
+                        mainOutput += '</ul>';
+
+                        //$('.player-synch-controls').append(metaDataMarkup);
+                        $('.display-stats-container').html(mainOutput);
+
+
+                        $('.mlb-check').click(function(event){
+                            currentMatchMLBId = $(event.target).val();
+                        });
+                    },
+                    error:function(response){
+                        sf1.log('error pull stats: ' + response);
+                    }
+                })
+            });
+            $('#BtnPullBatterStats').click(function(event){
                sf1.io.ajax({
                    type:'GET',
-                   url:'/pullstats',
+                   url:'/pullstats/batters',
                    success:function(response){
                        sf1.log('success pull stats');
                        var statObj = JSON.parse(response);

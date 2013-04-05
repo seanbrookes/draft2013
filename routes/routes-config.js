@@ -27,7 +27,7 @@ module.exports = function(app){
     app.get('/draft', draft.getDraftModel);
     app.get('/drafttranscript', chat.getDraftTranscript);
     app.get('/pendingaccounts',admin.getPendingAccountList);
-    app.get('/pullstats',stats.pullStats);
+    app.get('/pullstats/:type',stats.pullStats);
     app.get('/rosterplayer',roster.getAllPlayers);
 
     app.post('/createdraft', draft.createDraft);
