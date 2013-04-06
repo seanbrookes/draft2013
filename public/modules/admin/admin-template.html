@@ -102,31 +102,86 @@
             <h1>Admin View</h1>
             <!--<a href="#" id="CreateDraft">Create Draft</a>-->
             <!--<a href="#" id="CreateDraftList">Create Draft Pick List</a>-->
-            <button id="BtnInitRosterScoresLink">Zero Rosters</button>
-            <button id="BtnSaveRosterLink">Save Association</button>
-            <!-- roster -->
-            <label for="AssociateRosterSelect">Roster</label>
-            <select id="AssociateRosterSelect" class="roster-select">
-                <option value="bashers">bashers</option>
-                <option value="hooters">hooters</option>
-                <option value="mashers">mashers</option>
-                <option value="rallycaps">rallycaps</option>
-                <option value="stallions">stallions</option>
-            </select>
+
+
+            <!-- main body of the view -->
+            <div class="row">
+
+                <div class="quarter">
+                    <ul>
+                        <li>
+                            <button id="BtnInitRosterScoresLink" disabled="disabled">Zero Rosters</button>
+                        </li>
+                        <li>
+                            <button id="BtnSaveRosterLink">Save MLB Association</button>
+                        </li>
+                        <li>
+
+                            <!-- roster -->
+                            <label for="AssociateRosterSelect">Roster</label>
+                            <select id="AssociateRosterSelect" class="roster-select">
+                                <option value="bashers">bashers</option>
+                                <option value="hooters">hooters</option>
+                                <option value="mashers">mashers</option>
+                                <option value="rallycaps">rallycaps</option>
+                                <option value="stallions">stallions</option>
+                            </select>
+                        </li>
+                        <li>
+                            <button id="BtnGetRosterPlayers">Get Players</button>
+                        </li>
+                        <li>
+
+                            <button id="BtnPullBatterStats">Pull Batter Stats</button>
+                        </li>
+                        <li>
+                            <button id="BtnPullPitcherStats">Pull Pitcher Stats</button>
+                        </li>
+                        <li>
+                            <button id="ProcessCurrentBatterStats">Process Batter Stats</button>
+                            <button id="ProcessCurrentPitcherStats">Process Pitcher Stats</button>
+                            <button id="GetLatestStats">Get Latest Stats</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="quarter">
+                    <div>Pool Players</div>
+                    <div class="display-players-container"></div>
+
+                </div>
+
+                <div class="quarter">
+                    <div class="stat-players-title">MLB Players</div>
+                    <div class="display-stats-container"></div>
+
+                </div>
+                <div class="quarter">
+
+                    <div class="stat-service-stats">instrumentation</div>
+
+                </div>
+
+
+            </div>
+
+
+
+
+
             <div class="player-synch-controls">
-                <button id="BtnGetRosterPlayers">Get Players</button>
-                <button id="BtnPullBatterStats">Pull Batter Stats</button>
-                <button id="BtnPullPitcherStats">Pull Pitcher Stats</button>
+
             </div>
             <div>
-                <div class="display-players-container"></div>
-                <div class="display-stats-container"></div>
+
+
             </div>
             <ul class="list-admin-views ui-nav-list">
                 <li>
                     <a href="#" id="GetDraft">Get Draft</a>
                 </li>
                 <li>
+                    <label>login as:</label>
                     <ul class="list-login-as ui-nav-list">
                         <li>
                             <button class="btn-cmd-link" data-id="514bd7499388c80200000042">Sean</button>

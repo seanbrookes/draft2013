@@ -14,7 +14,7 @@ var PlayerSchema = new Schema({
     name : {type: String, required: true },
     pos : {type: String, required: true },
     team: {type: String, required: true },
-    posType: {type: String, required: true}, // batter, starter, closer
+    posType: {type: String, required: true}, // batter, pitcher
     draftStatus: {type: String, required: true}, // protected, bubble, dropped
     playerStatus: {type: String, required: true}, // nl, dl, prospect, regular
     runs: {type: Number},

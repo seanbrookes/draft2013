@@ -29,6 +29,7 @@ module.exports = function(app){
     app.get('/pendingaccounts',admin.getPendingAccountList);
     app.get('/pullstats/:type',stats.pullStats);
     app.get('/rosterplayer',roster.getAllPlayers);
+    app.get('/getlateststats',stats.getLatestStats);
 
     app.post('/createdraft', draft.createDraft);
     app.post('/createdraftlist', draft.createDraftList);
@@ -37,6 +38,7 @@ module.exports = function(app){
     app.post('/deleterosterplayer', roster.deletePlayer);
     app.post('/postpicktoroster', draft.postPickToRoster);
     app.post('/rosterplayer', roster.addRosterPlayer);
+    app.post('/playerstats', stats.postPlayerStats);
 
     app.put('/statusupdate', roster.updateDraftStatus);
     app.put('/playerrosterupdate', roster.updatePlayerRoster);

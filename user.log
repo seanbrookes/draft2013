@@ -275,3 +275,4 @@
 {"level":"info","message":"update player:514bc7e862faf2c00d000018  roseter: bashers  mlbid: 452252","timestamp":"2013-04-05T04:38:37.654Z"}
 {"level":"info","message":"update player:514bc7e862faf2c00d00001a  roseter: hooters  mlbid: 282332","timestamp":"2013-04-05T06:44:21.000Z"}
 {"level":"error","message":{"message":"Cast to date failed for value \"function now() { [native code] }\"","name":"CastError","type":"date"},"timestamp":"2013-04-06T05:17:15.886Z"}
+{"level":"info","message":"update player:514bc83062faf2c00d00007c  roseter: bashers  mlbid: 434378","timestamp":"2013-04-06T15:04:12.786Z"}

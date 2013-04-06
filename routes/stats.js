@@ -8,7 +8,9 @@
  *
  * http://content.usatoday.com/sportsdata/baseball/mlb/statistics
  */
-winston = require('winston');
+var BatterStat = require('../models/batterstats-model');
+var PitcherStat = require('../models/pitcherstats-model');
+var winston = require('winston');
 
 var jsdom = require('jsdom')
     , request = require('request')
@@ -22,7 +24,14 @@ var logger = new (winston.Logger)({
        // new (winston.transports.File)({ filename: './logs/stats.log' })
     ]
 });
-
+exports.getLatestStats = function(req, res){
+    PitcherStat.find({},function(err,dox){
+       if(err){
+           return res.send(500,'error getting latest stats: ' + err.message);
+       }
+        return res.send(dox);
+    });
+};
 var updateBatters = function(){
 
     // get the URL
@@ -40,6 +49,61 @@ var updateBatters = function(){
 var updatePitchers = function(){
 
 };
+// post player stats
+exports.postPlayerStats = function(req,res){
+    // is it a pitcher or batter
+    var playerType = req.param('posType',null);
+    var stats;
+    try{
+        stats = req.param('stats',null);
+    }
+    catch(e){
+        stats = null;
+        return res.send(500, 'error parsing stats: ' + e.message);
+    }
+    logger.info('postPlayerStats: ' + playerType);
+
+    if (playerType && stats){
+
+
+
+
+        var dbStatObj;
+        if (playerType === 'batter'){
+            dbStatObj = new BatterStat(stats);
+            dbStatObj.lastUpdate = Date.now();
+            dbStatObj.save(function(err){
+               if (err){
+                   logger.error('error saving batter stat: ' + e.message);
+                   return res.send(500,'error saving batter stat: ' + e.message);
+               }
+               return res.send(200,'stats inserted successfully');
+            });
+        }
+        else if(playerType === 'pitcher'){
+            dbStatObj = new PitcherStat(stats);
+            dbStatObj.lastUpdate = Date.now();
+            dbStatObj.save(function(err){
+                if (err){
+                    logger.error('error saving pitcher stat: ' + e.message);
+                    return res.send(500,'error saving pitcher stat: ' + e.message);
+                }
+                return res.send(200,'stats inserted successfully');
+            });
+        }
+        else{
+            return res.send(400, 'bad posType: ' + playerType);
+        }
+    }
+    else{
+        logger.warn('postPlayerStats problem: no player type and-or stats');
+        return res.send(400);
+    }
+    // set the date
+    // save document
+
+};
+
 
 
 /*
@@ -54,9 +118,9 @@ exports.pullStats = function(req, res){
     //var reqUrl = 'http://mlb.mlb.com/stats/sortable.jsp?c_id=tex#game_type=R&season=2013&league_code=AL&split=&playerType=ALL&sectionType=sp&statType=hitting&elem=%5Bobject+Object%5D&tab_level=child&click_text=Sortable+Player+hitting&season_type=ANY&page=1&ts=1364832580073&team_id=';
    // var reqUrl = 'http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order=desc&sort_column=avg&stat_type=hitting&page_type=SortablePlayer&game_type=R&player_pool=ALL&season_type=ANY&league_code=AL&sport_code=mlb&results=1000&recSP=1&recPP=50';
 
-    var pitchers = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='asc'&sort_column='era'&stat_type=pitching&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&position='1'&recSP=1&recPP=1100";
+    var pitchers = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='asc'&sort_column='era'&stat_type=pitching&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&position='1'&recSP=1&recPP=900";
 
-    var batters = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=1&recPP=1100";
+    var batters = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=1&recPP=900";
     var reqUrl = batters;
     var page1 = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=1&recPP=50";
     var page2 = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=2&recPP=50";
@@ -94,16 +158,19 @@ exports.pullStats = function(req, res){
             console.log('Request error: ' + JSON.stringify(err));
             return res.send(500,'there was an error: ' +response.statusCode  + ' : ' + err);
         }
+        var payload = {};
+        payload.data = body;
+        payload.metadata = {};
 
-        var payload = body;
-        var statObj = JSON.parse(payload);
-        var totalRecords = statObj.stats_sortable_player.queryResults.totalSize;
-        var recordsPerPage = statObj.stats_sortable_player.queryResults.recPP;
-        var pageCount = statObj.stats_sortable_player.queryResults.totalP;
-        var currentPage = statObj.stats_sortable_player.queryResults.recSP;
+        var statObj = JSON.parse(payload.data);
+
+        payload.metadata.totalRecords = statObj.stats_sortable_player.queryResults.totalSize;
+        payload.metadata.recordsPerPage = statObj.stats_sortable_player.queryResults.recPP;
+        payload.metadata.pageCount = statObj.stats_sortable_player.queryResults.totalP;
+        payload.metadata.currentPage = statObj.stats_sortable_player.queryResults.recSP;
 
 
-        logger.info('total: ' + totalRecords);
+        logger.info('total: ' + payload.metadata.totalRecords);
 
         //logger.info(payload);
 

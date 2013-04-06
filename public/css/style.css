@@ -332,6 +332,11 @@ select#DraftPickRosterSelect{
 .associated{
     background-color:#68B37A;
 }
+.stat-service-stats{
+    background-color: #ffffff;
+    border:1px solid #444;
+    border-radius:5px;
+}
 /*
 
     small screen
