@@ -298,6 +298,48 @@ define(
             currentMatchRoster = null;
             currentMatchMLBId = null;
 
+
+            /*
+            *
+            *
+            * process zero init scores
+            *
+            * */
+            $('#BtnInitRosterScoresLink').click(function(event){
+
+                // iterate over the roster array
+                // create put object
+                // put to the server
+                // let the responses come in
+
+                var udpateObj = {};
+
+                var roster = $('#AssociateRosterSelect').val();
+
+                if (roster){
+                    udpateObj.roster = roster;
+
+                    sf1.io.ajax({
+                        type:'PUT',
+                        url:'/initrostertotals',
+                        data:udpateObj,
+                        success:function(response){
+                            sf1.log(response);
+                            // clear all checkboxes
+
+                            //sf1.EventBus.trigger('admin.getRosterPlayersRequest');
+                        },
+                        error:function(response){
+                            sf1.log(response);
+                        }
+                    });
+                }
+                else{
+                    sf1.log('no roster supplied ');
+                }
+
+
+            });
         });
         sf1.EventBus.bind('admin.getRosterPlayersRequest',function(event){
             sf1.io.ajax({

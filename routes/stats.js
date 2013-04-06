@@ -22,6 +22,26 @@ var logger = new (winston.Logger)({
        // new (winston.transports.File)({ filename: './logs/stats.log' })
     ]
 });
+
+var updateBatters = function(){
+
+    // get the URL
+    // pull the stats block
+    // pull the pitchers from each of the rosters
+    // iterate over the roster players
+    // grab the mlbid
+    // find the relevant entry in the stats from mlb
+    // parse out the relevant fields
+    // get the date
+    // update the players stats with a date stamp
+
+
+};
+var updatePitchers = function(){
+
+};
+
+
 /*
 *
 *

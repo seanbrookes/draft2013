@@ -39,6 +39,8 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
     var PlayerCollection = Backbone.Collection.extend({
         model: PlayerModel
     });
+
+
     /*
      *
      * Marionette Views

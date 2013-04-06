@@ -28,6 +28,7 @@ var PlayerSchema = new Schema({
     ip: {type: Number},
     saves: {type: Number},
     total: {type: Number},
+    lastUpdate: {type: Date, default: Date.now },
     draftYear: {type: Number}
 
 

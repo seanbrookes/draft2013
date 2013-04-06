@@ -339,7 +339,47 @@ function compare(a,b) {
     }
     return 0;
 }
+exports.initRosterTotals = function(req, res){
+    // pull all the roster entries
+    var roster = req.param('roster',null);
+    // merge the arrays
+    Roster.find({'slug':roster},function(err, doc){
+        if(err){
+            logger.error(err);
+            return res.send(500,err);
+        }
+        //logger.info('doc: ' + doc[0]);
+        var collection = doc[0].players;
+        //logger.info('collection: ' + collection);
+        for (var i = 0;i < collection.length;i++){
 
+            collection[i].runs = 0;
+            collection[i].hits = 0;
+            collection[i].hr = 0;
+            collection[i].rbi = 0;
+            collection[i].sb = 0;
+            collection[i].wins = 0;
+            collection[i].losses = 0;
+            collection[i].k = 0;
+            collection[i].ip = 0;
+            collection[i].saves = 0;
+            collection[i].total = 0;
+            collection[i].lastUpdate = Date.now();
+        }
+        doc[0].players = collection;
+        doc[0].save(function(err){
+            if(err){
+                logger.error(err);
+                return res.send(500,err);
+            }
+            return res.send(200,'initialized');
+
+        });
+        //return res.send(200,'deleted');
+    });
+    // update them all to 0
+
+};
 
 exports.getRoster = function(req,res){
     var rosterSlug = req.params.name;
