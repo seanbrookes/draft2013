@@ -46,11 +46,26 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
      * Marionette Views
      *
      * */
-    var PlayerView = Backbone.Marionette.ItemView.extend({
-        template: '#PlayerTemplate',
-        tagName: 'tr'
+        var PlayerView = Backbone.Marionette.ItemView.extend({
+            template: '#PlayerTemplate',
+            tagName: 'tr'
 
-    });
+        });
+        var BatterItemView = Backbone.Marionette.ItemView.extend({
+            template: '#BatterTemplate',
+            tagName: 'tr'
+
+        });
+        var StarterItemView = Backbone.Marionette.ItemView.extend({
+            template: '#StarterTemplate',
+            tagName: 'tr'
+
+        });
+        var CloserItemView = Backbone.Marionette.ItemView.extend({
+            template: '#CloserTemplate',
+            tagName: 'tr'
+
+        });
 
     /*
      * RosterView
@@ -68,6 +83,57 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         }
     });
 
+        /*
+         * BatterView
+         *
+         * */
+        var BatterView = Backbone.Marionette.CompositeView.extend({
+            template: '#BatterTableViewTemplate',
+            itemView: BatterItemView,
+            itemViewContainer: 'tbody',
+            className: 'batter-list'
+//            onAfterItemAdded: function(item){
+//                // add class
+//                var dStatus = item.model.attributes.draftStatus;
+//                var dPos = item.model.attributes.pos;
+//                $(item.el).addClass('player-' + dStatus);
+//                $(item.el).addClass('pos-' + dPos);
+//            }
+        });
+        /*
+         * StarterView
+         *
+         * */
+        var StarterView = Backbone.Marionette.CompositeView.extend({
+            template: '#StarterTableViewTemplate',
+            className: 'starter-list',
+            itemViewContainer: 'tbody',
+            itemView: StarterItemView
+//            onAfterItemAdded: function(item){
+//                // add class
+//                var dStatus = item.model.attributes.draftStatus;
+//                var dPos = item.model.attributes.pos;
+//                $(item.el).addClass('player-' + dStatus);
+//                $(item.el).addClass('pos-' + dPos);
+//            }
+        });
+        /*
+         * CloserView
+         *
+         * */
+        var CloserView = Backbone.Marionette.CompositeView.extend({
+            template: '#CloserTableViewTemplate',
+            className: 'closter-list',
+            itemViewContainer: 'tbody',
+            itemView: CloserItemView
+//            onAfterItemAdded: function(item){
+//                // add class
+//                var dStatus = item.model.attributes.draftStatus;
+//                var dPos = item.model.attributes.pos;
+//                $(item.el).addClass('player-' + dStatus);
+//                $(item.el).addClass('pos-' + dPos);
+//            }
+        });
 
 
 
@@ -378,22 +444,6 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
         };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     var updateRosterDraftStatusModel = function(){
         protectedCount = 0;
         bubbleCount = 0;
@@ -479,18 +529,56 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 //        var roster = rosterslug;
 //        var name;
         if (rosterSlug){
-            var rosterShell = $('#RosterTemplate').html();
-            $('.main-content-wrapper').append(rosterShell);
+            //var rosterShell = $('#RosterTemplate').html();
+            //$('.main-content-wrapper').append(rosterShell);
             // convert raw model to BB collection
-            var playersCollection = new PlayerCollection(playersModel);
-            var rosterView = new RosterView({
-                itemView: PlayerView,
-                collection: playersCollection
+//            var playersCollection = new PlayerCollection(playersModel);
+//            var rosterView = new RosterView({
+//                itemView: PlayerView,
+//                collection: playersCollection
+//            });
+//            var output = rosterView.render().$el;
+
+            var battersArray = [];
+            var startersArray = [];
+            var closersArray = [];
+
+            for (var i = 0;i < playersModel.length;i++){
+                if (playersModel[i].pos === 'SP'){
+                    startersArray.push(playersModel[i]);
+                }
+                else if (playersModel[i].pos === 'RP'){
+                    closersArray.push(playersModel[i]);
+                }
+                else{
+                    battersArray.push(playersModel[i]);
+
+                }
+            }
+
+
+            var battersCollection = new PlayerCollection(battersArray);
+            var batterView = new BatterView({
+                collection: battersCollection
             });
-            var output = rosterView.render().$el;
+            var batterOutput = batterView.render().$el;
+
+            var startersCollection = new PlayerCollection(startersArray);
+            var starterView = new StarterView({
+                collection: startersCollection
+            });
+            var starterOutput = starterView.render().$el;
+            var closersCollection = new PlayerCollection(closersArray);
+            var closerView = new CloserView({
+                collection: closersCollection
+            });
+            var closerOutput = closerView.render().$el;
 
 
-            $('.roster-container .roster-inner').html(output);
+            $('.main-content-wrapper').html(batterOutput);
+            $('.main-content-wrapper').append(starterOutput);
+            $('.main-content-wrapper').append(closerOutput);
+
             $('.roster-title').text(rosterName);
 
             $('.btn-cmd-editpos').click(function(event){
