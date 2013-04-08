@@ -10,6 +10,7 @@
  */
 var BatterStat = require('../models/batterstats-model');
 var PitcherStat = require('../models/pitcherstats-model');
+var Roster = require('../models/roster-model');
 var winston = require('winston');
 
 var jsdom = require('jsdom')
@@ -31,6 +32,419 @@ exports.getLatestStats = function(req, res){
        }
         return res.send(dox);
     });
+};
+function processBatterStats(roster, statData){
+    var stats = statData;
+    var slug = roster;
+
+    BatterStat.find({player_id:stats.mlbid},function(err,dox){
+        if(err){
+            logger.error('error looking up latest pitcher stats: ' + err);
+            return res.send(500,err)
+        }
+
+        logger.info('|-------------------------------------------');
+        logger.info('|-------------------------------------------');
+        logger.info('| found BatterStat with mlbid: ' + stats.mlbid + ':' + stats.name);
+        logger.info('|-------------------------------------------');
+        logger.info('|-------------------------------------------');
+        logger.info('|  this means we found the matching mlbid record in the stats collection for player: ' + stats.name);
+        logger.info('|-------------------------------------------');
+        logger.info('|  length of current stat records: ' + dox.length);
+        logger.info('|-------------------------------------------');
+//        logger.info('|');
+//        logger.info('|');
+//        //logger.info('|' + dox[0]);
+//        logger.info('|');
+//        logger.info('|');
+//        logger.info('|-------------------------------------------');
+//        logger.info('|-------------------------------------------');
+//        logger.info('- end found BatterStat with mlbid');
+//        logger.info('|-------------------------------------------');
+//        logger.info('|-------------------------------------------');
+//        logger.info('|-------------------------------------------');
+//        logger.info('|-------------------------------------------');
+        // assume the first document is the latest
+        // - this is important so pay attention to the sort
+        if (dox[0]){
+            var latestStatRecord = dox[0];
+            stats.runs = latestStatRecord.r;
+            stats.hits = latestStatRecord.h;
+            stats.hr = latestStatRecord.hr;
+            stats.rbi = latestStatRecord.rbi;
+            stats.sb = latestStatRecord.sb;
+            stats.lastUpdate = Date.now();
+
+            logger.info('|------------------------');
+            logger.info('- set player stats: ' + stats.name);
+            logger.info('|currentPlayer.hits: ' + stats.hits);
+            logger.info('|currentPlayer.hr: ' + stats.hr);
+            logger.info('|currentPlayer.rbi: ' + stats.rbi);
+            logger.info('|currentPlayer.sb: ' + stats.sb);
+            logger.info('|currentPlayer.saves: ' + stats.saves);
+            logger.info('|------------------------');
+
+            Roster.update(
+                {slug:slug,'players.mlbid':stats.mlbid},
+                {$set:{'players.$.hits':stats.hits,
+                    'players.$.hr':stats.hr,
+                    'players.$.k':stats.k,
+                    'players.$.rbi':stats.rbi,
+                    'players.$.sb':stats.sb,
+                    'players.$.lastUpdate':Date.now()
+                }
+                },
+                function(err){
+                    if(err){
+                        logger.error('error updating roster: ' + err);
+                    }
+                    logger.info('|  --------------------------------------------');
+                    logger.info('|  -');
+                    logger.info('|  ');
+                    logger.info('|  ');
+                    logger.info('|  processBatterStats success: ' + stats.name);
+                    logger.info('|  ');
+                    logger.info('|  ');
+                    logger.info('|  -');
+                    logger.info('|  --------------------------------------------');
+                }
+            );
+            // logger.info('|-cur length : ' + currRosterPlayersLength);
+
+
+        }
+
+
+
+    });
+}
+function processPitcherStats(roster, statData){
+    var stats = statData;
+    var slug = roster;
+
+    PitcherStat.find({player_id:stats.mlbid},function(err,dox){
+
+        if(err){
+            logger.error('error looking up latest pitcher stats: ' + err);
+            return res.send(500,err)
+        }
+        logger.info('|-------------------------------------------');
+        logger.info('|-------------------------------------------');
+        logger.info('| found PitcherStat with mlbid: ' + stats.mlbid + ':' + stats.name);
+        logger.info('|-------------------------------------------');
+        logger.info('|-------------------------------------------');
+        logger.info('|  this means we found the matching mlbid record in the stats collection for player: ' + stats.name);
+        logger.info('|-------------------------------------------');
+        logger.info('|  length of current stat records: ' + dox.length);
+        logger.info('|-------------------------------------------');
+
+        // assume the first document is the latest
+        // - this is important so pay attention to the sort
+        if (dox[0]){
+            var latestStatRecord = dox[0];
+            stats.wins = latestStatRecord.w;
+            stats.losses = latestStatRecord.l;
+            stats.k = latestStatRecord.so;
+            stats.ip = latestStatRecord.w;
+            stats.saves = latestStatRecord.sv;
+            stats.lastUpdate = Date.now();
+            logger.info('|------------------------');
+            logger.info('- set player stats: ' + stats.name);
+            logger.info('|currentPlayer.wins: ' + stats.wins);
+            logger.info('|currentPlayer.losses: ' + stats.losses);
+            logger.info('|currentPlayer.k: ' + stats.k);
+            logger.info('|currentPlayer.ip: ' + stats.ip);
+            logger.info('|currentPlayer.saves: ' + stats.saves);
+            logger.info('|------------------------');
+
+            Roster.update(
+                {slug:slug,'players.mlbid':stats.mlbid},
+                {$set:{'players.$.wins':stats.wins,
+                        'players.$.losses':stats.losses,
+                        'players.$.k':stats.k,
+                        'players.$.ip':stats.ip,
+                        'players.$.saves':stats.saves,
+                        'players.$.lastUpdate':Date.now()
+                        }
+                },
+                function(err){
+                    if(err){
+                        logger.error('error updating roster: ' + err);
+                    }
+                    logger.info('|  --------------------------------------------');
+                    logger.info('|  -');
+                    logger.info('|  ');
+                    logger.info('|  ');
+                    logger.info('|  processPitcherStats success: ' + stats.name);
+                    logger.info('|  ');
+                    logger.info('|  ');
+                    logger.info('|  -');
+                    logger.info('|  --------------------------------------------');
+                }
+            );
+           // logger.info('|-cur length : ' + currRosterPlayersLength);
+
+
+        }
+
+    });
+}
+exports.processSingleRosterStats = function(req, res){
+    var roster = req.param('roster',null);
+    Roster.find({slug:roster},function(err, doc){
+        if (err){
+            logger.error('error finding roster: ' + err);
+            return res.send(500,err);
+        }
+         logger.info('process roster: ' + roster );
+
+        var currRoster = doc[0];
+        var currRosterPlayers = currRoster.players;
+        var currRosterPlayersLength = currRosterPlayers.length;
+       // logger.info('roster players count: ' + currRosterPlayersLength);
+        for (var j = 0;j < currRosterPlayersLength;j++){
+            var currentPlayer = currRosterPlayers[j];
+           // logger.info('inside roster players loop: ' + currentPlayer.name);
+            if ((currentPlayer.pos === 'SP') || (currentPlayer.pos === 'RP')){
+                // pitcher roster player
+                if (currentPlayer.mlbid && (currentPlayer.mlbid != 'undefined')){
+                    logger.info('- I am a picher: ' + currentPlayer.name);
+                    logger.info('- I have a mlbid: ' + currentPlayer.mlbid);
+                    // make sure the player has been mapped to a mlbid
+                    // look up the player in the latest stat entry
+                    var stats = currentPlayer;
+                    processPitcherStats(roster,stats);
+
+                }
+            }
+            else{
+                // batter roster player
+                // pitcher roster player
+                if (currentPlayer.mlbid && (currentPlayer.mlbid != 'undefined')){
+                    // make sure the player has been mapped to a mlbid
+                    // look up the player in the latest stat entry
+                    logger.info('- I am a batter: ' + currentPlayer.name);
+                    logger.info('- I have a mlbid: ' + currentPlayer.mlbid);
+                    var stats = currentPlayer;
+                    processBatterStats(roster,stats);
+                    
+
+                }
+            }
+//            if (j === currRosterPlayersLength){
+//                logger.info('|------------------------');
+//                logger.info('|Save this Roster Player set: ' + currRoster.slug);
+//                logger.info('|------------------------');
+//                // last player in the roster
+//                currRoster.save(function(err){
+//                    if(err){
+//                        logger.error('error saving roster players after round of stat update: ' + err);
+//                        return res.send(500,'error saving roster players after stats update: ' + err);
+//                    }
+//                    logger.info('|------------------------');
+//                    logger.info('|========================');
+//                    logger.info('|========================');
+//                    logger.info('|========================');
+//                    logger.info('|========================');
+//                    logger.info('|========================');
+//                    logger.info('|========================');
+//                    logger.info('|  Save the Roster success');
+//                    logger.info('|------------------------');
+//                    logger.info('save roster: ' + j);
+//                    return res.send(200,'stats update complete');
+//                });
+//            }
+        }
+
+
+
+
+    });
+
+
+
+}
+exports.processLatestStats = function(req, res){
+    var rosterArray = ['hooters','stallions','bashers','rallycaps','mashers'];
+
+    logger.info('entry processLatestStats ');
+
+    for (var i = 0;i  < rosterArray.length;i++){
+        Roster.find({slug:rosterArray[i]},function(err, doc){
+           if (err){
+               logger.error('error finding roster: ' + err);
+               return res.send(500,err);
+           }
+           // logger.info('inside roster loop: ' + rosterArray[i] + ' : '  + doc );
+
+            var currRoster = doc[0];
+            var currRosterPlayers = currRoster.players;
+            var currRosterPlayersLength = currRosterPlayers.length;
+            logger.info('roster players count: ' + currRosterPlayersLength);
+            for (var j = 0;j < currRosterPlayersLength;j++){
+                var currentPlayer = currRosterPlayers[j];
+                logger.info('inside roster players loop: ' + currentPlayer.name);
+                if ((currentPlayer.pos === 'SP') || (currentPlayer.pos === 'RP')){
+                    // pitcher roster player
+                    logger.info('- I am a picher: ' + currentPlayer.pos);
+                    if (currentPlayer.mlbid){
+                        logger.info('- I have a mlbid: ' + currentPlayer.mlbid);
+                        // make sure the player has been mapped to a mlbid
+                        // look up the player in the latest stat entry
+                        PitcherStat.find({player_id:currentPlayer.mlbid},function(err,dox){
+                            if(err){
+                                logger.error('error looking up latest pitcher stats: ' + err);
+                                return res.send(500,err)
+                            }
+                            logger.info('|-------------------------------------------');
+                            logger.info('|-------------------------------------------');
+                            logger.info('| found PitcherStat with mlbid');
+                            logger.info('|-------------------------------------------');
+                            logger.info('|-------------------------------------------');
+                            logger.info('|  this means we found the matching mlbid record in the stats collection for player: ' + currentPlayer.name);
+                            logger.info('|-------------------------------------------');
+                            logger.info('|  length of current stat records: ' + dox.length);
+                            logger.info('|-------------------------------------------');
+                            logger.info('|');
+                            logger.info('|');
+                            logger.info('|' + dox[0]);
+                            logger.info('|');
+                            logger.info('|');
+                            logger.info('|-------------------------------------------');
+                            logger.info('|-------------------------------------------');
+                            logger.info('- end found PitcherStat with mlbid');
+                            logger.info('|-------------------------------------------');
+                            logger.info('|-------------------------------------------');
+                            logger.info('|-------------------------------------------');
+                            logger.info('|-------------------------------------------');
+                            // assume the first document is the latest
+                            // - this is important so pay attention to the sort
+                            if (dox[0]){
+                                var latestStatRecord = dox[0];
+                                currentPlayer.wins = latestStatRecord.w;
+                                currentPlayer.losses = latestStatRecord.l;
+                                currentPlayer.k = latestStatRecord.so;
+                                currentPlayer.ip = latestStatRecord.w;
+                                currentPlayer.saves = latestStatRecord.sv;
+                                currentPlayer.lastUpdate = Date.now();
+                                logger.info('|------------------------');
+                                logger.info('- set player stats: ' + currentPlayer.name);
+                                logger.info('|currentPlayer.wins: ' + currentPlayer.wins);
+                                logger.info('|currentPlayer.losses: ' + currentPlayer.losses);
+                                logger.info('|currentPlayer.k: ' + currentPlayer.k);
+                                logger.info('|currentPlayer.ip: ' + currentPlayer.ip);
+                                logger.info('|currentPlayer.saves: ' + currentPlayer.saves);
+                                logger.info('|------------------------');
+
+                                logger.info('|- j ' + j + '  cur length : ' + currRosterPlayersLength);
+                                if (j === currRosterPlayersLength){
+                                    logger.info('|------------------------');
+                                    logger.info('|Save this Roster Player set: ' + currRoster.slug);
+                                    logger.info('|------------------------');
+                                    // last player in the roster
+                                    currRoster.save(function(err){
+                                        if(err){
+                                            logger.error('error saving roster players after round of stat update: ' + err);
+                                            return res.send(500,'error saving roster players after stats update: ' + err);
+                                        }
+                                        logger.info('|------------------------');
+                                        logger.info('|========================');
+                                        logger.info('|========================');
+                                        logger.info('|========================');
+                                        logger.info('|========================');
+                                        logger.info('|========================');
+                                        logger.info('|========================');
+                                        logger.info('|  Save the Roster success');
+                                        logger.info('|------------------------');
+                                        logger.info('save roster: ' + j);
+                                    });
+                                    if (i === 4){
+                                        return res.send(200,'stats update complete');
+                                    }
+                                }
+
+                            }
+
+                        });
+                    }
+                }
+                else{
+                    // batter roster player
+                    // pitcher roster player
+                    if (currentPlayer.mlbid){
+                        // make sure the player has been mapped to a mlbid
+                        // look up the player in the latest stat entry
+                        BatterStat.find({player_id:currentPlayer.mlbid},function(err,dox){
+                            if(err){
+                                logger.error('error looking up latest pitcher stats: ' + err);
+                                return res.send(500,err)
+                            }
+                            // assume the first document is the latest
+                            // - this is important so pay attention to the sort
+                            if (dox[0]){
+                                var latestStatRecord = dox[0];
+                                currentPlayer.runs = latestStatRecord.r;
+                                currentPlayer.hits = latestStatRecord.h;
+                                currentPlayer.hr = latestStatRecord.hr;
+                                currentPlayer.rbi = latestStatRecord.rbi;
+                                currentPlayer.sb = latestStatRecord.sv;
+                                currentPlayer.lastUpdate = Date.now();
+
+                                if (j === (currRosterPlayersLength - 1)){
+                                    // last player in the roster
+                                    currRoster.save(function(err){
+                                        if(err){
+                                            logger.error('error saving roster players after round of stat update: ' + err);
+                                            return res.send(500,'error saving roster players after stats update: ' + err);
+                                        }
+                                        logger.info('save roster: ' + j);
+                                    });
+                                    if (i === 4){
+                                        return res.send(200,'stats update complete');
+                                    }
+                                }
+
+                            }
+
+                        });
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        });
+
+    }
+
+    // iterate over each roster
+    // get the players list
+    // for each player
+    // determine pitcher or batter
+    // get latest stats for player
+    //PitcherStat.find({player_id:mlbid})
+    // assign relevant data points -including date
+    // save player
 };
 var updateBatters = function(){
 

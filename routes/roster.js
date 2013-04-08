@@ -366,7 +366,7 @@ exports.initRosterTotals = function(req, res){
             collection[i].total = 0;
             collection[i].lastUpdate = Date.now();
         }
-        doc[0].players = collection;
+        //doc[0].players = collection;
         doc[0].save(function(err){
             if(err){
                 logger.error(err);

@@ -30,6 +30,9 @@ module.exports = function(app){
     app.get('/pullstats/:type',stats.pullStats);
     app.get('/rosterplayer',roster.getAllPlayers);
     app.get('/getlateststats',stats.getLatestStats);
+    app.get('/processlateststats',stats.processLatestStats);
+    app.get('/singlerosterstats/:roster',stats.processSingleRosterStats);
+
 
     app.post('/createdraft', draft.createDraft);
     app.post('/createdraftlist', draft.createDraftList);

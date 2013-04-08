@@ -172,6 +172,33 @@ define(
                 }
 
             });
+
+            $('#BtnUpdateSingleRoster').click(function(event){
+                var urlToGet = '/singlerosterstats/' + $('#AssociateRosterSelect').val();
+                sf1.io.ajax({
+                    type:'GET',
+                    url:urlToGet,
+                    success:function(response){
+                        sf1.log('success: ' + response);
+                    },
+                    error:function(response){
+                        sf1.log('error: ' + response)
+                    }
+                });
+            });
+
+            $('#BtnUpdateRosters').click(function(event){
+               sf1.io.ajax({
+                  type:'GET',
+                  url:'/processlateststats',
+                   success:function(response){
+                       sf1.log('success: ' + response);
+                   },
+                   error:function(response){
+                       sf1.log('error: ' + response)
+                   }
+               });
+            });
             $('#BtnGetRosterPlayers').click(function(event){
                 sf1.EventBus.trigger('admin.getRosterPlayersRequest');
 
