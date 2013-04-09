@@ -525,6 +525,115 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         sf1.EventBus.trigger('roster.playerModelUpdateRequest');
 
     };
+    function compareTotals(a,b) {
+
+        if (a.total > b.total){
+            return -1;
+        }
+        if (a.total < b.total){
+            return 1;
+        }
+        return 0;
+    }
+    var totalBatterScore = function(player){
+
+        player.total = ((parseInt(player.runs)) + (parseInt(player.hits) / 2) + (parseInt(player.rbi)) + (parseInt(player.hr) * 2) + (parseInt(player.sb) / 2));
+
+        return player;
+
+    };
+    var totalAndSortStarters = function(originalArray){
+        for (var i = 0;i < originalArray.length;i++){
+            originalArray[i].total = ((originalArray[i].wins * 7) - (originalArray[i].losses * 4) + (originalArray[i].k / 2))
+        }
+        originalArray.sort(compareTotals);
+        return originalArray;
+    };
+    var totalAndSortBatters = function(originalArray){
+        var catchersArray = [];
+        var firstBArray = [];
+        var twoBArray = [];
+        var threeBArray = [];
+        var ssArray = [];
+        var lfArray = [];
+        var cfArray = [];
+        var rfArray = [];
+        var dhArray = [];
+
+        var returnArray = [];
+
+        for (var i = 0;i < originalArray.length;i++){
+            var player = originalArray[i];
+
+            player = totalBatterScore(player);
+            switch(player.pos){
+
+                case 'C':
+                    catchersArray.push(player);
+                    break;
+                case '1B':
+                    firstBArray.push(player);
+
+                    break;
+
+                case '2B':
+                    twoBArray.push(player);
+
+                    break;
+                case '3B':
+                    threeBArray.push(player);
+
+                    break;
+                case 'SS':
+                    ssArray.push(player);
+
+                    break;
+                case 'LF':
+                    lfArray.push(player);
+
+                    break;
+                case 'CF':
+                    cfArray.push(player);
+
+                    break;
+                case 'RF':
+                    rfArray.push(player);
+
+                    break;
+
+                case 'DH':
+                    dhArray.push(player);
+
+                    break;
+                default:
+
+            }
+
+        }
+
+        catchersArray.sort(compareTotals);
+        firstBArray.sort(compareTotals);
+        twoBArray.sort(compareTotals);
+        threeBArray.sort(compareTotals);
+        ssArray.sort(compareTotals);
+        lfArray.sort(compareTotals);
+        cfArray.sort(compareTotals);
+        rfArray.sort(compareTotals);
+        dhArray.sort(compareTotals);
+
+        returnArray = $.merge(returnArray,catchersArray);
+        returnArray = $.merge(returnArray,firstBArray);
+        returnArray = $.merge(returnArray,twoBArray);
+        returnArray = $.merge(returnArray,threeBArray);
+        returnArray = $.merge(returnArray,ssArray);
+        returnArray = $.merge(returnArray,lfArray);
+        returnArray = $.merge(returnArray,cfArray);
+        returnArray = $.merge(returnArray,rfArray);
+        returnArray = $.merge(returnArray,dhArray);
+
+        return returnArray;
+
+    };
     var renderRoster = function(){
 //        var roster = rosterslug;
 //        var name;
@@ -555,6 +664,11 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
                 }
             }
+
+
+
+            battersArray = totalAndSortBatters(battersArray);
+            startersArray = totalAndSortStarters(startersArray);
 
 
             var battersCollection = new PlayerCollection(battersArray);
