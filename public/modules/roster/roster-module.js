@@ -549,6 +549,13 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         originalArray.sort(compareTotals);
         return originalArray;
     };
+    var totalAndSortClosers = function(originalArray){
+        for (var i = 0;i < originalArray.length;i++){
+            originalArray[i].total = ((originalArray[i].saves * 6)  + (originalArray[i].k / 2) + (originalArray[i].ip / 2))
+        }
+        originalArray.sort(compareTotals);
+        return originalArray;
+    };
     var totalAndSortBatters = function(originalArray){
         var catchersArray = [];
         var firstBArray = [];
@@ -669,6 +676,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
             battersArray = totalAndSortBatters(battersArray);
             startersArray = totalAndSortStarters(startersArray);
+            closersArray = totalAndSortClosers(closersArray);
 
 
             var battersCollection = new PlayerCollection(battersArray);
