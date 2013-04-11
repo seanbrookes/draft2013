@@ -46,26 +46,26 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
      * Marionette Views
      *
      * */
-        var PlayerView = Backbone.Marionette.ItemView.extend({
-            template: '#PlayerTemplate',
-            tagName: 'tr'
+    var PlayerView = Backbone.Marionette.ItemView.extend({
+        template: '#PlayerTemplate',
+        tagName: 'tr'
 
-        });
-        var BatterItemView = Backbone.Marionette.ItemView.extend({
-            template: '#BatterTemplate',
-            tagName: 'tr'
+    });
+    var BatterItemView = Backbone.Marionette.ItemView.extend({
+        template: '#BatterTemplate',
+        tagName: 'tr'
 
-        });
-        var StarterItemView = Backbone.Marionette.ItemView.extend({
-            template: '#StarterTemplate',
-            tagName: 'tr'
+    });
+    var StarterItemView = Backbone.Marionette.ItemView.extend({
+        template: '#StarterTemplate',
+        tagName: 'tr'
 
-        });
-        var CloserItemView = Backbone.Marionette.ItemView.extend({
-            template: '#CloserTemplate',
-            tagName: 'tr'
+    });
+    var CloserItemView = Backbone.Marionette.ItemView.extend({
+        template: '#CloserTemplate',
+        tagName: 'tr'
 
-        });
+    });
 
     /*
      * RosterView

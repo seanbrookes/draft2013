@@ -1,0 +1,52 @@
+<div id="StatsModuleTemplateContainer">
+
+    <script type="text/template" id="StatsModuleDefaultTemplate">
+
+        <div class="control-container">
+            <div class="control-feedback">
+                <p>feedback goes here</p>
+            </div>
+            <ul>
+
+                <li>
+                    <button id="BtnUpdateRosters" >Update Roster Stats</button>
+                </li>
+                <li>
+                    <button id="BtnInitRosterScoresLink" disabled="disabled">Zero Rosters</button>
+                </li>
+                <li>
+                    <button id="BtnUpdateSingleRoster" >Update Single Roster Stats</button>
+                </li>
+                <li>
+                    <!-- roster -->
+                    <label for="AssociateRosterSelect">Roster</label>
+                    <select id="AssociateRosterSelect" class="roster-select">
+                        <option value="bashers">bashers</option>
+                        <option value="hooters">hooters</option>
+                        <option value="mashers">mashers</option>
+                        <option value="rallycaps">rallycaps</option>
+                        <option value="stallions">stallions</option>
+                    </select>
+                </li>
+                <li>
+                    <button id="BtnGetRosterPlayers">Get Roster Players</button>
+                </li>
+                <li>
+
+                    <button id="BtnPullBatterStats">Get Latest Batter Stats</button>
+                </li>
+                <li>
+                    <button id="BtnPullPitcherStats">Get Latest Pitcher Stats</button>
+                </li>
+                <li>
+                    <button id="ProcessCurrentBatterStats">Process Batter Stats</button>
+                </li>
+                <li>
+                    <button id="ProcessCurrentPitcherStats">Process Pitcher Stats</button>
+                </li>
+            </ul>
+        </div>
+
+    </script>
+
+</div>

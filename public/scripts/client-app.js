@@ -19,6 +19,7 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             "login": "login",
             "signup": "signup",
             "chat": "chat",
+            "adminstats": "adminstats",
             "admin": "admin",
             "page/:name": "page",
             "roster/:name": "roster"
@@ -103,6 +104,19 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
 
             require(['security'], function (module) {
                 module.initLogin();
+            });
+//
+//            securityModule.initLogin();
+
+        },
+        adminstats: function () {
+            sf1.log('adminstats route');
+            sf1.EventBus.trigger('ia.mainNavEvent', [
+                {route: 'adminstats'}
+            ]);
+
+            require(['stats'], function (module) {
+                module.init();
             });
 //
 //            securityModule.initLogin();

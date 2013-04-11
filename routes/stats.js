@@ -25,6 +25,14 @@ var logger = new (winston.Logger)({
        // new (winston.transports.File)({ filename: './logs/stats.log' })
     ]
 });
+var rosterArray = ['hooters','stallions','bashers','rallycaps','mashers'];
+
+var currentRawPitcherStats = [];
+var currentRawBatterStats = [];
+var currentRosterModel;
+
+
+
 exports.getLatestStats = function(req, res){
     PitcherStat.find({},function(err,dox){
        if(err){
@@ -40,7 +48,6 @@ function processBatterStats(roster, statData){
     BatterStat.find({player_id:stats.mlbid},function(err,dox){
         if(err){
             logger.error('error looking up latest pitcher stats: ' + err);
-            return res.send(500,err)
         }
 
 //        logger.info('|-------------------------------------------');
@@ -268,7 +275,7 @@ exports.processSingleRosterStats = function(req, res){
 
 }
 exports.processLatestStats = function(req, res){
-    var rosterArray = ['hooters','stallions','bashers','rallycaps','mashers'];
+
 
     logger.info('entry processLatestStats ');
 
@@ -463,9 +470,270 @@ var updateBatters = function(){
 
 
 };
+EventBus.on('stats.rosterPitchersArrayLoaded',function(data){
+    var rosterSlug = data.slug;
+    var rosterPitchers = data.pitchersArray;
+    //logger.info('stats.rosterPitchersArrayLoaded ' + data);
+    for (var i = 0;i < rosterPitchers.length;i++){
+        var rosterPitcher = rosterPitchers[i];
+        for (var x = 0;x < currentRawPitcherStats.length;x++){
+            var statPitcher = currentRawPitcherStats[x];
+            //logger.info('stats.rosterPitchersArrayLoaded B');
+            if (statPitcher.player_id === rosterPitcher.mlbid){
+                rosterPitcher.wins = statPitcher.w;
+                rosterPitcher.losses = statPitcher.l;
+                rosterPitcher.saves = statPitcher.sv;
+                rosterPitcher.ip = statPitcher.ip;
+                rosterPitcher.k = statPitcher.so;
+                rosterPitcher.lastUpdate = Date.now();
+                //logger.info('stats.rosterPitchersArrayLoaded C');
+                Roster.update(
+                    {slug:rosterSlug,'players.mlbid':rosterPitcher.mlbid},
+                    {$set:{'players.$.wins':rosterPitcher.wins,
+                            'players.$.losses':rosterPitcher.losses,
+                            'players.$.saves':rosterPitcher.saves,
+                            'players.$.ip':rosterPitcher.ip,
+                            'players.$.k':rosterPitcher.k,
+                            'players.$.lastUpdate':Date.now()
+                          }
+                    },
+                    function(err){
+                        if (err){
+                            logger.error('error updating roster pitcher stat' + err);
+                        }
+                        EventBus.emit('stats.pitcherProcessedSuccess', + rosterPitcher.name);
+                        //logger.info('stats.rosterPitchersArrayLoaded D');
+                        //logger.info('update roster pitcher stats: ' + rosterPitcher.name);
+                    }
+                );
+            }
+        }
+    }
+});
+EventBus.on('stats.pitcherProcessedSuccess', function(data){
+    logger.info('stats.pitcherProcessedSuccess: ' + data);
+});
+EventBus.on('stats.rosterBatterLoadSuccess',function(roster){
+    var currRoster = roster;
+    logger.info('stats.rosterLoadSuccess ' + currRoster.slug);
+
+    if (currentRawBatterStats){
+        // start with the outer loop of all pitchers from the raw list
+        for (var i = 0;i < currentRawBatterStats.length;i++){
+            var tPlayer = currentRawBatterStats[i];
+            // for each of the raw pitchers - see if there is a match on this roster
+            // inner loop on the roster players
+            for (var j = 0;j < currRoster.players.length;j++){
+                var cPlayer = currRoster.players[j];
+                if (cPlayer.mlbid === tPlayer.player_id){
+                    // set the stats
+                    cPlayer.runs = tPlayer.r;
+                    cPlayer.hits = tPlayer.h;
+                    cPlayer.hr = tPlayer.hr;
+                    cPlayer.rbi = tPlayer.rbi;
+                    cPlayer.sb = tPlayer.sb;
+                    cPlayer.lastUpdate = Date.now();
+                }
+            }
+
+        }
+        try{
+            // when the loop is complete, save the roster
+            logger.info('saving roster: ' + currRoster.slug);
+            currRoster.save(function(err){
+                if (err){
+                    EventBus.emit('stats.errorEvent',err);
+                    //logger.error('stats.errorEvent: ' + err);
+                }
+                EventBus.emit('stats.rosterBatterSavedSuccess',currRoster.slug);
+                if (currRoster.slug == 'mashers'){
+                    EventBus.emit('stats.batterStatsRosterLoopComplete');
+                }
+            });
+        }
+        catch(err){
+            EventBus.emit('stats.errorEvent',err);
+        }
+    }
+});
+EventBus.on('stats.rosterPitcherLoadSuccess',function(roster){
+   var currRoster = roster;
+    logger.info('stats.rosterLoadSuccess ' + currRoster.slug);
+    var pitchersArray = [];
+    if (currentRawPitcherStats){
+        // start with the outer loop of all pitchers from the raw list
+        for (var i = 0;i < currentRawPitcherStats.length;i++){
+            var tPlayer = currentRawPitcherStats[i];
+            // for each of the raw pitchers - see if there is a match on this roster
+            // inner loop on the roster players
+            for (var j = 0;j < currRoster.players.length;j++){
+                var cPlayer = currRoster.players[j];
+                if (cPlayer.mlbid === tPlayer.player_id){
+                    // set the stats
+                    cPlayer.wins = tPlayer.w;
+                    cPlayer.losses = tPlayer.l;
+                    cPlayer.saves = tPlayer.sv;
+                    cPlayer.ip = tPlayer.ip;
+                    cPlayer.k = tPlayer.so;
+                    cPlayer.lastUpdate = Date.now();
+                }
+            }
+
+        }
+        try{
+            // when the loop is complete, save the roster
+            logger.info('saving roster: ' + currRoster.slug);
+            currRoster.save(function(err){
+                if (err){
+                    EventBus.emit('stats.errorEvent',err);
+                    //logger.error('stats.errorEvent: ' + err);
+                }
+                EventBus.emit('stats.rosterPitcherSavedSuccess',currRoster.slug);
+                if (currRoster.slug == 'mashers'){
+                    EventBus.emit('stats.pitcherStatsRosterLoopComplete');
+                }
+            });
+        }
+        catch(err){
+            EventBus.emit('stats.errorEvent',err);
+        }
+    }
+});
+
+EventBus.on('stats.rosterBatterSavedSuccess',function(roster){
+    logger.error(roster + ' - saved batters');
+});
+
+EventBus.on('stats.rosterPitcherSavedSuccess',function(roster){
+    logger.error(roster + ' - saved pitchers');
+});
+EventBus.on('stats.errorEvent',function(err){
+    logger.error(err + ' - save roster pitchers error');
+});
+
+EventBus.on('stats.batterStatsPullSuccess',function(data){
+    // loop over the rosters
+    logger.info('stats.batterStatsPullSuccess B');
+
+    for (var i = 0;i < rosterArray.length;i++){
+        var tRosterSlug = rosterArray[i];
+        Roster.find({slug:tRosterSlug},function(err,dox){
+            //var thisSlug = tRosterSlug;
+            if (err){
+                logger.error('error finding roster for pitcher stat update: ' + err);
+            }
+            var tRoster = dox[0];
+
+            EventBus.emit('stats.rosterBatterLoadSuccess',tRoster);
+
+        });
+
+
+    }
+
+    // for each roster
+    // get the player list
+    // loop over the pitchers
+    // update properties
+    // when each roster players loop is done
+    // save the roster
+});
+EventBus.on('stats.pitcherStatsPullSuccess',function(data){
+    // loop over the rosters
+    logger.info('stats.pitcherStatsPullSuccess B');
+
+    for (var i = 0;i < rosterArray.length;i++){
+        var tRosterSlug = rosterArray[i];
+        Roster.find({slug:tRosterSlug},function(err,dox){
+            //var thisSlug = tRosterSlug;
+            if (err){
+                logger.error('error finding roster for pitcher stat update: ' + err);
+            }
+            var tRoster = dox[0];
+
+            EventBus.emit('stats.rosterPitcherLoadSuccess',tRoster);
+
+        });
+
+
+    }
+
+    // for each roster
+    // get the player list
+    // loop over the pitchers
+    // update properties
+    // when each roster players loop is done
+    // save the roster
+});
 var updatePitchers = function(){
 
 };
+
+exports.triggerPitcherStats = function(req,res){
+    var pitchers = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='asc'&sort_column='era'&stat_type=pitching&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&position='1'&recSP=1&recPP=900";
+
+    request({uri: pitchers}, function(err, response, body){
+        // var urlObj2 = urlObj;
+        var self = this;
+        // var innerIndex2 = innerIndex;
+        self.items = new Array();//I feel like I want to save my results in an array
+        //Just a basic error check
+        if(err && response.statusCode !== 200){
+            console.log('Request error: ' + JSON.stringify(err));
+            return res.send(500,'there was an error: ' +response.statusCode  + ' : ' + err);
+        }
+        var payload = {};
+        payload.data = body;
+        payload.metadata = {};
+
+        var statObj = JSON.parse(payload.data);
+
+        currentRawPitcherStats = statObj.stats_sortable_player.queryResults.row;
+        logger.info('stats.pitcherStatsPullSuccess - count: ' + currentRawPitcherStats.length);
+
+        EventBus.emit('stats.pitcherStatsPullSuccess');
+
+        EventBus.on('stats.pitcherStatsRosterLoopComplete',function(data){
+            return res.send(200,'pitcher loop complete');
+        });
+
+
+    });
+
+};
+exports.triggerBatterStats = function(req,res){
+    var batters = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=1&recPP=900";
+
+    request({uri: batters}, function(err, response, body){
+        // var urlObj2 = urlObj;
+        var self = this;
+        // var innerIndex2 = innerIndex;
+        self.items = new Array();//I feel like I want to save my results in an array
+        //Just a basic error check
+        if(err && response.statusCode !== 200){
+            console.log('Request error: ' + JSON.stringify(err));
+            return res.send(500,'there was an error: ' +response.statusCode  + ' : ' + err);
+        }
+        var payload = {};
+        payload.data = body;
+        payload.metadata = {};
+
+        var statObj = JSON.parse(payload.data);
+
+        currentRawBatterStats = statObj.stats_sortable_player.queryResults.row;
+        logger.info('stats.batterStatsPullSuccess - count: ' + currentRawBatterStats.length);
+
+        EventBus.emit('stats.batterStatsPullSuccess');
+
+        EventBus.on('stats.batterStatsRosterLoopComplete',function(data){
+            return res.send(200,'batter loop complete');
+        });
+
+
+    });
+
+};
+
 // post player stats
 exports.postPlayerStats = function(req,res){
     // is it a pitcher or batter
@@ -535,9 +803,6 @@ exports.pullStats = function(req, res){
     //var reqUrl = 'http://mlb.mlb.com/stats/sortable.jsp?c_id=tex#game_type=R&season=2013&league_code=AL&split=&playerType=ALL&sectionType=sp&statType=hitting&elem=%5Bobject+Object%5D&tab_level=child&click_text=Sortable+Player+hitting&season_type=ANY&page=1&ts=1364832580073&team_id=';
    // var reqUrl = 'http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order=desc&sort_column=avg&stat_type=hitting&page_type=SortablePlayer&game_type=R&player_pool=ALL&season_type=ANY&league_code=AL&sport_code=mlb&results=1000&recSP=1&recPP=50';
 
-    var pitchers = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='asc'&sort_column='era'&stat_type=pitching&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&position='1'&recSP=1&recPP=900";
-
-    var batters = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=1&recPP=900";
     var reqUrl = batters;
     var page1 = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=1&recPP=50";
     var page2 = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=2&recPP=50";

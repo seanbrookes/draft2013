@@ -32,6 +32,8 @@ module.exports = function(app){
     app.get('/getlateststats',stats.getLatestStats);
     app.get('/processlateststats',stats.processLatestStats);
     app.get('/singlerosterstats/:roster',stats.processSingleRosterStats);
+    app.get('/dopitchers',stats.triggerPitcherStats);
+    app.get('/dobatters',stats.triggerBatterStats);
 
 
     app.post('/createdraft', draft.createDraft);

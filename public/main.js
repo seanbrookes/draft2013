@@ -30,6 +30,7 @@ require.config({
         'sf1'           : 'scripts/sf1.0.1',
         'draft'         : 'modules/draft/draft-module',
         'security'      : 'modules/security/security-module',
+        'stats'         : 'modules/stats/stats.controller',
         'admin'         : 'modules/admin/admin-module',
         'index'         : 'modules/index/index-module',
         'countdown'     : 'scripts/lib/plugins/kkcountdown',
