@@ -89,7 +89,9 @@ ul{
     font-size:1.5em;
     font-family:Consolas;
 }
-
+tr.counting{
+    background-color:#eee;
+}
 .ui-instrument-list{
     list-style:none;
     margin-top:.7em;

@@ -53,17 +53,35 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
     });
     var BatterItemView = Backbone.Marionette.ItemView.extend({
         template: '#BatterTemplate',
-        tagName: 'tr'
+        tagName: 'tr',
+        onRender:function(){
+            if (this.model.attributes.counting){
+                this.$el.addClass('counting');
+            }
+            //sf1.log('ON RENDER' + this.model);
+        }
 
     });
     var StarterItemView = Backbone.Marionette.ItemView.extend({
         template: '#StarterTemplate',
-        tagName: 'tr'
+        tagName: 'tr',
+        onRender:function(){
+            if (this.model.attributes.counting){
+                this.$el.addClass('counting');
+            }
+            //sf1.log('ON RENDER' + this.model);
+        }
 
     });
     var CloserItemView = Backbone.Marionette.ItemView.extend({
         template: '#CloserTemplate',
-        tagName: 'tr'
+        tagName: 'tr',
+        onRender:function(){
+            if (this.model.attributes.counting){
+                this.$el.addClass('counting');
+            }
+            //sf1.log('ON RENDER' + this.model);
+        }
 
     });
 
@@ -535,6 +553,11 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         }
         return 0;
     }
+    /*
+    *
+    * Batters Total
+    *
+    * */
     var totalBatterScore = function(player){
 
         player.total = ((parseInt(player.runs)) + (parseInt(player.hits) / 2) + (parseInt(player.rbi)) + (parseInt(player.hr) * 2) + (parseInt(player.sb) / 2));
@@ -542,18 +565,48 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         return player;
 
     };
+    /*
+     *
+     * Starters Total
+     *
+     * */
     var totalAndSortStarters = function(originalArray){
         for (var i = 0;i < originalArray.length;i++){
             originalArray[i].total = ((originalArray[i].wins * 7) - (originalArray[i].losses * 4) + (originalArray[i].k / 2))
         }
         originalArray.sort(compareTotals);
+        if (originalArray[0]){
+            originalArray[0].counting = true;
+        }
+        if (originalArray[1]){
+            originalArray[1].counting = true;
+        }
+        if (originalArray[2]){
+            originalArray[2].counting = true;
+        }
+        if (originalArray[3]){
+            originalArray[3].counting = true;
+        }
+
         return originalArray;
     };
+    /*
+     *
+     * Closers Total
+     *
+     * */
     var totalAndSortClosers = function(originalArray){
         for (var i = 0;i < originalArray.length;i++){
             originalArray[i].total = ((originalArray[i].saves * 6)  + (originalArray[i].k / 2) + (originalArray[i].ip / 2))
         }
         originalArray.sort(compareTotals);
+        if (originalArray[0]){
+            originalArray[0].counting = true;
+        }
+        if (originalArray[1]){
+            originalArray[1].counting = true;
+        }
+
         return originalArray;
     };
     var totalAndSortBatters = function(originalArray){
@@ -572,6 +625,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         for (var i = 0;i < originalArray.length;i++){
             var player = originalArray[i];
 
+            // add total property
             player = totalBatterScore(player);
             switch(player.pos){
 
@@ -618,16 +672,51 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
         }
 
-        catchersArray.sort(compareTotals);
-        firstBArray.sort(compareTotals);
-        twoBArray.sort(compareTotals);
-        threeBArray.sort(compareTotals);
-        ssArray.sort(compareTotals);
-        lfArray.sort(compareTotals);
-        cfArray.sort(compareTotals);
-        rfArray.sort(compareTotals);
-        dhArray.sort(compareTotals);
-
+        // set augmented properties
+        // total
+        // sort
+        // establish counting property
+        if (catchersArray.length > 0){
+            catchersArray.sort(compareTotals);
+            catchersArray[0].counting = true;
+        }
+        if (firstBArray.length > 0){
+            firstBArray.sort(compareTotals);
+            firstBArray[0].counting = true;
+        }
+        if (twoBArray.length > 0){
+            twoBArray.sort(compareTotals);
+            twoBArray[0].counting = true;
+        }
+        if (threeBArray.length > 0){
+            threeBArray.sort(compareTotals);
+            threeBArray[0].counting = true;
+        }
+        if (ssArray.length > 0){
+            ssArray.sort(compareTotals);
+            ssArray[0].counting = true;
+        }
+        if (lfArray.length > 0){
+            lfArray.sort(compareTotals);
+            lfArray[0].counting = true;
+        }
+        if (cfArray.length > 0){
+            cfArray.sort(compareTotals);
+            cfArray[0].counting = true;
+        }
+        if (rfArray.length > 0){
+            rfArray.sort(compareTotals);
+            rfArray[0].counting = true;
+        }
+        if (dhArray.length > 0){
+            dhArray.sort(compareTotals);
+            dhArray[0].counting = true;
+        }
+        /*
+        *
+        * Merge all the arrays
+        *
+        * */
         returnArray = $.merge(returnArray,catchersArray);
         returnArray = $.merge(returnArray,firstBArray);
         returnArray = $.merge(returnArray,twoBArray);
