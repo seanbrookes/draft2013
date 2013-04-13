@@ -533,7 +533,7 @@ define(
                 currentMatchRosterPlayer = $(event.target).data('id');
                 currentMatchRoster = $(event.target).data('roster');
             });
-            $('.roster-check').not('[data-mlbid=\'undefined\']').attr('disabled','disabled').parent().addClass('associated');
+            $('.roster-check').not('[data-mlbid=\'undefined\']').parent().addClass('associated');
 
 
             sf1.EventBus.trigger('admin.renderRosterPlayersComplete');
