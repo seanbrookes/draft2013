@@ -26,6 +26,8 @@ var logger = new (winston.Logger)({
     ]
 });
 var rosterArray = ['hooters','stallions','bashers','rallycaps','mashers'];
+var batters = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=1&recPP=900";
+var pitchers = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='asc'&sort_column='era'&stat_type=pitching&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&position='1'&recSP=1&recPP=900";
 
 var currentRawPitcherStats = [];
 var currentRawBatterStats = [];
@@ -748,7 +750,6 @@ exports.triggerPitcherStats = function(req,res){
 
 };
 EventBus.on('stats.getLatestPitcherStatsRequest',function(event){
-    var pitchers = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='asc'&sort_column='era'&stat_type=pitching&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&position='1'&recSP=1&recPP=900";
 
     request({uri: pitchers}, function(err, response, body){
         // var urlObj2 = urlObj;
@@ -779,7 +780,6 @@ EventBus.on('stats.getLatestPitcherStatsRequest',function(event){
     });
 });
 EventBus.on('stats.getLatestBatterStatsRequest',function(event){
-    var batters = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=1&recPP=900";
 
     request({uri: batters}, function(err, response, body){
         // var urlObj2 = urlObj;
