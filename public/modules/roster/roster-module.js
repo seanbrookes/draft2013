@@ -167,6 +167,9 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
 
     function init(rosterName){
+        battersSubTotal = 0;
+        startersSubTotal = 0;
+        closersSubTotal = 0;
 
         if (sf1.hasStorage){
             var testUserObj = getCurrentAuthRoster();
