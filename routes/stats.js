@@ -30,6 +30,8 @@ var rosterArray = ['hooters','stallions','bashers','rallycaps','mashers'];
 var currentRawPitcherStats = [];
 var currentRawBatterStats = [];
 var currentRosterModel;
+var fetchStatsAgentActive = false;
+var fetchStatsTimer;
 
 
 
@@ -601,11 +603,11 @@ EventBus.on('stats.rosterPitcherLoadSuccess',function(roster){
 });
 
 EventBus.on('stats.rosterBatterSavedSuccess',function(roster){
-    logger.error(roster + ' - saved batters');
+    logger.info(roster + ' - saved batters');
 });
 
 EventBus.on('stats.rosterPitcherSavedSuccess',function(roster){
-    logger.error(roster + ' - saved pitchers');
+    logger.info(roster + ' - saved pitchers');
 });
 EventBus.on('stats.errorEvent',function(err){
     logger.error(err + ' - save roster pitchers error');
@@ -668,8 +670,84 @@ EventBus.on('stats.pitcherStatsPullSuccess',function(data){
 var updatePitchers = function(){
 
 };
+exports.getFetchStatsStatus = function(req,res){
+  return res.send(200,fetchStatsAgentActive + '');
+};
+EventBus.on('stats.turnOnFetchStatsRequest',function(){
+    fetchStatsAgentActive = true;
+    fetchStatsTimer = setInterval(function(){
+        //if (fetchStatsAgentActive){
+        EventBus.emit('stats.getLatestPitcherStatsRequest');
+        EventBus.emit('stats.getLatestBatterStatsRequest');
+        statsFetchMessage = '| FETCH STATS ON';
+        logger.info('| FETCH STATS ON');
+        //}
+        // else{
+        //      logger.info('| FETCH STATS OFF');
+        //  }
+
+    },43200000);
+    EventBus.emit('stats.fetchStatsTurnedOn');
+
+});
+EventBus.on('stats.turnOffFetchStatsRequest',function(){
+    fetchStatsAgentActive = false;
+//    logger.info('| FETCH STATS OFF');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|  CLEAR TIMEOUT ');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+    clearInterval(fetchStatsTimer);
+    EventBus.emit('stats.fetchStatsTurnedOff');
+
+});
+exports.toggleFetchStats = function(req, res){
+    var bValue = req.param('value',null);
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|  bVAlue: ' + bValue);
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+//    logger.info('|');
+    var statsFetchMessage;
+    if (bValue === 'true'){
+        EventBus.emit('stats.turnOnFetchStatsRequest');
+
+    }
+    else{
+        EventBus.emit('stats.turnOffFetchStatsRequest');
+
+    }
+    EventBus.on('stats.fetchStatsTurnedOff',function(){
+        return res.send(200,'stats fetching turned off');
+    });
+    EventBus.on('stats.fetchStatsTurnedOfn',function(){
+        return res.send(200,'stats fetching turned on');
+    });
+};
 
 exports.triggerPitcherStats = function(req,res){
+    EventBus.emit('stats.getLatestPitcherStatsRequest');
+
+
+};
+EventBus.on('stats.getLatestPitcherStatsRequest',function(event){
     var pitchers = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='asc'&sort_column='era'&stat_type=pitching&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&position='1'&recSP=1&recPP=900";
 
     request({uri: pitchers}, function(err, response, body){
@@ -693,15 +771,14 @@ exports.triggerPitcherStats = function(req,res){
 
         EventBus.emit('stats.pitcherStatsPullSuccess');
 
-        EventBus.on('stats.pitcherStatsRosterLoopComplete',function(data){
-            return res.send(200,'pitcher loop complete');
-        });
+//        EventBus.on('stats.pitcherStatsRosterLoopComplete',function(data){
+//            return res.send(200,'pitcher loop complete');
+//        });
 
 
     });
-
-};
-exports.triggerBatterStats = function(req,res){
+});
+EventBus.on('stats.getLatestBatterStatsRequest',function(event){
     var batters = "http://mlb.mlb.com/pubajax/wf/flow/stats.splayer?season=2013&sort_order='desc'&sort_column='avg'&stat_type=hitting&page_type=SortablePlayer&game_type='R'&player_pool=ALL&season_type=ANY&league_code='AL'&sport_code='mlb'&results=1000&recSP=1&recPP=900";
 
     request({uri: batters}, function(err, response, body){
@@ -725,12 +802,18 @@ exports.triggerBatterStats = function(req,res){
 
         EventBus.emit('stats.batterStatsPullSuccess');
 
-        EventBus.on('stats.batterStatsRosterLoopComplete',function(data){
-            return res.send(200,'batter loop complete');
-        });
+//        EventBus.on('stats.batterStatsRosterLoopComplete',function(data){
+//            return res.send(200,'batter loop complete');
+//        });
 
 
     });
+});
+exports.triggerBatterStats = function(req,res){
+
+    EventBus.emit('stats.getLatestBatterStatsRequest');
+
+
 
 };
 

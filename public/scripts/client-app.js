@@ -30,10 +30,11 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             sf1.EventBus.trigger('ia.mainNavEvent', [
                 {route: 'index'}
             ]);
-            require(['draft', 'chat'], function (draftMod, chatMod) {
+            require(['score', 'chat'], function (score) {
                 $('.main-content-wrapper').empty();
                // chatMod.init();
-                draftMod.init();
+                score.init();
+                //draftMod.init();
 
             });
             //indexModule.init();

@@ -30,6 +30,46 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/stats
                sf1.EventBus.trigger('stats.initStatsModuleComplete');
             });
         };
+        //sf1.EventBus.bind('stats.initStatsEventListenersComplete');
+        sf1.EventBus.bind('stats.initStatsEventListenersComplete',function(){
+
+            var statsFetchStatusMessage;
+            var toggleFetchVal = false;
+            sf1.io.ajax({
+               type:'GET',
+               url:'/fetchstatsstatus',
+                success:function(response){
+                    sf1.log('success checking fetchStatus: ' + response);
+                    $('#FetchStatsStatus').text(response);
+                    if (response === 'false'){
+                        statsFetchStatusMessage = 'fetch stats are off click to turn on';
+                        toggleFetchVal = true;
+                    }
+                    else{
+                        statsFetchStatusMessage = 'fetch stats are on click to turn off';
+                        toggleFetchVal = false;
+                    }
+
+                    $('#FetchStatsStatus').text(statsFetchStatusMessage).click(function(){
+                            sf1.io.ajax({
+                                type:'GET',
+                                url:'/togglefetchstats/' + toggleFetchVal,
+                                success:function(response){
+                                    sf1.log('success toggle stats: ' + response);
+                                },
+                                error:function(response){
+                                    sf1.log('error toggle stats: ' + response);
+                                }
+                            });
+                    });
+
+                },
+                error:function(response){
+                    sf1.log('error getting fetch stats status');
+                }
+
+            });
+        });
 
         var initEventListeners = function(){
             $('#BtnUpdateRosters').click(function(event){
@@ -61,7 +101,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/stats
                     error:function(response){
                         sf1.log('error pull stats: ' + response);
                     }
-                })
+                });
             });
             $('#ProcessCurrentBatterStats').click(function(event){
                 $('.control-feedback').html('<p>ProcessCurrentBatterStats clicked</p>');

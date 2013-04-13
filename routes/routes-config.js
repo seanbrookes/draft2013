@@ -34,6 +34,8 @@ module.exports = function(app){
     app.get('/singlerosterstats/:roster',stats.processSingleRosterStats);
     app.get('/dopitchers',stats.triggerPitcherStats);
     app.get('/dobatters',stats.triggerBatterStats);
+    app.get('/togglefetchstats/:value', stats.toggleFetchStats);
+    app.get('/fetchstatsstatus', stats.getFetchStatsStatus);
 
 
     app.post('/createdraft', draft.createDraft);
