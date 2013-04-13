@@ -14,7 +14,7 @@
     </script>
 
     <!-- Roster Container -->
-    <script type="text/template" id="RosterTemplate" class="ui-template">
+    <script id="RosterTemplate" type="text/template" class="ui-template">
         <div id="Roster" class="roster-container">
             <h1 class="roster-title"><%= S. %></h1>
             <div class="roster-status-instrument-container">
@@ -43,7 +43,7 @@
         </div>
     </script>
 
-    <script type="text/template" id="RosterEditPosControlTemplate" class="ui-template">
+    <script id="RosterEditPosControlTemplate" type="text/template" class="ui-template">
 
         <select id="RosterPickPosSelect" class="select-pos pick-property-edit" data-id="<%= S.id %>" data-type="pos">
             <option value="C">C</option>
@@ -63,7 +63,7 @@
 
 
     <!-- status selector -->
-    <script type="text/template" id="StatusSelectTemplate" class="ui-template">
+    <script id="StatusSelectTemplate" type="text/template" class="ui-template">
         <select class="status-select">
             <option value="protected">protected</option>
             <option value="bubble">bubble</option>
@@ -72,7 +72,7 @@
             <option value="roster">roster</option>
         </select>
     </script>
-    <script type="text/template" id="RosterSelectTemplate" class="ui-template">
+    <script id="RosterSelectTemplate" type="text/template" class="ui-template">
         <select class="roster-select">
             <option value="bashers">bashers</option>
             <option value="hooters">hooters</option>
@@ -83,7 +83,7 @@
     </script>
 
     <!-- button trigger control -->
-    <script type="text/template" id="RosterPosEditTriggerControlTemplate" class="ui-template">
+    <script id="RosterPosEditTriggerControlTemplate" type="text/template" class="ui-template">
 
         <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S.id %>" data-val="<%= S.val %>">
             <%= S.val %>
@@ -92,7 +92,7 @@
     </script>
 
 
-    <script type="text/template" id="BatterTableViewTemplate">
+    <script id="BatterViewTemplate" type="text/template">
         <table>
             <caption>Batters</caption>
             <thead>
@@ -115,7 +115,7 @@
             </tbody>
         </table>
     </script>
-    <script type="text/template" id="StarterTableViewTemplate">
+    <script id="StarterViewTemplate" type="text/template">
         <table>
             <caption>Starters</caption>
             <thead>
@@ -138,7 +138,7 @@
             </tbody>
         </table>
     </script>
-    <script type="text/template" id="CloserTableViewTemplate">
+    <script id="CloserViewTemplate" type="text/template">
         <table>
             <caption>Closers</caption>
             <thead>
@@ -161,7 +161,12 @@
             </tbody>
         </table>
     </script>
-    <!-- Batter Template -->
+
+    <!--
+
+    Batter Template
+
+    -->
     <script id="BatterTemplate" class="player-template" type="text/template">
         <td>
             <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
@@ -198,7 +203,13 @@
         </td>
 
     </script>
-    <!-- Starter Template -->
+
+
+    <!--
+
+    Starter Template
+
+    -->
     <script id="StarterTemplate" class="player-template" type="text/template">
         <td>
             <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
@@ -235,7 +246,13 @@
         </td>
 
     </script>
-    <!-- Closer Template -->
+
+
+    <!--
+
+    Closer Template
+
+    -->
     <script id="CloserTemplate" class="player-template" type="text/template">
         <td>
             <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
