@@ -24,6 +24,12 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
     // namespace for var reference in template
     _.templateSettings.variable = 'S';
+
+    // attach the module template markup to the DOM
+    baseMarkup = $(template);
+    $(anchorSelector).append(baseMarkup);
+
+
     var getCurrentAuthRoster = function(){
         if (sf1.hasStorage){
             return localStorage.getItem('currentAuthRoster');
@@ -164,12 +170,16 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
 
 
-
-
-    function init(rosterName){
+    var zeroTotals = function(){
         battersSubTotal = 0;
         startersSubTotal = 0;
         closersSubTotal = 0;
+    };
+
+
+    function init(rosterName){
+
+        zeroTotals();
 
         if (sf1.hasStorage){
             var testUserObj = getCurrentAuthRoster();
@@ -182,30 +192,21 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
             }
         }
 
-        rosterSlug = rosterName;
-        sf1.log('Roster module init ');
-
-        // attach the module template markup to the DOM
-        baseMarkup = $(template);
-        $(anchorSelector).append(baseMarkup);
-
+        if (rosterName){
+            rosterSlug = rosterName;
+        }
         sf1.log('roster module init - rosterId: ' + rosterName);
-
-
-
 
         if (rosterName){
             synchPlayerModel();
-           // new PlayerCollection(response.players)
 
-
-            // fire ajax query to get roster
-            // call render roster with collection
         }
 
 
-
     }
+    var setRoster = function(slug){
+      rosterSlug = slug;
+    };
     sf1.EventBus.bind('roster.updateRosterPlayerPos', function(data, event){
         var postObj = {};
         postObj.playerId = $(event.target).data('id');;
@@ -296,7 +297,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         // update
         synchPlayerModel();
     });
-    sf1.EventBus.bind('roster.playerModelUpdate',function(){
+    sf1.EventBus.bind('roster.playerModelUpdateSuccess',function(){
         // update
         renderRoster();
         updateRosterDraftStatusModel();
@@ -322,7 +323,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
                     //rosterSlug = rosterName;
                     rosterName = response[0].name;
 
-                    sf1.EventBus.trigger('roster.playerModelUpdate');
+                    sf1.EventBus.trigger('roster.playerModelUpdateSuccess');
 
 
 
@@ -895,6 +896,16 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
     return {
         init:function(rosterId){
             return init(rosterId);
+        },
+        setRoster:setRoster,
+        getTotals:function(roster){
+            if(roster){
+                setRoster(roster);
+                synchPlayerModel();
+                sf1.EventBus.bind('roster.playerModelUpdateSuccess',function(data){
+                   return {total:675,pitchers:334};
+                });
+            }
         }
     };
 });

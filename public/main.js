@@ -39,6 +39,8 @@ require.config({
         'chatlib'       : 'scripts/lib/plugins/chat.io',
         'pageheader'    : 'modules/pageheader/pageheader-module',
         'maincontent'   : 'modules/maincontent/maincontent-module',
+        'score'         : 'modules/score/score.controller',
+        'roster'         : 'modules/roster/roster-module',
        // 'io'            : 'modules/io/io-module',
         'ui'            : 'modules/ui/ui-module',
         'ia'            : 'modules/ia/ia-module'
