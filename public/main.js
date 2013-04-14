@@ -40,7 +40,7 @@ require.config({
         'pageheader'    : 'modules/pageheader/pageheader-module',
         'maincontent'   : 'modules/maincontent/maincontent-module',
         'score'         : 'modules/score/score.controller',
-        'roster'         : 'modules/roster/roster-module',
+        'roster'        : 'modules/roster/roster.controller',
        // 'io'            : 'modules/io/io-module',
         'ui'            : 'modules/ui/ui-module',
         'ia'            : 'modules/ia/ia-module'

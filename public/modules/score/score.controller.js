@@ -6,7 +6,7 @@
  * Time: 10:57 PM
  *
  */
-define(['sf1','modules/score/score.models','modules/score/score.views','modules/roster/roster-module','text!modules/score/score.template.html'],
+define(['sf1','modules/score/score.models','modules/score/score.views','roster','text!modules/score/score.template.html'],
     function(sf1,Models, Views, Roster, template){
         var anchorSelector = '#TemplateContainer';
         _.templateSettings.variable = 'S';

@@ -80,7 +80,7 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
                 {route: rosterId}
             ]);
             $('.main-content-wrapper').empty();
-            require(['../modules/roster/roster-module', 'chat'], function (module, chatMod) {
+            require(['roster', 'chat'], function (module, chatMod) {
                 module.init(rosterId);
                // chatMod.init();
             });
