@@ -24,12 +24,6 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
     // namespace for var reference in template
     _.templateSettings.variable = 'S';
-
-    // attach the module template markup to the DOM
-    baseMarkup = $(template);
-    $(anchorSelector).append(baseMarkup);
-
-
     var getCurrentAuthRoster = function(){
         if (sf1.hasStorage){
             return localStorage.getItem('currentAuthRoster');
@@ -170,16 +164,12 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
 
 
-    var zeroTotals = function(){
-        battersSubTotal = 0;
-        startersSubTotal = 0;
-        closersSubTotal = 0;
-    };
 
 
     function init(rosterName){
-
-        zeroTotals();
+        battersSubTotal = 0;
+        startersSubTotal = 0;
+        closersSubTotal = 0;
 
         if (sf1.hasStorage){
             var testUserObj = getCurrentAuthRoster();
@@ -192,14 +182,25 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
             }
         }
 
-        if (rosterName){
-            rosterSlug = rosterName;
-        }
+        rosterSlug = rosterName;
+        sf1.log('Roster module init ');
+
+        // attach the module template markup to the DOM
+        baseMarkup = $(template);
+        $(anchorSelector).append(baseMarkup);
+
         sf1.log('roster module init - rosterId: ' + rosterName);
+
+
+
 
         if (rosterName){
             synchPlayerModel();
+           // new PlayerCollection(response.players)
 
+
+            // fire ajax query to get roster
+            // call render roster with collection
         }
 
 
@@ -899,13 +900,12 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
         },
         setRoster:setRoster,
         getTotals:function(roster){
-            if(roster){
-                setRoster(roster);
-                synchPlayerModel();
-                sf1.EventBus.bind('roster.playerModelUpdateSuccess',function(data){
-                   return {total:675,pitchers:334};
-                });
-            }
+            setRoster(roster);
+            synchPlayerModel();
+            sf1.EventBus.bind('roster.playerModelUpdateSuccess',function(data){
+               return {total:675,pitchers:334};
+            });
+
         }
     };
 });
