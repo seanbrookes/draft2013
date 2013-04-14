@@ -744,11 +744,6 @@ exports.toggleFetchStats = function(req, res){
     });
 };
 
-exports.triggerPitcherStats = function(req,res){
-    EventBus.emit('stats.getLatestPitcherStatsRequest');
-
-
-};
 EventBus.on('stats.getLatestPitcherStatsRequest',function(event){
 
     request({uri: pitchers}, function(err, response, body){
@@ -810,13 +805,14 @@ EventBus.on('stats.getLatestBatterStatsRequest',function(event){
     });
 });
 exports.triggerBatterStats = function(req,res){
-
     EventBus.emit('stats.getLatestBatterStatsRequest');
-
-
-
+    return res.send(200,'batter processing request is processing');
 };
 
+exports.triggerPitcherStats = function(req,res){
+    EventBus.emit('stats.getLatestPitcherStatsRequest');
+    return res.send(200,'pitcher processing request is processing');
+};
 // post player stats
 exports.postPlayerStats = function(req,res){
     // is it a pitcher or batter
