@@ -572,54 +572,9 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
     };
     /*
      *
-     * Starters Total
+     * Batters Total/Sort
      *
      * */
-    var totalAndSortStarters = function(originalArray){
-        for (var i = 0;i < originalArray.length;i++){
-            originalArray[i].total = ((originalArray[i].wins * 7) - (originalArray[i].losses * 4) + (originalArray[i].k / 2))
-        }
-        originalArray.sort(compareTotals);
-        if (originalArray[0]){
-            originalArray[0].counting = true;
-            startersSubTotal += originalArray[0].total;
-        }
-        if (originalArray[1]){
-            originalArray[1].counting = true;
-            startersSubTotal += originalArray[1].total;
-        }
-        if (originalArray[2]){
-            originalArray[2].counting = true;
-            startersSubTotal += originalArray[2].total;
-        }
-        if (originalArray[3]){
-            originalArray[3].counting = true;
-            startersSubTotal += originalArray[3].total;
-        }
-
-        return originalArray;
-    };
-    /*
-     *
-     * Closers Total
-     *
-     * */
-    var totalAndSortClosers = function(originalArray){
-        for (var i = 0;i < originalArray.length;i++){
-            originalArray[i].total = ((originalArray[i].saves * 6)  + (originalArray[i].k / 2) + (originalArray[i].ip / 2))
-        }
-        originalArray.sort(compareTotals);
-        if (originalArray[0]){
-            originalArray[0].counting = true;
-            closersSubTotal += originalArray[0].total;
-        }
-        if (originalArray[1]){
-            originalArray[1].counting = true;
-            closersSubTotal += originalArray[0].total;
-        }
-
-        return originalArray;
-    };
     var totalAndSortBatters = function(originalArray){
         var catchersArray = [];
         var firstBArray = [];
@@ -733,10 +688,10 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
             battersSubTotal += dhArray[0].total;
         }
         /*
-        *
-        * Merge all the arrays
-        *
-        * */
+         *
+         * Merge all the arrays
+         *
+         * */
         returnArray = $.merge(returnArray,catchersArray);
         returnArray = $.merge(returnArray,firstBArray);
         returnArray = $.merge(returnArray,twoBArray);
@@ -749,6 +704,58 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/roste
 
         return returnArray;
 
+    };
+
+    /*
+     *
+     * Starters Total
+     *
+     * */
+    var totalAndSortStarters = function(originalArray){
+        for (var i = 0;i < originalArray.length;i++){
+            originalArray[i].total = ((originalArray[i].wins * 15) - (originalArray[i].losses * 4) + (originalArray[i].k / 2))
+        }
+        originalArray.sort(compareTotals);
+        if (originalArray[0]){
+            originalArray[0].counting = true;
+            startersSubTotal += originalArray[0].total;
+        }
+        if (originalArray[1]){
+            originalArray[1].counting = true;
+            startersSubTotal += originalArray[1].total;
+        }
+        if (originalArray[2]){
+            originalArray[2].counting = true;
+            startersSubTotal += originalArray[2].total;
+        }
+        if (originalArray[3]){
+            originalArray[3].counting = true;
+            startersSubTotal += originalArray[3].total;
+        }
+
+        return originalArray;
+    };
+    /*
+     *
+     * Closers Total
+     *
+     * */
+
+    var totalAndSortClosers = function(originalArray){
+        for (var i = 0;i < originalArray.length;i++){
+            originalArray[i].total = ((originalArray[i].saves * 7)  + (originalArray[i].wins * 6) + (originalArray[i].k / 2) + (originalArray[i].ip / 2))
+        }
+        originalArray.sort(compareTotals);
+        if (originalArray[0]){
+            originalArray[0].counting = true;
+            closersSubTotal += originalArray[0].total;
+        }
+        if (originalArray[1]){
+            originalArray[1].counting = true;
+            closersSubTotal += originalArray[0].total;
+        }
+
+        return originalArray;
     };
     var renderRoster = function(){
 //        var roster = rosterslug;
