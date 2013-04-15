@@ -10,9 +10,85 @@ define(['marionette','sf1'],
     function(Marionette,sf1){
 
         /*
+        *
+        * main score total layout view
+        *
+        * */
+        var ScoreSummaryLayout = Backbone.Marionette.Layout.extend({
+            template: "#ScoreModuleDefaultTemplate",
+
+            regions: {
+                overallRegion: "#OverallTotalsContainer",
+                battersRegion: "#BatterTotalsContainer",
+                startersRegion: "#StarterTotalsContainer",
+                closersRegion: "#CloserTotalsContainer"
+            }
+        });
+        /*
         * define score views
         *
         * */
+
+        var TotalItemView = Backbone.Marionette.ItemView.extend({
+            template: '#ScoreItemTemplate',
+            tagName: 'tr',
+            onRender:function(){
+//                if (this.model.attributes.counting){
+//                    this.$el.addClass('counting');
+//                }
+                //sf1.log('ON RENDER' + this.model);
+            }
+
+        });
+        /*
+         * RosterTotals
+         *
+         * */
+        var RosterTotalView = Backbone.Marionette.CompositeView.extend({
+            template: '#RosterTotalsViewTemplate',
+            itemView: TotalItemView,
+            itemViewContainer: 'tbody'
+        });
+        /*
+         * BatterTotals
+         *
+         * */
+        var BatterTotalView = Backbone.Marionette.CompositeView.extend({
+            template: '#BatterTotalsViewTemplate',
+            itemView: TotalItemView,
+            itemViewContainer: 'tbody'
+        });
+        /*
+         * StarterTotals
+         *
+         * */
+        var StarterTotalView = Backbone.Marionette.CompositeView.extend({
+            template: '#StarterTotalsViewTemplate',
+            itemView: TotalItemView,
+            itemViewContainer: 'tbody'
+        });
+        /*
+         * CloserTotals
+         *
+         * */
+        var CloserTotalView = Backbone.Marionette.CompositeView.extend({
+            template: '#CloserTotalsViewTemplate',
+            itemView: TotalItemView,
+            itemViewContainer: 'tbody'
+        });
+
+
+
+
+
+        return {
+            BatterTotalView:BatterTotalView,
+            StarterTotalView:StarterTotalView,
+            CloserTotalView:CloserTotalView,
+            RosterTotalView:RosterTotalView,
+            ScoreSummaryLayout:ScoreSummaryLayout
+        };
+
 
 
     }

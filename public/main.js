@@ -86,8 +86,8 @@ require.config({
     }
 });
 define(
-    ['jquery', 'i18n', 'client', 'security', 'ia', 'pageheader', 'maincontent'],
-    function($, i18n, App, Security, IA, PageHeader, MainContent) {
+    ['jquery', 'sf1', 'i18n', 'client', 'security', 'ia', 'pageheader', 'maincontent','roster'],
+    function($, sf1, i18n, App, Security, IA, PageHeader, MainContent, Roster) {
 
         App.sf1.log('typeof $: ' + typeof $);
         App.sf1.log('typeof _: ' + typeof _);
@@ -97,6 +97,52 @@ define(
             i18n.init({
                 lng: 'en'
             }, function(t) {
+                Roster.getRoster('bashers');
+                Roster.getRoster('hooters');
+                Roster.getRoster('mashers');
+                Roster.getRoster('stallions');
+                Roster.getRoster('rallycaps');
+                sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+
+                    if(roster){
+                        sf1.rosters.push(roster);
+                    }
+                    if(sf1.rosters.length === 5){
+                        sf1.EventBus.trigger('score.rostersArrayLoaded');
+                    }
+                });
+
+
+
+//                if (sf1.rosters.length !== 5){
+//                    sf1.rosters = [];
+//                    Roster.getRoster('bashers');
+//                    Roster.getRoster('hooters');
+//                    Roster.getRoster('mashers');
+//                    Roster.getRoster('stallions');
+//                    Roster.getRoster('rallycaps');
+//                    sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+//
+//                        if(roster){
+//                            sf1.rosters.push(roster);
+//                        }
+//                        if(sf1.rosters.length > 4){
+//                            sf1.EventBus.trigger('score.rostersArrayLoaded');
+//                        }
+//                    });
+//                }
+
+
+
+
+
+
+
+
+
+
+
+
                 var router = new App.AppRouter(t);
                 Backbone.history.start();
 

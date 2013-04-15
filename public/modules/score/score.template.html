@@ -2,8 +2,83 @@
 
     <script type="text/template" id="ScoreModuleDefaultTemplate">
 
-        <div>score goes here</div>
+        <div class="row">
+            <div class="quarter" id="OverallTotalsContainer">
+
+            </div>
+            <div class="quarter" id="BatterTotalsContainer">
+
+            </div>
+            <div class="quarter" id="StarterTotalsContainer">
+
+            </div>
+            <div class="quarter" id="CloserTotalsContainer">
+
+            </div>
+
+        </div>
 
     </script>
 
+
+    <!-- Roster Totals  -->
+    <script id="RosterTotalsViewTemplate" type="text/template">
+        <table>
+            <caption>Overall</caption>
+            <thead>
+            <tr>
+                <th scope="col">roster</th>
+                <th scope="col">total</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </script>
+    <script id="BatterTotalsViewTemplate" type="text/template">
+        <table>
+            <caption>Batters</caption>
+            <thead>
+            <tr>
+                <th scope="col">roster</th>
+                <th scope="col">total</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </script>
+    <script id="StarterTotalsViewTemplate" type="text/template">
+        <table>
+            <caption>Starters</caption>
+            <thead>
+            <tr>
+                <th scope="col">roster</th>
+                <th scope="col">total</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </script>
+    <script id="CloserTotalsViewTemplate" type="text/template">
+        <table>
+            <caption>Closers</caption>
+            <thead>
+            <tr>
+                <th scope="col">roster</th>
+                <th scope="col">total</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </script>
+    <script id="ScoreItemTemplate" type="text/template">
+        <td><%= S.name %></td><td><%= S.total %></td>
+    </script>
 </div>

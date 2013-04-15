@@ -8,6 +8,12 @@
  */
 // Client App
 define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
+
+
+
+
+    sf1.initRosterPoints();
+
     var AppRouter;
     AppRouter = Backbone.Router.extend({
 
@@ -33,8 +39,8 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             require(['score', 'draft', 'chat'], function (score, draft) {
                 $('.main-content-wrapper').empty();
                // chatMod.init();
-                //score.init();
-                draft.init();
+                score.init();
+                //draft.init();
                 //draftMod.init();
 
             });

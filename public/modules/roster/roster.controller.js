@@ -61,6 +61,14 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
 
 
         if (rosterName){
+            /*
+             *
+             *
+             * Synch Player Model
+             *
+             *
+             * */
+
             Model.synchPlayerModel(rosterSlug);
            // new PlayerCollection(response.players)
 
@@ -170,13 +178,6 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
         renderRoster(playersModel);
         updateRosterDraftStatusModel();
     });
-    /*
-    *
-    *
-    * Synch Player Model
-    *
-    *
-    * */
 
 
     /*
@@ -198,125 +199,109 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
 //            });
 //            var output = rosterView.render().$el;
 
-            var battersArray = [];
-            var startersArray = [];
-            var closersArray = [];
+            if(Model.getRoster(rosterSlug)){
+                var rosterObj = Model.getRoster(rosterSlug);
 
-            for (var i = 0;i < playersModel.length;i++){
-                if (playersModel[i].pos === 'SP'){
-                    startersArray.push(playersModel[i]);
-                }
-                else if (playersModel[i].pos === 'RP'){
-                    closersArray.push(playersModel[i]);
-                }
-                else{
-                    battersArray.push(playersModel[i]);
 
-                }
+
+
+                var battersCollection = new Model.PlayerCollection(rosterObj.battersArray);
+                var batterView = new View.BatterView({
+                    collection: battersCollection
+                });
+                var batterOutput = batterView.render().$el;
+
+                var startersCollection = new Model.PlayerCollection(rosterObj.startersArray);
+                var starterView = new View.StarterView({
+                    collection: startersCollection
+                });
+                var starterOutput = starterView.render().$el;
+                var closersCollection = new Model.PlayerCollection(rosterObj.closersArray);
+                var closerView = new View.CloserView({
+                    collection: closersCollection
+                });
+                var closerOutput = closerView.render().$el;
+
+                var headerOutput = '<ul>';
+
+                headerOutput += '<li>';
+                headerOutput += 'batters: ' + rosterObj.batterTotal;
+                headerOutput += '</li>';
+
+                headerOutput += '<li>';
+                headerOutput += 'starters: ' + rosterObj.starterTotal;
+                headerOutput += '</li>';
+
+                headerOutput += '<li>';
+                headerOutput += 'closers: ' + rosterObj.closerTotal;
+                headerOutput += '</li>';
+
+                headerOutput += '<li>';
+                headerOutput += 'total: ' + parseFloat(rosterObj.batterTotal + rosterObj.starterTotal + rosterObj.closerTotal).toFixed(2);
+                headerOutput += '</li>';
+
+                headerOutput += '</ul>';
+
+                $('.main-content-wrapper').html(headerOutput);
+                $('.main-content-wrapper').append(batterOutput);
+                $('.main-content-wrapper').append(starterOutput);
+                $('.main-content-wrapper').append(closerOutput);
+
+                $('.roster-title').text(rosterName);
+
+                $('.btn-cmd-editpos').click(function(event){
+                    sf1.EventBus.trigger('roster.editPlayerPosRequest',event);
+                });
+
+                $('.draft-status-cmd').click(function(event){
+                    event.preventDefault();
+                    // get
+                    var id = $(event.target).data('id');
+                    var val = $(event.target).text();
+                    toggleEditOn(id,val);
+
+                });
+                $('.draft-roster-cmd').click(function(event){
+                    event.preventDefault();
+                    // get
+                    var id = $(event.target).data('id');
+                    //  var val = $(event.target).text();
+                    var val = rosterSlug;
+                    toggleRosterEditOn(id,val);
+
+                });
+                $('.delete-roster-player').click(function(event){
+                    event.preventDefault();
+                    // confirm delete
+                    var answer = confirm("Confirm Delete?");
+                    if (answer){
+                        // ajax
+                        sf1.io.ajax({
+                            type:'POST',
+                            url:'/deleterosterplayer',
+                            data:{slug:rosterSlug,playerId:$(event.target).data('id')},
+                            success:function(response){
+                                sf1.log('player deleted ' + response);
+                                document.location.reload();
+                            },
+                            error:function(response){
+                                sf1.log('error deleting player: ' + response);
+                            }
+
+                        })
+                    }
+                    // ajax delete pass id
+
+                });
+                sf1.EventBus.trigger('roster.renderRosterComplete');
+                //$('.nav-main-list').i18n();
+
+                sf1.log('| BATTER TOTAL: ' + rosterObj.batterTotal);
+                sf1.log('| STARTER TOTAL: ' + rosterObj.starterTotal);
+                sf1.log('| CLOSER TOTAL: ' + rosterObj.closerTotal);
+                //sf1.EventBus.trigger('ia.mainNavRenderComplete');
             }
 
-
-
-            battersArray = totalAndSortBatters(battersArray);
-            startersArray = totalAndSortStarters(startersArray);
-            closersArray = totalAndSortClosers(closersArray);
-
-
-            var battersCollection = new Model.PlayerCollection(battersArray);
-            var batterView = new View.BatterView({
-                collection: battersCollection
-            });
-            var batterOutput = batterView.render().$el;
-
-            var startersCollection = new Model.PlayerCollection(startersArray);
-            var starterView = new View.StarterView({
-                collection: startersCollection
-            });
-            var starterOutput = starterView.render().$el;
-            var closersCollection = new Model.PlayerCollection(closersArray);
-            var closerView = new View.CloserView({
-                collection: closersCollection
-            });
-            var closerOutput = closerView.render().$el;
-
-            var headerOutput = '<ul>';
-
-            headerOutput += '<li>';
-            headerOutput += 'batters: ' + battersSubTotal;
-            headerOutput += '</li>';
-
-            headerOutput += '<li>';
-            headerOutput += 'starters: ' + startersSubTotal;
-            headerOutput += '</li>';
-
-            headerOutput += '<li>';
-            headerOutput += 'closers: ' + closersSubTotal;
-            headerOutput += '</li>';
-
-            headerOutput += '<li>';
-            headerOutput += 'total: ' + parseFloat(battersSubTotal + startersSubTotal + closersSubTotal).toFixed(2);
-            headerOutput += '</li>';
-
-            headerOutput += '</ul>';
-
-            $('.main-content-wrapper').html(headerOutput);
-            $('.main-content-wrapper').append(batterOutput);
-            $('.main-content-wrapper').append(starterOutput);
-            $('.main-content-wrapper').append(closerOutput);
-
-            $('.roster-title').text(rosterName);
-
-            $('.btn-cmd-editpos').click(function(event){
-                sf1.EventBus.trigger('roster.editPlayerPosRequest',event);
-            });
-
-            $('.draft-status-cmd').click(function(event){
-                event.preventDefault();
-                // get
-                var id = $(event.target).data('id');
-                var val = $(event.target).text();
-                toggleEditOn(id,val);
-
-            });
-            $('.draft-roster-cmd').click(function(event){
-                event.preventDefault();
-                // get
-                var id = $(event.target).data('id');
-                //  var val = $(event.target).text();
-                var val = rosterSlug;
-                toggleRosterEditOn(id,val);
-
-            });
-            $('.delete-roster-player').click(function(event){
-                event.preventDefault();
-                // confirm delete
-                var answer = confirm("Confirm Delete?");
-                if (answer){
-                    // ajax
-                    sf1.io.ajax({
-                        type:'POST',
-                        url:'/deleterosterplayer',
-                        data:{slug:rosterSlug,playerId:$(event.target).data('id')},
-                        success:function(response){
-                            sf1.log('player deleted ' + response);
-                            document.location.reload();
-                        },
-                        error:function(response){
-                            sf1.log('error deleting player: ' + response);
-                        }
-
-                    })
-                }
-                // ajax delete pass id
-
-            });
-            sf1.EventBus.trigger('roster.renderRosterComplete');
-            //$('.nav-main-list').i18n();
-
-            sf1.log('| BATTER TOTAL: ' + battersSubTotal);
-            sf1.log('| STARTER TOTAL: ' + startersSubTotal);
-            sf1.log('| CLOSER TOTAL: ' + closersSubTotal);
-            //sf1.EventBus.trigger('ia.mainNavRenderComplete');
         }
     }
 
@@ -385,215 +370,7 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
         }
 
     };
-    function compareTotals(a,b) {
 
-        if (a.total > b.total){
-            return -1;
-        }
-        if (a.total < b.total){
-            return 1;
-        }
-        return 0;
-    }
-    /*
-    *
-    * Batters Total
-    *
-    * */
-    var totalBatterScore = function(player){
-
-        player.total = ((parseInt(player.runs)) + (parseInt(player.hits) / 2) + (parseInt(player.rbi)) + (parseInt(player.hr) * 2) + (parseInt(player.sb) / 2));
-
-        return player;
-
-    };
-    /*
-     *
-     * Batters Total/Sort
-     *
-     * */
-    var totalAndSortBatters = function(originalArray){
-        var catchersArray = [];
-        var firstBArray = [];
-        var twoBArray = [];
-        var threeBArray = [];
-        var ssArray = [];
-        var lfArray = [];
-        var cfArray = [];
-        var rfArray = [];
-        var dhArray = [];
-
-        var returnArray = [];
-
-        for (var i = 0;i < originalArray.length;i++){
-            var player = originalArray[i];
-
-            // add total property
-            player = totalBatterScore(player);
-            switch(player.pos){
-
-                case 'C':
-                    catchersArray.push(player);
-                    break;
-                case '1B':
-                    firstBArray.push(player);
-
-                    break;
-
-                case '2B':
-                    twoBArray.push(player);
-
-                    break;
-                case '3B':
-                    threeBArray.push(player);
-
-                    break;
-                case 'SS':
-                    ssArray.push(player);
-
-                    break;
-                case 'LF':
-                    lfArray.push(player);
-
-                    break;
-                case 'CF':
-                    cfArray.push(player);
-
-                    break;
-                case 'RF':
-                    rfArray.push(player);
-
-                    break;
-
-                case 'DH':
-                    dhArray.push(player);
-
-                    break;
-                default:
-
-            }
-
-        }
-
-        // set augmented properties
-        // total
-        // sort
-        // establish counting property
-        if (catchersArray.length > 0){
-            catchersArray.sort(compareTotals);
-            catchersArray[0].counting = true;
-            battersSubTotal += catchersArray[0].total;
-        }
-        if (firstBArray.length > 0){
-            firstBArray.sort(compareTotals);
-            firstBArray[0].counting = true;
-            battersSubTotal += firstBArray[0].total;
-        }
-        if (twoBArray.length > 0){
-            twoBArray.sort(compareTotals);
-            twoBArray[0].counting = true;
-            battersSubTotal += twoBArray[0].total;
-        }
-        if (threeBArray.length > 0){
-            threeBArray.sort(compareTotals);
-            threeBArray[0].counting = true;
-            battersSubTotal += threeBArray[0].total;
-        }
-        if (ssArray.length > 0){
-            ssArray.sort(compareTotals);
-            ssArray[0].counting = true;
-            battersSubTotal += ssArray[0].total;
-        }
-        if (lfArray.length > 0){
-            lfArray.sort(compareTotals);
-            lfArray[0].counting = true;
-            battersSubTotal += lfArray[0].total;
-        }
-        if (cfArray.length > 0){
-            cfArray.sort(compareTotals);
-            cfArray[0].counting = true;
-            battersSubTotal += cfArray[0].total;
-        }
-        if (rfArray.length > 0){
-            rfArray.sort(compareTotals);
-            rfArray[0].counting = true;
-            battersSubTotal += rfArray[0].total;
-        }
-        if (dhArray.length > 0){
-            dhArray.sort(compareTotals);
-            dhArray[0].counting = true;
-            battersSubTotal += dhArray[0].total;
-        }
-        /*
-         *
-         * Merge all the arrays
-         *
-         * */
-        returnArray = $.merge(returnArray,catchersArray);
-        returnArray = $.merge(returnArray,firstBArray);
-        returnArray = $.merge(returnArray,twoBArray);
-        returnArray = $.merge(returnArray,threeBArray);
-        returnArray = $.merge(returnArray,ssArray);
-        returnArray = $.merge(returnArray,lfArray);
-        returnArray = $.merge(returnArray,cfArray);
-        returnArray = $.merge(returnArray,rfArray);
-        returnArray = $.merge(returnArray,dhArray);
-
-        return returnArray;
-
-    };
-
-    /*
-     *
-     * Starters Total
-     *
-     * */
-    var totalAndSortStarters = function(originalArray){
-        for (var i = 0;i < originalArray.length;i++){
-            originalArray[i].total = ((originalArray[i].wins * 15) - (originalArray[i].losses * 4) + (originalArray[i].k / 2))
-        }
-        originalArray.sort(compareTotals);
-        if (originalArray[0]){
-            originalArray[0].counting = true;
-            startersSubTotal += originalArray[0].total;
-        }
-        if (originalArray[1]){
-            originalArray[1].counting = true;
-            startersSubTotal += originalArray[1].total;
-        }
-        if (originalArray[2]){
-            originalArray[2].counting = true;
-            startersSubTotal += originalArray[2].total;
-        }
-        if (originalArray[3]){
-            originalArray[3].counting = true;
-            startersSubTotal += originalArray[3].total;
-        }
-
-        return originalArray;
-    };
-    /*
-     *
-     * Closers Total
-     *
-     * */
-
-    var totalAndSortClosers = function(originalArray){
-        for (var i = 0;i < originalArray.length;i++){
-            originalArray[i].total = ((originalArray[i].saves * 7)  + (originalArray[i].wins * 6) + (originalArray[i].k / 2) + (originalArray[i].ip / 2))
-        }
-        originalArray.sort(compareTotals);
-        if (originalArray[0]){
-            originalArray[0].counting = true;
-            closersSubTotal += originalArray[0].total;
-        }
-        if (originalArray[1]){
-            originalArray[1].counting = true;
-            closersSubTotal += originalArray[0].total;
-        }
-
-        return originalArray;
-    };
 
 
 
@@ -774,6 +551,9 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
             return init(rosterId);
         },
         setRoster:setRoster,
+        getRoster:function(roster){
+            Model.getRoster(roster);
+        },
         getTotals:function(roster){
             setRoster(roster);
             synchPlayerModel();

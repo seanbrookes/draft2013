@@ -14,5 +14,14 @@ define(['backbone','sf1'],
         * define score models
         *
         * */
+        var TotalItemModel = Backbone.Model.extend({});
+        var TotalCollection = Backbone.Collection.extend({
+            model: TotalItemModel
+        });
+
+
+        return {
+            TotalCollection:TotalCollection
+        }
     }
 );
