@@ -1,0 +1,191 @@
+<div id="PosTemplateContainer">
+
+    <script type="text/template" id="PosDefaultTemplate">
+
+        <div>Position Stats go here</div>
+
+    </script>
+
+    <!--
+
+    Batter Template
+
+    -->
+    <script id="BatterTemplate" class="player-template" type="text/template">
+        <td>
+            <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
+                <%= S.pos %>
+            </button>
+        </td>
+        <td data-id="<%= S._id %>" data-type="playername">
+            <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>
+        </td>
+        <td class="team-col"><%= S.team %></td>
+        <td>
+            <%= S.runs %>
+        </td>
+        <td>
+            <%= S.hits %>
+        </td>
+        <td>
+            <%= S.hr %>
+        </td>
+        <td>
+            <%= S.rbi %>
+        </td>
+        <td>
+            <%= S.sb %>
+        </td>
+        <td class="total-col">
+            <%= S.total %>
+        </td>
+
+
+    </script>
+
+
+    <!--
+
+    Starter Template
+
+    -->
+    <script id="StarterTemplate" class="player-template" type="text/template">
+        <td>
+            <button class="btn-property-edit btn-cmd-link btn-cmd-editpos"  data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
+                <%= S.pos %>
+            </button>
+        </td>
+        <td data-id="<%= S._id %>" data-type="playername">
+            <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>
+        </td>
+        <td class="team-col"><%= S.team %></td>
+        <td>
+
+        </td>
+        <td>
+            <%= S.wins %>
+        </td>
+        <td>
+            <%= S.losses %>
+        </td>
+        <td>
+            <%= S.k %>
+        </td>
+        <td>
+
+        </td>
+        <td class="total-col">
+            <%= S.total %>
+        </td>
+
+
+    </script>
+
+
+    <!--
+
+    Closer Template
+
+    -->
+    <script id="CloserTemplate" class="player-template" type="text/template">
+        <td>
+            <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S._id %>" data-mlbid="<%= S.mlbid%>" data-val="<%= S.pos %>">
+                <%= S.pos %>
+            </button>
+        </td>
+        <td data-id="<%= S._id %>" data-type="playername">
+            <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>
+        </td>
+        <td class="team-col"><%= S.team %></td>
+        <td>
+            <%= S.wins %>
+        </td>
+        <td>
+            <%= S.losses %>
+        </td>
+        <td>
+            <%= S.saves %>
+        </td>
+        <td>
+            <%= S.ip %>
+        </td>
+        <td>
+            <%= S.k %>
+        </td>
+        <td class="total-col">
+            <%= S.total %>
+        </td>
+
+
+    </script>
+    <script id="BatterViewTemplate" type="text/template">
+        <table>
+            <caption>Batters</caption>
+            <thead>
+            <tr>
+                <th scope="col">pos</th>
+                <th scope="col">name</th>
+                <th scope="col">team</th>
+                <th scope="col">runs</th>
+                <th scope="col">hits</th>
+                <th scope="col">hr</th>
+                <th scope="col">rbi</th>
+                <th scope="col">sb</th>
+                <th scope="col">total</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </script>
+    <script id="StarterViewTemplate" type="text/template">
+        <table>
+            <caption>Starters</caption>
+            <thead>
+            <tr>
+                <th scope="col">pos</th>
+                <th scope="col">name</th>
+                <th scope="col">team</th>
+                <th scope="col"></th>
+                <th scope="col">wins</th>
+                <th scope="col">losses</th>
+                <th scope="col">so</th>
+                <th scope="col"></th>
+                <th scope="col">total</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </script>
+    <script id="CloserViewTemplate" type="text/template">
+        <table>
+            <caption>Closers</caption>
+            <thead>
+            <tr>
+                <th scope="col">pos</th>
+                <th scope="col">name</th>
+                <th scope="col">team</th>
+                <th scope="col">wins</th>
+                <th scope="col">losses</th>
+                <th scope="col">saves</th>
+                <th scope="col">ip</th>
+                <th scope="col">so</th>
+                <th scope="col">total</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </script>
+
+</div>

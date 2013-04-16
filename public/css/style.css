@@ -89,6 +89,13 @@ ul{
     font-size:1.5em;
     font-family:Consolas;
 }
+.total-col{
+    font-weight:bold;
+    background-color:#eee;
+}
+.team-col{
+    background-color:#eee;
+}
 tr.counting{
     background-color:#eee;
 }
@@ -152,6 +159,16 @@ table.player-list select{
     margin-left:1em;
 }
 .roster-status-instrument-container{
+
+}
+.roster-title{
+    float:left
+}
+.roster-scores-list{
+    list-style:none;
+    margin-left:30em;
+}
+.roster-scores-list li{
 
 }
 .draft-module-container{

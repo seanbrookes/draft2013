@@ -222,7 +222,8 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
                 });
                 var closerOutput = closerView.render().$el;
 
-                var headerOutput = '<ul>';
+                var headerOutput = '<h1 class="roster-title">' + rosterSlug + '</h1>';
+                headerOutput += '<ul class="roster-scores-list">';
 
                 headerOutput += '<li>';
                 headerOutput += 'batters: ' + rosterObj.batterTotal;
@@ -236,16 +237,26 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
                 headerOutput += 'closers: ' + rosterObj.closerTotal;
                 headerOutput += '</li>';
 
+                var rosterTotal = parseFloat(rosterObj.batterTotal + rosterObj.starterTotal + rosterObj.closerTotal).toFixed(2);
+
                 headerOutput += '<li>';
-                headerOutput += 'total: ' + parseFloat(rosterObj.batterTotal + rosterObj.starterTotal + rosterObj.closerTotal).toFixed(2);
+                headerOutput += 'total: ' + rosterTotal;
                 headerOutput += '</li>';
 
                 headerOutput += '</ul>';
+
 
                 $('.main-content-wrapper').html(headerOutput);
                 $('.main-content-wrapper').append(batterOutput);
                 $('.main-content-wrapper').append(starterOutput);
                 $('.main-content-wrapper').append(closerOutput);
+
+                $('.batter-total').text(rosterObj.batterTotal);
+                $('.starter-total').text(rosterObj.starterTotal);
+                $('.closer-total').text(rosterObj.closerTotal);
+                $('.roster-total').text(rosterTotal);
+
+
 
                 $('.roster-title').text(rosterName);
 

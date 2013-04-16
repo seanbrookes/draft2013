@@ -40,10 +40,11 @@ require.config({
         'pageheader'    : 'modules/pageheader/pageheader-module',
         'maincontent'   : 'modules/maincontent/maincontent-module',
         'score'         : 'modules/score/score.controller',
+        'pos'           : 'modules/pos/pos.controller',
         'roster'        : 'modules/roster/roster.controller',
        // 'io'            : 'modules/io/io-module',
         'ui'            : 'modules/ui/ui-module',
-        'ia'            : 'modules/ia/ia-module'
+        'ia'            : 'modules/ia/ia.controller'
     },
     shim: {
 
@@ -114,46 +115,19 @@ define(
 
 
 
-//                if (sf1.rosters.length !== 5){
-//                    sf1.rosters = [];
-//                    Roster.getRoster('bashers');
-//                    Roster.getRoster('hooters');
-//                    Roster.getRoster('mashers');
-//                    Roster.getRoster('stallions');
-//                    Roster.getRoster('rallycaps');
-//                    sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
-//
-//                        if(roster){
-//                            sf1.rosters.push(roster);
-//                        }
-//                        if(sf1.rosters.length > 4){
-//                            sf1.EventBus.trigger('score.rostersArrayLoaded');
-//                        }
-//                    });
-//                }
-
-
-
-
-
-
-
-
-
-
-
-
                 var router = new App.AppRouter(t);
                 Backbone.history.start();
 
 
                 SF1 = new Backbone.Marionette.Application();
+
                 SF1.addRegions({
                     mainContentRegion: '.main-content-wrapper',
                     pageHeaderRegion:'.page-header',
                     pageFooterRegion:'.page-footer',
                     mainNavRegion:'#MainNavigation',
-                    globalNavRegion:'#GlbalNavigation'
+                    rosterNavRegion:'#RosterNavigation',
+                    globalNavRegion:'#GlobalNavigation'
 
                 });
                 PageHeader.init();

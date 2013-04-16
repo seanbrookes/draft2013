@@ -7,14 +7,14 @@
  *
  */
 define(
-	['marionette', 'i18n', 'sf1', 'client', 'text!/modules/ia/ia-template.html', 'text!/modules/ia/config.json'],
-	function(Marionette, i18n, sf1, App, template, config) {
+	['sf1','marionette', 'i18n', 'modules/ia/ia.models', 'modules/ia/ia.views', 'text!/modules/ia/ia.template.html', 'text!/modules/ia/config.json'],
+	function(sf1, Marionette, i18n, Model, View, template, config) {
 
 		_.templateSettings.variable = 'P';
 
 
 
-        var sf1 = App.sf1;
+        //var sf1 = App.sf1;
         var anchorSelector = '#TemplateContainer';
 
         var mainNavCollection = {};
@@ -30,43 +30,8 @@ define(
         var navConfigObj = {};
 
 
-		/*
-		 * Nav Item Model / Collection
-		 *
-		 * */
-		var NavItemModel = Backbone.Model.extend({});
-		var NavItemCollection = Backbone.Collection.extend({
-			model: NavItemModel
-		});
-        /*
-        * 
-        * Marionette Views
-        * 
-        * */
-        var NavItemView = Backbone.Marionette.ItemView.extend({
-            template: '#NavItemTemplate',
-            tagName: 'li'
-        });
 
-        /*
-        * MainNavView
-        *
-        * */
-        var MainNavView = Backbone.Marionette.CollectionView.extend({
-            tagName: 'ul',
-            className: 'nav-main-list nav'
 
-        });
-
-        /*
-         * GlobalNavView
-         *
-         * */
-        var GlobalNavView = Backbone.Marionette.CollectionView.extend({
-            tagName: 'ul',
-            className: 'nav-global-list nav nav-pills'
-
-        });
 
         /*
          * initialize data store mdel
@@ -120,9 +85,9 @@ define(
                 var mainNavShell = $('#MainNavTemplate').html();
                 $('.page-header').after(mainNavShell);
 
-                var mainNavView = new MainNavView({
-                    itemView: NavItemView,
-                    collection: new NavItemCollection(navConfigObj.mainNav)
+                var mainNavView = new View.MainNavView({
+                    itemView: View.NavItemView,
+                    collection: new Model.NavItemCollection(navConfigObj.mainNav)
                 });
                 $('.main-nav-container .navbar-inner').html(mainNavView.render().$el);
 
@@ -143,16 +108,58 @@ define(
                 $('.page-header').append(globalNavShell);
 
 
-                var globalNavView = new GlobalNavView({
-                    itemView: NavItemView,
-                    collection: new NavItemCollection(navConfigObj.globalNav)
+                var globalNavView = new View.GlobalNavView({
+                    itemView: View.NavItemView,
+                    collection: new Model.NavItemCollection(navConfigObj.globalNav)
                 });
                 $('.global-nav-container').html(globalNavView.render().$el);
 
                 $('.nav-global-list').i18n();
                 sf1.EventBus.trigger('ia.globalNavRenderComplete');
 
-                sf1.EventBus.trigger('checkauth-event');
+                //sf1.EventBus.trigger('checkauth-event');
+            });
+            /*
+             *
+             * render roster nav
+             *
+             * */
+            sf1.EventBus.bind('ia.renderRosterNavRequest',function(event){
+                _.templateSettings.variable = 'P';
+                // set the initial main nav markup
+                var rosterNavShell = $('#RosterNavTemplate').html();
+                $('#SideBar').html(rosterNavShell);
+
+                var rosterNavView = new View.RosterNavView({
+                    itemView: View.NavItemView,
+                    collection: new Model.NavItemCollection(navConfigObj.rosterNav)
+                });
+                $('.roster-nav-container').html(rosterNavView.render().$el);
+
+                $('.nav-roster-list').i18n();
+                sf1.EventBus.trigger('ia.rosterNavRenderSuccess');
+
+            });
+            /*
+             *
+             * render roster nav
+             *
+             * */
+            sf1.EventBus.bind('ia.renderPosNavRequest',function(event){
+                _.templateSettings.variable = 'P';
+                // set the initial main nav markup
+                var posNavShell = $('#PosNavTemplate').html();
+                $('#SideBar').append(posNavShell);
+
+                var posNavView = new View.PosNavView({
+                    itemView: View.NavItemView,
+                    collection: new Model.NavItemCollection(navConfigObj.posNav)
+                });
+                $('.pos-nav-container').html(posNavView.render().$el);
+
+                $('.nav-pos-list').i18n();
+                sf1.EventBus.trigger('ia.posNavRenderSuccess');
+
             });
             sf1.EventBus.bind('ia.mainNavEvent',function(event,param){
                 if (param){
@@ -176,6 +183,12 @@ define(
             },
             initMainNav:function(){
                 sf1.EventBus.trigger('ia.renderMainNavRequest');
+            },
+            initRosterNav:function(){
+                sf1.EventBus.trigger('ia.renderRosterNavRequest');
+            },
+            initPosNav:function(){
+                sf1.EventBus.trigger('ia.renderPosNavRequest');
             }
         };
 

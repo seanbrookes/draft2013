@@ -113,6 +113,21 @@
             <tbody>
 
             </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>sub</td>
+                    <td><label class="batter-total"></label></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
         </table>
     </script>
     <script id="StarterViewTemplate" type="text/template">
@@ -136,6 +151,22 @@
             <tbody>
 
             </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>sub</td>
+                    <td><label class="starter-total"></label></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+
         </table>
     </script>
     <script id="CloserViewTemplate" type="text/template">
@@ -159,6 +190,34 @@
             <tbody>
 
             </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>sub</td>
+                    <td><label class="closer-total"></label></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>ttl</td>
+                    <td><label class="roster-total"></label></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
         </table>
     </script>
 
@@ -176,7 +235,7 @@
         <td data-id="<%= S._id %>" data-type="playername">
             <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>
         </td>
-        <td><%= S.team %></td>
+        <td class="team-col"><%= S.team %></td>
         <td>
             <%= S.runs %>
         </td>
@@ -192,7 +251,7 @@
         <td>
             <%= S.sb %>
         </td>
-        <td>
+        <td class="total-col">
             <%= S.total %>
         </td>
         <td data-id="<%= S._id%>" data-type="draftstatus">
@@ -219,7 +278,7 @@
         <td data-id="<%= S._id %>" data-type="playername">
             <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>
         </td>
-        <td><%= S.team %></td>
+        <td class="team-col"><%= S.team %></td>
         <td>
 
         </td>
@@ -235,7 +294,7 @@
         <td>
 
         </td>
-        <td>
+        <td class="total-col">
             <%= S.total %>
         </td>
         <td data-id="<%= S._id%>" data-type="draftstatus">
@@ -262,7 +321,7 @@
         <td data-id="<%= S._id %>" data-type="playername">
             <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>
         </td>
-        <td><%= S.team %></td>
+        <td class="team-col"><%= S.team %></td>
         <td>
             <%= S.wins %>
         </td>
@@ -278,7 +337,7 @@
         <td>
             <%= S.k %>
         </td>
-        <td>
+        <td class="total-col">
             <%= S.total %>
         </td>
         <td data-id="<%= S._id%>" data-type="draftstatus">

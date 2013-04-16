@@ -24,8 +24,14 @@ define(
             var moduleMarkup = $('#MainContentDefaultTemplate').html();
 
             $('.viewport').append(moduleMarkup);
+//
+//            var layout = new View.ScoreSummaryLayout();
+//            // layout.render();
+//            SF1.mainContentRegion.show(layout);
 
             IA.initMainNav();
+            IA.initRosterNav();
+            IA.initPosNav();
 
             sf1.EventBus.trigger('maincontent.initComplete');
         };

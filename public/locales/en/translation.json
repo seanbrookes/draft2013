@@ -1,6 +1,7 @@
 {
     "ia": {
-        "home": "Draft",
+        "home": "Home",
+        "draft": "Draft",
         "admin": "Admin",
         "signup": "Sign Up",
         "hooters": "Hooters",

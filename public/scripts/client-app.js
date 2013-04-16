@@ -28,7 +28,9 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             "adminstats": "adminstats",
             "admin": "admin",
             "page/:name": "page",
-            "roster/:name": "roster"
+            "roster/:name": "roster",
+            "pos/": "position",
+            "pos/:name": "position"
         },
 
         index: function () {
@@ -89,6 +91,17 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             require(['roster', 'chat'], function (module, chatMod) {
                 module.init(rosterId);
                // chatMod.init();
+            });
+
+        },
+        position: function (posName) {
+            sf1.log('pos route');
+            sf1.EventBus.trigger('ia.mainNavEvent', [
+                {route: posName}
+            ]);
+            $('.main-content-wrapper').empty();
+            require(['pos'], function (module) {
+                module.init(posName);
             });
 
         },
