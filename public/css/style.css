@@ -365,6 +365,15 @@ select#DraftPickRosterSelect{
 
 */
 @media screen and (max-width: 600px) {
+    .row .fifth{
+        border:1px solid red;
+        float:left;
+        max-width:10em;
+    }
+    .row .fourfifth{
+        max-width:18em;
+        border:1px solid blue;
+    }
     li{
         line-height: 16px;
     }
