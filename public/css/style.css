@@ -169,7 +169,10 @@ table.player-list select{
     margin-left:30em;
 }
 .roster-scores-list li{
-
+    font-weight:bold;
+}
+.roster-scores-list li .roster-score-summary-label{
+    font-weight:normal;
 }
 .draft-module-container{
     max-width:550px;
@@ -359,23 +362,50 @@ select#DraftPickRosterSelect{
 .control-feedback p{
     margin:0;
 }
+
+.nav-roster-list li a, .nav-pos-list li a{
+    padding-top:.25em;
+    padding-bottom:.25em;
+    display:inline-block;
+}
 /*
 
     small screen
 
 */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 50em) {
+    ul, ol, ul ul, ol ol, ul ol, ol ul{
+        margin: 0 0 0 1em;
+    }
     .row .fifth{
         border:0px solid red;
         float:left;
-        max-width:10em;
+        max-width:8em;
     }
     .row .fourfifth{
-        max-width:18em;
+        max-width:20em;
         border:0px solid blue;
     }
+    .roster-scores-list{
+        margin-left:5em;
+    }
     li{
-        line-height: 16px;
+        line-height: .85em;
+    }
+
+    td{
+        line-height:.9em;
+        padding:.1em;
+        border:1px solid #dddddd;
+        vertical-align:middle;
+        text-align:center;
+    }
+    .name-col{
+        text-align:left;
+
+    }
+    .name-col a{
+        font-size:.7em;
     }
     .roster-title{
         font-size:1em;
@@ -388,14 +418,14 @@ select#DraftPickRosterSelect{
         margin-left:.5em;
     }
     .roster-container{
-        max-width:600px;
+        max-width:40em;
     }
     table.player-list select{
         width:6em;
     }
     .player-list td{
-        padding:.14em;
-        font-size: .81em;
+        padding:.1em;
+        font-size: .75em;
     }
     .gauge-title{
         font-size:.55em;
@@ -412,5 +442,35 @@ select#DraftPickRosterSelect{
     }
     .navbar .nav>li>a{
         padding:5px 8px 5px
+    }
+
+}
+@media screen and (max-width: 30em) {
+    ul, ol, ul ul, ol ol, ul ol, ol ul{
+        margin: 0 0 0 1em;
+    }
+    .row .fifth{
+        border:1px solid red;
+        float:left;
+        max-width:6em;
+
+    }
+    .row .fourfifth{
+        max-width:15em;
+        border:1px solid blue;
+    }
+    td{
+        line-height:.8em;
+        padding:0;
+        border:1px solid #dddddd;
+        vertical-align:middle;
+        text-align:center;
+    }
+    .name-col{
+        text-align:left;
+
+    }
+    .name-col a{
+        font-size:.65em;
     }
 }

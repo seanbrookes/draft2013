@@ -226,21 +226,21 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
                 headerOutput += '<ul class="roster-scores-list">';
 
                 headerOutput += '<li>';
-                headerOutput += 'batters: ' + rosterObj.batterTotal;
+                headerOutput += '<label class="roster-score-summary-label">batters: </label>' + rosterObj.batterTotal;
                 headerOutput += '</li>';
 
                 headerOutput += '<li>';
-                headerOutput += 'starters: ' + rosterObj.starterTotal;
+                headerOutput += '<label class="roster-score-summary-label">starters:: </label>' + rosterObj.starterTotal;
                 headerOutput += '</li>';
 
                 headerOutput += '<li>';
-                headerOutput += 'closers: ' + rosterObj.closerTotal;
+                headerOutput += '<label class="roster-score-summary-label">closers:: </label>' + rosterObj.closerTotal;
                 headerOutput += '</li>';
 
                 var rosterTotal = parseFloat(rosterObj.batterTotal + rosterObj.starterTotal + rosterObj.closerTotal).toFixed(2);
 
                 headerOutput += '<li>';
-                headerOutput += 'total: ' + rosterTotal;
+                headerOutput += '<label class="roster-score-summary-label">total:: </label>' + rosterTotal;
                 headerOutput += '</li>';
 
                 headerOutput += '</ul>';
