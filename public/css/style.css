@@ -453,14 +453,14 @@ select#DraftPickRosterSelect{
         margin: 0 0 0 1em;
     }
     .row .fifth{
-        border:1px solid red;
+        border:0px solid red;
         float:left;
         max-width:6em;
 
     }
     .row .fourfifth{
         max-width:15em;
-        border:1px solid blue;
+        border:0px solid blue;
     }
     td{
         line-height:.8em;
