@@ -12,9 +12,10 @@
 
     -->
     <script id="BatterTemplate" class="player-template" type="text/template">
+        <td></td>
         <td>
             <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
-                <%= S.pos %>
+                <%= S.roster %>
             </button>
         </td>
         <td data-id="<%= S._id %>" class="name-col" data-type="playername">
@@ -50,9 +51,10 @@
 
     -->
     <script id="StarterTemplate" class="player-template" type="text/template">
+        <td></td>
         <td>
             <button class="btn-property-edit btn-cmd-link btn-cmd-editpos"  data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
-                <%= S.pos %>
+                <%= S.roster %>
             </button>
         </td>
         <td data-id="<%= S._id %>" class="name-col" data-type="playername">
@@ -88,9 +90,10 @@
 
     -->
     <script id="CloserTemplate" class="player-template" type="text/template">
+        <td></td>
         <td>
             <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S._id %>" data-mlbid="<%= S.mlbid%>" data-val="<%= S.pos %>">
-                <%= S.pos %>
+                <%= S.roster %>
             </button>
         </td>
         <td data-id="<%= S._id %>" class="name-col" data-type="playername">
@@ -120,10 +123,11 @@
     </script>
     <script id="BatterViewTemplate" type="text/template">
         <table>
-            <caption>Batters</caption>
+            <caption>Batters [<%= S.pos %>] </caption>
             <thead>
             <tr>
-                <th scope="col">pos</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
                 <th scope="col">name</th>
                 <th scope="col">team</th>
                 <th scope="col">runs</th>
@@ -146,7 +150,7 @@
             <caption>Starters</caption>
             <thead>
             <tr>
-                <th scope="col">pos</th>
+                <th scope="col"></th>
                 <th scope="col">name</th>
                 <th scope="col">team</th>
                 <th scope="col"></th>
@@ -169,7 +173,7 @@
             <caption>Closers</caption>
             <thead>
             <tr>
-                <th scope="col">pos</th>
+                <th scope="col"></th>
                 <th scope="col">name</th>
                 <th scope="col">team</th>
                 <th scope="col">wins</th>

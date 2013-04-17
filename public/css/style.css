@@ -91,13 +91,13 @@ ul{
 }
 .total-col{
     font-weight:bold;
-    background-color:#eee;
+    background-color:#f9f9f9;
 }
 .team-col{
-    background-color:#eee;
+    background-color:#f9f9f9;
 }
 tr.counting{
-    background-color:#eee;
+    background-color:#E9F2E6;
 }
 .ui-instrument-list{
     list-style:none;
@@ -417,6 +417,9 @@ select#DraftPickRosterSelect{
         margin-right:1em;
         margin-left:.5em;
     }
+    .team-col{
+        font-size:.67em;
+    }
     .roster-container{
         max-width:40em;
     }
@@ -465,12 +468,16 @@ select#DraftPickRosterSelect{
         border:1px solid #dddddd;
         vertical-align:middle;
         text-align:center;
+        font-size:.8em;
+    }
+    .team-col{
+        font-size:.7em;
     }
     .name-col{
         text-align:left;
 
     }
     .name-col a{
-        font-size:.65em;
+        font-size:.75em;
     }
 }

@@ -19,9 +19,11 @@ define(['backbone','sf1'],
             model: TotalItemModel
         });
 
+        var PosRankModel = Backbone.Model.extend({});
 
         return {
-            TotalCollection:TotalCollection
+            TotalCollection:TotalCollection,
+            PosRankModel:PosRankModel
         };
     }
 );
