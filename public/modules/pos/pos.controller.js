@@ -66,7 +66,7 @@ define(['sf1','modules/pos/pos.models','modules/pos/pos.views','text!modules/pos
                     });
 
                 }
-                else if (pos.toLowerCase === 'rp'){
+                else if (pos.toLowerCase() === 'rp'){
                     mainView = new View.CloserView({
                         collection: posTotalCollection
                     });
