@@ -43,13 +43,15 @@ define(['sf1','modules/pos/pos.models','modules/pos/pos.views','text!modules/pos
                         var curPlayer = curRoster.players[j];
                         if (curPlayer.pos.toLowerCase() === pos.toLowerCase()){
                             curPlayer.roster = curRoster.slug;
-                            curPlayer.rank = rankInt;
                             playerArray.push(curPlayer);
                             rankInt++;
                         }
                     }
                 }
                 playerArray.sort(sortTotal);
+                for (var j = 0;j < playerArray.length;j++){
+                    playerArray[j].rank = j + 1;
+                }
                 // loop through the rosters
                 // filter out the list of the position
                 // build array

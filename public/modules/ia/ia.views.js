@@ -18,6 +18,11 @@ define(['sf1','marionette'],
             template: '#NavItemTemplate',
             tagName: 'li'
         });
+        var RosterNavItemView = Backbone.Marionette.ItemView.extend({
+            template: '#RosterNavItemTemplate',
+            tagName: 'li'
+        });
+
 
         /*
          * MainNavView
@@ -63,6 +68,7 @@ define(['sf1','marionette'],
             MainNavView:MainNavView,
             GlobalNavView:GlobalNavView,
             RosterNavView:RosterNavView,
+            RosterNavItemView:RosterNavItemView,
             PosNavView:PosNavView
         };
 

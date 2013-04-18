@@ -3,11 +3,16 @@
     <!-- Navigation Item Template -->
     <script id="NavItemTemplate" class="nav-item-template" type="text/template">
         <a href="<%= P.href %>"
-            <% _.each(P.dataAttribs,function(item, key, list){%>
-            data-<%= item.name %>="<%= item.value %>"
-            <%}) %>
-             class="<% _.each(P.cssClasses,function(item){%><%= item %> <%}) %>"><span><%= P.name %></span></a>
+        <% _.each(P.dataAttribs,function(item, key, list){%>
+        data-<%= item.name %>="<%= item.value %>"
+        <%}) %>
+        class="<% _.each(P.cssClasses,function(item){%><%= item %> <%}) %>"><span><%= P.name %></span></a>
     </script>
+    <script id="RosterNavItemTemplate" class="nav-item-template" type="text/template">
+        <a href="/#roster/<%= P.slug %>"><%= P.name%><span class="nav-score-item">[<%= P.total%>]</span></a>
+    </script>
+
+    RosterNavItemTemplate
 
     <!-- Main Navigation Container -->
     <script type="text/template" id="MainNavTemplate" class="ui-template">

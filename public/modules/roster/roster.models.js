@@ -79,6 +79,7 @@ define(['sf1','backbone'],function(sf1,Backbone){
             roster.total = (roster.batterTotal + roster.starterTotal + roster.closerTotal);
 
 
+
         }
         return roster;
     };

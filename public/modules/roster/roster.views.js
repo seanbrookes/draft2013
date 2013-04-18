@@ -18,7 +18,7 @@ define(['marionette'],function(Marionette){
 
     });
     var BatterItemView = Backbone.Marionette.ItemView.extend({
-        template: '#BatterTemplate',
+        template: '#RosterBatterTemplate',
         tagName: 'tr',
         onRender:function(){
             if (this.model.attributes.counting){
@@ -29,7 +29,7 @@ define(['marionette'],function(Marionette){
 
     });
     var StarterItemView = Backbone.Marionette.ItemView.extend({
-        template: '#StarterTemplate',
+        template: '#RosterStarterTemplate',
         tagName: 'tr',
         onRender:function(){
             if (this.model.attributes.counting){
@@ -40,7 +40,7 @@ define(['marionette'],function(Marionette){
 
     });
     var CloserItemView = Backbone.Marionette.ItemView.extend({
-        template: '#CloserTemplate',
+        template: '#RosterCloserTemplate',
         tagName: 'tr',
         onRender:function(){
             if (this.model.attributes.counting){
@@ -72,7 +72,7 @@ define(['marionette'],function(Marionette){
      *
      * */
     var BatterView = Backbone.Marionette.CompositeView.extend({
-        template: '#BatterViewTemplate',
+        template: '#RosterBatterViewTemplate',
         itemView: BatterItemView,
         itemViewContainer: 'tbody',
         className: 'batter-list'
@@ -89,7 +89,7 @@ define(['marionette'],function(Marionette){
      *
      * */
     var StarterView = Backbone.Marionette.CompositeView.extend({
-        template: '#StarterViewTemplate',
+        template: '#RosterStarterViewTemplate',
         className: 'starter-list',
         itemViewContainer: 'tbody',
         itemView: StarterItemView
@@ -106,7 +106,7 @@ define(['marionette'],function(Marionette){
      *
      * */
     var CloserView = Backbone.Marionette.CompositeView.extend({
-        template: '#CloserViewTemplate',
+        template: '#RosterCloserViewTemplate',
         className: 'closter-list',
         itemViewContainer: 'tbody',
         itemView: CloserItemView

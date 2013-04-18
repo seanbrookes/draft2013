@@ -12,11 +12,14 @@
 
     -->
     <script id="BatterTemplate" class="player-template" type="text/template">
-        <td></td>
+        <td><%= S.rank %></td>
         <td>
-            <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
+            <a href="/#roster/<%= S.roster%>">
                 <%= S.roster %>
-            </button>
+            </a>
+            <!--<button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">-->
+                <!--<%= S.roster %>-->
+            <!--</button>-->
         </td>
         <td data-id="<%= S._id %>" class="name-col" data-type="playername">
             <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>
@@ -51,11 +54,14 @@
 
     -->
     <script id="StarterTemplate" class="player-template" type="text/template">
-        <td></td>
+        <td><%= S.rank %></td>
         <td>
-            <button class="btn-property-edit btn-cmd-link btn-cmd-editpos"  data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
+            <a href="/#roster/<%= S.roster%>">
                 <%= S.roster %>
-            </button>
+            </a>
+            <!--<button class="btn-property-edit btn-cmd-link btn-cmd-editpos"  data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">-->
+                <!--<%= S.roster %>-->
+            <!--</button>-->
         </td>
         <td data-id="<%= S._id %>" class="name-col" data-type="playername">
             <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>
@@ -90,11 +96,14 @@
 
     -->
     <script id="CloserTemplate" class="player-template" type="text/template">
-        <td></td>
+        <td><%= S.rank %></td>
         <td>
-            <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S._id %>" data-mlbid="<%= S.mlbid%>" data-val="<%= S.pos %>">
+            <a href="/#roster/<%= S.roster%>">
                 <%= S.roster %>
-            </button>
+            </a>
+            <!--<button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S._id %>" data-mlbid="<%= S.mlbid%>" data-val="<%= S.pos %>">-->
+                <!--<%= S.roster %>-->
+            <!--</button>-->
         </td>
         <td data-id="<%= S._id %>" class="name-col" data-type="playername">
             <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>
@@ -136,8 +145,6 @@
                 <th scope="col">rbi</th>
                 <th scope="col">sb</th>
                 <th scope="col">total</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -151,6 +158,7 @@
             <thead>
             <tr>
                 <th scope="col"></th>
+                <th scope="col"></th>
                 <th scope="col">name</th>
                 <th scope="col">team</th>
                 <th scope="col"></th>
@@ -159,7 +167,6 @@
                 <th scope="col">so</th>
                 <th scope="col"></th>
                 <th scope="col">total</th>
-                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -173,6 +180,7 @@
             <caption>Closers</caption>
             <thead>
             <tr>
+                <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col">name</th>
                 <th scope="col">team</th>

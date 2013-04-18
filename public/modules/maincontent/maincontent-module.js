@@ -7,8 +7,8 @@
  *
  */
 define(
-    ['client','ia', 'text!/modules/maincontent/maincontent-template.html'],
-    function(App, IA, markup) {
+    ['client','ia', 'score', 'text!/modules/maincontent/maincontent-template.html'],
+    function(App, IA, Score, markup) {
         var sf1 = App.sf1;
         sf1.log('MainContent module loaded ');
 
@@ -29,9 +29,12 @@ define(
 //            // layout.render();
 //            SF1.mainContentRegion.show(layout);
 
-            IA.initMainNav();
-            IA.initRosterNav();
-            IA.initPosNav();
+            sf1.EventBus.bind('score.rostersArrayLoaded',function(){
+                IA.initMainNav();
+                IA.initRosterNav();
+                IA.initPosNav();
+            });
+            //Score.initSideNav();
 
             sf1.EventBus.trigger('maincontent.initComplete');
         };

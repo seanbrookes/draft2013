@@ -7,6 +7,7 @@
  *
  */
 var Player = require('../models/player-model');
+var Totals = require('../models/totals-model');
 var Roster = require('../models/roster-model');
 var winston = require('winston');
 var logger = new (winston.Logger)({
@@ -15,6 +16,16 @@ var logger = new (winston.Logger)({
         new (winston.transports.File)({ filename: 'user.log' })
     ]
 });
+var compare = function(a,b) {
+    if (a.pos < b.pos){
+        return -1;
+    }
+    if (a.pos > b.pos){
+        return 1;
+    }
+    return 0;
+}
+
 exports.associateMLBId = function(req, res){
   var playerId = req.param('playerId',null);
   var roster = req.param('roster',null);
@@ -69,7 +80,6 @@ exports.getAllPlayers = function(req, res){
         return res.send(dox);
     });
 };
-
 exports.updateRosterPos = function(req, res){
     var playerId = req.param('playerId',null);
     var rosterSlug = req.param('rosterSlug',null);
@@ -115,7 +125,6 @@ exports.updateRosterPos = function(req, res){
     }
 
 };
-
 exports.updateDraftStatus = function(req,res){
   var playerId = req.param('playerId',null);
     //logger.info('playerId: ' + playerId);
@@ -329,16 +338,6 @@ exports.updatePlayerRoster = function(req,res){
     //logger.info('REQ PARAMS: ' + JSON.stringify(req.params));
     //res.send(400);
 };
-function compare(a,b) {
-
-    if (a.pos < b.pos){
-        return -1;
-    }
-    if (a.pos > b.pos){
-        return 1;
-    }
-    return 0;
-}
 exports.initRosterTotals = function(req, res){
     // pull all the roster entries
     var roster = req.param('roster',null);
@@ -380,7 +379,6 @@ exports.initRosterTotals = function(req, res){
     // update them all to 0
 
 };
-
 exports.getRoster = function(req,res){
     var rosterSlug = req.params.name;
     if (rosterSlug){
@@ -408,4 +406,32 @@ exports.getRoster = function(req,res){
         logger.warn('no roster name supplied');
         res.send(400,'no roster name supplied');
     }
+};
+exports.addRosterTotals = function(req,res){
+  // takes an array of total objects to add to totals collection
+    var rostersArray = JSON.parse(req.param('rosters',null));
+    for (var i = 0;i < rostersArray.length;i++){
+
+        var totalsObj = new Totals(rostersArray[i]);
+        Totals.findOne({roster:totalsObj.roster}).sort({date:-1}, function(err, totals){
+            if (err){
+                logger.error('exception looking up latest totals: ' + err);
+                return res.send(500,'exception looking up latest totals: ' + err);
+            }
+            if(!totals){
+                return res.send(400,'could not find a latest totals doc');
+            }
+            // compare totals to make sure an update is warranted
+            if ((totalsObj.battersTotal !== totals.battersTotal) || (totalsObj.startersTotal !== totals.startersTotal) || (totalsObj.closersTotal !== totals.closersTotal)){
+                totalsObj.save(function(err){
+                    if (err){
+                        logger.error('exception saving roster totals: ' + err);
+                        return res.send(500,'exception saving roster totals: ' + err);
+                    }
+                });
+            }
+        });
+    }
+    return res.send(200);
+
 };

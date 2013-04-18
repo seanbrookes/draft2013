@@ -46,6 +46,7 @@ module.exports = function(app){
     app.post('/postpicktoroster', draft.postPickToRoster);
     app.post('/rosterplayer', roster.addRosterPlayer);
     app.post('/playerstats', stats.postPlayerStats);
+    app.post('/totals',roster.addRosterTotals);
 
     app.put('/statusupdate', roster.updateDraftStatus);
     app.put('/playerrosterupdate', roster.updatePlayerRoster);

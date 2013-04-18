@@ -92,7 +92,7 @@
     </script>
 
 
-    <script id="BatterViewTemplate" type="text/template">
+    <script id="RosterBatterViewTemplate" type="text/template">
         <table>
             <caption>Batters</caption>
             <thead>
@@ -130,7 +130,7 @@
             </tfoot>
         </table>
     </script>
-    <script id="StarterViewTemplate" type="text/template">
+    <script id="RosterStarterViewTemplate" type="text/template">
         <table>
             <caption>Starters</caption>
             <thead>
@@ -169,7 +169,7 @@
 
         </table>
     </script>
-    <script id="CloserViewTemplate" type="text/template">
+    <script id="RosterCloserViewTemplate" type="text/template">
         <table>
             <caption>Closers</caption>
             <thead>
@@ -226,7 +226,7 @@
     Batter Template
 
     -->
-    <script id="BatterTemplate" class="player-template" type="text/template">
+    <script id="RosterBatterTemplate" class="player-template" type="text/template">
         <td>
             <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
                 <%= S.pos %>
@@ -269,7 +269,7 @@
     Starter Template
 
     -->
-    <script id="StarterTemplate" class="player-template" type="text/template">
+    <script id="RosterStarterTemplate" class="player-template" type="text/template">
         <td>
             <button class="btn-property-edit btn-cmd-link btn-cmd-editpos"  data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
                 <%= S.pos %>
@@ -312,7 +312,7 @@
     Closer Template
 
     -->
-    <script id="CloserTemplate" class="player-template" type="text/template">
+    <script id="RosterCloserTemplate" class="player-template" type="text/template">
         <td>
             <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-type="pos" data-id="<%= S._id %>" data-mlbid="<%= S.mlbid%>" data-val="<%= S.pos %>">
                 <%= S.pos %>

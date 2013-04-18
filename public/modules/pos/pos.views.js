@@ -102,7 +102,7 @@ define(['marionette','sf1'],
          * */
         var CloserView = Backbone.Marionette.CompositeView.extend({
             template: '#CloserViewTemplate',
-            className: 'closter-list',
+            className: 'closer-list',
             itemViewContainer: 'tbody',
             itemView: CloserItemView
 //            onAfterItemAdded: function(item){

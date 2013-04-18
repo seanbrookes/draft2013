@@ -367,6 +367,15 @@ select#DraftPickRosterSelect{
     padding-top:.25em;
     padding-bottom:.25em;
     display:inline-block;
+    white-space: nowrap;
+}
+.nav-score-item{
+    color:#D2413A;
+    font-size:70%;
+}
+.draft-roster-cmd{
+    color:#111;
+    text-decoration:none;
 }
 /*
 
@@ -450,7 +459,7 @@ select#DraftPickRosterSelect{
 }
 @media screen and (max-width: 30em) {
     ul, ol, ul ul, ol ol, ul ol, ol ul{
-        margin: 0 0 0 1em;
+        margin: 0 0 0 0;
     }
     .row .fifth{
         border:0px solid red;
@@ -479,5 +488,13 @@ select#DraftPickRosterSelect{
     }
     .name-col a{
         font-size:.75em;
+    }
+    .nav-roster-list{
+        border-right:1px solid #ddd;
+        overflow: hidden;
+        padding-right:.2em;
+    }
+    .batter-list th, .starter-list th, .closer-list th{
+        font-size:68%;
     }
 }

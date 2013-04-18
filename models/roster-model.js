@@ -42,6 +42,7 @@ var RosterSchema = new Schema({
     owner: {type: String },
     email : {type: String},
     total : {type: Number},
+    totals : {type: Number},
     year : {type: Number},
     players : [PlayerSchema]
 

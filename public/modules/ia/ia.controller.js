@@ -130,11 +130,14 @@ define(
                 var rosterNavShell = $('#RosterNavTemplate').html();
                 $('#SideBar').html(rosterNavShell);
 
+
+                var rosterNavList = sf1.rosters.sort(sf1.totalSort);
+
                 var rosterNavView = new View.RosterNavView({
-                    itemView: View.NavItemView,
-                    collection: new Model.NavItemCollection(navConfigObj.rosterNav)
+                    itemView: View.RosterNavItemView,
+                    collection: new Model.NavItemCollection(rosterNavList)
                 });
-                $('.roster-nav-container').html(rosterNavView.render().$el);
+                $('.roster-nav-container').prepend(rosterNavView.render().$el);
 
                 $('.nav-roster-list').i18n();
                 sf1.EventBus.trigger('ia.rosterNavRenderSuccess');
