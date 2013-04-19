@@ -222,28 +222,31 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
                 });
                 var closerOutput = closerView.render().$el;
 
-                var headerOutput = '<h1 class="roster-title">' + rosterSlug + '</h1>';
-                headerOutput += '<ul class="roster-scores-list">';
+                var headerOutput = '<table>';
+                headerOutput += '<caption class="roster-title">' + rosterSlug + '</caption>';
 
-                headerOutput += '<li>';
-                headerOutput += '<label class="roster-score-summary-label">batters: </label>' + rosterObj.batterTotal;
-                headerOutput += '</li>';
+                headerOutput += '<tbody class="roster-scores-list">';
 
-                headerOutput += '<li>';
-                headerOutput += '<label class="roster-score-summary-label">starters:: </label>' + rosterObj.starterTotal;
-                headerOutput += '</li>';
+                headerOutput += '<tr>';
+                headerOutput += '<td class="roster-total-sum-col"><label class="roster-score-summary-label">batters: </label></td><td class="roster-total-val-col">' + rosterObj.batterTotal + '</td>';
+                headerOutput += '</tr>';
 
-                headerOutput += '<li>';
-                headerOutput += '<label class="roster-score-summary-label">closers:: </label>' + rosterObj.closerTotal;
-                headerOutput += '</li>';
+                headerOutput += '<tr>';
+                headerOutput += '<td class="roster-total-sum-col"><label class="roster-score-summary-label">starters: </label></td><td class="roster-total-val-col">' + rosterObj.starterTotal + '</td>';
+                headerOutput += '</tr>';
+
+                headerOutput += '<tr>';
+                headerOutput += '<td class="roster-total-sum-col"><label class="roster-score-summary-label">closers: </label></td><td class="roster-total-val-col">' + rosterObj.closerTotal + '</td>';
+                headerOutput += '</tr>';
 
                 var rosterTotal = parseFloat(rosterObj.batterTotal + rosterObj.starterTotal + rosterObj.closerTotal).toFixed(2);
 
-                headerOutput += '<li>';
-                headerOutput += '<label class="roster-score-summary-label">total:: </label>' + rosterTotal;
-                headerOutput += '</li>';
+                headerOutput += '<tr>';
+                headerOutput += '<td class="roster-total-sum-col"><label class="roster-score-summary-label">total: </label></td><td class="roster-total-val-col">' + rosterTotal + '</td>';
+                headerOutput += '</tr>';
 
-                headerOutput += '</ul>';
+                headerOutput += '</tbody';
+                headerOutput += '</table';
 
 
                 $('.main-content-wrapper').html(headerOutput);

@@ -83,7 +83,7 @@ define(
                 _.templateSettings.variable = 'P';
                 // set the initial main nav markup
                 var mainNavShell = $('#MainNavTemplate').html();
-                $('.page-header').after(mainNavShell);
+                $('.page-header-banner').prepend(mainNavShell);
 
                 var mainNavView = new View.MainNavView({
                     itemView: View.NavItemView,

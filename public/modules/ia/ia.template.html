@@ -8,8 +8,9 @@
         <%}) %>
         class="<% _.each(P.cssClasses,function(item){%><%= item %> <%}) %>"><span><%= P.name %></span></a>
     </script>
+
     <script id="RosterNavItemTemplate" class="nav-item-template" type="text/template">
-        <td class="label-col"><a href="/#roster/<%= P.slug %>"><%= P.name%></td><td><span class="nav-score-item">[<%= P.total%>]</span></td>
+        <td class="label-col"><a href="/#roster/<%= P.slug %>"><%= P.name%></td><td class="nav-score-col"><span class="nav-score-item"><%= P.total%></span></td>
     </script>
 
 
