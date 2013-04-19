@@ -390,6 +390,7 @@ select#DraftPickRosterSelect{
     text-align:left;
     font-weight:bold;
 }
+.total-col{}
 /*
 
     small screen
@@ -407,6 +408,11 @@ select#DraftPickRosterSelect{
     .row .fourfifth{
         max-width:20em;
         border:0px solid blue;
+    }
+    .row .quarter{
+        display:block;
+        float:none;
+        border:0x solid blue;
     }
     .roster-scores-list{
         margin-left:5em;
