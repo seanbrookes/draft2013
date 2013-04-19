@@ -134,7 +134,7 @@ define(
                 var rosterNavList = sf1.rosters.sort(sf1.totalSort);
 
                 var rosterNavView = new View.RosterNavView({
-                    itemView: View.RosterNavItemView,
+
                     collection: new Model.NavItemCollection(rosterNavList)
                 });
                 $('.roster-nav-container').prepend(rosterNavView.render().$el);

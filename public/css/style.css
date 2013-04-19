@@ -96,6 +96,9 @@ ul{
 .team-col{
     background-color:#f9f9f9;
 }
+.label-col{
+    text-align:left;
+}
 tr.counting{
     background-color:#E9F2E6;
 }

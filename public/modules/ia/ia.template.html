@@ -9,7 +9,7 @@
         class="<% _.each(P.cssClasses,function(item){%><%= item %> <%}) %>"><span><%= P.name %></span></a>
     </script>
     <script id="RosterNavItemTemplate" class="nav-item-template" type="text/template">
-        <a href="/#roster/<%= P.slug %>"><%= P.name%><span class="nav-score-item">[<%= P.total%>]</span></a>
+        <td class="label-col"><a href="/#roster/<%= P.slug %>"><%= P.name%></td><td><span class="nav-score-item">[<%= P.total%>]</span></td>
     </script>
 
 
@@ -32,6 +32,10 @@
     <!-- Roster Navigation Container -->
     <script type="text/template" id="RosterNavTemplate" class="ui-template">
         <nav id="RosterNavigation" class="roster-nav-container">
+            <table>
+                <tbody>
+                </tbody>
+            </table>
 
         </nav>
     </script>
