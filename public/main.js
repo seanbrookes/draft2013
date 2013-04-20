@@ -132,12 +132,14 @@ define(
 
 
         var rosterModelsInit = function(){
+            var locTimestamp;
             Roster.getRoster('bashers');
             Roster.getRoster('hooters');
             Roster.getRoster('mashers');
             Roster.getRoster('stallions');
             Roster.getRoster('rallycaps');
             sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+
 
                 if(roster){
                     sf1.rosters.push(roster);
@@ -161,7 +163,7 @@ define(
                         data:postObj,
                         success:function(response){
                             sf1.log(response);
-                            sf1.EventBus.trigger('score.updateTotalsSuccess',{timestamp:response.lastUpdate});
+                            locTimestamp = response.lastUpdate
                         },
                         error:function(response){
                             sf1.log(response);
@@ -169,6 +171,7 @@ define(
                     });
                 }
                 if(sf1.rosters.length === 5){
+                    sf1.EventBus.trigger('score.updateTotalsSuccess',{timestamp:locTimestamp});
                     sf1.EventBus.trigger('score.rostersArrayLoaded');
 
                 }
