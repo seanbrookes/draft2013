@@ -442,12 +442,14 @@ exports.addRosterTotals = function(req,res){
             logger.error('exception looking up latest totals: ' + err);
             return res.send(500,'exception looking up latest totals: ' + err);
         }
-        if(!totals){
+        if(!totals[0]){
             totalsObj.save(function(err){
                 if (err){
                     logger.error('exception saving roster totals: ' + err);
                     return res.send(500,'exception saving roster totals: ' + err);
                 }
+                return res.send({lastUpdate:sourceDoc.date,message:'totals are updated'});
+
             });
         }
         // compare totals to make sure an update is warranted
