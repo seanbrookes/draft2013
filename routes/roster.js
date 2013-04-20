@@ -442,7 +442,8 @@ exports.addRosterTotals = function(req,res){
             logger.error('exception looking up latest totals: ' + err);
             return res.send(500,'exception looking up latest totals: ' + err);
         }
-        if(!totals[0]){
+        var sourceDoc = totals[0];
+        if(!sourceDoc){
             totalsObj.save(function(err){
                 if (err){
                     logger.error('exception saving roster totals: ' + err);
@@ -453,7 +454,7 @@ exports.addRosterTotals = function(req,res){
             });
         }
         // compare totals to make sure an update is warranted
-        var sourceDoc = totals[0];
+
         if ((totalsObj.battersTotal == sourceDoc.battersTotal) && (totalsObj.startersTotal == sourceDoc.startersTotal) && (totalsObj.closersTotal == sourceDoc.closersTotal)){
             logger.info('totals do not need updating');
             return res.send({lastUpdate:sourceDoc.date,message:'no update necessary - totals are current'});
