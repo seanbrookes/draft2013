@@ -98,47 +98,8 @@ define(
             i18n.init({
                 lng: 'en'
             }, function(t) {
-                Roster.getRoster('bashers');
-                Roster.getRoster('hooters');
-                Roster.getRoster('mashers');
-                Roster.getRoster('stallions');
-                Roster.getRoster('rallycaps');
-                sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
-
-                    if(roster){
-                        sf1.rosters.push(roster);
-                        // post totals to server
-                        var postObj = {};
-                        postObj.roster = roster.slug;
-                        postObj.battersTotal = roster.batterTotal;
-                        postObj.startersTotal = roster.starterTotal;
-                        postObj.closersTotal = roster.closerTotal;
-                        postObj.total = roster.total;
-                       // var postArray = [];
-                       // postArray.push(postObj);
 
 
-
-
-
-                        sf1.io.ajax({
-                            type:'POST',
-                            url:'/totals',
-                            data:postObj,
-                            success:function(response){
-                                sf1.log(response);
-                                sf1.EventBus.trigger('score.updateTotalsSuccess',{timestamp:response.lastUpdate});
-                            },
-                            error:function(response){
-                                sf1.log(response);
-                            }
-                        });
-                    }
-                    if(sf1.rosters.length === 5){
-                        sf1.EventBus.trigger('score.rostersArrayLoaded');
-
-                    }
-                });
 
 
 
@@ -159,7 +120,9 @@ define(
                 });
                 PageHeader.init();
                 MainContent.init();
-                //IA.init();
+
+
+                rosterModelsInit();
 
 
 
@@ -168,5 +131,49 @@ define(
         });
 
 
+        var rosterModelsInit = function(){
+            Roster.getRoster('bashers');
+            Roster.getRoster('hooters');
+            Roster.getRoster('mashers');
+            Roster.getRoster('stallions');
+            Roster.getRoster('rallycaps');
+            sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+
+                if(roster){
+                    sf1.rosters.push(roster);
+                    // post totals to server
+                    var postObj = {};
+                    postObj.roster = roster.slug;
+                    postObj.battersTotal = roster.batterTotal;
+                    postObj.startersTotal = roster.starterTotal;
+                    postObj.closersTotal = roster.closerTotal;
+                    postObj.total = roster.total;
+                    // var postArray = [];
+                    // postArray.push(postObj);
+
+
+
+
+
+                    sf1.io.ajax({
+                        type:'POST',
+                        url:'/totals',
+                        data:postObj,
+                        success:function(response){
+                            sf1.log(response);
+                            sf1.EventBus.trigger('score.updateTotalsSuccess',{timestamp:response.lastUpdate});
+                        },
+                        error:function(response){
+                            sf1.log(response);
+                        }
+                    });
+                }
+                if(sf1.rosters.length === 5){
+                    sf1.EventBus.trigger('score.rostersArrayLoaded');
+
+                }
+            });
+
+        };
     }
 );
