@@ -443,6 +443,11 @@ exports.addRosterTotals = function(req,res){
             return res.send(500,'exception looking up latest totals: ' + err);
         }
         var sourceDoc = totals[0];
+        logger.info('1');
+        logger.info(totalsObj);
+        logger.info('2');
+        logger.info(sourceDoc);
+        logger.info('3');
         if(!sourceDoc){
             totalsObj.save(function(err){
                 if (err){
