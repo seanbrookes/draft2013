@@ -24,16 +24,16 @@ define(
             var pageHeaderMarkup = $('#PageHeaderDefaultTemplate').html();
             $('.viewport').append(pageHeaderMarkup);
 
-            $('.countdown-timer').kkcountdown({
-                dayText : 'day ',
-                daysText : 'days ',
-                hoursText : 'h ',
-                minutesText : 'm ',
-                secondsText : 's',
-                displayZeroDays : false,
-                oneDayClass : 'one-day'
-            });
-            IA.initGlobalNav();
+//            $('.countdown-timer').kkcountdown({
+//                dayText : 'day ',
+//                daysText : 'days ',
+//                hoursText : 'h ',
+//                minutesText : 'm ',
+//                secondsText : 's',
+//                displayZeroDays : false,
+//                oneDayClass : 'one-day'
+//            });
+//            IA.initGlobalNav();
 
             setGreeting();
 
