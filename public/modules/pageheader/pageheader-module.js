@@ -7,7 +7,7 @@
  *
  */
 define(
-    ['jquery', 'client','ia', 'countdown', 'text!/modules/pageheader/pageheader-template.html'],
+    ['jquery', 'client','ia', 'countdown', 'text!/modules/pageheader/pageheader-template.html', 'stats', 'prettydate'],
     function($, App, IA, countdown, markup) {
         var sf1 = App.sf1;
         //sf1.log('PageHeader module loaded ');
@@ -37,6 +37,12 @@ define(
 
             setGreeting();
 
+            sf1.EventBus.bind('score.updateTotalsSuccess',function(event,data){
+                $('.stats-update-date').text(data.timestamp);
+                $('.stats-update-date').attr('title',data.timestamp);
+                sf1.EventBus.trigger('pageheader.lastUpdateUpdate');
+
+            });
 
             sf1.EventBus.trigger('pageheader.initComplete');
         };
@@ -44,14 +50,38 @@ define(
             if (sf1.hasStorage){
                 if (localStorage.getItem('currentAuthRoster')){
                     currentAuthRoster = JSON.parse(localStorage.getItem('currentAuthRoster'));
-                    $('.page-header-greeting').text('Hi ' + currentAuthRoster.owner)
+                    $('.page-header-greeting').text('Hi ' + currentAuthRoster.owner);
                 }
             }
         };
+        sf1.EventBus.bind('pageheader.lastUpdateUpdate',function(){
+            $('.stats-update-date').prettyDate();
+        });
         sf1.EventBus.bind('user.setNewAuthUser',function(event){
             setGreeting();
         });
 
+        sf1.EventBus.bind('pageheader.initComplete',function(){
+            $('.btn-update-stats').click(function(){
+                sf1.EventBus.trigger('stats.updateStatsRequest');
+
+                $('.btn-update-stats').hide();
+                $('.stats-update-comp').append('<img src="./images/chasingspheres.gif">');
+                // set button to 'activity state active' i.e. swap an image for the button
+                // set event listener for stats complete
+                sf1.EventBus.bind('stats.updateStatsRequestComplete',function(){
+                    // tick over 5 seconds to simulate stat fetch time
+                    // then reload the page
+                    // reset the button and/or
+                    setTimeout(resetAfterStatUpdate, 6500);
+                });
+            });
+        });
+
+        var resetAfterStatUpdate = function(){
+          sf1.log('RELOAD PAGE');
+            document.location.reload();
+        };
         return{
             init:function(){
                 return init();

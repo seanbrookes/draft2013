@@ -409,29 +409,65 @@ exports.getRoster = function(req,res){
 };
 exports.addRosterTotals = function(req,res){
   // takes an array of total objects to add to totals collection
-    var rostersArray = JSON.parse(req.param('rosters',null));
-    for (var i = 0;i < rostersArray.length;i++){
-
-        var totalsObj = new Totals(rostersArray[i]);
-        Totals.findOne({roster:totalsObj.roster}).sort({date:-1}, function(err, totals){
-            if (err){
-                logger.error('exception looking up latest totals: ' + err);
-                return res.send(500,'exception looking up latest totals: ' + err);
-            }
-            if(!totals){
-                return res.send(400,'could not find a latest totals doc');
-            }
-            // compare totals to make sure an update is warranted
-            if ((totalsObj.battersTotal !== totals.battersTotal) || (totalsObj.startersTotal !== totals.startersTotal) || (totalsObj.closersTotal !== totals.closersTotal)){
-                totalsObj.save(function(err){
-                    if (err){
-                        logger.error('exception saving roster totals: ' + err);
-                        return res.send(500,'exception saving roster totals: ' + err);
-                    }
-                });
-            }
-        });
+    var roster = req.body.roster;
+    var total = req.param('total',null);
+    var battersTotal = req.param('battersTotal',null);
+    var startersTotal = req.param('startersTotal',null);
+    var closersTotal = req.param('closersTotal',null);
+    if (total === 'NaN'){
+        total = 0;
     }
-    return res.send(200);
+    if (battersTotal === 'NaN'){
+        battersTotal = 0;
+    }
+    if (startersTotal === 'NaN'){
+        startersTotal = 0;
+    }
+    if (closersTotal === 'NaN'){
+        closersTotal = 0;
+    }
+
+
+    var totalsObj = new Totals({
+        roster:roster,
+        total:total,
+        battersTotal:battersTotal,
+        startersTotal:startersTotal,
+        closersTotal:closersTotal
+    });
+
+    Totals.findOne({roster:roster}).sort({date:-1}).execFind(function(err, totals){
+
+        if (err){
+            logger.error('exception looking up latest totals: ' + err);
+            return res.send(500,'exception looking up latest totals: ' + err);
+        }
+        if(!totals){
+            totalsObj.save(function(err){
+                if (err){
+                    logger.error('exception saving roster totals: ' + err);
+                    return res.send(500,'exception saving roster totals: ' + err);
+                }
+            });
+        }
+        // compare totals to make sure an update is warranted
+        var sourceDoc = totals[0];
+        if ((totalsObj.battersTotal == sourceDoc.battersTotal) && (totalsObj.startersTotal == sourceDoc.startersTotal) && (totalsObj.closersTotal == sourceDoc.closersTotal)){
+            logger.info('totals do not need updating');
+            return res.send({lastUpdate:sourceDoc.date,message:'no update necessary - totals are current'});
+
+
+        }
+        else{
+            totalsObj.save(function(err){
+                if (err){
+                    logger.error('exception saving roster totals: ' + err);
+                    return res.send(500,'exception saving roster totals: ' + err);
+                }
+
+                return res.send({lastUpdate:sourceDoc.date,message:'totals are updated'});
+            });
+        }
+    });
 
 };

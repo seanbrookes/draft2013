@@ -71,6 +71,46 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/stats
             });
         });
 
+        sf1.EventBus.bind('stats.updateStatsRequest',function(){
+            var batterStatsComplete = false;
+            var pitcherStatsComplete = false;
+            sf1.io.ajax({
+                type:'GET',
+                url:'/dopitchers',
+                success:function(response){
+                    sf1.log('success dopitchers: ' + response);
+                    batterStatsComplete = true;
+                    sf1.EventBus.trigger('stats.updatePitcherRequestSuccess');
+                    sf1.EventBus.trigger('stats.updateStatsRequestSuccess');
+                },
+                error:function(response){
+                    sf1.log('error dopitchers: ' + response);
+                    sf1.EventBus.trigger('stats.updatePitcherRequestError',response);
+                }
+
+            });
+            sf1.io.ajax({
+                type:'GET',
+                url:'/dobatters',
+                success:function(response){
+                    sf1.log('success dobatters: ' + response);
+                    pitcherStatsComplete = true;
+                    sf1.EventBus.trigger('stats.updateBatterRequestSuccess');
+                    sf1.EventBus.trigger('stats.updateStatsRequestSuccess');
+                },
+                error:function(response){
+                    sf1.log('error dobatters: ' + response);
+                    sf1.EventBus.trigger('stats.updateBatterRequestError',response);
+                }
+
+            });
+            sf1.EventBus.bind('stats.updateStatsRequestSuccess',function(){
+                if (batterStatsComplete && pitcherStatsComplete){
+                    sf1.EventBus.trigger('stats.updateStatsRequestComplete');
+                }
+            });
+        });
+
         var initEventListeners = function(){
             $('#BtnUpdateRosters').click(function(event){
                $('.control-feedback').html('<p>BtnUpdateRosters clicked</p>');
@@ -105,33 +145,11 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/stats
             });
             $('#ProcessCurrentBatterStats').click(function(event){
                 $('.control-feedback').html('<p>ProcessCurrentBatterStats clicked</p>');
-                sf1.io.ajax({
-                    type:'GET',
-                    url:'/dobatters',
-                    success:function(response){
-                        sf1.log('success dobatters: ' + response);
-                    },
-                    error:function(response){
-                        sf1.log('error dobatters: ' + response);
-                    }
-
-                });
+                sf1.EventBus.trigger('stats.updateStatsRequest');
             });
             $('#ProcessCurrentPitcherStats').click(function(event){
                 $('.control-feedback').html('<p>Process Current Pitcher Stats Request</p>');
-
-                sf1.io.ajax({
-                    type:'GET',
-                    url:'/dopitchers',
-                    success:function(response){
-                        sf1.log('success dopitchers: ' + response);
-                    },
-                    error:function(response){
-                        sf1.log('error dopitchers: ' + response);
-                    }
-
-                });
-
+                sf1.EventBus.trigger('stats.updateStatsRequest');
 
             });
 

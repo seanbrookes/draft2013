@@ -228,9 +228,12 @@
     -->
     <script id="RosterBatterTemplate" class="player-template" type="text/template">
         <td>
-            <button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">
+            <a href="/#pos/<%= S.pos%>">
                 <%= S.pos %>
-            </button>
+            </a>
+            <!--<button class="btn-property-edit btn-cmd-link btn-cmd-editpos" data-mlbid="<%= S.mlbid%>" data-type="pos" data-id="<%= S._id %>" data-val="<%= S.pos %>">-->
+                <!--<%= S.pos %>-->
+            <!--</button>-->
         </td>
         <td data-id="<%= S._id %>" class="name-col" data-type="playername">
             <a class="draft-roster-cmd" href="#" data-id="<%= S._id%>"><%= S.name %></a>

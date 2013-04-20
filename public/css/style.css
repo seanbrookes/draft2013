@@ -81,6 +81,9 @@ ul{
 #TestButton{
     display:none;
 }
+.stats-update-comp{
+    float:right;
+}
 #MainNavigation .is-selected{
     color:#0066aa;
     font-weight: bold;
@@ -92,19 +95,46 @@ ul{
 .page-header-greeting{
     float:right
 }
-.total-col{
+.stats-update-comp{
+
+}
+.btn-update-stats{
+    font-size:60%;
+}
+.stats-update-label{
+    font-size:85%;
+}
+.stats-update-date{
     font-weight:bold;
-    background-color:#f9f9f9;
+    font-style: italic;
+    font-size:90%;
+    background-color:#f3f3f3;
+    border:1px solid #aaa;
+    padding:.12em;
+    border-radius:2px;
 }
 .team-col{
-    background-color:#f9f9f9;
+   /* background-color:#fefefe; */
+    border-right:1px solid #eee;
 }
 .label-col{
     text-align:left;
 }
-tr.counting{
+tr.counting td{
     background-color:#E9F2E6;
+   border-bottom:1px solid #aaa;
 }
+.total-col{
+    border-right:1px solid #eee;
+    border-left:1px solid #eee;
+
+    /* background-color:#f9f9f9;*/
+}
+tr.counting .total-col{
+    font-weight:bold;
+    /* background-color:#f9f9f9;*/
+}
+
 .ui-instrument-list{
     list-style:none;
     margin-top:.7em;
