@@ -29,11 +29,10 @@ define(
 //            // layout.render();
 //            SF1.mainContentRegion.show(layout);
 
-            sf1.EventBus.bind('score.rostersArrayLoaded',function(){
+            //sf1.EventBus.bind('score.rostersArrayLoaded',function(){
                 IA.initMainNav();
-                IA.initRosterNav();
-                IA.initPosNav();
-            });
+
+           // });
             //Score.initSideNav();
 
             sf1.EventBus.trigger('maincontent.initComplete');

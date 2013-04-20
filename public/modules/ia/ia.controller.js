@@ -70,7 +70,8 @@ define(
 			sf1.EventBus.bind('ia.initComplete',function(event){
 
                 sf1.EventBus.trigger('ia.renderMainNavRequest');
-                //sf1.EventBus.trigger('ia.renderGlobalNavRequest');
+                sf1.EventBus.trigger('ia.renderRosterNavRequest');
+                sf1.EventBus.trigger('ia.renderPosNavRequest');
 
 			});
 

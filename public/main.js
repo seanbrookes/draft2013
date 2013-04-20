@@ -173,7 +173,8 @@ define(
                 if(sf1.rosters.length === 5){
                     sf1.EventBus.trigger('score.rostersArrayLoaded');
                     sf1.EventBus.trigger('score.updateTotalsSuccess',{timestamp:locTimestamp});
-
+                    IA.initRosterNav();
+                    IA.initPosNav();
                 }
             });
 
