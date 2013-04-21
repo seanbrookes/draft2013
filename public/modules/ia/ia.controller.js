@@ -42,7 +42,7 @@ define(
                     data:postObj,
                     success:function(response){
                         sf1.log(response);
-                        locTimestamp = response.lastUpdate
+                        sf1.lastUpdate = response.lastUpdate
                     },
                     error:function(response){
                         sf1.log(response);

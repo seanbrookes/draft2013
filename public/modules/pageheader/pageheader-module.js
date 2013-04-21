@@ -37,12 +37,10 @@ define(
 
             setGreeting();
 
-            sf1.EventBus.bind('score.updateTotalsSuccess',function(event,data){
-                $('.stats-update-date').text(data.timestamp);
-                $('.stats-update-date').attr('title',data.timestamp);
-                sf1.EventBus.trigger('pageheader.lastUpdateUpdate');
+            $('.stats-update-date').text(sf1.lastUpdate);
+            $('.stats-update-date').attr('title',sf1.lastUpdate);
+            sf1.EventBus.trigger('pageheader.lastUpdateUpdate');
 
-            });
 
             sf1.EventBus.trigger('pageheader.initComplete');
         };
