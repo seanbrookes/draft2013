@@ -99,6 +99,7 @@ define(['sf1','backbone'],function(sf1,Backbone){
                 if (sf1.rosters[i].slug === slug){
 
                     return sf1.rosters[i];
+                    sf1.EventBus.trigger('roster.getRosterSuccess', [sf1.rosters[i]]);
                     break;
                 }
             }
