@@ -86,13 +86,13 @@ define(
                 var mainNavShell = $('#MainNavTemplate').html();
                 $('.page-header-banner').prepend(mainNavShell);
 
-                var mainNavView = new View.MainNavView({
-                    itemView: View.NavItemView,
-                    collection: new Model.NavItemCollection(navConfigObj.mainNav)
-                });
-                $('.main-nav-container .navbar-inner').html(mainNavView.render().$el);
-
-                $('.nav-main-list').i18n();
+//                var mainNavView = new View.MainNavView({
+//                    itemView: View.NavItemView,
+//                    collection: new Model.NavItemCollection(navConfigObj.mainNav)
+//                });
+//                $('.main-nav-container .navbar-inner').html(mainNavView.render().$el);
+//
+//                $('.nav-main-list').i18n();
 
                 sf1.EventBus.trigger('ia.mainNavRenderComplete');
                 //sf1.EventBus.trigger('checkauth-event');
