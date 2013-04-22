@@ -95,14 +95,14 @@ define(['sf1','backbone'],function(sf1,Backbone){
         if (slug){
             // look up the slug in the global array first
 
-            for (var i = 0;i < sf1.rosters.length;i++){
-                if (sf1.rosters[i].slug === slug){
-
-                    return sf1.rosters[i];
-                    sf1.EventBus.trigger('roster.getRosterSuccess', [sf1.rosters[i]]);
-                    break;
-                }
-            }
+//            for (var i = 0;i < sf1.rosters.length;i++){
+//                if (sf1.rosters[i].slug === slug){
+//
+//                    return sf1.rosters[i];
+//                    sf1.EventBus.trigger('roster.getRosterSuccess', [sf1.rosters[i]]);
+//                    break;
+//                }
+//            }
 
             sf1.io.ajax({
                 type:'GET',

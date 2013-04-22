@@ -37,8 +37,8 @@ define(['sf1','modules/pos/pos.models','modules/pos/pos.views','text!modules/pos
             if (pos){
                 // single pos
                 var rankInt = 1;
-                for (var i = 0;i < sf1.rosters.length;i++){
-                    var curRoster = sf1.rosters[i];
+                for (var i = 0;i < sf1.app.rosters.length;i++){
+                    var curRoster = sf1.app.rosters[i];
                     for (var j = 0;j < curRoster.players.length;j++){
                         var curPlayer = curRoster.players[j];
                         if (curPlayer.pos.toLowerCase() === pos.toLowerCase()){

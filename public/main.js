@@ -87,44 +87,77 @@ require.config({
     }
 });
 define(
-    ['jquery', 'sf1', 'i18n', 'client', 'security', 'ia', 'pageheader', 'maincontent','roster'],
-    function($, sf1, i18n, App, Security, IA, PageHeader, MainContent, Roster) {
-
-        App.sf1.log('typeof $: ' + typeof $);
-        App.sf1.log('typeof _: ' + typeof _);
-        App.sf1.log('typeof backbone: ' + typeof Backbone);
+    ['jquery', 'sf1', 'i18n', 'client', 'security', 'roster'],
+    function($, sf1, i18n, App, Security, Roster) {
 
         $(document).ready(function(){
             i18n.init({
                 lng: 'en'
-            }, function(t) {
+            }, function() {
+
+                // load the rosters
+                // fire the event
+                if (!sf1.app.rosters){
+                    sf1.app.rosters = [];
+                    Roster.getRoster('bashers');
+                    Roster.getRoster('hooters');
+                    Roster.getRoster('mashers');
+                    Roster.getRoster('stallions');
+                    Roster.getRoster('rallycaps');
+
+
+
+                    sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+
+
+                        if(roster){
+                            sf1.app.rosters.push(roster);
+                            // post totals to server
+                            var postObj = {};
+                            postObj.roster = roster.slug;
+                            postObj.battersTotal = roster.batterTotal;
+                            postObj.startersTotal = roster.starterTotal;
+                            postObj.closersTotal = roster.closerTotal;
+                            postObj.total = roster.total;
+                            // var postArray = [];
+                            // postArray.push(postObj);
 
 
 
 
 
-                var router = new App.AppRouter(t);
-                Backbone.history.start();
+                            sf1.io.ajax({
+                                type:'POST',
+                                url:'/totals',
+                                data:postObj,
+                                success:function(response){
+                                    sf1.log(response);
+                                    sf1.lastUpdate = response.lastUpdate;
+                                },
+                                error:function(response){
+                                    sf1.log(response);
+                                }
+                            });
+                        }
+                        if(sf1.app.rosters.length === 5){
+//                            sf1.EventBus.trigger('score.rostersArrayLoaded');
+//                            sf1.EventBus.trigger('score.updateTotalsSuccess',{timestamp:locTimestamp});
 
 
-                SF1 = new Backbone.Marionette.Application();
-
-                SF1.addRegions({
-                    mainContentRegion: '.main-content-wrapper',
-                    pageHeaderRegion:'.page-header',
-                    pageFooterRegion:'.page-footer',
-                    mainNavRegion:'#MainNavigation',
-                    rosterNavRegion:'#RosterNavigation',
-                    globalNavRegion:'#GlobalNavigation'
-
-                });
-                PageHeader.init();
-                MainContent.init();
+                            sf1.EventBus.trigger('main.appInitialized');
+//                    IA.initRosterNav();
+//                    IA.initPosNav();
+                        }
+                    });
+                }
+                else{
+                    sf1.EventBus.trigger('main.appInitialized');
+                }
 
 
 
-                sf1.EventBus.trigger('ia.renderRosterNavRequest');
-                sf1.EventBus.trigger('ia.renderPosNavRequest');
+
+
 
             });
         });

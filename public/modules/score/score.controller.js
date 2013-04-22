@@ -17,27 +17,27 @@ define(['sf1','modules/score/score.models','modules/score/score.views','roster',
 
 
         var initSideNav = function(){
-            if (sf1.rosters.length !== 5){
-                sf1.rosters = [];
-                Roster.getRoster('bashers');
-                Roster.getRoster('hooters');
-                Roster.getRoster('mashers');
-                Roster.getRoster('stallions');
-                Roster.getRoster('rallycaps');
-                sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+//            if (sf1.app.rosters.length !== 5){
+//                sf1.rosters = [];
+//                Roster.getRoster('bashers');
+//                Roster.getRoster('hooters');
+//                Roster.getRoster('mashers');
+//                Roster.getRoster('stallions');
+//                Roster.getRoster('rallycaps');
+//                sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+//
+//                    if(roster){
+//                        sf1.rosters.push(roster);
+//
+//                    }
+//                    if(sf1.rosters.length > 4){
+//                        sf1.EventBus.trigger('score.rostersArrayLoaded');
+//
+//                    }
+//                });
+//            }
 
-                    if(roster){
-                        sf1.rosters.push(roster);
-
-                    }
-                    if(sf1.rosters.length > 4){
-                        sf1.EventBus.trigger('score.rostersArrayLoaded');
-
-                    }
-                });
-            }
-
-            if(sf1.rosters.length === 5){
+            if(sf1.app.rosters.length === 5){
                 var batterTotals = [];
                 var starterTotals = [];
                 var closerTotals = [];
@@ -97,26 +97,26 @@ define(['sf1','modules/score/score.models','modules/score/score.views','roster',
 
 
 
-            if (sf1.rosters.length !== 5){
-                sf1.rosters = [];
-                Roster.getRoster('bashers');
-                Roster.getRoster('hooters');
-                Roster.getRoster('mashers');
-                Roster.getRoster('stallions');
-                Roster.getRoster('rallycaps');
-                sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+//            if (sf1.rosters.length !== 5){
+//                sf1.rosters = [];
+//                Roster.getRoster('bashers');
+//                Roster.getRoster('hooters');
+//                Roster.getRoster('mashers');
+//                Roster.getRoster('stallions');
+//                Roster.getRoster('rallycaps');
+//                sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+//
+//                    if(roster){
+//                        sf1.rosters.push(roster);
+//                    }
+//                    if(sf1.rosters.length > 4){
+//                        sf1.EventBus.trigger('score.rostersArrayLoaded');
+//
+//                    }
+//                });
+//            }
 
-                    if(roster){
-                        sf1.rosters.push(roster);
-                    }
-                    if(sf1.rosters.length > 4){
-                        sf1.EventBus.trigger('score.rostersArrayLoaded');
-
-                    }
-                });
-            }
-
-            if(sf1.rosters.length === 5){
+            if(sf1.app.rosters.length === 5){
                 var batterTotals = [];
                 var starterTotals = [];
                 var closerTotals = [];
@@ -166,6 +166,41 @@ define(['sf1','modules/score/score.models','modules/score/score.views','roster',
             }
         };
 
+        var summaryView = function(){
+
+            var totals = Model.getTotals();
+            var rosterTotalCollection = new Model.TotalCollection(totals.overall);
+            var rosterTotalView = new View.RosterTotalView({
+                collection: rosterTotalCollection
+            });
+            var batterTotalCollection = new Model.TotalCollection(totals.batter);
+            var batterTotalView = new View.BatterTotalView({
+                collection: batterTotalCollection
+            });
+            var starterTotalCollection = new Model.TotalCollection(totals.starter);
+            var starterTotalView = new View.StarterTotalView({
+                collection: starterTotalCollection
+            });
+            var closerTotalCollection = new Model.TotalCollection(totals.closer);
+            var closerTotalView = new View.CloserTotalView({
+                collection: closerTotalCollection
+            });
+            //var totalOutput = rosterTotalView.render().$el;
+            //var scoreMainView = $('#ScoreModuleDefaultTemplate').html();
+
+            var layout = new View.ScoreSummaryLayout();
+
+            layout.overallRegion.show(rosterTotalView);
+            layout.battersRegion.show(batterTotalView);
+            layout.startersRegion.show(starterTotalView);
+            layout.closersRegion.show(closerTotalView);
+
+            return layout;
+
+            // return marionette layout view - score summary
+        };
+
+
         sf1.EventBus.bind('score.rostersArrayLoaded',function(){
 
 
@@ -186,7 +221,8 @@ define(['sf1','modules/score/score.models','modules/score/score.views','roster',
         }
         return{
             init:init,
-            initSideNav:initSideNav
+            initSideNav:initSideNav,
+            SummaryView:summaryView
         };
     }
 );

@@ -37,13 +37,16 @@ define(
 
             setGreeting();
 
-            $('.stats-update-date').text(sf1.lastUpdate);
-            $('.stats-update-date').attr('title',sf1.lastUpdate);
-            sf1.EventBus.trigger('pageheader.lastUpdateUpdate');
+            sf1.EventBus.bind('pageheader.renderLastUpdateValRequest');
 
 
             sf1.EventBus.trigger('pageheader.initComplete');
         };
+        sf1.EventBus.bind('pageheader.renderLastUpdateValRequest',function(){
+            $('.stats-update-date').text(sf1.lastUpdate);
+            $('.stats-update-date').attr('title',sf1.lastUpdate);
+            sf1.EventBus.trigger('pageheader.lastUpdateUpdate');
+        });
         var setGreeting = function(){
             if (sf1.hasStorage){
                 if (localStorage.getItem('currentAuthRoster')){

@@ -11,7 +11,7 @@ define(
     ['jquery', 'cookie'],
     function($){
         var sf1 = {};
-        sf1.rosters = [];
+
         // usage: POF.log('inside coolFunc',this,arguments);
         // inspired by: http://paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
         sf1.log =  function(){
@@ -71,12 +71,6 @@ define(
             }
             else{
                 return false;
-            }
-        };
-        sf1.initRosterPoints = function(){
-            var rosterArray = ['mashers','bashers','rallycaps','hooters','stallions'];
-            for (var i = 0;i < rosterArray,length;i++){
-
             }
         };
         sf1.totalSort = function(a,b){

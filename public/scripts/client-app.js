@@ -7,49 +7,30 @@
  *
  */
 // Client App
-define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
+define(['jquery', 'sf1', 'marionette'],function($, sf1, Marionette){
+    sf1.app = new Backbone.Marionette.Application();
 
-
-
-
-    sf1.initRosterPoints();
-
-    var AppRouter;
-    AppRouter = Backbone.Router.extend({
-
-        routes: {
-            "": "index",
-            "home": "index",
-            "draft": "draft",
-            "draft/:userid": "draft",
-            "login": "login",
-            "signup": "signup",
-            "chat": "chat",
-            "adminstats": "adminstats",
-            "admin": "admin",
-            "page/:name": "page",
-            "roster/:name": "roster",
-            "pos/": "position",
-            "pos/:name": "position"
-        },
-
+    var routerController = {
         index: function () {
             sf1.log('index');
             sf1.EventBus.trigger('ia.mainNavEvent', [
                 {route: 'index'}
             ]);
-            require(['score', 'draft', 'chat'], function (score, draft) {
-                $('.main-content-wrapper').empty();
-               // chatMod.init();
-                score.init();
-                //draft.init();
-                //draftMod.init();
-
+            sf1.EventBus.trigger('ia.loadRegion',{
+               region:'mainContentRegion',
+                module:'score',
+                view:'SummaryView'
             });
+//            require(['score'], function (score) {
+//
+//                // chatMod.init();
+//                sf1.score.init();
+//                //draft.init();
+//                //draftMod.init();
+//
+//            });
             //indexModule.init();
         },
-
-
         signup: function () {
             sf1.log('signup route');
             sf1.EventBus.trigger('ia.mainNavEvent', [
@@ -61,7 +42,6 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             });
 
         },
-
         page: function (rosterName) {
             sf1.log('page route');
             sf1.EventBus.trigger('ia.mainNavEvent', [
@@ -90,7 +70,7 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             $('.main-content-wrapper').empty();
             require(['roster', 'chat'], function (module, chatMod) {
                 module.init(rosterId);
-               // chatMod.init();
+                // chatMod.init();
             });
 
         },
@@ -113,7 +93,7 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
             require(['draft', 'chat'], function (draftMod, chatMod) {
                 $('.main-content-wrapper').empty();
                 draftMod.init(userId);
-               // chatMod.init();
+                // chatMod.init();
 
             });
         },
@@ -143,7 +123,6 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
 //            securityModule.initLogin();
 
         },
-
         admin: function () {
             sf1.log('admin route');
 
@@ -167,11 +146,91 @@ define(['jquery', 'sf1', 'backbone'],function($, sf1, Backbone){
                 module.init();
             });
         }
+    };
+
+    sf1.EventBus.bind('main.appInitialized',function(){
+
+
+        //var router = new AppRouter();
+
+
+
+        sf1.app.addRegions({
+            mainContentRegion: '#MainContent',
+            pageHeaderRegion:'#PageHeader',
+            pageFooterRegion:'#PageFooter',
+            mainNavRegion:'#MainNavigation',
+            sideBar:'#SideBar'
+
+        });
+
+        //sf1.app.vent.on("routing:started", function() {
+            //Backbone.history.start();
+        //});
+        //sf1.app.addInitializer(function(){
+            sf1.router = new AppRouter();
+       // });
+        sf1.app.on("initialize:after", function(){
+            if (Backbone.history){
+                Backbone.history.start();
+            }
+        });
+        sf1.app.start();
+
+
+//        PageHeader.init();
+//        MainContent.init();
+
+
+
+        sf1.EventBus.trigger('ia.renderRosterNavRequest');
+        sf1.EventBus.trigger('ia.renderPosNavRequest');
+
 
 
     });
+
+    var AppRouter = Backbone.Marionette.AppRouter.extend({
+        appRoutes: {
+            "": "index",
+            "home": "index",
+            "draft": "draft",
+            "draft/:userid": "draft",
+            "login": "login",
+            "signup": "signup",
+            "chat": "chat",
+            "adminstats": "adminstats",
+            "admin": "admin",
+            "page/:name": "page",
+            "roster/:name": "roster",
+            "pos/": "position",
+            "pos/:name": "position"
+        },
+        controller: routerController
+
+    });
+
+    /*
+    *
+    * App Event Listners
+    *
+    *
+    *
+    *
+    * */
+    sf1.EventBus.bind('ia.loadRegion',function(event,obj){
+        var region = obj.region; //'sf1.app.mainContentRegion',
+        var module = obj.module; // :'score',
+        var view = obj.view; // 'SummaryView'
+        require([module],function(mod){
+           // mod.init();
+            sf1.app.mainContentRegion.show(mod.SummaryView());
+//            sf1.app[region].show(mod[view]);
+            sf1.log('LOAD REGION');
+        });
+
+    });
     return {
-        AppRouter:AppRouter,
         sf1:sf1
     };
 });

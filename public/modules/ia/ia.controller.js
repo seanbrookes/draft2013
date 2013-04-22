@@ -12,50 +12,50 @@ define(
 
 
         var locTimestamp;
-        Roster.getRoster('bashers');
-        Roster.getRoster('hooters');
-        Roster.getRoster('mashers');
-        Roster.getRoster('stallions');
-        Roster.getRoster('rallycaps');
-        sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
-
-
-            if(roster){
-                sf1.rosters.push(roster);
-                // post totals to server
-                var postObj = {};
-                postObj.roster = roster.slug;
-                postObj.battersTotal = roster.batterTotal;
-                postObj.startersTotal = roster.starterTotal;
-                postObj.closersTotal = roster.closerTotal;
-                postObj.total = roster.total;
-                // var postArray = [];
-                // postArray.push(postObj);
-
-
-
-
-
-                sf1.io.ajax({
-                    type:'POST',
-                    url:'/totals',
-                    data:postObj,
-                    success:function(response){
-                        sf1.log(response);
-                        sf1.lastUpdate = response.lastUpdate
-                    },
-                    error:function(response){
-                        sf1.log(response);
-                    }
-                });
-            }
-            if(sf1.rosters.length === 5){
-                sf1.EventBus.trigger('score.rostersArrayLoaded');
-                sf1.EventBus.trigger('score.updateTotalsSuccess',{timestamp:locTimestamp});
-//                    IA.initRosterNav();
-//                    IA.initPosNav();
-            }
-        });
+//        Roster.getRoster('bashers');
+//        Roster.getRoster('hooters');
+//        Roster.getRoster('mashers');
+//        Roster.getRoster('stallions');
+//        Roster.getRoster('rallycaps');
+//        sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+//
+//
+//            if(roster){
+//                sf1.rosters.push(roster);
+//                // post totals to server
+//                var postObj = {};
+//                postObj.roster = roster.slug;
+//                postObj.battersTotal = roster.batterTotal;
+//                postObj.startersTotal = roster.starterTotal;
+//                postObj.closersTotal = roster.closerTotal;
+//                postObj.total = roster.total;
+//                // var postArray = [];
+//                // postArray.push(postObj);
+//
+//
+//
+//
+//
+//                sf1.io.ajax({
+//                    type:'POST',
+//                    url:'/totals',
+//                    data:postObj,
+//                    success:function(response){
+//                        sf1.log(response);
+//                        sf1.lastUpdate = response.lastUpdate;
+//                    },
+//                    error:function(response){
+//                        sf1.log(response);
+//                    }
+//                });
+//            }
+//            if(sf1.rosters.length === 5){
+//                sf1.EventBus.trigger('score.rostersArrayLoaded');
+//                sf1.EventBus.trigger('score.updateTotalsSuccess',{timestamp:locTimestamp});
+////                    IA.initRosterNav();
+////                    IA.initPosNav();
+//            }
+//        });
 		_.templateSettings.variable = 'P';
 
 

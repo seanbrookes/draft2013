@@ -80,7 +80,6 @@ define(['marionette','sf1'],
 
 
 
-
         return {
             BatterTotalView:BatterTotalView,
             StarterTotalView:StarterTotalView,
