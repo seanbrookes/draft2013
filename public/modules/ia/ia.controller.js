@@ -7,8 +7,8 @@
  *
  */
 define(
-	['sf1','marionette', 'roster', 'i18n', 'modules/ia/ia.models', 'modules/ia/ia.views', 'text!/modules/ia/ia.template.html', 'text!/modules/ia/config.json'],
-	function(sf1, Marionette, Roster, i18n, Model, View, template, config) {
+	['sf1','marionette', 'roster', 'i18n', 'ia', 'modules/ia/ia.models', 'modules/ia/ia.views', 'text!/modules/ia/ia.template.html', 'text!/modules/ia/config.json'],
+	function(sf1, Marionette, Roster, i18n, IA, Model, View, template, config) {
 
 
         var locTimestamp;
@@ -174,17 +174,17 @@ define(
             sf1.EventBus.bind('ia.renderRosterNavRequest',function(event){
                 _.templateSettings.variable = 'P';
                 // set the initial main nav markup
-                var rosterNavShell = $('#RosterNavTemplate').html();
-                $('#SideBar').html(rosterNavShell);
+//                var rosterNavShell = $('#RosterNavTemplate').html();
+//                $('#SideBar').html(rosterNavShell);
 
 
-                var rosterNavList = sf1.rosters.sort(sf1.totalSort);
+                var rosterNavList = sf1.app.rosters.sort(sf1.totalSort);
 
                 var rosterNavView = new View.RosterNavView({
 
                     collection: new Model.NavItemCollection(rosterNavList)
                 });
-                $('.roster-nav-container').prepend(rosterNavView.render().$el);
+                $('#SideBar').prepend(rosterNavView.render().$el);
 
                 $('.nav-roster-list').i18n();
                 sf1.EventBus.trigger('ia.rosterNavRenderSuccess');

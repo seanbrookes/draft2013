@@ -7,9 +7,9 @@
  *
  */
 define(
-    ['jquery', 'client','ia', 'countdown', 'text!/modules/pageheader/pageheader-template.html', 'stats', 'prettydate'],
-    function($, App, IA, countdown, markup) {
-        var sf1 = App.sf1;
+    ['jquery', 'sf1','client','ia', 'countdown', 'text!/modules/pageheader/pageheader-template.html', 'stats', 'prettydate'],
+    function($, sf1, App, IA, countdown, markup) {
+        //var sf1 = App.sf1;
         //sf1.log('PageHeader module loaded ');
         var currentAuthRoster;
 
@@ -22,7 +22,7 @@ define(
         var init = function(){
 
             var pageHeaderMarkup = $('#PageHeaderDefaultTemplate').html();
-            $('.viewport').append(pageHeaderMarkup);
+            $('#PageHeader').html(pageHeaderMarkup);
 
 //            $('.countdown-timer').kkcountdown({
 //                dayText : 'day ',

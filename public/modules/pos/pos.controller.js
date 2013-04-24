@@ -82,7 +82,7 @@ define(['sf1','modules/pos/pos.models','modules/pos/pos.views','text!modules/pos
                 }
 
                 // layout.render();
-                SF1.mainContentRegion.show(mainView);
+                sf1.app.mainContentRegion.show(mainView);
 
 
 

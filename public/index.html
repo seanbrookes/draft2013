@@ -25,16 +25,39 @@
 
     <!-- Body Markup -->
     <div class="viewport ui-container">
-
         <div id="PageHeader"></div>
         <div id="MainNav"></div>
-        <div id="SideBar"></div>
-        <div id="MainContent"></div>
+        <div class="row">
+            <div id="SideBar" class="fifth">
+                <nav id="RosterNavigation" class="roster-nav-container">
+                    <table>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </nav>
+            </div>
+            <div id="MainContent" class="fourfifth"></div>
+        </div>
         <div id="PageFooter"></div>
+
     </div>
 
 <!-- DOM location for dynamically loaded template markup -->
-<div id="TemplateContainer"></div>
+<div id="TemplateContainer">
+
+    <script id="BaseLayoutTemplateContainer" type="text/template">
+
+        <!--<div id="PageHeader"></div>-->
+        <!--<div id="MainNav"></div>-->
+        <!--<div id="SideBar"></div>-->
+        <!--<div id="MainContent"></div>-->
+        <!--<div id="PageFooter"></div>-->
+
+    </script>
+
+</div>
+
 
 
 <script data-main="main" src="scripts/lib/require.js"></script>

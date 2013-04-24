@@ -7,7 +7,8 @@
  *
  */
 // Client App
-define(['jquery', 'sf1', 'marionette'],function($, sf1, Marionette){
+define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
+    function($, sf1, Marionette, IA, PageHeader){
     sf1.app = new Backbone.Marionette.Application();
 
     var routerController = {
@@ -67,23 +68,33 @@ define(['jquery', 'sf1', 'marionette'],function($, sf1, Marionette){
             sf1.EventBus.trigger('ia.mainNavEvent', [
                 {route: rosterId}
             ]);
-            $('.main-content-wrapper').empty();
-            require(['roster', 'chat'], function (module, chatMod) {
-                module.init(rosterId);
-                // chatMod.init();
+            //$('.main-content-wrapper').empty();
+//            require(['roster', 'chat'], function (module, chatMod) {
+//                module.init(rosterId);
+//                // chatMod.init();
+//            });
+            sf1.EventBus.trigger('ia.loadRegion',{
+                region:'mainContentRegion',
+                module:'roster',
+                view:'RosterView',
+                data:rosterId
             });
-
         },
         position: function (posName) {
             sf1.log('pos route');
             sf1.EventBus.trigger('ia.mainNavEvent', [
                 {route: posName}
             ]);
-            $('.main-content-wrapper').empty();
-            require(['pos'], function (module) {
-                module.init(posName);
+//            $('.main-content-wrapper').empty();
+//            require(['pos'], function (module) {
+//                module.init(posName);
+//            });
+            sf1.EventBus.trigger('ia.loadRegion',{
+                region:'mainContentRegion',
+                module:'pos',
+                view:'init',
+                data:posName
             });
-
         },
         draft: function (userId) {
             sf1.log('draft route');
@@ -147,12 +158,26 @@ define(['jquery', 'sf1', 'marionette'],function($, sf1, Marionette){
             });
         }
     };
+    //var mainContentRegion;
 
     sf1.EventBus.bind('main.appInitialized',function(){
 
 
         //var router = new AppRouter();
+        var BaseLayout = Backbone.Marionette.Layout.extend({
+            template: "#BaseLayoutTemplateContainer",
 
+            regions: {
+                mainContentRegion: '#MainContent',
+                pageHeaderRegion:'#PageHeader',
+                pageFooterRegion:'#PageFooter',
+                mainNavRegion:'#MainNavigation',
+                sideBar:'#SideBar'
+            }
+        });
+//        mainContentRegion = Backbone.Marionette.Region({
+//            el:'#MainContent'
+//        });
 
 
         sf1.app.addRegions({
@@ -163,10 +188,15 @@ define(['jquery', 'sf1', 'marionette'],function($, sf1, Marionette){
             sideBar:'#SideBar'
 
         });
-
+        //sf1.app.render();
         //sf1.app.vent.on("routing:started", function() {
             //Backbone.history.start();
         //});
+
+//        sf1.app.addInitializer(function(){
+//            sf1.router = new AppRouter();
+//        });
+
         //sf1.app.addInitializer(function(){
             sf1.router = new AppRouter();
        // });
@@ -178,14 +208,14 @@ define(['jquery', 'sf1', 'marionette'],function($, sf1, Marionette){
         sf1.app.start();
 
 
-//        PageHeader.init();
+        PageHeader.init();
 //        MainContent.init();
 
 
 
         sf1.EventBus.trigger('ia.renderRosterNavRequest');
         sf1.EventBus.trigger('ia.renderPosNavRequest');
-
+        sf1.EventBus.trigger('pageheader.renderLastUpdateValRequest');
 
 
     });
@@ -222,9 +252,18 @@ define(['jquery', 'sf1', 'marionette'],function($, sf1, Marionette){
         var region = obj.region; //'sf1.app.mainContentRegion',
         var module = obj.module; // :'score',
         var view = obj.view; // 'SummaryView'
+        var data = obj.data;
+
         require([module],function(mod){
+
+            var currentView = mod[view](data);
+//            var currentViewMarkup = currentView;
+//            $("#MainContent").html('<p>test</p>');
+            //$("#MainContent").html(currentView.el);
+//            sf1.app.mainContentRegion.show(currentView);
+
            // mod.init();
-            sf1.app.mainContentRegion.show(mod.SummaryView());
+            //sf1.app.mainContentRegion.show(mod.SummaryView());
 //            sf1.app[region].show(mod[view]);
             sf1.log('LOAD REGION');
         });

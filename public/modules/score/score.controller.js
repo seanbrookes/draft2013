@@ -78,7 +78,7 @@ define(['sf1','modules/score/score.models','modules/score/score.views','roster',
 
                 var layout = new View.ScoreSummaryLayout();
                 // layout.render();
-                SF1.mainContentRegion.show(layout);
+                sf1.app.mainContentRegion.show(layout);
 
                 var outputMarkup = '';
 
@@ -157,7 +157,7 @@ define(['sf1','modules/score/score.models','modules/score/score.views','roster',
 
                 var layout = new View.ScoreSummaryLayout();
                 // layout.render();
-                SF1.mainContentRegion.show(layout);
+                sf1.app.mainContentRegion.show(layout);
                 layout.overallRegion.show(rosterTotalView);
                 layout.battersRegion.show(batterTotalView);
                 layout.startersRegion.show(starterTotalView);
@@ -189,11 +189,13 @@ define(['sf1','modules/score/score.models','modules/score/score.views','roster',
             //var scoreMainView = $('#ScoreModuleDefaultTemplate').html();
 
             var layout = new View.ScoreSummaryLayout();
-
+            //layout.render();
+            sf1.app.mainContentRegion.show(layout);
             layout.overallRegion.show(rosterTotalView);
             layout.battersRegion.show(batterTotalView);
             layout.startersRegion.show(starterTotalView);
             layout.closersRegion.show(closerTotalView);
+            //var render = layout.render()
 
             return layout;
 
@@ -223,6 +225,7 @@ define(['sf1','modules/score/score.models','modules/score/score.views','roster',
             init:init,
             initSideNav:initSideNav,
             SummaryView:summaryView
+
         };
     }
 );

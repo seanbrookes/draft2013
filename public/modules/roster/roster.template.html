@@ -13,6 +13,43 @@
         </div>
     </script>
 
+    <script id="RosterLayoutTemplateContainer" type="text/template">
+
+        <div>
+            <div class="roster-header"></div>
+            <div class="roster-batter"></div>
+            <div class="roster-starter"></div>
+            <div class="roster-closer"></div>
+
+        </div>
+
+    </script>
+
+    <script id="RosterHeaderTemplateContainer" type="text/template">
+
+        <table>
+            <caption class="roster-title"><%= S.rosterName %></caption>
+            <tbody class="roster-scores-list">
+                <tr>
+                    <td class="roster-total-sum-col"><label class="roster-score-summary-label">batters: </label></td><td class="roster-total-val-col"><%= S.batterTotal %></td>
+                </tr>
+                <tr>
+                    <td class="roster-total-sum-col"><label class="roster-score-summary-label">starters: </label></td><td class="roster-total-val-col"><%= S.starterTotal %></td>
+                </tr>
+                <tr>
+                    <td class="roster-total-sum-col"><label class="roster-score-summary-label">closers: </label></td><td class="roster-total-val-col"><%= S.closerTotal %></td>
+                </tr>
+                <tr>
+                    <td class="roster-total-sum-col">
+                        <label class="roster-score-summary-label">total: </label>
+                    </td>
+                <td class="roster-total-val-col"><%= S.total %></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </script>
+
     <!-- Roster Container -->
     <script id="RosterTemplate" type="text/template" class="ui-template">
         <div id="Roster" class="roster-container">

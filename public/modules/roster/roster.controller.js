@@ -21,9 +21,11 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
     var battersSubTotal = 0;
     var startersSubTotal = 0;
     var closersSubTotal = 0;
-
-    // namespace for var reference in template
+        // attach the module template markup to the DOM
     _.templateSettings.variable = 'S';
+    baseMarkup = $(template);
+    $(anchorSelector).append(baseMarkup);
+    // namespace for var reference in template
     var getCurrentAuthRoster = function(){
         if (sf1.hasStorage){
             return localStorage.getItem('currentAuthRoster');
@@ -38,7 +40,7 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
         battersSubTotal = 0;
         startersSubTotal = 0;
         closersSubTotal = 0;
-
+        _.templateSettings.variable = 'S';
         if (sf1.hasStorage){
             var testUserObj = getCurrentAuthRoster();
             if (testUserObj){
@@ -53,9 +55,7 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
         rosterSlug = rosterName;
         sf1.log('Roster module init ');
 
-        // attach the module template markup to the DOM
-        baseMarkup = $(template);
-        $(anchorSelector).append(baseMarkup);
+
 
         sf1.log('roster module init - rosterId: ' + rosterName);
 
@@ -84,8 +84,8 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
     };
     sf1.EventBus.bind('roster.updateRosterPlayerPos', function(data, event){
         var postObj = {};
-        postObj.playerId = $(event.target).data('id');;
-        postObj.propertyVal = $(event.target).val();;
+        postObj.playerId = $(event.target).data('id');
+        postObj.propertyVal = $(event.target).val();
         postObj.rosterSlug = rosterSlug;
 
         var endPoint = '/rosterpos';
@@ -186,6 +186,13 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
     *
     * */
     var renderRoster = function(playersModel){
+        _.templateSettings.variable = 'S';
+
+        if (!$('#RosterModuleTemplateContainer').html()){
+            baseMarkup = $(template);
+            $(anchorSelector).append(baseMarkup);
+        }
+
 //        var roster = rosterslug;
 //        var name;
         if (rosterSlug){
@@ -209,55 +216,50 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
                 var batterView = new View.BatterView({
                     collection: battersCollection
                 });
-                var batterOutput = batterView.render().$el;
+                //var batterOutput = batterView.render().$el;
 
                 var startersCollection = new Model.PlayerCollection(rosterObj.startersArray);
                 var starterView = new View.StarterView({
                     collection: startersCollection
                 });
-                var starterOutput = starterView.render().$el;
+                //var starterOutput = starterView.render().$el;
                 var closersCollection = new Model.PlayerCollection(rosterObj.closersArray);
                 var closerView = new View.CloserView({
                     collection: closersCollection
                 });
-                var closerOutput = closerView.render().$el;
+               // var closerOutput = closerView.render().$el;
 
-                var headerOutput = '<table>';
-                headerOutput += '<caption class="roster-title">' + rosterSlug + '</caption>';
+                rosterObj.rosterName = rosterSlug;
+                rosterObj.total = parseFloat(rosterObj.batterTotal + rosterObj.starterTotal + rosterObj.closerTotal).toFixed(2);
 
-                headerOutput += '<tbody class="roster-scores-list">';
-
-                headerOutput += '<tr>';
-                headerOutput += '<td class="roster-total-sum-col"><label class="roster-score-summary-label">batters: </label></td><td class="roster-total-val-col">' + rosterObj.batterTotal + '</td>';
-                headerOutput += '</tr>';
-
-                headerOutput += '<tr>';
-                headerOutput += '<td class="roster-total-sum-col"><label class="roster-score-summary-label">starters: </label></td><td class="roster-total-val-col">' + rosterObj.starterTotal + '</td>';
-                headerOutput += '</tr>';
-
-                headerOutput += '<tr>';
-                headerOutput += '<td class="roster-total-sum-col"><label class="roster-score-summary-label">closers: </label></td><td class="roster-total-val-col">' + rosterObj.closerTotal + '</td>';
-                headerOutput += '</tr>';
-
-                var rosterTotal = parseFloat(rosterObj.batterTotal + rosterObj.starterTotal + rosterObj.closerTotal).toFixed(2);
-
-                headerOutput += '<tr>';
-                headerOutput += '<td class="roster-total-sum-col"><label class="roster-score-summary-label">total: </label></td><td class="roster-total-val-col">' + rosterTotal + '</td>';
-                headerOutput += '</tr>';
-
-                headerOutput += '</tbody';
-                headerOutput += '</table';
+                var rosterHeaderView = new View.RosterHeaderView({
+                    model:new Model.RosterHeadModel(rosterObj)
+                });
 
 
-                $('.main-content-wrapper').html(headerOutput);
-                $('.main-content-wrapper').append(batterOutput);
-                $('.main-content-wrapper').append(starterOutput);
-                $('.main-content-wrapper').append(closerOutput);
+
+                var rosterLayout = new View.RosterLayout();
+                sf1.app.mainContentRegion.show(rosterLayout);
+
+                rosterLayout.headerRegion.show(rosterHeaderView);
+                rosterLayout.batterRegion.show(batterView);
+                rosterLayout.starterRegion.show(starterView);
+                rosterLayout.closerRegion.show(closerView);
+
+
+//                $('#MainContent').empty();
+//                $('#MainContent').html(headerOutput);
+//                $('#MainContent').append(batterOutput);
+//                $('#MainContent').append(starterOutput);
+//                $('#MainContent').append(closerOutput);
+
+
+
 
                 $('.batter-total').text(rosterObj.batterTotal);
                 $('.starter-total').text(rosterObj.starterTotal);
                 $('.closer-total').text(rosterObj.closerTotal);
-                $('.roster-total').text(rosterTotal);
+                $('.roster-total').text(rosterObj.total);
 
 
 
@@ -557,13 +559,55 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
         sf1.EventBus.trigger('roster.playerModelUpdateRequest');
 
     };
+        var rosterView = function(rosterName){
 
+            battersSubTotal = 0;
+            startersSubTotal = 0;
+            closersSubTotal = 0;
+
+//            if (sf1.hasStorage){
+//                var testUserObj = getCurrentAuthRoster();
+//                if (testUserObj){
+//                    currentAuthRoster = testUserObj;
+//                    sf1.log('CURRENT AUTH ROSTER: ' + currentAuthRoster);
+//                }
+//                else{
+//                    sf1.log('No auth ROSTER ');
+//                }
+//            }
+
+            rosterSlug = rosterName;
+
+
+
+
+            sf1.log('roster module view - rosterId: ' + rosterName);
+
+
+            if (rosterName){
+                /*
+                 *
+                 *
+                 * Synch Player Model
+                 *
+                 *
+                 * */
+
+                Model.synchPlayerModel(rosterSlug);
+                // new PlayerCollection(response.players)
+
+
+                // fire ajax query to get roster
+                // call render roster with collection
+            }
+        };
 
 
     return {
         init:function(rosterId){
             return init(rosterId);
         },
+        RosterView:rosterView,
         setRoster:setRoster,
         getRoster:function(roster){
             Model.getRoster(roster);

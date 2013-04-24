@@ -9,6 +9,24 @@
 define(['marionette'],function(Marionette){
     /*
      *
+     * Layout
+     *
+     * */
+    var RosterLayout = Backbone.Marionette.Layout.extend({
+        template: '#RosterLayoutTemplateContainer',
+        regions:{
+            headerRegion:'.roster-header',
+            batterRegion:'.roster-batter',
+            starterRegion:'.roster-starter',
+            closerRegion:'.roster-closer'
+        }
+
+    });
+
+
+
+    /*
+     *
      * Marionette Views
      *
      * */
@@ -121,7 +139,7 @@ define(['marionette'],function(Marionette){
 
 
     var RosterHeaderView = Backbone.Marionette.ItemView.extend({
-
+        template:'#RosterHeaderTemplateContainer'
     });
 
     return{
@@ -131,7 +149,9 @@ define(['marionette'],function(Marionette){
         RosterView:RosterView,
         BatterView:BatterView,
         StarterView:StarterView,
-        CloserView:CloserView
+        CloserView:CloserView,
+        RosterLayout:RosterLayout,
+        RosterHeaderView:RosterHeaderView
 
 
 

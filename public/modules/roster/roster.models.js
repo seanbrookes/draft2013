@@ -29,6 +29,11 @@ define(['sf1','backbone'],function(sf1,Backbone){
     var PlayerCollection = Backbone.Collection.extend({
         model: PlayerModel
     });
+
+    var RosterHeadModel = Backbone.Model.extend({});
+
+
+
     function compareTotals(a,b) {
 
         if (a.total > b.total){
@@ -95,14 +100,13 @@ define(['sf1','backbone'],function(sf1,Backbone){
         if (slug){
             // look up the slug in the global array first
 
-//            for (var i = 0;i < sf1.rosters.length;i++){
-//                if (sf1.rosters[i].slug === slug){
-//
-//                    return sf1.rosters[i];
-//                    sf1.EventBus.trigger('roster.getRosterSuccess', [sf1.rosters[i]]);
-//                    break;
-//                }
-//            }
+            for (var i = 0;i < sf1.app.rosters.length;i++){
+                if (sf1.app.rosters[i].slug === slug){
+                    sf1.EventBus.trigger('roster.getRosterSuccess', [sf1.app.rosters[i]]);
+                    return sf1.app.rosters[i];
+                    break;
+                }
+            }
 
             sf1.io.ajax({
                 type:'GET',
@@ -457,6 +461,7 @@ define(['sf1','backbone'],function(sf1,Backbone){
     return{
         PlayerCollection:PlayerCollection,
         getRoster:getRoster,
-        synchPlayerModel:synchPlayerModel
+        synchPlayerModel:synchPlayerModel,
+        RosterHeadModel:RosterHeadModel
     };
 });

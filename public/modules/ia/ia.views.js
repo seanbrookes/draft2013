@@ -52,7 +52,7 @@ define(['sf1','marionette'],
             itemView: RosterNavItemView,
             itemViewContainer: 'tbody',
             className: 'nav-roster-list',
-            template:'#RosterNavTemplate'
+            template:'#RosterNavigation'
         });
         /*
          * PosNavView
