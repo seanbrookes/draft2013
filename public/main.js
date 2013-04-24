@@ -126,6 +126,7 @@ define(
 
 
 
+                            // post totals to server
                             sf1.io.ajax({
                                 type:'POST',
                                 url:'/totals',
@@ -133,6 +134,7 @@ define(
                                 success:function(response){
                                     sf1.log(response);
                                     sf1.lastUpdate = response.lastUpdate;
+                                    //
                                 },
                                 error:function(response){
                                     sf1.log(response);

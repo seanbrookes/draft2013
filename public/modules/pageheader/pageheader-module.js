@@ -37,7 +37,7 @@ define(
 
             setGreeting();
 
-            sf1.EventBus.bind('pageheader.renderLastUpdateValRequest');
+            //sf1.EventBus.trigger('pageheader.renderLastUpdateValRequest');
 
 
             sf1.EventBus.trigger('pageheader.initComplete');

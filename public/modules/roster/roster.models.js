@@ -102,7 +102,7 @@ define(['sf1','backbone'],function(sf1,Backbone){
 
             for (var i = 0;i < sf1.app.rosters.length;i++){
                 if (sf1.app.rosters[i].slug === slug){
-                    sf1.EventBus.trigger('roster.getRosterSuccess', [sf1.app.rosters[i]]);
+                    //sf1.EventBus.trigger('roster.getRosterSuccess', [sf1.app.rosters[i]]);
                     return sf1.app.rosters[i];
                     break;
                 }

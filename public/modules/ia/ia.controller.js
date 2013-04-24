@@ -176,6 +176,10 @@ define(
                 // set the initial main nav markup
 //                var rosterNavShell = $('#RosterNavTemplate').html();
 //                $('#SideBar').html(rosterNavShell);
+                if (!$('#IAModule').html()){
+                    baseMarkup = $(template);
+                    $(anchorSelector).append(baseMarkup);
+                }
 
 
                 var rosterNavList = sf1.app.rosters.sort(sf1.totalSort);
@@ -198,6 +202,10 @@ define(
             sf1.EventBus.bind('ia.renderPosNavRequest',function(event){
                 _.templateSettings.variable = 'P';
                 // set the initial main nav markup
+                if (!$('#IAModule').html()){
+                    baseMarkup = $(template);
+                    $(anchorSelector).append(baseMarkup);
+                }
                 var posNavShell = $('#PosNavTemplate').html();
                 $('#SideBar').append(posNavShell);
 
