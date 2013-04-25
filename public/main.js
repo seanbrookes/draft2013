@@ -19,7 +19,7 @@ require.config({
         'jquery'        : 'scripts/lib/jquery-1.8.2.min',
         'cookie'        : 'scripts/lib/plugins/jquery.cookie',
         'prettydate'    : 'scripts/lib/plugins/jquery.prettydate',
-        'underscore'    : 'scripts/lib/underscore',
+        'underscore'    : 'scripts/lib/underscore-min',
         //'text'          : 'scripts/lib/text',
         'json2'         : 'scripts/lib/json2',
         'i18n'          : 'scripts/lib/i18next.amd-1.6.0',

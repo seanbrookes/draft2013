@@ -1,18 +1,34 @@
 /** basic default styles **/
-html { margin: 0; padding: 0; }
+html {
+    margin: 0;
+    padding: 0;
+    min-height:100%;
+}
 
 body {
-    height: 101%;
+    min-height:100%;
     font-size: 95.5%;
     font-family: "Trebuchet MS", Arial, Tahoma, sans-serif;
     color: #333;
-    background: #fff;
+    background: #023469;
     padding-top: 10px;
 }
 
-a {
+.viewport, .row{
+    min-height:100%;
+}
+a, .secondary-nav .is-selected a, .page-header.is-selected a{
     color: #0040D0;
     text-decoration: none;
+}
+.page-header{
+    position:relative;
+}
+.page-header-logo a{
+    color:#ffffff;
+}
+.secondary-nav a {
+    color: #fff;
 }
 a:hover { text-decoration: underline; }
 
@@ -82,18 +98,53 @@ ul{
     display:none;
 }
 .stats-update-comp{
-    float:right;
+    position:absolute;
+    top:0;
+    right:.4em;
+
 }
+#MainContent{
+    background-color:#fff;
+    min-height:100%;
+    padding-bottom:6em;
+
+}
+#MainContent.fourfifth{
+    margin-left:0;
+    min-height:100%;
+}
+.page-header.is-selected{
+    background-color:#ffffff;
+    height:100%;
+    padding:0;
+    margin:0;
+}
+
 #MainNavigation .is-selected{
     color:#0066aa;
     font-weight: bold;
+}
+ul.secondary-nav a {
+    display:inline-block;
+    width:100%;
+    padding-top:.5em;
+    padding-bottom:.5em;
+}
+.secondary-nav{
+    width:100%;
+}
+.secondary-nav table{
+    width:100%;
+}
+.secondary-nav .is-selected{
+    background-color: #ffffff;
 }
 .roster-title{
     font-size:1.5em;
     font-family:Consolas;
 }
 .page-header-greeting{
-    float:right
+
 }
 .stats-update-comp{
 
@@ -279,8 +330,8 @@ select#DraftPickRosterSelect{
 }
 .viewport .page-header{
     padding-bottom: 2px;
-    margin: 6px 0 6px;
-    border-bottom: 1px solid #eee;
+    margin: 6px 0 0 0;
+    border-bottom: 0px solid #eee;
 }
 .chat-container-1{
     float:left;
@@ -399,7 +450,7 @@ select#DraftPickRosterSelect{
     margin:0;
 }
 
-.nav-roster-list li a, .nav-pos-list li a{
+.nav-roster-list li a{
     padding-top:.25em;
     padding-bottom:.25em;
     display:inline-block;

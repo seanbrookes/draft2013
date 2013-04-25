@@ -32,11 +32,8 @@ define(['marionette','sf1'],
         var TotalItemView = Backbone.Marionette.ItemView.extend({
             template: '#ScoreItemTemplate',
             tagName: 'tr',
-            onRender:function(){
-//                if (this.model.attributes.counting){
-//                    this.$el.addClass('counting');
-//                }
-                //sf1.log('ON RENDER' + this.model);
+            onRender: function(model, index){
+                this.$el.addClass('rank-' + index);
             }
 
         });
@@ -47,7 +44,10 @@ define(['marionette','sf1'],
         var RosterTotalView = Backbone.Marionette.CompositeView.extend({
             template: '#RosterTotalsViewTemplate',
             itemView: TotalItemView,
-            itemViewContainer: 'tbody'
+            itemViewContainer: 'tbody',
+            itemViewOptions:function(model){
+                cssClass: "rank-" + this.collection.indexOf(model)
+            }
         });
         /*
          * BatterTotals

@@ -22,15 +22,7 @@ define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
                 module:'score',
                 view:'SummaryView'
             });
-//            require(['score'], function (score) {
-//
-//                // chatMod.init();
-//                sf1.score.init();
-//                //draft.init();
-//                //draftMod.init();
-//
-//            });
-            //indexModule.init();
+
         },
         signup: function () {
             sf1.log('signup route');
@@ -68,11 +60,6 @@ define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
             sf1.EventBus.trigger('ia.mainNavEvent', [
                 {route: rosterId}
             ]);
-            //$('.main-content-wrapper').empty();
-//            require(['roster', 'chat'], function (module, chatMod) {
-//                module.init(rosterId);
-//                // chatMod.init();
-//            });
             sf1.EventBus.trigger('ia.loadRegion',{
                 region:'mainContentRegion',
                 module:'roster',
@@ -83,7 +70,7 @@ define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
         position: function (posName) {
             sf1.log('pos route');
             sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: posName}
+                {route: posName.toLowerCase() }
             ]);
 //            $('.main-content-wrapper').empty();
 //            require(['pos'], function (module) {
@@ -215,7 +202,7 @@ define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
 
         sf1.EventBus.trigger('ia.renderRosterNavRequest');
         sf1.EventBus.trigger('ia.renderPosNavRequest');
-        sf1.EventBus.trigger('pageheader.renderLastUpdateValRequest');
+
         //sf1.EventBus.trigger('pageheader.renderLastUpdateValRequest');
 
 
@@ -246,7 +233,7 @@ define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
     * App Event Listners
     *
     *
-    *
+    *   LOAD REGION
     *
     * */
     sf1.EventBus.bind('ia.loadRegion',function(event,obj){
@@ -257,16 +244,8 @@ define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
 
         require([module],function(mod){
 
-            var currentView = mod[view](data);
-//            var currentViewMarkup = currentView;
-//            $("#MainContent").html('<p>test</p>');
-            //$("#MainContent").html(currentView.el);
-//            sf1.app.mainContentRegion.show(currentView);
+            mod[view](data);
 
-           // mod.init();
-            //sf1.app.mainContentRegion.show(mod.SummaryView());
-//            sf1.app[region].show(mod[view]);
-            sf1.log('LOAD REGION');
         });
 
     });

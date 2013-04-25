@@ -12,50 +12,7 @@ define(
 
 
         var locTimestamp;
-//        Roster.getRoster('bashers');
-//        Roster.getRoster('hooters');
-//        Roster.getRoster('mashers');
-//        Roster.getRoster('stallions');
-//        Roster.getRoster('rallycaps');
-//        sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
-//
-//
-//            if(roster){
-//                sf1.rosters.push(roster);
-//                // post totals to server
-//                var postObj = {};
-//                postObj.roster = roster.slug;
-//                postObj.battersTotal = roster.batterTotal;
-//                postObj.startersTotal = roster.starterTotal;
-//                postObj.closersTotal = roster.closerTotal;
-//                postObj.total = roster.total;
-//                // var postArray = [];
-//                // postArray.push(postObj);
-//
-//
-//
-//
-//
-//                sf1.io.ajax({
-//                    type:'POST',
-//                    url:'/totals',
-//                    data:postObj,
-//                    success:function(response){
-//                        sf1.log(response);
-//                        sf1.lastUpdate = response.lastUpdate;
-//                    },
-//                    error:function(response){
-//                        sf1.log(response);
-//                    }
-//                });
-//            }
-//            if(sf1.rosters.length === 5){
-//                sf1.EventBus.trigger('score.rostersArrayLoaded');
-//                sf1.EventBus.trigger('score.updateTotalsSuccess',{timestamp:locTimestamp});
-////                    IA.initRosterNav();
-////                    IA.initPosNav();
-//            }
-//        });
+
 		_.templateSettings.variable = 'P';
 
 
@@ -74,6 +31,8 @@ define(
 
         // IA base model
         var navConfigObj = {};
+
+        var currentNavRoute;
 
 
 
@@ -191,7 +150,7 @@ define(
                 $('#SideBar').prepend(rosterNavView.render().$el);
 
                 $('.nav-roster-list').i18n();
-                sf1.EventBus.trigger('ia.rosterNavRenderSuccess');
+                setActiveNavItem();
 
             });
             /*
@@ -216,21 +175,49 @@ define(
                 $('.pos-nav-container').html(posNavView.render().$el);
 
                 $('.nav-pos-list').i18n();
-                sf1.EventBus.trigger('ia.posNavRenderSuccess');
+                setActiveNavItem();
 
             });
+            /*
+             *
+             * set active nav item
+             *
+             *
+             * */
+            sf1.EventBus.bind('ia.setActiveNavItem',function(event,obj){
+                if (!obj){
+                    return;
+                }
+                // get a handle on the navigation element
+                // iterate over the children and set the active one
+                var navList = $(obj.navEl);
+                if (navList){
+                    $(obj.navEl).removeClass('is-selected');
+                    var itemSelector = obj.navEl + '[data-route=' + obj.navItem + ']';
+                    $(itemSelector).addClass('is-selected');
+                }
+            });
+
             sf1.EventBus.bind('ia.mainNavEvent',function(event,param){
                 if (param){
-                    setActiveNavItem(param.route);
+                    currentNavRoute = param.route;
+                    setActiveNavItem();
                 }
 
             });
 
 		}
-        var setActiveNavItem = function(route){
-            $('.nav-main-list a').removeClass('is-selected');
-            var itemSelector = '[data-route=' + route + ']';
+        var setActiveNavItem = function(){
+            $('.secondary-nav li').removeClass('is-selected');
+            $('.secondary-nav tr').removeClass('is-selected');
+            $('.secondary-nav a').removeClass('is-selected');
+            $('.page-header').removeClass('is-selected');
+            var itemSelector = '[data-route=' + currentNavRoute + ']';
             $(itemSelector).addClass('is-selected');
+            if (currentNavRoute === 'index'){
+                sf1.log('current nav is index');
+                $('.page-header').addClass('is-selected');
+            }
         };
 
 
@@ -268,44 +255,6 @@ define(
 );
 
 
-
-
-
-///*
-// *
-// *   main nav event
-// *
-// * */
-//sf1.EventBus.bind('ia.mainNavEvent',function(event,obj){
-//    if(!obj){
-//        return;
-//    }
-//    if (obj.route){
-//        sf1.EventBus.trigger('ia.setActiveNavItem',{
-//            navEl:'.nav-main-list li a',
-//            navItem:obj.route
-//        });
-//    }
-//});
-///*
-// *
-// * set active nav item
-// *
-// *
-// * */
-//sf1.EventBus.bind('ia.setActiveNavItem',function(event,obj){
-//    if (!obj){
-//        return;
-//    }
-//    // get a handle on the navigation element
-//    // iterate over the children and set the active one
-//    var navList = $(obj.navEl);
-//    if (navList){
-//        $(obj.navEl).removeClass('is-selected');
-//        var itemSelector = obj.navEl + '[data-route=' + obj.navItem + ']';
-//        $(itemSelector).addClass('is-selected');
-//    }
-//});
 
 
 
