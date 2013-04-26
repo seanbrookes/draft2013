@@ -63,15 +63,20 @@ define(['sf1','modules/history/history.models', 'modules/history/history.views',
                     }
 
                     for (var j = 0;j < bashersSeries.length;j++){
-                        masterArray.push({
-                            date:bashersSeries[j].date,
-                            bashersTtl:bashersSeries[j].total,
-                            hootersTtl:hootersSeries[j].total,
-                            mashersTtl:mashersSeries[j].total,
-                            stallionsTtl:stallionsSeries[j].total,
-                            rallycapsTtl:rallycapsSeries[j].total
+                        try{
+                            masterArray.push({
+                                date:bashersSeries[j].date,
+                                bashersTtl:bashersSeries[j].total,
+                                hootersTtl:hootersSeries[j].total,
+                                mashersTtl:mashersSeries[j].total,
+                                stallionsTtl:stallionsSeries[j].total,
+                                rallycapsTtl:rallycapsSeries[j].total
 
-                        })
+                            });
+                        }
+                        catch(e){
+
+                        }
                     }
 
                     new Morris.Line({
