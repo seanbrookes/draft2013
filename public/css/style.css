@@ -17,9 +17,30 @@ body {
 .viewport, .row{
     min-height:100%;
 }
+.secondary-nav .is-selected{
+    background: -moz-linear-gradient(left,  rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.08) 7%, rgba(0,0,0,0) 8%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(0,0,0,0.65)), color-stop(7%,rgba(0,0,0,0.08)), color-stop(8%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.08) 7%,rgba(0,0,0,0) 8%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.08) 7%,rgba(0,0,0,0) 8%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.08) 7%,rgba(0,0,0,0) 8%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.08) 7%,rgba(0,0,0,0) 8%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
+
+
+}
+.secondary-nav a{
+    padding-left:.9em;
+}
 a, .secondary-nav .is-selected a, .page-header.is-selected a{
     color: #0040D0;
     text-decoration: none;
+
+
+
+
+
+
+
 }
 .page-header{
     position:relative;
@@ -383,6 +404,9 @@ select#DraftPickRosterSelect{
     color:#37541A;
     font-family: Consolas;
 }
+.starter-list td{
+    border-bottom:1px solid #ccc;
+}
 .message-timestamp{
     position:absolute;
     right:1px;
@@ -459,7 +483,7 @@ select#DraftPickRosterSelect{
 .nav-score-item{
     color:#FF2656;
     font-size:80%;
-    border-bottom:1px solid #ddd;
+    border-bottom:0px solid #ddd;
 }
 .is-selected .nav-score-item{
     color:#812D21;
@@ -509,7 +533,7 @@ select#DraftPickRosterSelect{
     td{
         line-height:.9em;
         padding:.1em;
-        border:1px solid #dddddd;
+        border:0px solid #dddddd;
         vertical-align:middle;
         text-align:center;
     }
@@ -588,8 +612,15 @@ Phone size
         border:0px solid #dddddd;
         vertical-align:middle;
         text-align:center;
-        font-size:.8em;
+        font-size:.88em;
     }
+    .tbl-posrank td{
+        border-bottom:1px solid #ddd;
+    }
+    .tbl-posrank .total-col{
+        font-weight:bold;
+    }
+
     .team-col{
         font-size:.7em;
     }
@@ -597,6 +628,7 @@ Phone size
         text-align:left;
 
     }
+
     .name-col a{
         font-size:.75em;
     }
@@ -607,10 +639,14 @@ Phone size
     }
     .label-col{
         text-align:right;
+        white-space: nowrap;
         padding-right:.2em;
         padding-top:.4em;
         padding-bottom:.4em;
         border:0;
+    }
+    .secondary-nav a{
+        padding-left:.4em;
     }
     .label-col label{
 
@@ -618,6 +654,9 @@ Phone size
     }
     .nav-score-col{
         text-align:left;
+    }
+    .nav-score-item {
+        padding:1em;
     }
     .batter-list th, .starter-list th, .closer-list th{
         font-size:68%;
@@ -631,6 +670,12 @@ Phone size
         left: 6em;
     }
     .nav-pos-list{
-        margin-left:1em;
+        /* margin-left:1em;*/
+    }
+    .nav-pos-list .secondary-nav-item{
+        /* margin-left:1em;*/
+    }
+    .nav-pos-list a{
+        margin-left:.5em;
     }
 }
