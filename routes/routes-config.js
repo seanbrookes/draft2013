@@ -36,6 +36,8 @@ module.exports = function(app){
     app.get('/dobatters',stats.triggerBatterStats);
     app.get('/togglefetchstats/:value', stats.toggleFetchStats);
     app.get('/fetchstatsstatus', stats.getFetchStatsStatus);
+    app.get('/totalshistory',stats.getTotalsHistory);
+    app.get('/lastupdate',stats.getLastUpdate);
 
 
     app.post('/createdraft', draft.createDraft);

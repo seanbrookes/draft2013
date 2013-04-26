@@ -43,9 +43,19 @@ define(
             sf1.EventBus.trigger('pageheader.initComplete');
         };
         sf1.EventBus.bind('pageheader.renderLastUpdateValRequest',function(){
-            $('.stats-update-date').text(sf1.lastUpdate);
-            $('.stats-update-date').attr('title',sf1.lastUpdate);
-            sf1.EventBus.trigger('pageheader.lastUpdateUpdate');
+            sf1.io.ajax({
+               type:'GET',
+               url:'/lastupdate',
+               success:function(response){
+                   $('.stats-update-date').text(response);
+                   $('.stats-update-date').attr('title',response);
+                   sf1.EventBus.trigger('pageheader.lastUpdateUpdate');
+               },
+               error:function(response){
+                   sf1.log(response);
+               }
+            });
+
         });
         var setGreeting = function(){
             if (sf1.hasStorage){
@@ -77,6 +87,7 @@ define(
                     setTimeout(resetAfterStatUpdate, 6500);
                 });
             });
+            sf1.EventBus.trigger('pageheader.renderLastUpdateValRequest');
         });
 
         var resetAfterStatUpdate = function(){

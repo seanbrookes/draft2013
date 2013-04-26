@@ -198,7 +198,6 @@ define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
         PageHeader.init();
 //        MainContent.init();
 
-        sf1.EventBus.trigger('pageheader.renderLastUpdateValRequest');
 
         sf1.EventBus.trigger('ia.renderRosterNavRequest');
         sf1.EventBus.trigger('ia.renderPosNavRequest');

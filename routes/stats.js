@@ -12,6 +12,7 @@ var BatterStat = require('../models/batterstats-model');
 var PitcherStat = require('../models/pitcherstats-model');
 var Roster = require('../models/roster-model');
 var winston = require('winston');
+var Totals = require('../models/totals-model');
 
 var jsdom = require('jsdom')
     , request = require('request')
@@ -603,18 +604,15 @@ EventBus.on('stats.rosterPitcherLoadSuccess',function(roster){
         }
     }
 });
-
 EventBus.on('stats.rosterBatterSavedSuccess',function(roster){
     logger.info(roster + ' - saved batters');
 });
-
 EventBus.on('stats.rosterPitcherSavedSuccess',function(roster){
     logger.info(roster + ' - saved pitchers');
 });
 EventBus.on('stats.errorEvent',function(err){
     logger.error(err + ' - save roster pitchers error');
 });
-
 EventBus.on('stats.batterStatsPullSuccess',function(data){
     // loop over the rosters
     logger.info('stats.batterStatsPullSuccess B');
@@ -743,7 +741,6 @@ exports.toggleFetchStats = function(req, res){
         return res.send(200,'stats fetching turned on');
     });
 };
-
 EventBus.on('stats.getLatestPitcherStatsRequest',function(event){
 
     request({uri: pitchers}, function(err, response, body){
@@ -808,7 +805,6 @@ exports.triggerBatterStats = function(req,res){
     EventBus.emit('stats.getLatestBatterStatsRequest');
     return res.send(200,'batter processing request is processing');
 };
-
 exports.triggerPitcherStats = function(req,res){
     EventBus.emit('stats.getLatestPitcherStatsRequest');
     return res.send(200,'pitcher processing request is processing');
@@ -867,9 +863,35 @@ exports.postPlayerStats = function(req,res){
     // save document
 
 };
+/*
+*
+* Get Totals History
+*
+* */
+exports.getTotalsHistory = function(req, res){
+    Totals.find(function(err,dox){
+       if(err){
+           return res.send(500, err);
+       }
+       return res.send(dox);
 
+    });
+};
 
+/*
+*
+* Get Latest Update Timestamp
+*
+* */
+exports.getLastUpdate = function(req,res){
+  Totals.find({roster:'bashers'}).sort({date:-1}).execFind(function(err,doc){
 
+      if (err){
+          return res.send(500,err)
+      }
+      return res.send(doc[0].date);
+  });
+};
 /*
 *
 *
