@@ -457,8 +457,12 @@ select#DraftPickRosterSelect{
     white-space: nowrap;
 }
 .nav-score-item{
-    color:#D2413A;
-    font-size:70%;
+    color:#FF2656;
+    font-size:80%;
+    border-bottom:1px solid #ddd;
+}
+.is-selected .nav-score-item{
+    color:#812D21;
 }
 .draft-roster-cmd{
     color:#111;
@@ -566,20 +570,22 @@ Phone size
     ul, ol, ul ul, ol ol, ul ol, ol ul{
         margin: 0 0 0 0;
     }
+
     .row .fifth{
         border:0px solid red;
         float:left;
         max-width:6em;
-
+        font-size:80%;
     }
     .row .fourfifth{
-        max-width:15em;
+        max-width:21em;
+        font-size:80%;
         border:0px solid blue;
     }
     td{
         line-height:.8em;
         padding:0;
-        border:1px solid #dddddd;
+        border:0px solid #dddddd;
         vertical-align:middle;
         text-align:center;
         font-size:.8em;
