@@ -287,3 +287,417 @@
 {"level":"info","message":"rosterPos: 2B","timestamp":"2013-04-07T17:01:08.531Z"}
 {"level":"info","message":"rosterPos: 1B","timestamp":"2013-04-08T07:32:15.632Z"}
 {"level":"info","message":"rosterPos: LF","timestamp":"2013-04-09T02:38:30.323Z"}
+{"level":"info","message":"remove [Kelly Johnson] from rallycaps","timestamp":"2013-04-16T07:14:47.010Z"}
+{"level":"info","message":"update player:514bc83062faf2c00d00007e  roseter: bashers  mlbid: 407845","timestamp":"2013-04-18T02:38:15.194Z"}
+{"level":"info","message":"|  update ROSTER TOTAL:  bashers","timestamp":"2013-04-20T02:58:34.180Z"}
+{"level":"info","message":"roster: undefined","timestamp":"2013-04-20T04:46:58.329Z"}
+{"level":"info","message":"roster: undefined","timestamp":"2013-04-20T04:46:58.340Z"}
+{"level":"info","message":"bashers","timestamp":"2013-04-20T04:49:31.688Z"}
+{"level":"info","message":"bashers","timestamp":"2013-04-20T04:54:15.028Z"}
+{"level":"info","message":"hooters","timestamp":"2013-04-20T04:54:15.039Z"}
+{"level":"info","message":"hey: bashers","timestamp":"2013-04-20T04:55:08.148Z"}
+{"level":"info","message":"hey: bashers","timestamp":"2013-04-20T04:56:38.015Z"}
+{"level":"info","message":"hey: hooters","timestamp":"2013-04-20T04:56:38.026Z"}
+{"level":"info","message":"hey: mashers","timestamp":"2013-04-20T04:56:38.032Z"}
+{"level":"info","message":"hey: bashers","timestamp":"2013-04-20T05:01:49.558Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:01:49.558Z"}
+{"level":"info","message":"hey: hooters","timestamp":"2013-04-20T05:01:49.572Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:01:49.572Z"}
+{"level":"info","message":"hey: mashers","timestamp":"2013-04-20T05:01:49.576Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:01:49.577Z"}
+{"level":"info","message":"hey: rallycaps","timestamp":"2013-04-20T05:01:49.580Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:01:49.581Z"}
+{"level":"info","message":"hey: stallions","timestamp":"2013-04-20T05:01:49.583Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:01:49.584Z"}
+{"level":"info","message":"hey: undefined","timestamp":"2013-04-20T05:11:54.937Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:11:54.937Z"}
+{"level":"info","message":"hey: undefined","timestamp":"2013-04-20T05:11:54.947Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:11:54.947Z"}
+{"level":"info","message":"hey: undefined","timestamp":"2013-04-20T05:11:54.954Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:11:54.954Z"}
+{"level":"info","message":"hey: undefined","timestamp":"2013-04-20T05:11:54.958Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:11:54.958Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:12:51.531Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:12:51.531Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:12:51.542Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:12:51.542Z"}
+{"level":"info","message":"hey: 18.5","timestamp":"2013-04-20T05:12:51.548Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:12:51.548Z"}
+{"level":"info","message":"hey: 28.5","timestamp":"2013-04-20T05:12:51.552Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:12:51.552Z"}
+{"level":"info","message":"hey: undefined","timestamp":"2013-04-20T05:13:25.329Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:13:25.330Z"}
+{"level":"info","message":"hey: undefined","timestamp":"2013-04-20T05:13:25.340Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:13:25.340Z"}
+{"level":"info","message":"hey: undefined","timestamp":"2013-04-20T05:13:25.346Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:13:25.346Z"}
+{"level":"info","message":"hey: undefined","timestamp":"2013-04-20T05:13:25.351Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:13:25.351Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:17:21.382Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:17:21.383Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:17:21.396Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:17:21.397Z"}
+{"level":"info","message":"hey: 18.5","timestamp":"2013-04-20T05:17:21.400Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:17:21.401Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:17:54.754Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:17:54.755Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:17:54.766Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:17:54.767Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:24:47.437Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:24:47.437Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:24:47.439Z"}
+{"level":"info","message":"roster: undefined","timestamp":"2013-04-20T05:24:47.440Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:29:12.382Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:29:12.382Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:29:12.384Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:29:12.385Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:29:12.387Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:29:12.387Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:29:12.388Z"}
+{"level":"info","message":"roster: hooters","timestamp":"2013-04-20T05:29:12.388Z"}
+{"level":"info","message":"hey: 18.5","timestamp":"2013-04-20T05:29:12.393Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:29:12.393Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:29:12.393Z"}
+{"level":"info","message":"roster: mashers","timestamp":"2013-04-20T05:29:12.393Z"}
+{"level":"info","message":"hey: 28.5","timestamp":"2013-04-20T05:29:12.396Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:29:12.396Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:29:12.396Z"}
+{"level":"info","message":"roster: stallions","timestamp":"2013-04-20T05:29:12.396Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:36:28.044Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:36:28.044Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:36:28.047Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:36:28.047Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:36:28.049Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:36:28.050Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:36:28.050Z"}
+{"level":"info","message":"roster: hooters","timestamp":"2013-04-20T05:36:28.051Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:37:56.054Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:37:56.055Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:37:56.057Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:37:56.057Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:38:16.737Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:38:16.738Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:38:16.741Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:38:16.741Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:39:20.573Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:39:20.573Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:39:20.575Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:39:20.575Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:39:20.578Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:39:20.578Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:39:20.579Z"}
+{"level":"info","message":"roster: hooters","timestamp":"2013-04-20T05:39:20.579Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:40:02.470Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:40:02.470Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:40:02.472Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:40:02.473Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:40:02.473Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:42:17.453Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:42:17.454Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:42:17.456Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:42:17.456Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:42:17.458Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:42:17.461Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:42:17.461Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:42:17.462Z"}
+{"level":"info","message":"roster: hooters","timestamp":"2013-04-20T05:42:17.462Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:42:17.463Z"}
+{"level":"info","message":"hey: 18.5","timestamp":"2013-04-20T05:42:17.467Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:42:17.468Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:42:17.468Z"}
+{"level":"info","message":"roster: mashers","timestamp":"2013-04-20T05:42:17.468Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:42:17.468Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:46:52.731Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:46:52.732Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:46:52.734Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:46:52.734Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:46:52.736Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:47:59.722Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:47:59.723Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:47:59.726Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:47:59.726Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:47:59.729Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:49:18.723Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:49:18.723Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:49:18.726Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:49:18.726Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:49:18.727Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:50:08.200Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:50:08.201Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:50:08.203Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:50:08.203Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:50:08.203Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:52:34.293Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:52:34.294Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:52:34.296Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:52:34.296Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:52:34.298Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:52:34.301Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:52:34.301Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:52:34.302Z"}
+{"level":"info","message":"roster: hooters","timestamp":"2013-04-20T05:52:34.302Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:52:34.303Z"}
+{"level":"info","message":"hey: 18.5","timestamp":"2013-04-20T05:52:34.308Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:52:34.308Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:52:34.309Z"}
+{"level":"info","message":"roster: mashers","timestamp":"2013-04-20T05:52:34.309Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:52:34.309Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:53:42.736Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:53:42.737Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:53:42.739Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:53:42.739Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:53:42.740Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:53:42.743Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:53:42.743Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:53:42.746Z"}
+{"level":"info","message":"roster: hooters","timestamp":"2013-04-20T05:53:42.746Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:53:42.746Z"}
+{"level":"info","message":"hey: 18.5","timestamp":"2013-04-20T05:53:42.751Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:53:42.751Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:53:42.751Z"}
+{"level":"info","message":"roster: mashers","timestamp":"2013-04-20T05:53:42.751Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:53:42.753Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:54:32.854Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:54:32.855Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:54:32.858Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:54:32.858Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:54:32.860Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:56:25.374Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:56:25.375Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:56:25.377Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:56:25.378Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:56:25.380Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:56:25.385Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:56:25.385Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:56:25.386Z"}
+{"level":"info","message":"roster: hooters","timestamp":"2013-04-20T05:56:25.386Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:56:25.386Z"}
+{"level":"info","message":"hey: 18.5","timestamp":"2013-04-20T05:56:25.392Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:56:25.392Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:56:25.392Z"}
+{"level":"info","message":"roster: mashers","timestamp":"2013-04-20T05:56:25.393Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:56:25.393Z"}
+{"level":"info","message":"hey: 28.5","timestamp":"2013-04-20T05:56:25.395Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:56:25.396Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:56:25.396Z"}
+{"level":"info","message":"roster: stallions","timestamp":"2013-04-20T05:56:25.396Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:56:25.396Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:56:55.916Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:56:55.916Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:56:55.918Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:56:55.918Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:56:55.921Z"}
+{"level":"info","message":"hey: 107.5","timestamp":"2013-04-20T05:56:55.925Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:56:55.926Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:56:55.926Z"}
+{"level":"info","message":"roster: hooters","timestamp":"2013-04-20T05:56:55.927Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:56:55.927Z"}
+{"level":"info","message":"hey: 18.5","timestamp":"2013-04-20T05:56:55.932Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:56:55.933Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:56:55.933Z"}
+{"level":"info","message":"roster: mashers","timestamp":"2013-04-20T05:56:55.933Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:56:55.933Z"}
+{"level":"info","message":"hey: 211.2","timestamp":"2013-04-20T05:58:43.591Z"}
+{"level":"info","message":"| 1","timestamp":"2013-04-20T05:58:43.592Z"}
+{"level":"info","message":"| 2","timestamp":"2013-04-20T05:58:43.594Z"}
+{"level":"info","message":"roster: bashers","timestamp":"2013-04-20T05:58:43.594Z"}
+{"level":"info","message":"after total find","timestamp":"2013-04-20T05:58:43.594Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-20T06:06:45.247Z"}
+{"level":"info","message":"1","timestamp":"2013-04-22T07:32:42.554Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"5174e79a3e16f7892a000004","date":"2013-04-22T07:32:42.543Z"},"timestamp":"2013-04-22T07:32:42.557Z"}
+{"level":"info","message":"2","timestamp":"2013-04-22T07:32:42.557Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51722eefb9645f8364000013","__v":0,"date":"2013-04-20T06:00:15.707Z"},"timestamp":"2013-04-22T07:32:42.557Z"}
+{"level":"info","message":"3","timestamp":"2013-04-22T07:32:42.558Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-22T07:32:42.558Z"}
+{"level":"info","message":"1","timestamp":"2013-04-22T07:32:42.565Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"5174e79a3e16f7892a000003","date":"2013-04-22T07:32:42.525Z"},"timestamp":"2013-04-22T07:32:42.566Z"}
+{"level":"info","message":"2","timestamp":"2013-04-22T07:32:42.566Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51722eefb9645f8364000012","__v":0,"date":"2013-04-20T06:00:15.702Z"},"timestamp":"2013-04-22T07:32:42.567Z"}
+{"level":"info","message":"3","timestamp":"2013-04-22T07:32:42.567Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-22T07:32:42.567Z"}
+{"level":"info","message":"1","timestamp":"2013-04-23T04:27:36.021Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"51760db7bbd6e5e148000004","date":"2013-04-23T04:27:35.979Z"},"timestamp":"2013-04-23T04:27:36.025Z"}
+{"level":"info","message":"2","timestamp":"2013-04-23T04:27:36.026Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000015","__v":0,"date":"2013-04-20T06:00:15.734Z"},"timestamp":"2013-04-23T04:27:36.027Z"}
+{"level":"info","message":"3","timestamp":"2013-04-23T04:27:36.027Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-23T04:27:36.028Z"}
+{"level":"info","message":"1","timestamp":"2013-04-23T04:27:36.035Z"}
+{"level":"info","message":{"roster":"rallycaps","total":0,"battersTotal":0,"startersTotal":35.5,"closersTotal":0,"_id":"51760db7bbd6e5e148000003","date":"2013-04-23T04:27:35.973Z"},"timestamp":"2013-04-23T04:27:36.037Z"}
+{"level":"info","message":"2","timestamp":"2013-04-23T04:27:36.037Z"}
+{"level":"info","message":{"roster":"rallycaps","total":0,"battersTotal":0,"startersTotal":35.5,"closersTotal":0,"_id":"51722eefb9645f8364000016","__v":0,"date":"2013-04-20T06:00:15.749Z"},"timestamp":"2013-04-23T04:27:36.038Z"}
+{"level":"info","message":"3","timestamp":"2013-04-23T04:27:36.039Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-23T04:27:36.039Z"}
+{"level":"info","message":"1","timestamp":"2013-04-23T04:27:36.050Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51760db7bbd6e5e148000006","date":"2013-04-23T04:27:35.996Z"},"timestamp":"2013-04-23T04:27:36.052Z"}
+{"level":"info","message":"2","timestamp":"2013-04-23T04:27:36.053Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51722eefb9645f8364000012","__v":0,"date":"2013-04-20T06:00:15.702Z"},"timestamp":"2013-04-23T04:27:36.054Z"}
+{"level":"info","message":"3","timestamp":"2013-04-23T04:27:36.054Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-23T04:27:36.055Z"}
+{"level":"info","message":"1","timestamp":"2013-04-23T04:27:36.062Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51760db7bbd6e5e148000005","date":"2013-04-23T04:27:35.984Z"},"timestamp":"2013-04-23T04:27:36.063Z"}
+{"level":"info","message":"2","timestamp":"2013-04-23T04:27:36.064Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51722eefb9645f8364000013","__v":0,"date":"2013-04-20T06:00:15.707Z"},"timestamp":"2013-04-23T04:27:36.065Z"}
+{"level":"info","message":"3","timestamp":"2013-04-23T04:27:36.066Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-23T04:27:36.066Z"}
+{"level":"info","message":"1","timestamp":"2013-04-23T04:27:36.074Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"51760db8bbd6e5e148000007","date":"2013-04-23T04:27:36.010Z"},"timestamp":"2013-04-23T04:27:36.075Z"}
+{"level":"info","message":"2","timestamp":"2013-04-23T04:27:36.075Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000014","__v":0,"date":"2013-04-20T06:00:15.728Z"},"timestamp":"2013-04-23T04:27:36.077Z"}
+{"level":"info","message":"3","timestamp":"2013-04-23T04:27:36.078Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-23T04:27:36.078Z"}
+{"level":"info","message":"1","timestamp":"2013-04-24T06:10:56.465Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"517777705b90a1db11000007","date":"2013-04-24T06:10:56.453Z"},"timestamp":"2013-04-24T06:10:56.468Z"}
+{"level":"info","message":"2","timestamp":"2013-04-24T06:10:56.468Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000015","__v":0,"date":"2013-04-20T06:00:15.734Z"},"timestamp":"2013-04-24T06:10:56.469Z"}
+{"level":"info","message":"3","timestamp":"2013-04-24T06:10:56.469Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-24T06:10:56.469Z"}
+{"level":"info","message":"1","timestamp":"2013-04-24T06:10:56.476Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"517777705b90a1db11000006","date":"2013-04-24T06:10:56.451Z"},"timestamp":"2013-04-24T06:10:56.477Z"}
+{"level":"info","message":"2","timestamp":"2013-04-24T06:10:56.478Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51722eefb9645f8364000012","__v":0,"date":"2013-04-20T06:00:15.702Z"},"timestamp":"2013-04-24T06:10:56.478Z"}
+{"level":"info","message":"3","timestamp":"2013-04-24T06:10:56.478Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-24T06:10:56.478Z"}
+{"level":"info","message":"1","timestamp":"2013-04-24T06:10:56.486Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"517777705b90a1db11000004","date":"2013-04-24T06:10:56.442Z"},"timestamp":"2013-04-24T06:10:56.486Z"}
+{"level":"info","message":"2","timestamp":"2013-04-24T06:10:56.486Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51722eefb9645f8364000013","__v":0,"date":"2013-04-20T06:00:15.707Z"},"timestamp":"2013-04-24T06:10:56.487Z"}
+{"level":"info","message":"3","timestamp":"2013-04-24T06:10:56.487Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-24T06:10:56.487Z"}
+{"level":"info","message":"1","timestamp":"2013-04-24T06:10:56.494Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"517777705b90a1db11000005","date":"2013-04-24T06:10:56.446Z"},"timestamp":"2013-04-24T06:10:56.495Z"}
+{"level":"info","message":"2","timestamp":"2013-04-24T06:10:56.495Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000014","__v":0,"date":"2013-04-20T06:00:15.728Z"},"timestamp":"2013-04-24T06:10:56.496Z"}
+{"level":"info","message":"3","timestamp":"2013-04-24T06:10:56.496Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-24T06:10:56.496Z"}
+{"level":"info","message":"1","timestamp":"2013-04-24T06:10:56.505Z"}
+{"level":"info","message":{"roster":"rallycaps","total":0,"battersTotal":0,"startersTotal":35.5,"closersTotal":0,"_id":"517777705b90a1db11000003","date":"2013-04-24T06:10:56.437Z"},"timestamp":"2013-04-24T06:10:56.507Z"}
+{"level":"info","message":"2","timestamp":"2013-04-24T06:10:56.507Z"}
+{"level":"info","message":{"roster":"rallycaps","total":0,"battersTotal":0,"startersTotal":35.5,"closersTotal":0,"_id":"51722eefb9645f8364000016","__v":0,"date":"2013-04-20T06:00:15.749Z"},"timestamp":"2013-04-24T06:10:56.509Z"}
+{"level":"info","message":"3","timestamp":"2013-04-24T06:10:56.509Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-24T06:10:56.509Z"}
+{"level":"info","message":"1","timestamp":"2013-04-24T06:46:56.684Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51777fe08769a91613000003","date":"2013-04-24T06:46:56.634Z"},"timestamp":"2013-04-24T06:46:56.688Z"}
+{"level":"info","message":"2","timestamp":"2013-04-24T06:46:56.688Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51722eefb9645f8364000012","__v":0,"date":"2013-04-20T06:00:15.702Z"},"timestamp":"2013-04-24T06:46:56.690Z"}
+{"level":"info","message":"3","timestamp":"2013-04-24T06:46:56.690Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-24T06:46:56.691Z"}
+{"level":"info","message":"1","timestamp":"2013-04-24T06:46:56.698Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51777fe08769a91613000004","date":"2013-04-24T06:46:56.662Z"},"timestamp":"2013-04-24T06:46:56.699Z"}
+{"level":"info","message":"2","timestamp":"2013-04-24T06:46:56.700Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51722eefb9645f8364000013","__v":0,"date":"2013-04-20T06:00:15.707Z"},"timestamp":"2013-04-24T06:46:56.701Z"}
+{"level":"info","message":"3","timestamp":"2013-04-24T06:46:56.701Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-24T06:46:56.702Z"}
+{"level":"info","message":"1","timestamp":"2013-04-24T06:46:56.711Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"51777fe08769a91613000005","date":"2013-04-24T06:46:56.667Z"},"timestamp":"2013-04-24T06:46:56.712Z"}
+{"level":"info","message":"2","timestamp":"2013-04-24T06:46:56.712Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000014","__v":0,"date":"2013-04-20T06:00:15.728Z"},"timestamp":"2013-04-24T06:46:56.713Z"}
+{"level":"info","message":"3","timestamp":"2013-04-24T06:46:56.714Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-24T06:46:56.714Z"}
+{"level":"info","message":"1","timestamp":"2013-04-24T06:46:56.725Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"51777fe08769a91613000006","date":"2013-04-24T06:46:56.673Z"},"timestamp":"2013-04-24T06:46:56.726Z"}
+{"level":"info","message":"2","timestamp":"2013-04-24T06:46:56.727Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000015","__v":0,"date":"2013-04-20T06:00:15.734Z"},"timestamp":"2013-04-24T06:46:56.728Z"}
+{"level":"info","message":"3","timestamp":"2013-04-24T06:46:56.728Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-24T06:46:56.729Z"}
+{"level":"info","message":"1","timestamp":"2013-04-25T05:01:19.887Z"}
+{"level":"info","message":{"roster":"rallycaps","total":0,"battersTotal":0,"startersTotal":35.5,"closersTotal":0,"_id":"5178b89f61f2321031000007","date":"2013-04-25T05:01:19.873Z"},"timestamp":"2013-04-25T05:01:19.890Z"}
+{"level":"info","message":"2","timestamp":"2013-04-25T05:01:19.891Z"}
+{"level":"info","message":{"roster":"rallycaps","total":0,"battersTotal":0,"startersTotal":35.5,"closersTotal":0,"_id":"51722eefb9645f8364000016","__v":0,"date":"2013-04-20T06:00:15.749Z"},"timestamp":"2013-04-25T05:01:19.892Z"}
+{"level":"info","message":"3","timestamp":"2013-04-25T05:01:19.892Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-25T05:01:19.892Z"}
+{"level":"info","message":"1","timestamp":"2013-04-25T05:01:19.899Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"5178b89f61f2321031000006","date":"2013-04-25T05:01:19.870Z"},"timestamp":"2013-04-25T05:01:19.899Z"}
+{"level":"info","message":"2","timestamp":"2013-04-25T05:01:19.900Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000014","__v":0,"date":"2013-04-20T06:00:15.728Z"},"timestamp":"2013-04-25T05:01:19.900Z"}
+{"level":"info","message":"3","timestamp":"2013-04-25T05:01:19.900Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-25T05:01:19.900Z"}
+{"level":"info","message":"1","timestamp":"2013-04-25T05:01:19.910Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"5178b89f61f2321031000003","date":"2013-04-25T05:01:19.856Z"},"timestamp":"2013-04-25T05:01:19.911Z"}
+{"level":"info","message":"2","timestamp":"2013-04-25T05:01:19.911Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51722eefb9645f8364000013","__v":0,"date":"2013-04-20T06:00:15.707Z"},"timestamp":"2013-04-25T05:01:19.911Z"}
+{"level":"info","message":"3","timestamp":"2013-04-25T05:01:19.912Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-25T05:01:19.912Z"}
+{"level":"info","message":"1","timestamp":"2013-04-25T05:01:19.921Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"5178b89f61f2321031000005","date":"2013-04-25T05:01:19.866Z"},"timestamp":"2013-04-25T05:01:19.927Z"}
+{"level":"info","message":"2","timestamp":"2013-04-25T05:01:19.928Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51722eefb9645f8364000012","__v":0,"date":"2013-04-20T06:00:15.702Z"},"timestamp":"2013-04-25T05:01:19.929Z"}
+{"level":"info","message":"3","timestamp":"2013-04-25T05:01:19.929Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-25T05:01:19.929Z"}
+{"level":"info","message":"1","timestamp":"2013-04-25T05:01:19.943Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"5178b89f61f2321031000004","date":"2013-04-25T05:01:19.863Z"},"timestamp":"2013-04-25T05:01:19.945Z"}
+{"level":"info","message":"2","timestamp":"2013-04-25T05:01:19.946Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000015","__v":0,"date":"2013-04-20T06:00:15.734Z"},"timestamp":"2013-04-25T05:01:19.947Z"}
+{"level":"info","message":"3","timestamp":"2013-04-25T05:01:19.948Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-25T05:01:19.948Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T04:05:55.255Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"5179fd2396fc60f048000004","date":"2013-04-26T04:05:55.082Z"},"timestamp":"2013-04-26T04:05:55.257Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T04:05:55.258Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51722eefb9645f8364000013","__v":0,"date":"2013-04-20T06:00:15.707Z"},"timestamp":"2013-04-26T04:05:55.259Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T04:05:55.259Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T04:05:55.259Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T04:05:55.267Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"5179fd2396fc60f048000003","date":"2013-04-26T04:05:55.074Z"},"timestamp":"2013-04-26T04:05:55.268Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T04:05:55.268Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000015","__v":0,"date":"2013-04-20T06:00:15.734Z"},"timestamp":"2013-04-26T04:05:55.268Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T04:05:55.268Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T04:05:55.268Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T04:05:55.276Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"5179fd2396fc60f048000006","date":"2013-04-26T04:05:55.206Z"},"timestamp":"2013-04-26T04:05:55.276Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T04:05:55.277Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000014","__v":0,"date":"2013-04-20T06:00:15.728Z"},"timestamp":"2013-04-26T04:05:55.277Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T04:05:55.277Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T04:05:55.277Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T04:05:55.284Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"5179fd2396fc60f048000005","date":"2013-04-26T04:05:55.168Z"},"timestamp":"2013-04-26T04:05:55.285Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T04:05:55.285Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51722eefb9645f8364000012","__v":0,"date":"2013-04-20T06:00:15.702Z"},"timestamp":"2013-04-26T04:05:55.285Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T04:05:55.286Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T04:05:55.286Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T06:59:57.736Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"517a25ed84228f9f4c000003","date":"2013-04-26T06:59:57.717Z"},"timestamp":"2013-04-26T06:59:57.740Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T06:59:57.740Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51722eefb9645f8364000012","__v":0,"date":"2013-04-20T06:00:15.702Z"},"timestamp":"2013-04-26T06:59:57.741Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T06:59:57.741Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T06:59:57.742Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T06:59:57.749Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"517a25ed84228f9f4c000004","date":"2013-04-26T06:59:57.726Z"},"timestamp":"2013-04-26T06:59:57.750Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T06:59:57.750Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51722eefb9645f8364000013","__v":0,"date":"2013-04-20T06:00:15.707Z"},"timestamp":"2013-04-26T06:59:57.751Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T06:59:57.752Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T06:59:57.752Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T07:00:36.150Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"517a2614464770d34c000003","date":"2013-04-26T07:00:36.133Z"},"timestamp":"2013-04-26T07:00:36.154Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T07:00:36.155Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51722eefb9645f8364000012","__v":0,"date":"2013-04-20T06:00:15.702Z"},"timestamp":"2013-04-26T07:00:36.156Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T07:00:36.156Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T07:00:36.156Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T07:00:36.163Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"517a2614464770d34c000004","date":"2013-04-26T07:00:36.141Z"},"timestamp":"2013-04-26T07:00:36.164Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T07:00:36.165Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51722eefb9645f8364000013","__v":0,"date":"2013-04-20T06:00:15.707Z"},"timestamp":"2013-04-26T07:00:36.166Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T07:00:36.166Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T07:00:36.167Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T07:02:00.336Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"517a26684a76fee84c000003","date":"2013-04-26T07:02:00.311Z"},"timestamp":"2013-04-26T07:02:00.340Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T07:02:00.340Z"}
+{"level":"info","message":{"roster":"bashers","total":221.2,"battersTotal":29.5,"startersTotal":129.5,"closersTotal":62.2,"_id":"51722eefb9645f8364000012","__v":0,"date":"2013-04-20T06:00:15.702Z"},"timestamp":"2013-04-26T07:02:00.341Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T07:02:00.341Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T07:02:00.342Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T07:02:00.349Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"517a26684a76fee84c000004","date":"2013-04-26T07:02:00.317Z"},"timestamp":"2013-04-26T07:02:00.350Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T07:02:00.350Z"}
+{"level":"info","message":{"roster":"hooters","total":119.5,"battersTotal":44.5,"startersTotal":75,"closersTotal":0,"_id":"51722eefb9645f8364000013","__v":0,"date":"2013-04-20T06:00:15.707Z"},"timestamp":"2013-04-26T07:02:00.351Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T07:02:00.351Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T07:02:00.351Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T07:02:00.358Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"517a26684a76fee84c000005","date":"2013-04-26T07:02:00.321Z"},"timestamp":"2013-04-26T07:02:00.359Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T07:02:00.359Z"}
+{"level":"info","message":{"roster":"mashers","total":29.5,"battersTotal":29.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000014","__v":0,"date":"2013-04-20T06:00:15.728Z"},"timestamp":"2013-04-26T07:02:00.360Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T07:02:00.360Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T07:02:00.360Z"}
+{"level":"info","message":"1","timestamp":"2013-04-26T07:02:00.368Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"517a26684a76fee84c000006","date":"2013-04-26T07:02:00.327Z"},"timestamp":"2013-04-26T07:02:00.369Z"}
+{"level":"info","message":"2","timestamp":"2013-04-26T07:02:00.369Z"}
+{"level":"info","message":{"roster":"stallions","total":40.5,"battersTotal":40.5,"startersTotal":0,"closersTotal":0,"_id":"51722eefb9645f8364000015","__v":0,"date":"2013-04-20T06:00:15.734Z"},"timestamp":"2013-04-26T07:02:00.370Z"}
+{"level":"info","message":"3","timestamp":"2013-04-26T07:02:00.370Z"}
+{"level":"info","message":"totals do not need updating","timestamp":"2013-04-26T07:02:00.370Z"}

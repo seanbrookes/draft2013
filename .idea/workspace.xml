@@ -1,29 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4cf87770-f4a7-456a-a049-9bc7007f72e5" name="Default" comment="sync .gitignore">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README" afterPath="$PROJECT_DIR$/README" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app-config.js" afterPath="$PROJECT_DIR$/app-config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+    <list default="true" id="4cf87770-f4a7-456a-a049-9bc7007f72e5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user.log" afterPath="$PROJECT_DIR$/user.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="3f83c72e-3c78-45cf-babd-2e0d979dcb26" name="Failed commit: Default" comment="ensure node version is 10" />
+    <list id="4020433f-7bce-4fa2-a7b5-8d6424fa4b3e" name="Failed commit: Default (2)" comment="progress towards marionette structure" />
     <ignored path="sf1.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363757801098" ignored="false" />
+    <file path="/Dummy.txt" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366964567521" ignored="false" />
     <file path="/router.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1362861376161" ignored="false" />
-    <file path="/translation.json" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1362848011859" ignored="false" />
+    <file path="/translation.json" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366085491644" ignored="false" />
     <file path="/ia-template.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363276954564" ignored="false" />
-    <file path="/config.json" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1362846152976" ignored="false" />
-    <file path="/main.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363619876449" ignored="false" />
-    <file path="/client-app.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363620030755" ignored="false" />
+    <file path="/config.json" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366091880362" ignored="false" />
+    <file path="/main.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366962902058" ignored="false" />
+    <file path="/client-app.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366959899300" ignored="false" />
     <file path="/ia-module.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363191751550" ignored="false" />
-    <file path="/index.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363757384984" ignored="false" />
+    <file path="/index.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366772279785" ignored="false" />
     <file path="/admin-i18n.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363159226969" ignored="false" />
-    <file path="/sf1.0.1.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363191535019" ignored="false" />
+    <file path="/sf1.0.1.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366267487764" ignored="false" />
     <file path="/i18next.amd-1.6.0.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363193449182" ignored="false" />
     <file path="/index-module.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363196121680" ignored="false" />
     <file path="/admin-module.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363196289380" ignored="false" />
@@ -37,6 +33,40 @@
     <file path="/locale.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363450932878" ignored="false" />
     <file path="/README" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363757224799" ignored="false" />
     <file path="$PROJECT_DIR$/../sf1/public/index.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1363757436925" ignored="false" />
+    <file path="/roster.controller.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366785336390" ignored="false" />
+    <file path="/roster.models.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366700631426" ignored="false" />
+    <file path="/roster.views.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366703606342" ignored="false" />
+    <file path="/roster.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366469015528" ignored="false" />
+    <file path="/score.controller.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366962425890" ignored="false" />
+    <file path="/a.dummy" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366959340108" ignored="false" />
+    <file path="/score.views.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366876337886" ignored="false" />
+    <file path="/score.template.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366873122978" ignored="false" />
+    <file path="/roster.template.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366703458896" ignored="false" />
+    <file path="/score.models.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366704079096" ignored="false" />
+    <file path="/ia.models.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366086737128" ignored="false" />
+    <file path="/ia.views.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366870816164" ignored="false" />
+    <file path="/ia.controller.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366873845859" ignored="false" />
+    <file path="/ia.template.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366355065675" ignored="false" />
+    <file path="/maincontent-module.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366353318565" ignored="false" />
+    <file path="/maincontent-template.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366353540066" ignored="false" />
+    <file path="/pos.template.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366957094035" ignored="false" />
+    <file path="/pos.controller.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366701230588" ignored="false" />
+    <file path="/pos.views.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366094141055" ignored="false" />
+    <file path="/style.css" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366964493547" ignored="false" />
+    <file path="/pos.models.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366184444836" ignored="false" />
+    <file path="/roster-model.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366263661450" ignored="false" />
+    <file path="/totals-model.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366265139757" ignored="false" />
+    <file path="/routes-config.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366958790265" ignored="false" />
+    <file path="/pageheader-module.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366959535694" ignored="false" />
+    <file path="/pageheader-template.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366964352454" ignored="false" />
+    <file path="/jquery.prettydate.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366441071538" ignored="false" />
+    <file path="/stats.controller.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366444748106" ignored="false" />
+    <file path="/*.regexp" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366532087559" ignored="false" />
+    <file path="/stats.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366959099263" ignored="false" />
+    <file path="/history.controller.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366964131816" ignored="false" />
+    <file path="/history.models.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366960868277" ignored="false" />
+    <file path="/history.views.js" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366960813938" ignored="false" />
+    <file path="/hisory.templates.html" changelist="4cf87770-f4a7-456a-a049-9bc7007f72e5" time="1366961829074" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,28 +86,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.js">
+      <file leaf-file-name="history.controller.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/history/history.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="13" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0">
+            <state line="88" column="86" selection-start="3738" selection-end="3738" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app-config.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app-config.js">
+      <file leaf-file-name="pageheader-template.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/pageheader/pageheader-template.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="11" selection-start="65" selection-end="65" vertical-scroll-proportion="0.0">
+            <state line="9" column="29" selection-start="243" selection-end="243" vertical-scroll-proportion="-7.071429">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes-config.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/routes-config.js">
+      <file leaf-file-name="totals-model.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/totals-model.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="70" column="32" selection-start="2483" selection-end="2483" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="score.controller.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/score/score.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="120" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -86,34 +136,34 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="0" selection-start="915" selection-end="915" vertical-scroll-proportion="-21.214285">
+            <state line="66" column="31" selection-start="1950" selection-end="1950" vertical-scroll-proportion="-7.25">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+      <file leaf-file-name="morris.min.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/scripts/lib/morris.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
+      <file leaf-file-name="history.templates.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/history/history.templates.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="22" selection-start="21" selection-end="21" vertical-scroll-proportion="-0.78571427">
+            <state line="2" column="33" selection-start="59" selection-end="76" vertical-scroll-proportion="-1.5714285">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README">
+      <file leaf-file-name="style.css" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
+            <state line="40" column="0" selection-start="1413" selection-end="1413" vertical-scroll-proportion="0.5116279">
               <folding />
             </state>
           </provider>
@@ -138,30 +188,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/modules/ia/ia-template.html" />
-        <option value="$PROJECT_DIR$/routes/admin.js" />
-        <option value="$PROJECT_DIR$/routes.js" />
-        <option value="$PROJECT_DIR$/config.js" />
-        <option value="$PROJECT_DIR$/locale.js" />
-        <option value="$PROJECT_DIR$/routes/user.js" />
-        <option value="$PROJECT_DIR$/public/main.js" />
+        <option value="$PROJECT_DIR$/public/modules/score/score.views.js" />
+        <option value="$PROJECT_DIR$/public/modules/pos/pos.template.html" />
+        <option value="$PROJECT_DIR$/routes/routes-config.js" />
+        <option value="$PROJECT_DIR$/public/modules/pageheader/pageheader-module.js" />
+        <option value="$PROJECT_DIR$/routes/stats.js" />
         <option value="$PROJECT_DIR$/public/scripts/client-app.js" />
-        <option value="$PROJECT_DIR$/public/scripts/sf1.0.1.js" />
-        <option value="$PROJECT_DIR$/public/scripts/lib/plugins/jquery.cookie.js" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/README" />
-        <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/app-config.js" />
+        <option value="$PROJECT_DIR$/public/modules/history/history.views.js" />
+        <option value="$PROJECT_DIR$/public/modules/history/history.models.js" />
+        <option value="$PROJECT_DIR$/public/modules/history/hisory.templates.html" />
+        <option value="$PROJECT_DIR$/public/modules/history/history.templates.html" />
         <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/public/modules/score/score.controller.js" />
+        <option value="$PROJECT_DIR$/public/main.js" />
+        <option value="$PROJECT_DIR$/public/modules/history/history.controller.js" />
+        <option value="$PROJECT_DIR$/public/modules/pageheader/pageheader-template.html" />
+        <option value="$PROJECT_DIR$/public/css/style.css" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="64" />
-    <option name="y" value="-4" />
-    <option name="width" value="1337" />
-    <option name="height" value="1055" />
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1335" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -205,26 +255,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sf1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sf1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sf1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="All">
           <PATH>
@@ -265,6 +295,84 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="draft2013">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="modules">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="draft2013">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="modules">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="pageheader">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="draft2013">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="public">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="css">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sf1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sf1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sf1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -274,10 +382,11 @@
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.JavaScript" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.CSS" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/routes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -330,7 +439,12 @@
     </configuration>
     <list size="0" />
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="ShelveChangesManager" show_recycled="false">
+    <changelist date="1365955031151">
+      <option name="PATH" value="$USER_HOME$/.WebStorm6/config/shelf/na.patch" />
+      <option name="DESCRIPTION" value="na" />
+    </changelist>
+  </component>
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
@@ -446,7 +560,171 @@
       <created>1363677452583</created>
       <updated>1363677452583</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="fix bug causing roster not to render">
+      <created>1365925670369</created>
+      <updated>1365925670369</updated>
+    </task>
+    <task id="LOCAL-00025" summary="refactor roster code structure part 1">
+      <created>1365954823137</created>
+      <updated>1365954823137</updated>
+    </task>
+    <task id="LOCAL-00026" summary="na">
+      <created>1365955031505</created>
+      <updated>1365955031505</updated>
+    </task>
+    <task id="LOCAL-00027" summary="score summary home page">
+      <created>1366040203599</created>
+      <updated>1366040203599</updated>
+    </task>
+    <task id="LOCAL-00028" summary="position summary - some style">
+      <created>1366097560921</created>
+      <updated>1366097560921</updated>
+    </task>
+    <task id="LOCAL-00029" summary="score width for mobile">
+      <created>1366179311415</created>
+      <updated>1366179311415</updated>
+    </task>
+    <task id="LOCAL-00030" summary="score width for mobile 2">
+      <created>1366179353249</created>
+      <updated>1366179353249</updated>
+    </task>
+    <task id="LOCAL-00031" summary="roster display mobile">
+      <created>1366182671874</created>
+      <updated>1366182671874</updated>
+    </task>
+    <task id="LOCAL-00032" summary="position rank display updates - mobile displayi">
+      <created>1366184703074</created>
+      <updated>1366184703074</updated>
+    </task>
+    <task id="LOCAL-00033" summary="remove border colors">
+      <created>1366185146076</created>
+      <updated>1366185146076</updated>
+    </task>
+    <task id="LOCAL-00034" summary="fix rp stats summary">
+      <created>1366253026381</created>
+      <updated>1366253026381</updated>
+    </task>
+    <task id="LOCAL-00035" summary="more mobile styling, roster nav rank sorting, rank column on pos stats">
+      <created>1366270613775</created>
+      <updated>1366270613776</updated>
+    </task>
+    <task id="LOCAL-00036" summary="remove garbage">
+      <created>1366271129182</created>
+      <updated>1366271129182</updated>
+    </task>
+    <task id="LOCAL-00037" summary="convert roster nav to table">
+      <created>1366352054443</created>
+      <updated>1366352054443</updated>
+    </task>
+    <task id="LOCAL-00038" summary="more cleanup">
+      <created>1366355956004</created>
+      <updated>1366355956004</updated>
+    </task>
+    <task id="LOCAL-00039" summary="more cleanup 2">
+      <created>1366356597009</created>
+      <updated>1366356597009</updated>
+    </task>
+    <task id="LOCAL-00040" summary="more cleanup 3">
+      <created>1366356845728</created>
+      <updated>1366356845728</updated>
+    </task>
+    <task id="LOCAL-00041" summary="fix nav bug">
+      <created>1366358153298</created>
+      <updated>1366358153298</updated>
+    </task>
+    <task id="LOCAL-00042" summary="added last update logic to capture updates and display a time reference to last update.  Also a button to retrieve stats">
+      <created>1366446210898</created>
+      <updated>1366446210898</updated>
+    </task>
+    <task id="LOCAL-00043" summary="added last update logic to capture updates and display a time reference to last update.  Also a button to retrieve stats">
+      <created>1366446239051</created>
+      <updated>1366446239051</updated>
+    </task>
+    <task id="LOCAL-00044" summary="fix totals reference on initial add">
+      <created>1366447019745</created>
+      <updated>1366447019745</updated>
+    </task>
+    <task id="LOCAL-00045" summary="fix undefined reference in save totals">
+      <created>1366468641479</created>
+      <updated>1366468641479</updated>
+    </task>
+    <task id="LOCAL-00046" summary="troubleshooting issue wth updates">
+      <created>1366469050794</created>
+      <updated>1366469050794</updated>
+    </task>
+    <task id="LOCAL-00047" summary="reorder to fix rendering issues">
+      <created>1366470868631</created>
+      <updated>1366470868631</updated>
+    </task>
+    <task id="LOCAL-00048" summary="reorder to fix rendering issues 2&#10;">
+      <created>1366472090208</created>
+      <updated>1366472090208</updated>
+    </task>
+    <task id="LOCAL-00049" summary="clean up page header logic">
+      <created>1366472731998</created>
+      <updated>1366472731998</updated>
+    </task>
+    <task id="LOCAL-00050" summary="clean up page header logic 3">
+      <created>1366473513076</created>
+      <updated>1366473513077</updated>
+    </task>
+    <task id="LOCAL-00051" summary="clean up page header logic 3">
+      <created>1366494413377</created>
+      <updated>1366494413378</updated>
+    </task>
+    <task id="LOCAL-00052" summary="tweak roster return">
+      <created>1366503178459</created>
+      <updated>1366503178459</updated>
+    </task>
+    <task id="LOCAL-00053" summary="comment out main nav">
+      <created>1366505636966</created>
+      <updated>1366505636966</updated>
+    </task>
+    <task id="LOCAL-00054" summary="more rearange to get the order straight">
+      <created>1366512601235</created>
+      <updated>1366512601235</updated>
+    </task>
+    <task id="LOCAL-00055" summary="fix last update date">
+      <created>1366513042836</created>
+      <updated>1366513042837</updated>
+    </task>
+    <task id="LOCAL-00056" summary="progress towards marionette structure">
+      <created>1366616842613</created>
+      <updated>1366616842613</updated>
+    </task>
+    <task id="LOCAL-00057" summary="code reorg to clean up rendering">
+      <created>1366785863077</created>
+      <updated>1366785863078</updated>
+    </task>
+    <task id="LOCAL-00058" summary="latest fucking attempt to get the last update to fucking work consistently">
+      <created>1366787438655</created>
+      <updated>1366787438655</updated>
+    </task>
+    <task id="LOCAL-00059" summary="presentation cleanup - activate navigation">
+      <created>1366877033855</created>
+      <updated>1366877033855</updated>
+    </task>
+    <task id="LOCAL-00060" summary="presentation cleanup - table containment">
+      <created>1366955057421</created>
+      <updated>1366955057421</updated>
+    </task>
+    <task id="LOCAL-00061" summary="presentation cleanup - small screen work">
+      <created>1366957256550</created>
+      <updated>1366957256550</updated>
+    </task>
+    <task id="LOCAL-00062" summary="fix overlap of roster score on small screens">
+      <created>1366957890019</created>
+      <updated>1366957890019</updated>
+    </task>
+    <task id="LOCAL-00063" summary="last update final - hopefully">
+      <created>1366959763453</created>
+      <updated>1366959763453</updated>
+    </task>
+    <task id="LOCAL-00064" summary="chart and last update">
+      <created>1366964575803</created>
+      <updated>1366964575804</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -470,14 +748,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-4" width="1337" height="1055" extended-state="6" />
+    <frame x="65" y="24" width="1335" height="1026" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998884" sideWeight="0.49960908" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49721295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.451505" sideWeight="0.49960908" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32887402" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994527" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20015638" sideWeight="0.67001116" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20250195" sideWeight="0.548495" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.4949179" order="7" side_tool="true" content_ui="tabs" />
@@ -486,8 +766,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23522854" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -535,7 +813,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="sync .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="chart and last update" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -549,127 +827,156 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="match db connection stuff" />
-    <MESSAGE value="update host url documentation" />
-    <MESSAGE value="comment out the MongoStore declaration (avoid mongo-connect conflict)" />
-    <MESSAGE value="clean up index header markup" />
-    <MESSAGE value="comment out MongoStore variable declaration" />
-    <MESSAGE value="remove a comment" />
-    <MESSAGE value="url submission and basic processing initial implementation" />
-    <MESSAGE value="updated index structure - closer to foundation page" />
-    <MESSAGE value="adding prettydate plugin" />
-    <MESSAGE value="update ia for navigation selection" />
-    <MESSAGE value="updates to configure main nav and testing for authentication" />
-    <MESSAGE value="marionette implementation" />
-    <MESSAGE value="adjust to match working init from tuduqu" />
-    <MESSAGE value="remove require jquery statement" />
-    <MESSAGE value="app config refactor" />
-    <MESSAGE value="try to fix event memory leak" />
-    <MESSAGE value="revert node version to 8.x" />
-    <MESSAGE value="fix i18next jquery dependency" />
-    <MESSAGE value="fix jquery cookie plugin amd issues" />
-    <MESSAGE value="add file meta data" />
-    <MESSAGE value="reconcile readme file" />
-    <MESSAGE value="unfortunate commit resolution with git pull" />
-    <MESSAGE value="ensure node version is 10" />
-    <MESSAGE value="sync .gitignore" />
+    <MESSAGE value="more cleanup" />
+    <MESSAGE value="more cleanup 2" />
+    <MESSAGE value="more cleanup 3" />
+    <MESSAGE value="fix nav bug" />
+    <MESSAGE value="added last update logic to capture updates and display a time reference to last update.  Also a button to retrieve stats" />
+    <MESSAGE value="fix totals reference on initial add" />
+    <MESSAGE value="fix undefined reference in save totals" />
+    <MESSAGE value="troubleshooting issue wth updates" />
+    <MESSAGE value="reorder to fix rendering issues" />
+    <MESSAGE value="reorder to fix rendering issues 2&#10;" />
+    <MESSAGE value="clean up page header logic" />
+    <MESSAGE value="clean up page header logic 3" />
+    <MESSAGE value="tweak roster return" />
+    <MESSAGE value="comment out main nav" />
+    <MESSAGE value="more rearange to get the order straight" />
+    <MESSAGE value="fix last update date" />
+    <MESSAGE value="progress towards marionette structure" />
+    <MESSAGE value="code reorg to clean up rendering" />
+    <MESSAGE value="latest fucking attempt to get the last update to fucking work consistently" />
+    <MESSAGE value="presentation cleanup - activate navigation" />
+    <MESSAGE value="presentation cleanup - table containment" />
+    <MESSAGE value="presentation cleanup - small screen work" />
+    <MESSAGE value="fix overlap of roster score on small screens" />
+    <MESSAGE value="last update final - hopefully" />
+    <MESSAGE value="chart and last update" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="3" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/README">
+    <entry file="file://$PROJECT_DIR$/public/modules/stats/stats.views.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/stats/stats.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1023#2598#0" expanded="false" />
+            <element signature="e#2665#4307#0" expanded="false" />
+            <element signature="e#4354#6584#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/stats/stats.template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="9.428572">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/admin.js">
+    <entry file="file://$PROJECT_DIR$/public/modules/history/history.views.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="404" selection-end="404" vertical-scroll-proportion="0.41435185" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="674" selection-end="775" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/locale.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="9" selection-start="526" selection-end="526" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="48" selection-start="1935" selection-end="1935" vertical-scroll-proportion="0.03352601" />
+        <state line="12" column="0" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#77#0" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/scripts/client-app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="25" selection-start="125" selection-end="125" vertical-scroll-proportion="0.025433525" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/sf1.0.1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="23" selection-start="158" selection-end="158" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/scripts/lib/plugins/jquery.cookie.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="5" selection-start="562" selection-end="562" vertical-scroll-proportion="0.49061033" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="22" selection-start="21" selection-end="21" vertical-scroll-proportion="-0.78571427">
+        <state line="33" column="31" selection-start="932" selection-end="939" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README">
+    <entry file="file://$PROJECT_DIR$/public/modules/ia/ia.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0">
+        <state line="9" column="131" selection-start="140" selection-end="222" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/public/modules/history/history.models.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="13" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0">
+        <state line="14" column="23" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app-config.js">
+    <entry file="file://$PROJECT_DIR$/public/modules/history/history.templates.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="11" selection-start="65" selection-end="65" vertical-scroll-proportion="0.0">
+        <state line="2" column="33" selection-start="59" selection-end="76" vertical-scroll-proportion="-1.5714285">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/routes-config.js">
+    <entry file="file://$PROJECT_DIR$/public/modules/score/score.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="8" column="120" selection-start="198" selection-end="198" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="915" selection-end="915" vertical-scroll-proportion="-21.214285">
+        <state line="66" column="31" selection-start="1950" selection-end="1950" vertical-scroll-proportion="-7.25">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/public/scripts/lib/morris.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="32" selection-start="2483" selection-end="2483" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/totals-model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/history/history.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="86" selection-start="3738" selection-end="3738" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/pageheader/pageheader-template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="29" selection-start="243" selection-end="243" vertical-scroll-proportion="-7.071429">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="0" selection-start="1413" selection-end="1413" vertical-scroll-proportion="0.5116279">
           <folding />
         </state>
       </provider>
