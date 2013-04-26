@@ -18,9 +18,21 @@ define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
                 {route: 'index'}
             ]);
             sf1.EventBus.trigger('ia.loadRegion',{
-               region:'mainContentRegion',
+                region:'mainContentRegion',
                 module:'score',
                 view:'SummaryView'
+            });
+
+        },
+        history: function () {
+            sf1.log('history');
+            sf1.EventBus.trigger('ia.mainNavEvent', [
+                {route: 'history'}
+            ]);
+            sf1.EventBus.trigger('ia.loadRegion',{
+                region:'mainContentRegion',
+                module:'history',
+                view:'ChartView'
             });
 
         },
@@ -213,6 +225,7 @@ define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
             "home": "index",
             "draft": "draft",
             "draft/:userid": "draft",
+            "history": "history",
             "login": "login",
             "signup": "signup",
             "chat": "chat",

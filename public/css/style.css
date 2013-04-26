@@ -45,7 +45,7 @@ a, .secondary-nav .is-selected a, .page-header.is-selected a{
 .page-header{
     position:relative;
 }
-.page-header-logo a{
+.page-header nav li a{
     color:#ffffff;
 }
 .secondary-nav a {
@@ -500,6 +500,9 @@ select#DraftPickRosterSelect{
     font-weight:bold;
 }
 .total-col{}
+.chart-main{
+    height:500px;
+}
 /*
 
     small screen

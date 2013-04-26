@@ -25,6 +25,8 @@ require.config({
         'i18n'          : 'scripts/lib/i18next.amd-1.6.0',
         'backbone'      : 'scripts/lib/backbone',
         'marionette'    : 'scripts/lib/backbone.marionette',
+        'raphael'       : 'scripts/lib/raphael-min',
+        'morris'        : 'scripts/lib/morris.min',
         'bootstrap'     : 'bootstrap/js/bootstrap',
         'client'        : 'scripts/client-app',
         'sf1'           : 'scripts/sf1.0.1',
@@ -35,6 +37,7 @@ require.config({
         'index'         : 'modules/index/index-module',
         'countdown'     : 'scripts/lib/plugins/kkcountdown',
         //'socket.io'     : '/socket.io/socket.io',
+        'history'       : 'modules/history/history.controller',
         'chat'          : 'modules/chat/chat-module',
         'chatlib'       : 'scripts/lib/plugins/chat.io',
         'pageheader'    : 'modules/pageheader/pageheader-module',
@@ -66,6 +69,14 @@ require.config({
         bootstrap: {
             deps: ['jquery'],
             exports: 'bootstrap'
+        },
+        raphael:{
+            deps: ['jquery'],
+            exports: 'Raphael'
+        },
+        morris: {
+            deps: ['jquery','raphael'],
+            exports: 'Morris'
         },
         sf1: {
             deps: ['jquery'],
