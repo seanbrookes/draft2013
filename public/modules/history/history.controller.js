@@ -66,11 +66,11 @@ define(['sf1','modules/history/history.models', 'modules/history/history.views',
                         try{
                             masterArray.push({
                                 date:bashersSeries[j].date,
-                                bashersTtl:bashersSeries[j].total,
-                                hootersTtl:hootersSeries[j].total,
-                                mashersTtl:mashersSeries[j].total,
-                                stallionsTtl:stallionsSeries[j].total,
-                                rallycapsTtl:rallycapsSeries[j].total
+                                bashersTtl:bashersSeries[j].total || 200,
+                                hootersTtl:hootersSeries[j].total || 200,
+                                mashersTtl:mashersSeries[j].total || 200,
+                                stallionsTtl:stallionsSeries[j].total || 200,
+                                rallycapsTtl:rallycapsSeries[j].total || 200
 
                             });
                         }
