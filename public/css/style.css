@@ -598,7 +598,7 @@ Phone size
     .row .fifth{
         border:0px solid red;
         float:left;
-        max-width:6em;
+        /*max-width:6em;*/
         font-size:80%;
     }
     .row .fourfifth{
