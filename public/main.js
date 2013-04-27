@@ -24,7 +24,7 @@ require.config({
         'raphael'       : 'scripts/lib/raphael-min',
         'morris'        : 'scripts/lib/morris.min',
         'router'        : 'router',
-        'client'        : 'scripts/client-app',
+        'client'        : 'client-app',
         'sf1'           : 'scripts/sf1.0.1',
         'draft'         : 'modules/draft/draft-module',
         'security'      : 'modules/security/security-module',
@@ -115,6 +115,7 @@ define(['jquery', 'sf1', 'i18n', 'client', 'security', 'roster'],
 
 
                     }
+                    // rosters have been initialized
                     else{
                         sf1.EventBus.trigger('app.contextInitSuccess');
                     }
@@ -134,6 +135,7 @@ define(['jquery', 'sf1', 'i18n', 'client', 'security', 'roster'],
 
                 }
             );
+            // where should this live?
             sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
 
 

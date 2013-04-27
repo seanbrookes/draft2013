@@ -7,8 +7,8 @@
  *
  */
 // Router
-define(['sf1'],
-    function(sf1){
+define(['sf1','backbone','router'],
+    function(sf1,Backbone,router){
 
         var routerConfig = {
             index: function () {
@@ -156,11 +156,36 @@ define(['sf1'],
                 });
             }
         };
+        /*
+         *
+         * Initialize the AppRouter
+         *
+         * */
+        var AppRouter = Backbone.Marionette.AppRouter.extend({
+            appRoutes: {
+                "": "index",
+                "home": "index",
+                "draft": "draft",
+                "draft/:userid": "draft",
+                "history": "history",
+                "login": "login",
+                "signup": "signup",
+                "chat": "chat",
+                "adminstats": "adminstats",
+                "admin": "admin",
+                "page/:name": "page",
+                "roster/:name": "roster",
+                "pos/": "position",
+                "pos/:name": "position"
+            },
+            controller: routerConfig
 
+        });
         return {
             getRouterConfig:function(){
                 return routerConfig;
-            }
+            },
+            AppRouter:AppRouter
         };
     }
 );
