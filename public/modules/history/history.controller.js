@@ -6,7 +6,7 @@
  * Time: 12:13 AM
  *
  */
-define(['sf1','modules/history/history.models', 'modules/history/history.views', 'text!/modules/history/history.templates.html','raphael','morris'],
+define(['sf1','modules/history/history.models', 'modules/history/history.views', 'text!/modules/history/history.templates.html','raphael','d3','morris'],
     function(sf1,Model,View,template){
         var anchorSelector = '#TemplateContainer';
 

@@ -140,7 +140,7 @@ define(
                     $(anchorSelector).append(baseMarkup);
                 }
 
-
+var test = sf1.app.rosters;
                 var rosterNavList = sf1.app.rosters.sort(sf1.totalSort);
 
                 var rosterNavView = new View.RosterNavView({

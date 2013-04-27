@@ -7,8 +7,8 @@
  *
  */
 // Router
-define(['sf1','backbone','router'],
-    function(sf1,Backbone,router){
+define(['sf1','backbone','marionette'],
+    function(sf1,Backbone,Marionette){
 
         var routerConfig = {
             index: function () {

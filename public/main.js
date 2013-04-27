@@ -22,6 +22,7 @@ require.config({
         'backbone'      : 'scripts/lib/backbone',
         'marionette'    : 'scripts/lib/backbone.marionette',
         'raphael'       : 'scripts/lib/raphael-min',
+        'd3'            : 'scripts/lib/d3.v3.min',
         'morris'        : 'scripts/lib/morris.min',
         'router'        : 'router',
         'client'        : 'client-app',
@@ -69,6 +70,9 @@ require.config({
         morris: {
             deps: ['jquery','raphael'],
             exports: 'Morris'
+        },
+        d3: {
+            exports: 'd3'
         },
         sf1: {
             deps: ['jquery'],
