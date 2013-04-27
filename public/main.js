@@ -5,14 +5,10 @@
  * Date: 05/01/13
  * Time: 9:31 AM
  *
- */
-/**
  *
- * Baseline - make sure object is supported
- *
+ * Main
  *
  */
-
 require.config({
     enforceDefine: true,
     paths: {
@@ -27,7 +23,7 @@ require.config({
         'marionette'    : 'scripts/lib/backbone.marionette',
         'raphael'       : 'scripts/lib/raphael-min',
         'morris'        : 'scripts/lib/morris.min',
-        'bootstrap'     : 'bootstrap/js/bootstrap',
+        'router'        : 'router',
         'client'        : 'scripts/client-app',
         'sf1'           : 'scripts/sf1.0.1',
         'draft'         : 'modules/draft/draft-module',
@@ -66,10 +62,6 @@ require.config({
             deps: ['jquery'],
             exports: 'i18n'
         },
-        bootstrap: {
-            deps: ['jquery'],
-            exports: 'bootstrap'
-        },
         raphael:{
             deps: ['jquery'],
             exports: 'Raphael'
@@ -97,81 +89,101 @@ require.config({
         }
     }
 });
-define(
-    ['jquery', 'sf1', 'i18n', 'client', 'security', 'roster'],
+define(['jquery', 'sf1', 'i18n', 'client', 'security', 'roster'],
     function($, sf1, i18n, App, Security, Roster) {
 
+        // jQuery init complete
         $(document).ready(function(){
+
+            // init locale
             i18n.init({
-                lng: 'en'
-            }, function() {
+                    lng: 'en'
+                },
+                function() {  // init rosters (app context models)
 
-                // load the rosters
-                // fire the event
-                if (!sf1.app.rosters){
-                    sf1.app.rosters = [];
-                    Roster.getRoster('bashers');
-                    Roster.getRoster('hooters');
-                    Roster.getRoster('mashers');
-                    Roster.getRoster('stallions');
-                    Roster.getRoster('rallycaps');
-
-
-
-                    sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
-
-
-                        if(roster){
-                            sf1.app.rosters.push(roster);
-                            // post totals to server
-                            var postObj = {};
-                            postObj.roster = roster.slug;
-                            postObj.battersTotal = roster.batterTotal;
-                            postObj.startersTotal = roster.starterTotal;
-                            postObj.closersTotal = roster.closerTotal;
-                            postObj.total = roster.total;
-                            // var postArray = [];
-                            // postArray.push(postObj);
+                    // load the rosters
+                    // fire the event: app.rostersInitialized
+                    if (!sf1.app.rosters){
+                        sf1.app.rosters = [];
+                        Roster.getRoster('bashers');
+                        Roster.getRoster('hooters');
+                        Roster.getRoster('mashers');
+                        Roster.getRoster('stallions');
+                        Roster.getRoster('rallycaps');
 
 
 
 
+                    }
+                    else{
+                        sf1.EventBus.trigger('app.contextInitSuccess');
+                    }
 
-                            // post totals to server
-                            sf1.io.ajax({
-                                type:'POST',
-                                url:'/totals',
-                                data:postObj,
-                                success:function(response){
-                                    sf1.log(response);
-                                    sf1.lastUpdate = response.lastUpdate;
-                                    //
-                                },
-                                error:function(response){
-                                    sf1.log(response);
-                                }
-                            });
-                        }
-                        if(sf1.app.rosters.length === 5){
-//                            sf1.EventBus.trigger('score.rostersArrayLoaded');
-//                            sf1.EventBus.trigger('score.updateTotalsSuccess',{timestamp:locTimestamp});
+                    /*
+                    *
+                    * conceptually there should be a configuration to feed the initialization sequence
+                    * to know when all of the initialization steps are complete
+                    * that may be what the
+                    *
+                    *
+                    * */
 
 
-                            sf1.EventBus.trigger('main.appInitialized');
-//                    IA.initRosterNav();
-//                    IA.initPosNav();
+
+
+
+                }
+            );
+            sf1.EventBus.bind('roster.getRosterSuccess', function(event, roster){
+
+
+                /*
+                 *
+                 *
+                 * we got a roster back so add it to the app context array
+                 * post the totals to the backend.
+                 *
+                 *
+                 * */
+                if(roster){
+                    sf1.app.rosters.push(roster);
+                    // post totals to server
+                    var postObj = {};
+                    postObj.roster = roster.slug;
+                    postObj.battersTotal = roster.batterTotal;
+                    postObj.startersTotal = roster.starterTotal;
+                    postObj.closersTotal = roster.closerTotal;
+                    postObj.total = roster.total;
+                    // var postArray = [];
+                    // postArray.push(postObj);
+
+
+
+
+                    sf1.EventBus.trigger('stats.postRosterTotalsRequest', postObj);
+
+                    // post totals to server
+                    sf1.io.ajax({
+                        type:'POST',
+                        url:'/totals',
+                        data:postObj,
+                        success:function(response){
+                            sf1.log('success posting roster total: ' + postObj.roster);
+                            //                                    sf1.log(response);
+                            //                                    sf1.lastUpdate = response.lastUpdate;
+                            //
+                        },
+                        error:function(response){
+                            sf1.log(response);
                         }
                     });
                 }
-                else{
-                    sf1.EventBus.trigger('main.appInitialized');
+
+                // rosters are ready
+                if(sf1.app.rosters.length === 5){
+                    // a condition has been met (all rosters have been loaded)
+                    sf1.EventBus.trigger('app.contextInitSuccess');
                 }
-
-
-
-
-
-
             });
         });
 

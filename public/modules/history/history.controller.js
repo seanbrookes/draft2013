@@ -79,6 +79,40 @@ define(['sf1','modules/history/history.models', 'modules/history/history.views',
                         }
                     }
 
+                    var arrayMetaData = [{
+                         roster:'bashers',
+                         totalsArrayName:'bashersTtl',
+                         label:'Bashers'
+                        },
+                        {
+                            roster:'hooters',
+                            totalsArrayName:'hootersTtl',
+                            label:'Hooters'
+                        },
+                        {
+                            roster:'mashers',
+                            totalsArrayName:'mashersTtl',
+                            label:'Mashers'
+                        },
+                        {
+                            roster:'stallions',
+                            totalsArrayName:'stallionsTtl',
+                            label:'Stallions'
+                        },
+                        {
+                            roster:'rallycaps',
+                            totalsArrayName:'rallycapsTtl',
+                            label:'Rally Caps'
+                        },
+                    ];
+
+
+                    var rosterNavList = sf1.app.rosters.sort(sf1.totalSort);
+                    for (var k = 0;k < rosterNavList.length;k++){
+
+                    }
+
+
                     new Morris.Line({
                         // ID of the element in which to draw the chart.
                         element: 'MainChart',
@@ -87,11 +121,13 @@ define(['sf1','modules/history/history.models', 'modules/history/history.views',
                         data: masterArray,
                         // The name of the data record attribute that contains x-values.
                         xkey: 'date',
+                        ymin:'auto',
+                        ymax:'auto',
                         // A list of names of data record attributes that contain y-values.
-                        ykeys: ['bashersTtl','hootersTtl','mashersTtl','stallionsTtl','rallycapsTtl'],
+                        ykeys: [rosterNavList[0].slug + 'Ttl',rosterNavList[1].slug + 'Ttl',rosterNavList[2].slug + 'Ttl',rosterNavList[3].slug + 'Ttl',rosterNavList[4].slug + 'Ttl'],
                         // Labels for the ykeys -- will be displayed when you hover over the
                         // chart.
-                        labels: ['Bashers','Hooters','Mashers','Stallions','Rally Caps']
+                        labels: [rosterNavList[0].name,rosterNavList[1].name,rosterNavList[2].name,rosterNavList[3].name,rosterNavList[4].name]
                     });
 
 

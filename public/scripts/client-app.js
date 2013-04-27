@@ -5,266 +5,136 @@
  * Date: 11/12/12
  * Time: 10:43 PM
  *
+ *
+ * client-app
+ *
+ *
  */
 // Client App
-define(['jquery', 'sf1', 'marionette', 'ia', 'pageheader'],
-    function($, sf1, Marionette, IA, PageHeader){
-    sf1.app = new Backbone.Marionette.Application();
+define(['jquery', 'backbone', 'marionette', 'sf1', 'router', 'ia', 'pageheader'],
+    function($, Backbone, Marionette, sf1, router, IA, PageHeader){
+        /*
+        *
+        * Initialize the app
+        *
+        * */
+        sf1.app = new Backbone.Marionette.Application();
 
-    var routerController = {
-        index: function () {
-            sf1.log('index');
-            sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: 'index'}
-            ]);
-            sf1.EventBus.trigger('ia.loadRegion',{
-                region:'mainContentRegion',
-                module:'score',
-                view:'SummaryView'
+        /*
+         *
+         * Initialize the AppRouter
+         *
+         * */
+        var AppRouter = Backbone.Marionette.AppRouter.extend({
+            appRoutes: {
+                "": "index",
+                "home": "index",
+                "draft": "draft",
+                "draft/:userid": "draft",
+                "history": "history",
+                "login": "login",
+                "signup": "signup",
+                "chat": "chat",
+                "adminstats": "adminstats",
+                "admin": "admin",
+                "page/:name": "page",
+                "roster/:name": "roster",
+                "pos/": "position",
+                "pos/:name": "position"
+            },
+            controller: router.getRouterConfig()
+
+        });
+        //var mainContentRegion;
+
+        sf1.EventBus.bind('app.contextInitSuccess',function(){
+
+
+            //var router = new AppRouter();
+            var BaseLayout = Backbone.Marionette.Layout.extend({
+                template: "#BaseLayoutTemplateContainer",
+
+                regions: {
+                    mainContentRegion: '#MainContent',
+                    pageHeaderRegion:'#PageHeader',
+                    pageFooterRegion:'#PageFooter',
+                    mainNavRegion:'#MainNavigation',
+                    sideBar:'#SideBar'
+                }
             });
-
-        },
-        history: function () {
-            sf1.log('history');
-            sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: 'history'}
-            ]);
-            sf1.EventBus.trigger('ia.loadRegion',{
-                region:'mainContentRegion',
-                module:'history',
-                view:'ChartView'
-            });
-
-        },
-        signup: function () {
-            sf1.log('signup route');
-            sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: 'signup'}
-            ]);
-
-            require(['security'], function (module) {
-                module.initSignup();
-            });
-
-        },
-        page: function (rosterName) {
-            sf1.log('page route');
-            sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: 'page'}
-            ]);
-            require(['../modules/pagereader/pagereader-module'], function (module) {
-                //module.init(rosterName);
-            });
-
-        },
-        chat: function (rosterName) {
-            sf1.log('chat route');
-            sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: 'chat'}
-            ]);
-            require(['chat'], function (module) {
-                module.init();
-            });
-
-        },
-        roster: function (rosterId) {
-            sf1.log('roster route');
-            sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: rosterId}
-            ]);
-            sf1.EventBus.trigger('ia.loadRegion',{
-                region:'mainContentRegion',
-                module:'roster',
-                view:'RosterView',
-                data:rosterId
-            });
-        },
-        position: function (posName) {
-            sf1.log('pos route');
-            sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: posName.toLowerCase() }
-            ]);
-//            $('.main-content-wrapper').empty();
-//            require(['pos'], function (module) {
-//                module.init(posName);
-//            });
-            sf1.EventBus.trigger('ia.loadRegion',{
-                region:'mainContentRegion',
-                module:'pos',
-                view:'init',
-                data:posName
-            });
-        },
-        draft: function (userId) {
-            sf1.log('draft route');
-            sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: 'draft'}
-            ]);
-            require(['draft', 'chat'], function (draftMod, chatMod) {
-                $('.main-content-wrapper').empty();
-                draftMod.init(userId);
-                // chatMod.init();
-
-            });
-        },
-        login: function () {
-            sf1.log('login route');
-            sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: 'login'}
-            ]);
-
-            require(['security'], function (module) {
-                module.initLogin();
-            });
-//
-//            securityModule.initLogin();
-
-        },
-        adminstats: function () {
-            sf1.log('adminstats route');
-            sf1.EventBus.trigger('ia.mainNavEvent', [
-                {route: 'adminstats'}
-            ]);
-
-            require(['stats'], function (module) {
-                module.init();
-            });
-//
-//            securityModule.initLogin();
-
-        },
-        admin: function () {
-            sf1.log('admin route');
-
-            /*
-             *
-             * Test to see if the module should be loaded
-             * - is the current user authenticated
-             * - if they are do they have permission to load the admin module
-             *
-             * need a central property mapped to event listeners on login / logout
-             *
-             * could test the cookie
-             *
-             * need to determine is this a framework issue or an application/security issue
-             *
-             * also maps to IA and other areas of the application.
-             *
-             * */
-            sf1.EventBus.trigger('ia.mainNavEvent', {route: 'admin'});
-            require(['../modules/admin/admin-module'], function (module) {
-                module.init();
-            });
-        }
-    };
-    //var mainContentRegion;
-
-    sf1.EventBus.bind('main.appInitialized',function(){
+    //        mainContentRegion = Backbone.Marionette.Region({
+    //            el:'#MainContent'
+    //        });
 
 
-        //var router = new AppRouter();
-        var BaseLayout = Backbone.Marionette.Layout.extend({
-            template: "#BaseLayoutTemplateContainer",
-
-            regions: {
+            sf1.app.addRegions({
                 mainContentRegion: '#MainContent',
                 pageHeaderRegion:'#PageHeader',
                 pageFooterRegion:'#PageFooter',
                 mainNavRegion:'#MainNavigation',
                 sideBar:'#SideBar'
-            }
-        });
-//        mainContentRegion = Backbone.Marionette.Region({
-//            el:'#MainContent'
-//        });
+
+            });
+            //sf1.app.render();
+            //sf1.app.vent.on("routing:started", function() {
+                //Backbone.history.start();
+            //});
+
+    //        sf1.app.addInitializer(function(){
+    //            sf1.router = new AppRouter();
+    //        });
+
+            //sf1.app.addInitializer(function(){
+                sf1.router = new AppRouter();
+           // });
+            sf1.app.on("initialize:after", function(){
+                if (Backbone.history){
+                    Backbone.history.start();
+                }
+            });
+            sf1.app.start();
 
 
-        sf1.app.addRegions({
-            mainContentRegion: '#MainContent',
-            pageHeaderRegion:'#PageHeader',
-            pageFooterRegion:'#PageFooter',
-            mainNavRegion:'#MainNavigation',
-            sideBar:'#SideBar'
-
-        });
-        //sf1.app.render();
-        //sf1.app.vent.on("routing:started", function() {
-            //Backbone.history.start();
-        //});
-
-//        sf1.app.addInitializer(function(){
-//            sf1.router = new AppRouter();
-//        });
-
-        //sf1.app.addInitializer(function(){
-            sf1.router = new AppRouter();
-       // });
-        sf1.app.on("initialize:after", function(){
-            if (Backbone.history){
-                Backbone.history.start();
-            }
-        });
-        sf1.app.start();
+            PageHeader.init();
+    //        MainContent.init();
 
 
-        PageHeader.init();
-//        MainContent.init();
+            sf1.EventBus.trigger('ia.renderRosterNavRequest');
+            sf1.EventBus.trigger('ia.renderPosNavRequest');
 
+            //sf1.EventBus.trigger('pageheader.renderLastUpdateValRequest');
 
-        sf1.EventBus.trigger('ia.renderRosterNavRequest');
-        sf1.EventBus.trigger('ia.renderPosNavRequest');
-
-        //sf1.EventBus.trigger('pageheader.renderLastUpdateValRequest');
-
-
-    });
-
-    var AppRouter = Backbone.Marionette.AppRouter.extend({
-        appRoutes: {
-            "": "index",
-            "home": "index",
-            "draft": "draft",
-            "draft/:userid": "draft",
-            "history": "history",
-            "login": "login",
-            "signup": "signup",
-            "chat": "chat",
-            "adminstats": "adminstats",
-            "admin": "admin",
-            "page/:name": "page",
-            "roster/:name": "roster",
-            "pos/": "position",
-            "pos/:name": "position"
-        },
-        controller: routerController
-
-    });
-
-    /*
-    *
-    * App Event Listners
-    *
-    *
-    *   LOAD REGION
-    *
-    * */
-    sf1.EventBus.bind('ia.loadRegion',function(event,obj){
-        var region = obj.region; //'sf1.app.mainContentRegion',
-        var module = obj.module; // :'score',
-        var view = obj.view; // 'SummaryView'
-        var data = obj.data;
-
-        require([module],function(mod){
-
-            mod[view](data);
 
         });
 
-    });
-    return {
-        sf1:sf1
-    };
-});
+
+
+        /*
+        *
+        * App Event Listners
+        *
+        *
+        *   LOAD REGION
+        *
+        * */
+        sf1.EventBus.bind('ia.loadRegionContentRequest',function(event,obj){
+            var region = obj.region; //'sf1.app.mainContentRegion',
+            var module = obj.module; // :'score',
+            var view = obj.view; // 'SummaryView'
+            var data = obj.data;
+
+            require([module],function(mod){
+
+                mod[view](data);
+
+            });
+
+        });
+        return {
+            sf1:sf1
+        };
+    }
+);
 
 
 

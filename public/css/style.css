@@ -173,8 +173,13 @@ ul.secondary-nav a {
 .btn-update-stats{
     font-size:60%;
 }
+
 .stats-update-label{
     font-size:85%;
+    color:#fff;
+}
+.is-selected .stats-update-label{
+    color:#023469;
 }
 .stats-update-date{
     font-weight:bold;
