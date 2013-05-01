@@ -38,6 +38,8 @@ define(['sf1','modules/history/history.models', 'modules/history/history.views',
                     var rallycapsSeries = [];
                     var masterArray = [];
 
+                    var dataSetLengthArray = [];
+
                     for (var i = 0;i < response.length;i++){
                         var responseItem = response[i];
                         switch(responseItem.roster){
@@ -60,23 +62,76 @@ define(['sf1','modules/history/history.models', 'modules/history/history.views',
                             default:
 
                         }
-                    }
-
-                    for (var j = 0;j < bashersSeries.length;j++){
-                        try{
-                            masterArray.push({
-                                date:bashersSeries[j].date,
-                                bashersTtl:bashersSeries[j].total || 200,
-                                hootersTtl:hootersSeries[j].total || 200,
-                                mashersTtl:mashersSeries[j].total || 200,
-                                stallionsTtl:stallionsSeries[j].total || 200,
-                                rallycapsTtl:rallycapsSeries[j].total || 200
-
-                            });
+                    };
+                    // create an array so we can identify the longest array by sorting
+                    dataSetLengthArray.push(
+                        {
+                            roster:bashersSeries,
+                            length:bashersSeries.length
+                        },
+                        {
+                            roster:hootersSeries,
+                            length:hootersSeries.length
+                        },
+                        {
+                            roster:mashersSeries,
+                            length:mashersSeries.length
+                        },
+                        {
+                            roster:stallionsSeries,
+                            length:stallionsSeries.length
+                        },
+                        {
+                            roster:rallycapsSeries,
+                            length:rallycapsSeries.length
                         }
-                        catch(e){
+                    );
+                    dataSetLengthArray.sort(compareLength);
 
+                    // longest array will dicated the size of the data set for the chart
+                    var longestArray = dataSetLengthArray[0];
+
+                    // initialize starting totals
+                    var bashersPostTotal = 400;
+                    var mashersPostTotal = 400;
+                    var hootersPostTotal = 400;
+                    var stallionsPostTotal = 400;
+                    var rallycapsPostTotal = 400;
+
+                    for (var j = 0;j < longestArray.length;j++){
+
+                        // only update the total if there is a valid value
+                        // if not just use the existing one
+                        if (bashersSeries[j].total){
+                            bashersPostTotal = bashersSeries[j].total;
                         }
+                        if (hootersSeries[j].total){
+                            hootersPostTotal = hootersSeries[j].total;
+                        }
+                        if (mashersSeries[j].total){
+                            mashersPostTotal = mashersSeries[j].total;
+                        }
+                        if (stallionsSeries[j].total){
+                            stallionsPostTotal = stallionsSeries[j].total;
+                        }
+                        if (rallycapsSeries[j].total){
+                            rallycapsPostTotal = rallycapsSeries[j].total;
+                        }
+
+
+                        var xyz = longestArray.roster[j];
+
+                        masterArray.push({
+                            date:xyz.date,
+                            bashersTtl:bashersPostTotal,
+                            hootersTtl:hootersPostTotal,
+                            mashersTtl:mashersPostTotal,
+                            stallionsTtl:stallionsPostTotal,
+                            rallycapsTtl:rallycapsPostTotal
+
+                        });
+
+                        var ttt = 'abc';
                     }
 
                     var arrayMetaData = [{
@@ -123,6 +178,7 @@ define(['sf1','modules/history/history.models', 'modules/history/history.views',
                         xkey: 'date',
                         ymin:'auto',
                         ymax:'auto',
+                        'hideHover':'auto',
                         // A list of names of data record attributes that contain y-values.
                         ykeys: [rosterNavList[0].slug + 'Ttl',rosterNavList[1].slug + 'Ttl',rosterNavList[2].slug + 'Ttl',rosterNavList[3].slug + 'Ttl',rosterNavList[4].slug + 'Ttl'],
                         // Labels for the ykeys -- will be displayed when you hover over the
@@ -149,6 +205,15 @@ define(['sf1','modules/history/history.models', 'modules/history/history.views',
                 }
             });
         };
+        var compareLength = function(a,b) {
+            if (a.length < b.length){
+                return -1;
+            }
+            if (a.length > b.length){
+                return 1;
+            }
+            return 0;
+        }
         return{
             init:init,
             ChartView:ChartView
