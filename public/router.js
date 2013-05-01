@@ -151,7 +151,7 @@ define(['sf1','backbone','marionette'],
                  *
                  * */
                 sf1.EventBus.trigger('ia.mainNavEvent', {route: 'admin'});
-                require(['/modules/admin/admin-module'], function (module) {
+                require(['admin'], function (module) {
                     module.init();
                 });
             }

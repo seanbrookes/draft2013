@@ -53,7 +53,7 @@ define(
 			var templateData = {};
 
 			var templateMarkup = template( templateData );
-			$('.main-content-wrapper').html(templateMarkup);
+			$('#MainContent').html(templateMarkup);
 
             var rosterPlayerForm = $('#AdminModuleAddNewRosterPlayerTemplate').html();
             $('.admin-module-container').append(rosterPlayerForm);
