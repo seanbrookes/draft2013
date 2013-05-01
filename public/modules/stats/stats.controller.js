@@ -23,7 +23,7 @@ define(['sf1','jquery','backbone','underscore','marionette','text!/modules/stats
             var templateData = {};
 
             var templateMarkup = template( templateData );
-            $('.main-content-wrapper').html(templateMarkup);
+            $('#MainContent').html(templateMarkup);
 
             initEventListeners();
             sf1.EventBus.bind('stats.initStatsEventListenersComplete',function(data){
