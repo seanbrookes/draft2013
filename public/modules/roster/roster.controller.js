@@ -256,10 +256,10 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
 
 
 
-                $('.batter-total').text(rosterObj.batterTotal.toFixed(2));
-                $('.starter-total').text(rosterObj.starterTotal.toFixed(2));
-                $('.closer-total').text(rosterObj.closerTotal.toFixed(2));
-                $('.roster-total').text(rosterObj.total.toFixed(2));
+                $('.batter-total').text(rosterObj.batterTotal);
+                $('.starter-total').text(rosterObj.starterTotal);
+                $('.closer-total').text(rosterObj.closerTotal);
+                $('.roster-total').text(rosterObj.total);
 
 
 

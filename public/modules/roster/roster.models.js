@@ -78,10 +78,10 @@ define(['sf1','backbone'],function(sf1,Backbone){
             roster.battersArray = totalAndSortBatters(battersArray).batters;
             roster.startersArray = totalAndSortStarters(startersArray).starters;
             roster.closersArray = totalAndSortClosers(closersArray).closers;
-            roster.batterTotal = totalAndSortBatters(battersArray).subTotal;
-            roster.starterTotal = totalAndSortStarters(startersArray).subTotal;
-            roster.closerTotal = totalAndSortClosers(closersArray).subTotal;
-            roster.total = (roster.batterTotal + roster.starterTotal + roster.closerTotal);
+            roster.batterTotal = parseFloat(totalAndSortBatters(battersArray).subTotal).toFixed(2);
+            roster.starterTotal = parseFloat(totalAndSortStarters(startersArray).subTotal).toFixed(2);
+            roster.closerTotal = parseFloat(totalAndSortClosers(closersArray).subTotal).toFixed(2);
+            roster.total = parseFloat((roster.batterTotal + roster.starterTotal + roster.closerTotal)).toFixed(2);
 
 
 
