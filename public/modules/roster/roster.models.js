@@ -393,7 +393,6 @@ define(['sf1','backbone'],function(sf1,Backbone){
      * Closers Total
      *
      * */
-
     var totalAndSortClosers = function(originalArray){
         var closersSubTotal = 0;
         for (var i = 0;i < originalArray.length;i++){
@@ -406,7 +405,7 @@ define(['sf1','backbone'],function(sf1,Backbone){
         }
         if (originalArray[1]){
             originalArray[1].counting = true;
-            closersSubTotal += originalArray[0].total;
+            closersSubTotal += originalArray[1].total;
         }
 
         return ({closers:originalArray,subTotal:closersSubTotal});

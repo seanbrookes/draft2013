@@ -124,6 +124,9 @@ var server = http.createServer(app).listen(app.get('port'), function(){
  *
  * CHAT IO
  *
+ * This is the vestiges of a chat implementation that kind of worked during our draft
+ * unfortunately I can't seem to find the original blog post I shamelessly copied most of this code from
+ * I will keep looking for it so I can give the appropriate attribution
  *
  * */
 if (config.socketio){
