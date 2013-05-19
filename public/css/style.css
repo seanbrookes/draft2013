@@ -508,6 +508,9 @@ select#DraftPickRosterSelect{
 .chart-main{
     height:500px;
 }
+.tbl-roster-totals, .tbl-posrank{
+    width:40rem;
+}
 /*
 
     small screen
@@ -591,7 +594,9 @@ select#DraftPickRosterSelect{
     .navbar .nav>li>a{
         padding:5px 8px 5px
     }
-
+    .tbl-roster-totals, .tbl-posrank{
+        width:100%;
+    }
 }
 /*
 
@@ -621,6 +626,9 @@ Phone size
         vertical-align:middle;
         text-align:center;
         font-size:.88em;
+    }
+    .tbl-roster-totals, .tbl-posrank{
+        width:100%;
     }
     .tbl-posrank td{
         border-bottom:1px solid #ddd;
