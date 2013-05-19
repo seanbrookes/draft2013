@@ -230,7 +230,7 @@ define(['sf1','modules/roster/roster.models','modules/roster/roster.views','text
                // var closerOutput = closerView.render().$el;
 
                 rosterObj.rosterName = rosterSlug;
-                rosterObj.total = parseFloat(rosterObj.batterTotal + rosterObj.starterTotal + rosterObj.closerTotal).toFixed(2);
+                rosterObj.total = (rosterObj.batterTotal + rosterObj.starterTotal + rosterObj.closerTotal);
 
                 var rosterHeaderView = new View.RosterHeaderView({
                     model:new Model.RosterHeadModel(rosterObj)
