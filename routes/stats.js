@@ -869,10 +869,19 @@ exports.postPlayerStats = function(req,res){
 *
 * */
 exports.getTotalsHistory = function(req, res){
-    Totals.find(function(err,dox){
+    var start = new Date();
+//    var end =  new Date(2013, 3, 1);
+//    end.setDate(start.getDate()-7);
+
+    var end = new Date();
+    end.setDate(start.getDate()-7);
+    logger.info('date start: ' + start);
+    logger.info('date.end: ' + end);
+    Totals.find({date: {$gte: end, $lt: start}},function(err,dox){
        if(err){
            return res.send(500, err);
        }
+        //logger.info('totals this is it Sean: ' + dox);
        return res.send(dox);
 
     });
