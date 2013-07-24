@@ -445,7 +445,7 @@ select#DraftPickRosterSelect{
     margin-left:2em;
 }
 .delete-roster-player{
-
+    display:none;
 }
 
 .pos-1B, .pos-3B, .pos-CF, .pos-LF, .pos-RP, .pos-SS{
