@@ -24,6 +24,6 @@ var config = {
     salt: '076ee61d63aa10a115ea872411e433bc',
     socketio: false, //
     cookieSecretString: 'a secret string 2013',
-    localPort: 3008
+    localPort: 3009
 };
 module.exports = config;

@@ -96,6 +96,9 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 
      */
     var dbConString = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'http://' + config.db.host + ':' + config.db.port +'/' + config.db.db;
+
+  dbConString = "mongodb://heroku_app13770468:e95fat6n889981ppj48eobibev@ds045157.mongolab.com:45157/heroku_app13770468";
+
     //logger.info('DBCONSTRING[' + dbConString + ']');
 	var db = mongoose.connect(dbConString, config.db.options ,function(err){
 		if(err){
