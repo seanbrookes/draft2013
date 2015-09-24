@@ -8,10 +8,8 @@
     <option nomen="true" />
     <option plusplus="true" />
     <option sloppy="true" />
-    <option undef="true" />
     <option unparam="true" />
     <option vars="true" />
     <option white="true" />
   </component>
 </project>
-
